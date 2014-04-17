@@ -161,9 +161,15 @@ nav a:hover, nav a:active {
 #route-list a:link {
 	text-decoration: none;
 }
+#route-list a:hover {
+	text-decoration: underline;
+}
 #route-list a[disabled] {
 	opacity: .3;
 	cursor: default !important;
+}
+#route-list a[disabled]:hover {
+	text-decoration: none !important;
 }
 
 @media all and (max-width: 44.5rem) {

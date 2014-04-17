@@ -73,10 +73,13 @@
 				5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 18
 			],
 			"days": [
-				1, 2, 3, 4, 5, 6
+				0, 1, 2, 3, 4, 5, 6
 			],
 			"in": {
 				"5": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
 					{
 						"id": "fs",
 						"name": "Fujihara Store",
@@ -110,6 +113,9 @@
 					}
 				],
 				"6": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
 					{
 						"id": "fs",
 						"name": "Fujihara Store",
@@ -158,6 +164,9 @@
 					}
 				],
 				"7": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
 					{
 						"id": "fs",
 						"name": "Fujihara Store",
@@ -206,6 +215,9 @@
 					}
 				],
 				"8": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
 					{
 						"id": "cy",
 						"name": "Capt. Cook Yano Hall",
@@ -253,7 +265,7 @@
 						"add": 55
 					},
 					{
-						"id": "wc",
+						"id": "kc",
 						"name": "West Hawaii Civic Center",
 						"add": 60
 					},
@@ -284,22 +296,455 @@
 					}
 				],
 				"9": [
-				
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "fs",
+						"name": "Fujihara Store",
+						"add": 20
+					},
+					{
+						"id": "ho",
+						"name": "Honaunau",
+						"add": 23
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 25
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 30
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 40
+					},
+					{
+						"id": "sk",
+						"name": "Sheraton Keauhou Resort",
+						"add": 50
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 55
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 60
+					},
+					{
+						"id": "oa",
+						"name": "Old Airport/Kona Commons",
+						"add": 65
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 70
+					}
 				],
 				"11": [
-				
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 30
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 35
+					},
+					{
+						"id": "kh",
+						"name": "Kona Hospital",
+						"add": 40
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 45
+					},
+					{
+						"id": "sk",
+						"name": "Sheraton Keauhou Resort",
+						"add": 55
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 60
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 65
+					},
+					{
+						"id": "fp",
+						"name": "The Friendly Place Campus",
+						"add": 67
+					},
+					{
+						"id": "oa",
+						"name": "Old Airport/Kona Commons",
+						"add": 70
+					},
+					{
+						"id": "kc",
+						"name": "West Hawaii Civic Center",
+						"add": 75
+					},
+					{
+						"id": "ct",
+						"name": "Costco/Uluwini Housing",
+						"add": 85
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 95
+					},
+					{
+						"id": "wm",
+						"name": "Walmart",
+						"add": 100
+					},
+					{
+						"id": "ke",
+						"name": "Kealakehe",
+						"add": 105
+					},
+					{
+						"id": "ms",
+						"name": "Matsuyama Store",
+						"add": 110
+					}
 				],
 				"13": [
-				
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 0
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 5
+					},
+					{
+						"id": "kh",
+						"name": "Kona Hospital",
+						"add": 10
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 15
+					},
+					{
+						"id": "sk",
+						"name": "Sheraton Keauhou Resort",
+						"add": 25
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 30
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 35
+					},
+					{
+						"id": "fp",
+						"name": "The Friendly Place Campus",
+						"add": 40
+					},
+					{
+						"id": "oa",
+						"name": "Old Airport/Kona Commons",
+						"add": 43
+					},
+					{
+						"id": "kc",
+						"name": "West Hawaii Civic Center",
+						"add": 55
+					},
+					{
+						"id": "ct",
+						"name": "Costco/Uluwini Housing",
+						"add": 70
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 80
+					},
+					{
+						"id": "wm",
+						"name": "Walmart",
+						"add": 85
+					},
+					{
+						"id": "ke",
+						"name": "Kealakehe",
+						"add": 90
+					},
+					{
+						"id": "ms",
+						"name": "Matsuyama Store",
+						"add": 95
+					}
 				],
 				"14": [
-				
+					[
+						1, 2, 3, 4, 5
+					],
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 35
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 40
+					},
+					{
+						"id": "kh",
+						"name": "Kona Hospital",
+						"add": 50
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 60
+					},
+					{
+						"id": "sk",
+						"name": "Sheraton Keauhou Resort",
+						"add": 70
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 75
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 80
+					},
+					{
+						"id": "fp",
+						"name": "The Friendly Place Campus",
+						"add": 85
+					},
+					{
+						"id": "oa",
+						"name": "Old Airport/Kona Commons",
+						"add": 88
+					},
+					{
+						"id": "kc",
+						"name": "West Hawaii Civic Center",
+						"add": 100
+					},
+					{
+						"id": "ct",
+						"name": "Costco/Uluwini Housing",
+						"add": 110
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 120
+					},
+					{
+						"id": "wm",
+						"name": "Walmart",
+						"add": 125
+					},
+					{
+						"id": "ke",
+						"name": "Kealakehe",
+						"add": 130
+					},
+					{
+						"id": "ms",
+						"name": "Matsuyama Store",
+						"add": 140
+					}
 				],
 				"16": [
-				
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 5
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 10
+					},
+					{
+						"id": "kh",
+						"name": "Kona Hospital",
+						"add": 15
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 20
+					},
+					{
+						"id": "sk",
+						"name": "Sheraton Keauhou Resort",
+						"add": 30
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 35
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 40
+					},
+					{
+						"id": "fp",
+						"name": "The Friendly Place Campus",
+						"add": 45
+					},
+					{
+						"id": "oa",
+						"name": "Old Airport/Kona Commons",
+						"add": 50
+					},
+					{
+						"id": "kc",
+						"name": "West Hawaii Civic Center",
+						"add": 65
+					},
+					{
+						"id": "ct",
+						"name": "Costco/Uluwini Housing",
+						"add": 80
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 90
+					},
+					{
+						"id": "wm",
+						"name": "Walmart",
+						"add": 95
+					},
+					{
+						"id": "ke",
+						"name": "Kealakehe",
+						"add": 100
+					},
+					{
+						"id": "ms",
+						"name": "Matsuyama Store",
+						"add": 105
+					}
 				],
 				"18": [
-				
+					[
+						1, 2, 3, 4, 5
+					],
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 5
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 10
+					},
+					{
+						"id": "kh",
+						"name": "Kona Hospital",
+						"add": 15
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 20
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 30
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 35
+					},
+					{
+						"id": "fp",
+						"name": "The Friendly Place Campus",
+						"add": 45
+					},
+					{
+						"id": "oa",
+						"name": "Old Airport/Kona Commons",
+						"add": 48
+					},
+					{
+						"id": "ct",
+						"name": "Costco/Uluwini Housing",
+						"add": 55
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 60
+					},
+					{
+						"id": "wm",
+						"name": "Walmart",
+						"add": 65
+					},
+					{
+						"id": "ke",
+						"name": "Kealakehe",
+						"add": 70
+					},
+					{
+						"id": "ms",
+						"name": "Matsuyama Store",
+						"add": 80
+					}
 				]
 			},
 			"out": {
@@ -479,38 +924,44 @@
 		"al": {
 			"name": "Alii Drive",
 			"id": "al",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.5972026,
+			"lng": -155.9735565
 		},
 		"ap": {
 			"name": "Kona Airport",
 			"id": "ap",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.736916,
+			"lng": -156.042925
+		},
+		"ct": {
+			"name": "Costco",
+			"id": "ct",
+			"lat": 19.685446,
+			"lng": -156.016626
 		},
 		"cy": {
 			"name": "Capt. Cook Yano Hall",
 			"id": "cy",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.489593,
+			"lng": -155.910193
 		},
 		"fp": {
 			"name": "The Friendly Place Campus",
 			"id": "fp",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.644532,
+			"lng": -155.999311
 		},
 		"fs": {
 			"name": "Fujihara Store",
 			"id": "fs",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.39684,
+			"lng": -155.879339
 		},
 		"ho": {
 			"name": "Honaunau",
 			"id": "ho",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.426944,
+			"lng": -155.9130556
 		},
 		"hp": {
 			"name": "HPA Lower Campus",
@@ -530,32 +981,44 @@
 		"ka": {
 			"name": "Kainaliu Honalo",
 			"id": "ka",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.5349997,
+			"lng": -155.9288889
+		},
+		"kc": {
+			"name": "West Hawaii Civic Center",
+			"id": "kc",
+			"lat": 19.673514,
+			"lng": -156.003909
+		},
+		"ke": {
+			"name": "Kealakehe",
+			"id": "ke",
+			"lat": 19.668344,
+			"lng": -155.99802
 		},
 		"kh": {
 			"name": "Kona Hospital",
 			"id": "kh",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.520084,
+			"lng": -155.9174645
 		},
 		"kk": {
 			"name": "Kealakekua",
 			"id": "kk",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.517688,
+			"lng": -155.922165
 		},
 		"km": {
 			"name": "Kmart/Macy's",
 			"id": "km",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.6527875,
+			"lng": -155.9990835
 		},
 		"ks": {
 			"name": "Keauhou Shopping Center",
 			"id": "ks",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.572346,
+			"lng": -155.961807
 		},
 		"kv": {
 			"name": "Kamuela View Estates",
@@ -572,8 +1035,8 @@
 		"ms": {
 			"name": "Matsuyama Store",
 			"id": "ms",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.716086,
+			"lng": -155.977471
 		},
 		"pr": {
 			"name": "Parker Ranch Shopping Center",
@@ -584,17 +1047,29 @@
 				"waimea", "kohala-kona"
 			]
 		},
+		"oa": {
+			"name": "Old Airport",
+			"id": "oa",
+			"lat": 19.645641,
+			"lng": -156.012899
+		},
 		"sk": {
 			"name": "Sheraton Keauhou Resort",
 			"id": "sk",
-			"lat": 1,
-			"lng": 1
+			"lat": 19.55823,
+			"lng": -155.965523
 		},
 		"wc": {
 			"name": "Waimea Civic Center",
 			"id": "wc",
 			"lat": 20.0238641,
 			"lng": -155.6618867
+		},
+		"wm": {
+			"name": "Walmart",
+			"id": "wm",
+			"lat": 19.6462325,
+			"lng": -155.9906295
 		},
 		"wp": {
 			"name": "Waimea Park",

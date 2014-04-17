@@ -202,6 +202,8 @@ function isInArray(value, array) {
 	return array.indexOf(value) > -1;
 }
 
+var schHour;
+
 function loadRoute() {
 	var routeName = getQueryVariable("name");
 	var direction = getQueryVariable("dir");
@@ -213,7 +215,6 @@ function loadRoute() {
 		return;
 	}
 	
-	var schHour;
 	schHour = getBestTime(routeData.hours, time);
 	
 	// If no direction is specified, set the direction to "in".
@@ -232,8 +233,8 @@ function loadRoute() {
 			week[routeData.days[routeData.days.length - 1]] + "</strong>";
 	} else if (routeData.consistent == false) {
 		document.getElementById("days").innerHTML = "Operates <strong>" +
-			week[routeData[direction][schHour.toString()].days[0]] + "</strong> through <strong>" +
-			week[routeData[direction][schHour.toString()].days[routeData[direction][schHour.toString()].days.length - 1]] + "</strong>";
+			week[routeData[direction][schHour.toString()][0][0]] + "</strong> through <strong>" +
+			week[routeData[direction][schHour.toString()][0][routeData[direction][schHour.toString()][0].length - 1]] + "</strong>";
 	}
 	
 	var list = document.getElementsByClassName("route-list")[0]; 
@@ -262,8 +263,8 @@ function loadRoute() {
 				}
 			}
 		}
-		var schedule = routeData[direction][schHour.toString()];
-		schedule.splice(schedule.indexOf("days"), 1);
+		var schedule = JSON.parse(JSON.stringify(routeData[direction][schHour.toString()]));
+		schedule.splice(0, 1);
 		for (var i = 0; i < schedule.length; i++) {
 			list.innerHTML += '<li><div class="lines">' + '<span class="icon ' +
 				routeName + '">' + schedule[i].id + '</span>' +
@@ -336,8 +337,14 @@ function loadMap() {
 	}
 	
 	var markers = new Array();
-	for (var n = 0; n < data.route[routeName][direction].length; n++) {
-		markers.push(data.station[data.route[routeName][direction][n].id]);
+	if (data.route[routeName].consistent) {
+		for (var n = 0; n < data.route[routeName][direction].length; n++) {
+			markers.push(data.station[data.route[routeName][direction][n].id]);
+		}
+	} else if (!data.route[routeName].consistent) {
+		for (var n = 1; n < data.route[routeName][direction][schHour.toString()].length; n++) {
+			markers.push(data.station[data.route[routeName][direction][schHour.toString()][n].id]);
+		}
 	}
 	
 	var mapOptions = {
@@ -368,44 +375,4 @@ function loadMap() {
 	}
 	map.setCenter(latlngbounds.getCenter());
 	map.fitBounds(latlngbounds);
-	/*
-	var path = new google.maps.MVCArray();
-	var service = new google.maps.DirectionsService();
-	
-	var lineSymbol = {
-		path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-		strokeOpacity: 1,
-		strokeColor: '#4d74ab'
-	};
-	
-	var poly = new google.maps.Polyline({ 
-		map: map, 
-		strokeColor: '#4d74ab',
-		strokeOpacity: 0,
-		icons: [{
-			icon: lineSymbol,
-			offset: '0',
-			repeat: '20px'
-		}]
-	});
-	
-	for (var q = 0; q < lat_lng.length; q++) {
-		if ((q + 1) < lat_lng.length) {
-			var src = lat_lng[q];
-			var des = lat_lng[q + 1];
-			path.push(src);
-			poly.setPath(path);
-			service.route({
-				origin: src,
-				destination: des,
-				travelMode: google.maps.DirectionsTravelMode.DRIVING
-			}, function (result, status) {
-				if (status == google.maps.DirectionsStatus.OK) {
-					for (var r = 0, len = result.routes[0].overview_path.length; r < len; r++) {
-						path.push(result.routes[0].overview_path[r]);
-					}
-				}
-			});
-        }
-	}*/
 }
