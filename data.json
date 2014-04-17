@@ -1,0 +1,609 @@
+{
+	"version": 1,
+	"route": {
+		"hilo-kaumana": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"hilo-downtown": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"hilo-keaukaha": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"hilo-waikea": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"hilo-resort": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"hilo-honokaa": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"hilo-volcano": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"hilo-kona": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"kona": {
+			"name": "Intra Kona",
+			"details": "Buses travel from Kailua-Kona, (with service to Palani Road), out to Capt. Cook.",
+			"consistent": false,
+			"hours": [
+				5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 18
+			],
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
+			"in": {
+				"5": [
+					{
+						"id": "fs",
+						"name": "Fujihara Store",
+						"add": 0
+					},
+					{
+						"id": "ho",
+						"name": "Honaunau",
+						"add": 3
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 5
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 7
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 20
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 30
+					}
+				],
+				"6": [
+					{
+						"id": "fs",
+						"name": "Fujihara Store",
+						"add": -15
+					},
+					{
+						"id": "ho",
+						"name": "Honaunau",
+						"add": -5
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 0
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 5
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 10
+					},
+					{
+						"id": "sk",
+						"name": "Sheraton Keauhou Resort",
+						"add": 20
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 30
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 45
+					},
+					{
+						"id": "ms",
+						"name": "Matsuyama Store",
+						"add": 55
+					}
+				],
+				"7": [
+					{
+						"id": "fs",
+						"name": "Fujihara Store",
+						"add": 10
+					},
+					{
+						"id": "ho",
+						"name": "Honaunau",
+						"add": 12
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 15
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 20
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 30
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 45
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 50
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 60
+					},
+					{
+						"id": "ap",
+						"name": "Kona Airport",
+						"add": 80
+					}
+				],
+				"8": [
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 15
+					},
+					{
+						"id": "kk",
+						"name": "Kealakekua",
+						"sub": "Konawaena",
+						"add": 20
+					},
+					{
+						"id": "kh",
+						"name": "Kona Hospital",
+						"add": 25
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 30
+					},
+					{
+						"id": "sk",
+						"name": "Sheraton Keauhou Resort",
+						"add": 40
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 45
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 50
+					},
+					{
+						"id": "fp",
+						"name": "The Friendly Place Campus",
+						"add": 53
+					},
+					{
+						"id": "oa",
+						"name": "Old Airport/Kona Commons",
+						"add": 55
+					},
+					{
+						"id": "wc",
+						"name": "West Hawaii Civic Center",
+						"add": 60
+					},
+					{
+						"id": "ct",
+						"name": "Costco/Uluwini Housing",
+						"add": 70
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 80
+					},
+					{
+						"id": "wm",
+						"name": "Walmart",
+						"add": 85
+					},
+					{
+						"id": "ke",
+						"name": "Kealakehe",
+						"add": 90
+					},
+					{
+						"id": "ms",
+						"name": "Matsuyama Store",
+						"add": 95
+					}
+				],
+				"9": [
+				
+				],
+				"11": [
+				
+				],
+				"13": [
+				
+				],
+				"14": [
+				
+				],
+				"16": [
+				
+				],
+				"18": [
+				
+				]
+			},
+			"out": {
+				"6": [
+					
+				],
+				"8": [
+					
+				],
+				"9": [
+					
+				],
+				"11": [
+					
+				],
+				"12": [
+					
+				],
+				"14": [
+					
+				],
+				"15": [
+					
+				],
+				"16": [
+					
+				],
+				"17": [
+					
+				],
+				"18": [
+					
+				]
+			}
+		},
+		"kohala-resort": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"kohala-kona": {
+			"name": "North Kohala to Waimea and Kailia Kona",
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"pahala-kona": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"hilo-pahala": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"waimea": {
+			"name": "Waimea Shuttle",
+			"details": "Waimea shuttle buses between Lakeland and Kamuela view estates by way of Hawaiian Homes/Kuhio Viillage, Parker Ranch shopping center, HPA lower campus and Waimea park.",
+			"consistent": true,
+			"hours": [
+				6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+			],
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
+			"in": [
+				{
+					"id": "ll",
+					"name": "Lakeland",
+					"add": 30
+				},
+				{
+					"id": "wc",
+					"name": "Waimea Civic Center",
+					"add": 40
+				},
+				{
+					"id": "pr",
+					"name": "Parker Ranch Shopping Center",
+					"sub": "back",
+					"add": 45
+				},
+				{
+					"id": "wp",
+					"name": "Waimea Park",
+					"add": 47
+				},
+				{
+					"id": "hp",
+					"name": "HPA Lower Campus",
+					"add": 50
+				},
+				{
+					"id": "ji",
+					"name": "Jacaranda Inn",
+					"add": 55
+				},
+				{
+					"id": "kv",
+					"name": "Kamuela View Estates",
+					"add": 60
+				}
+			],
+			"out": [
+				{
+					"id": "kv",
+					"name": "Kamuela View Estates",
+					"add": 60
+				},
+				{
+					"id": "ji",
+					"name": "Jacaranda Inn",
+					"sub": "across",
+					"add": 65
+				},
+				{
+					"id": "hp",
+					"name": "HPA Lower Campus",
+					"sub": "across",
+					"add": 70
+				},
+				{
+					"id": "wp",
+					"name": "Waimea Park",
+					"sub": "across",
+					"add": 73
+				},
+				{
+					"id": "pr",
+					"name": "Parker Ranch Shopping Center",
+					"sub": "back",
+					"add": 75
+				},
+				{
+					"id": "wc",
+					"name": "Waimea Civic Center",
+					"add": 80
+				},
+				{
+					"id": "ll",
+					"name": "Lakeland",
+					"add": 90
+				}
+			]
+		},
+		"hilo-waimea": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		},
+		"waikoloa": {
+			"in": [
+			
+			],
+			"out": [
+			
+			]
+		}
+	},
+	"station": {
+		"al": {
+			"name": "Alii Drive",
+			"id": "al",
+			"lat": 1,
+			"lng": 1
+		},
+		"ap": {
+			"name": "Kona Airport",
+			"id": "ap",
+			"lat": 1,
+			"lng": 1
+		},
+		"cy": {
+			"name": "Capt. Cook Yano Hall",
+			"id": "cy",
+			"lat": 1,
+			"lng": 1
+		},
+		"fp": {
+			"name": "The Friendly Place Campus",
+			"id": "fp",
+			"lat": 1,
+			"lng": 1
+		},
+		"fs": {
+			"name": "Fujihara Store",
+			"id": "fs",
+			"lat": 1,
+			"lng": 1
+		},
+		"ho": {
+			"name": "Honaunau",
+			"id": "ho",
+			"lat": 1,
+			"lng": 1
+		},
+		"hp": {
+			"name": "HPA Lower Campus",
+			"id": "hp",
+			"lat": 20.0271181,
+			"lng": -155.6880357,
+			"connections": [
+				"waimea", "kohala-kona"
+			]
+		},
+		"ji": {
+			"name": "Jacaranda Inn",
+			"id": "ji",
+			"lat": 20.026589,
+			"lng": -155.686335
+		},
+		"ka": {
+			"name": "Kainaliu Honalo",
+			"id": "ka",
+			"lat": 1,
+			"lng": 1
+		},
+		"kh": {
+			"name": "Kona Hospital",
+			"id": "kh",
+			"lat": 1,
+			"lng": 1
+		},
+		"kk": {
+			"name": "Kealakekua",
+			"id": "kk",
+			"lat": 1,
+			"lng": 1
+		},
+		"km": {
+			"name": "Kmart/Macy's",
+			"id": "km",
+			"lat": 1,
+			"lng": 1
+		},
+		"ks": {
+			"name": "Keauhou Shopping Center",
+			"id": "ks",
+			"lat": 1,
+			"lng": 1
+		},
+		"kv": {
+			"name": "Kamuela View Estates",
+			"id": "kv",
+			"lat": 20.0264092,
+			"lng": -155.7210179
+		},
+		"ll": {
+			"name": "Lakeland",
+			"id": "ll",
+			"lat": 20.0426189,
+			"lng": -155.5971596
+		},
+		"ms": {
+			"name": "Matsuyama Store",
+			"id": "ms",
+			"lat": 1,
+			"lng": 1
+		},
+		"pr": {
+			"name": "Parker Ranch Shopping Center",
+			"id": "pr",
+			"lat": 20.0192935,
+			"lng": -155.666389,
+			"connections": [
+				"waimea", "kohala-kona"
+			]
+		},
+		"sk": {
+			"name": "Sheraton Keauhou Resort",
+			"id": "sk",
+			"lat": 1,
+			"lng": 1
+		},
+		"wc": {
+			"name": "Waimea Civic Center",
+			"id": "wc",
+			"lat": 20.0238641,
+			"lng": -155.6618867
+		},
+		"wp": {
+			"name": "Waimea Park",
+			"id": "wp",
+			"lat": 20.0219156,
+			"lng": -155.6712065,
+			"connections": [
+				"waimea", "kohala-kona"
+			]
+		}
+	}
+}

@@ -1,0 +1,688 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+body {
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	background-color: #eee;
+}
+
+header {
+	height: auto;
+	font-size: 15px;
+	background: #2d3039;
+	color: white;
+	border-bottom: #1E2026 0.2rem solid;
+}
+
+header span {
+	background-color: #4d74ab;
+	background-image: url('icon/logo.png');
+	background-repeat: no-repeat;
+	background-position: 7% center;
+	display: inline-block;
+	padding-left: 6em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	text-transform: uppercase;
+	width: 6em;
+	line-height: 1em;
+	margin-left: 2em;
+	margin-right: 1em;
+}
+
+nav {
+	display: inline-block;
+	height: 4em;
+	vertical-align: top;
+	width: 19.75em;
+}
+
+nav a {
+	border-bottom: 5px solid rgba(0,0,0,0);
+	height: calc(100% - 5px);
+	display: inline-block;
+	line-height: 4em;
+	padding: 0 .9em;
+	transition: background-color 0.1s linear, border-bottom 0.1s linear;
+}
+nav a:link, nav a:visited {
+	color: white;
+	text-decoration: none;
+}
+nav a:hover, nav a:active {
+	border-bottom: 5px solid #4d74ab;
+	background-color: rgba(255,255,255,0.1);
+}
+
+@media all and (max-width: 34rem) {
+	header span {
+		display: block;
+		width: auto;
+		margin: 0;
+		background-position: 0.7em center;
+		border-bottom: 0.2rem solid #476b9e;
+	}
+	nav {
+		display: block;
+		margin: 0 auto;
+		height: 3em;
+	}
+	nav a {
+		line-height: 3em;
+	}
+	#disclaimer span {
+		display: block;
+		float: none !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+}
+
+#disclaimer {
+	color: white;
+	background-color: #FF851B;
+	padding: 0 2em;
+	line-height: 2em;
+	border-bottom: #E8530D 0.2rem solid;
+	max-height: 25em;
+}
+#disclaimer span {
+	float: right;
+	background: rgba(255,255,255,0.3);
+	width: 1.25em;
+	line-height: 1.25em;
+	text-align: center;
+	margin: 0.375em 0;
+	border-radius: 0.3em;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+#disclaimer span:hover {
+	background: rgba(255,255,255,0.4);
+}
+#disclaimer span:active {
+	background: rgba(255,255,255,0.5);
+}
+#disclaimer.closing {
+	-webkit-animation-duration: 1s;
+	-webkit-animation-name: close;
+	overflow: hidden;
+}
+#disclaimer.closed {
+	display: none;
+}
+
+@keyframes close {
+	from {
+		max-height: 25em;
+		display: block;
+	}
+	to {
+		max-height: 0;
+		display: none;
+	}
+}
+@-webkit-keyframes close {
+	from {
+		max-height: 10em;
+		display: block;
+	}
+	to {
+		max-height: 0;
+		display: none;
+	}
+}
+
+
+#route-list {
+	display: block;
+	color: black;
+	background-color: #eee;
+	padding-bottom: 2.5em;
+	border-bottom: 0.2rem solid #ddd;
+	background-image: url('assets/lines.svg');
+	background-repeat: no-repeat;
+	background-position: left bottom;
+}
+#route-list h1 {
+	padding: 0.5em 1.5em;
+	background-color: #eee;
+	margin: 0;
+	background-image: url('assets/lines.svg');
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+#route-list a {
+	display: inline-block;
+	width: calc(50% - 1em);
+	padding: 0 0.5em;
+	line-height: 2em;
+	position: relative;
+	z-index: 2;
+}
+#route-list a:link {
+	text-decoration: none;
+}
+#route-list a[disabled] {
+	opacity: .3;
+	cursor: default !important;
+}
+
+@media all and (max-width: 44.5rem) {
+	#route-list a {
+		width: calc(100% - 1em);
+	}
+}
+@media all and (min-width: 88rem) {
+	#route-list a {
+		width: calc(25% - 1em);
+	}
+}
+@media all and (min-width: 110rem) {
+	#route-list a {
+		width: calc(20% - 1em);
+	}
+}
+@media all and (min-width: 175rem) {
+	#route-list a {
+		width: calc(12.5% - 1em);
+	}
+}
+
+#map {
+	height: 30rem;
+	z-index: 1;
+	background-color: #b3d1ff;
+}
+
+#streetview {
+	height: 25rem;
+	z-index: 1;
+	background-color: #b3d1ff;
+}
+#streetview + #map {
+	height: 15rem !important;
+	z-index: 1;
+	background-color: #b3d1ff;
+}
+
+#fares h1 {
+	margin: 0.5em 1.5em;
+}
+#fares {
+	background-color: #eee;
+	margin-bottom: 2em;
+}
+#fares .prices {
+	width: 82.5em;
+	margin: 0 auto;
+}
+
+@media all and (max-width: 84rem) {
+	#fares .prices {
+		width: 66em;
+	}
+}
+@media all and (max-width: 67rem) {
+	#fares .prices {
+		width: 49.5em;
+	}
+}
+@media all and (max-width: 51rem) {
+	#fares .prices {
+		width: 33em;
+	}
+}
+@media all and (max-width: 34rem) {
+	#fares .prices {
+		width: 16.5em;
+	}
+	#fares .prices .extra-price h3, #fares .prices .extra-price h4 {
+		width: auto !important;
+	}
+}
+
+#fares .prices .main-price {
+	display: inline-block;
+	text-align: center;
+	width: 16em;
+	vertical-align: top;
+	background-color: white;
+	margin: 0 0.25em;
+	margin-bottom: 0.5em;
+	box-shadow: 0 0.05em 0.1em 0.1em rgba(0,0,0,0.3);
+	border-radius: 0.25rem;
+}
+#fares .prices .main-price h2 {
+	color: white;
+	background-color: #4d74ab;
+	margin: 0;
+	border-top-left-radius: 0.25rem;
+	border-top-right-radius: 0.25rem;
+	box-shadow: 0 0.1em 0.1em 0 rgba(0,0,0,0.2);
+	font-weight: normal;
+	margin-bottom: 0.2em;
+}
+#fares .prices .main-price .details {
+	display: block;
+	color: #666;
+	font-size: 0.9rem;
+	margin: 0 0.5em;
+	height: 2.5em;
+}
+#fares .prices .main-price .price {
+	display: block;
+	font-weight: bold;
+	margin: 0.5em 0;
+}
+#fares .prices .extra-price {
+	border: 1px solid #aaa;
+	border-bottom: 0;
+	padding: 0.5em;
+	margin: 0 0.25em;
+	background: white;
+}
+#fares .prices .extra-price.top {
+	margin-top: 1em;
+}
+#fares .prices .extra-price:last-of-type {
+	border: 1px solid #aaa;
+}
+#fares .prices .extra-price h3 {
+	margin: 0;
+	display: inline-block;
+	width: calc(100% - 15rem);
+	font-weight: normal;
+}
+#fares .prices .extra-price h4 {
+	margin: 0;
+	display: inline-block;
+	width: calc(100% - 15rem);
+	font-weight: normal;
+	color: #666;
+}
+#fares .prices .extra-price .price {
+	display: inline-block;
+	text-align: right;
+	width: 15rem;
+	font-weight: bold;
+}
+#fares .prices .extra-price .price.discount {
+	color: #666;
+}
+
+.route-list {
+	padding: 0;
+	margin: 1.5em 3em;
+	margin-right: 23em;
+	display: block;
+	margin-bottom: 0.5em;
+}
+.route-list li {
+	display: block;
+	height: 3em;
+	position: relative;
+	transition: background 0.2s ease;
+}
+.route-list li:hover {
+	background: #e1eded !important;
+}
+.route-list li::after {
+	content: "\bb";
+	color: #4d74ab;
+	position: absolute;
+	right: 0.5em;
+	top: 0;
+	line-height: 3rem;
+	font-size: 2rem;
+}
+.route-list li:nth-child(odd) {
+	background-color: #f7f7f7;
+}
+.route-list li:nth-child(even) {
+	background-color: #fff;
+}
+
+.route-list li:first-child, .route-list li:last-child {
+	height: 5em;
+}
+.route-list li:first-child::after, .route-list li:last-child::after {
+	line-height: 5rem;
+}
+
+.route-list .stop {
+	height: 3rem;
+	display: inline-block;
+	vertical-align: top;
+	width: calc(100% - 4rem);
+}
+.route-list li:first-child .stop, .route-list li:last-child .stop {
+	height: 5em;
+}
+
+.route-list li:first-child .lines, .route-list li:last-child .lines {
+	width: calc(4em - 2px);
+	height: calc(100% - 2px);
+	display: inline-block;
+	border: 1px solid #ccc;
+	background: white;
+}
+.route-list .icon {
+	display: block;
+	width: 2em;
+	line-height: 2em;
+	text-align: center;
+	border-radius: 50%;
+	box-shadow: 0 0.07em 0.1em 0.1em rgba(0,0,0,0.3);
+	font-size: 0.8em;
+	text-transform:uppercase;
+}
+.route-list li:first-child .icon, .route-list li:last-child .icon {
+	margin-top: 1.2rem;
+	margin-bottom: 1.8rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+.route-list li:not(:first-child):not(:last-child) .icon {
+	position: absolute;
+	top: calc(50% - 1em);
+	left: calc(2rem + 0.7em);
+	z-index: 1;
+}
+.route-list li:first-child .lines span:nth-child(2), .route-list li:last-child .lines span:nth-child(2) {
+	width: 100%;
+	height: 0.3em;
+	display: block;
+}
+.route-list li:first-child .lines span:last-child, .route-list li:last-child .lines span:last-child {
+	display: none;
+}
+
+.route-list .lines {
+	width: 4em;
+	height: 100%;
+	display: inline-block;
+	position: relative;
+}
+.route-list .lines span:nth-child(2) {
+	height: 100%;
+	margin: 0 auto;
+	width: 0.3em;
+	display: block;
+}
+.route-list .lines span:last-child {
+	height: 0.2em;
+	margin-left: 50%;
+	width: 25%;
+	display: block;
+	margin-top: 1.4em;
+	margin-bottom: 1.4em;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.route-list .name {
+	vertical-align: top;
+	line-height: 3em;
+	margin-left: 1rem;
+	width: calc(100% - 10.5rem);
+	display: inline-block;
+	text-decoration: none;
+	color: #333;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.route-list li:first-child .name, .route-list li:last-child .name {
+	line-height: 5rem;
+	font-size: 1.1em;
+}
+
+.route-list .data {
+	display: inline-block;
+	width: 2em;
+	margin: 0.9rem 0;
+	height: 1.2rem;
+	float: right;
+	margin-right: 3em;
+}
+.route-list li:first-child .data, .route-list li:last-child .data {
+	margin: 1.9rem 0;
+	height: 1.2rem;
+}
+
+.route-list .tooltip {
+	position: absolute;
+	right: -21em;
+	top: 0;
+	width: 19em;
+	background: #2d3039;
+	border-bottom: 0.2rem #1E2026 solid;
+	color: white;
+	padding: 0.5em;
+	transition: opacity 0.2s ease;
+	opacity: 0;
+	display: none;
+}
+.route-list .tooltip::before {
+	width: 0; 
+	height: 0; 
+	content: " ";
+	border-top: 0.5em solid transparent;
+	border-bottom: 0.5em solid transparent; 
+	border-right:0.5em solid #2d3039; 
+	position: absolute;
+	left: -0.5em;
+	top: 0.5em;
+}
+
+.route-list .connections:hover .tooltip {
+	opacity: 100;
+	display: block;
+}
+
+.route-list .connections .line {
+	display: block;
+	height: 0.4em;
+	width: 2em;
+}
+
+@media all and (max-width: 60rem) {
+	.route-list {
+		margin-right: 3em;
+	}
+	.route-list .connections:hover .tooltip {
+		display: none !important;
+	}
+}
+@media all and (max-width: 40rem) {
+	.route-list {
+		margin-right: 0;
+		margin-left: 0;
+	}
+	.times {
+		display: block !important;
+		float: none !important;
+		margin-top: 0.5em;
+	}
+	#map {
+		height: 20rem;
+	}
+}
+
+#route-heading {
+	display: inline-block;
+	padding: 0.25em 0.5em;
+	font-weight: normal;
+	margin: 0.5em 3rem;
+}
+
+#station-heading {
+	display: inline-block;
+	padding: 0.25em 0.5em;
+	font-weight: normal;
+	margin: 0.5em 3rem;
+	color: white;
+	background-color: #4d74ab;
+	font-size: 2rem;
+}
+
+.route-list time {
+	width: 4.5rem;
+	line-height: 3em;
+	vertical-align: top;
+	text-align: right;
+}
+.route-list li:first-child time, .route-list li:last-child time {
+	line-height: 5em;
+}
+
+#details {
+	margin: 0 3em;
+	background-color: #ddd;
+	padding: 0.1em 1em;
+	margin-bottom: 1em;
+}
+#details p {
+	border-bottom: 1px solid gray;
+	margin: 0;
+	padding: 0.5em 0;
+}
+#details p:last-child {
+	border-bottom: 0;
+}
+
+.controls {
+	background-color: #ddd;
+	margin: 1em 3em;
+	padding: 1em 1em;
+}
+#switch {
+	display: inline-block;
+	background: white;
+	box-shadow: 0 0.05em 0.1em 0.1em rgba(0,0,0,0.3);
+	border-radius: 0.2em;
+	color: #333;
+	width: 13em;
+	text-align: center;
+	text-decoration: none;
+	transition: background 0.2s ease;
+	cursor: pointer;
+}
+#switch:hover {
+	background: #efefef;
+}
+#switch:active {
+	background: #e0e0e0;
+}
+.times {
+	margin-left: 0;
+	float: right;
+	display: inline-block;
+}
+
+.connect {
+	margin: 3rem;
+}
+.connect .line {
+	display: block;
+	padding: 0.7em 1.5em;
+	text-decoration: none;
+}
+.connect .line:hover {
+	text-docoration: underline;
+}
+
+#map .h2 {
+	padding: 0.1em 0.5em;
+	margin: 0;
+	font-size: 1.25rem;
+	text-decoration: none;
+}
+#map .connect {
+	margin: 0;
+}
+#map .connect .line {
+	padding: 0.3em 1em;
+}
+#map .h2:hover, #map .connect .line:hover {
+	text-decoration: underline;
+}
+
+.gm-style-iw {
+	min-width: 20em;
+	min-height: 3em;
+}
+.gm-style-iw div {
+	min-height: 3em;
+}
+
+.hilo-kaumana {
+	background-color: #00a0e2;
+	color: black;
+}
+.hilo-downtown {
+	background-color: #009694;
+	color: white;
+}
+.hilo-keaukaha {
+	background-color: #63c9b4;
+	color: black;
+}
+.hilo-waikea {
+	background-color: #2E8B57;
+	color: white;
+}
+.hilo-resort {
+	background-color: #5f0d46;
+	color: white;
+}
+.hilo-honokaa {
+	background-color: #0019a8;
+	color: white;
+}
+.hilo-volcano {
+	background-color: #dc241f;
+	color: white;
+}
+.hilo-kona {
+	background-color: #d087a1;
+	color: black;
+}
+.kona {
+	background-color: #005920;
+	color: white;
+}
+.kohala-resort {
+	background-color: #222222;
+	color: white;
+}
+.kohala-kona {
+	background-color: #6a7278;
+	color: white;
+}
+.pahala-kona {
+	background-color: #7CFC00;
+	color: black;
+}
+.hilo-pahala {
+	background-color: #6A5ACD;
+	color: black;
+}
+.waimea {
+	background-color: #894e24;
+	color: white;
+}
+.hilo-waimea {
+	background-color: #e6b900;
+	color: black;
+}
+.holiday {
+	background-color: FireBrick;
+	color: white;
+}
+.waikoloa {
+	background-color: #d05f0e;
+	color: black;
+}

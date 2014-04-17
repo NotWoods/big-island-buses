@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" media="screen" type="text/css" href="../style.css"/>
+		<link rel="icon" href="../icon/favicon.ico">
+		<title>Hele-On Schedule</title>
+		<meta name="keywords" content="hele on, bus, hawaii, big island, transport, schedule, app, mass transit, hawaii county mass transit agency">
+		<meta name="description" content="A far easier to use unofficial schedule for the Hawaii Hele-On Bus.">
+		<meta name="author" content="Tiger Oakes">
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI&sensor=false"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="mobile-web-app-capable" content="yes">
+		<link rel="icon" sizes="196x196" href="../icon/196.png">
+		<link rel="icon" sizes="128x128" href="../icon/128.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../icon/120.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../icon/152.png">
+	</head>
+	<body>
+		<header>
+			<span>Hele-On Schedule</span><!--
+		 --><nav>
+				<a href="../index.html#route-list">Routes</a><!--
+			 --><!--<a href="../index.html#map">Map</a>--><!--
+			 --><!--<a href="../index.html#plan">Plan a trip</a>--><!--
+			 --><a href="../index.html#fares">Fares</a>
+			</nav>
+		</header>
+		<section id="disclaimer">Disclaimer: This site is not affiliated with the Hawaii Country Mass Transit Agency.  
+		Data is based on written schedules from heleonbus.org and is not updated live.<span onclick="hideDisclaimer()">x</span></section>
+		<h2 id="station-heading"></h2>
+		<section id="details">
+			<p id="address"></p>
+		</section>
+		<section id="streetview"></section>
+		<section id="map"></section>
+		<div class="connect">
+		</div>
+		<script src="../js/station.js"></script>
+		<script src="../js/ui.js"></script>
+	</body>
+</html>

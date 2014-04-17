@@ -1,0 +1,10 @@
+# OS files
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Publishing version will be stored here
+min/
+
+template.html

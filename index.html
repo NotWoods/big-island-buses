@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" media="screen" type="text/css" href="style.css"/>
+		<link rel="icon" href="icon/favicon.ico">
+		<title>Hele-On Schedule</title>
+		<meta name="keywords" content="hele on, bus, hawaii, big island, transport, schedule, app, mass transit, hawaii county mass transit agency">
+		<meta name="description" content="A far easier to use unofficial schedule for the Hawaii Hele-On Bus.">
+		<meta name="author" content="Tiger Oakes">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI&sensor=false"></script>
+		<meta name="mobile-web-app-capable" content="yes">
+		<link rel="icon" sizes="196x196" href="icon/196.png">
+		<link rel="icon" sizes="128x128" href="icon/128.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="icon/120.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="icon/152.png">
+	</head>
+	<body>
+		<header>
+			<span>Hele-On Schedule</span><!--
+		 --><nav>
+				<a href="index.html#route-list">Routes</a><!--
+			 --><!--<a href="index.html#map">Map</a>--><!--
+			 --><!--<a href="index.html#plan">Plan a trip</a>--><!--
+			 --><a href="index.html#fares">Fares</a>
+			</nav>
+		</header>
+		<section id="disclaimer">Disclaimer: This site is not affiliated with the Hawaii Country Mass Transit Agency.  
+		Data is based on written schedules from heleonbus.org and is not updated live.<span onclick="hideDisclaimer()">x</span></section>
+		<section id="route-list">
+			<h1>Routes</h1>
+			<a disabled href="route/?name=hilo-kaumana" 	class="hilo-kaumana">Hilo - Ainako/Kaumana</a><!--
+		 --><a disabled href="route/?name=hilo-downtown" class="hilo-downtown">Downtown Hilo-Aupuni Center-Prince Kuhio</a><!--
+		 --><a disabled href="route/?name=hilo-keaukaha" class="hilo-keaukaha">Hilo - Keaukaha</a><!--
+		 --><a disabled href="route/?name=hilo-waikea" 	class="hilo-waikea">Hilo - Waiakea Uka</a><!--
+		 --><a disabled href="route/?name=hilo-resort" 	class="hilo-resort">Hilo - Waikoloa Resorts</a><!--
+		 --><a disabled href="route/?name=hilo-honokaa" 	class="hilo-honokaa">Honoka'a - Hilo</a><!--
+		 --><a disabled href="route/?name=hilo-volcano" 	class="hilo-volcano">Ka'u-Volcano - Hilo</a><!--
+		 --><a disabled href="route/?name=hilo-kona" 	class="hilo-kona">Kona/Hilo</a><!--
+		 --><a disabled href="route/?name=kona" 			class="kona">Intra Kona</a><!--
+		 --><a disabled href="route/?name=kohala-resort" class="kohala-resort">North Kohala to South Kohala Resorts</a><!--
+		 --><a disabled href="route/?name=kohala-kona" 	class="kohala-kona">North Kohala to Waimea and Kailua-Kona</a><!--
+		 --><a disabled href="route/?name=pahala-kona" 	class="pahala-kona">Pahala/Ocean View - West Hawaii</a><!--
+		 --><a disabled href="route/?name=hilo-pahala" 	class="hilo-pahala">Pahoa/Pohoiki/Hilo</a><!--
+		 --><a 			href="route/?name=waimea" 		class="waimea">Waimea Shuttle</a><!--
+		 --><a disabled href="route/?name=hilo-waimea" 	class="hilo-waimea">Waimea - Hilo </a><!--
+		 --><a disabled href="route/?name=waikoloa" 		class="waikoloa">Waikoloa Village Shuttle</a><!--
+		 --><a disabled href="route/?name=holiday" 		class="holiday">Holiday Schedules</a>
+			<div class="ad"></div>
+		</section>
+		<!--<section id="map"></section>
+		<section id="plan"></section>-->
+		<section id="fares">
+			<h1>Fares</h1>
+			<div class="prices">
+				<div class="main-price">
+					<h2>General</h2>
+					<span class="details">Standard fare</span>
+					<span class="price">$2.00</span>
+				</div><!--
+			 --><div class="main-price">
+					<h2>Students</h2>
+					<span class="details">K-12 through college with current student ID</span>
+					<span class="price">$1.00</span>
+				</div><!--
+			 --><div class="main-price">
+					<h2>Senior Citizens</h2>
+					<span class="details">60 years and above with a valid ID</span>
+					<span class="price">$1.00</span>
+				</div><!--
+			 --><div class="main-price">
+					<h2>Disabled Individuals</h2>
+					<span class="details">with County Mass Transit issued disability ID or pass</span>
+					<span class="price">$1.00</span>
+				</div><!--
+			 --><div class="main-price">
+					<h2>Children</h2>
+					<span class="details">5 years and below</span>
+					<span class="price">Free</span>
+				</div>
+				<div class="extra-price top">
+					<div>
+						<h3>Prepaid discount tickets</h3><!--
+					 --><span class="price">$15.00 per sheet of 10 tickets</span>
+					</div>
+					<div>
+						<h4>Students, senior citizens, disabled individuals</h4><!--
+					 --><span class="price discount">$7.50 per sheet of 10 tickets</span>
+					</div>
+				</div>
+				<div class="extra-price">
+					<div>
+						<h3>Monthly bus pass</h3><!--
+					 --><span class="price">$60.00</span>
+					</div>
+					<div>
+						<h4>Students, senior citizens, disabled individuals</h4><!--
+					 --><span class="price discount">$45.00</span>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script src="../js/ui.js"></script>
+	</body>
+</html>
