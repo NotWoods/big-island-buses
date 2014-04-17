@@ -13,7 +13,7 @@ function getQueryVariable(variable)
        return(false);
 }
 
-var jsonUrl = "http://tigeroakes.com/heleon/data.json";
+var jsonUrl = "../data.json";
 var data;
 
 if (window.navigator.onLine) {
@@ -138,7 +138,7 @@ function loadStation() {
 	var stationData = data.station[id];
 	
 	if (!id) {
-		window.location = "http://www.tigeroakes.com/heleon";
+		window.location = "../";
 		return;
 	}
 	
@@ -166,6 +166,8 @@ function loadStation() {
 
 function loadMap() {
 	var id = getQueryVariable("id");
+	var latitude = getQueryVariable("lat");
+	var longitude = getQueryVariable("lng");
 	var pos = new google.maps.LatLng(data.station[id].lat,data.station[id].lng);
 	
 	var mapOptions = {
@@ -174,6 +176,16 @@ function loadMap() {
 		zoom: 16
 	};
 	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	if (latitude != false && longitude != false) {
+		var markerPos = new google.maps.LatLng(parseFloat(latitude), parseFloat(longitude));
+		
+		var marker = new google.maps.Marker({
+			position: markerPos,
+			map: map,
+			title: "My Location",
+			icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+		});
+	}
 	var panoramaOptions = {
 		position: pos,
 		scrollwheel: false,

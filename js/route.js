@@ -13,7 +13,7 @@ function getQueryVariable(variable)
        return(false);
 }
 
-var jsonUrl = "http://tigeroakes.com/heleon/data.json";
+var jsonUrl = "../data.json";
 var data;
 
 var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -126,7 +126,6 @@ function timeAdd(hrBase, minBase) {
 function loadConnections(stationId, routeName, displayTitle) {
 	if (data.station[stationId].connections != null) {
 		var connect;
-		console.log(data.station[stationId].connections);
 		if (routeName == false || routeName == null) {
 			connect = JSON.parse(JSON.stringify(data.station[stationId].connections));
 		} else {
@@ -180,6 +179,8 @@ function getBestTime(hours, now) {
 	
 	if (now == null || now == false) {
 		bestTime = new Date().getHours();
+	} else {
+		bestTime = parseInt(now);
 	}
 	if (bestTime > max && bestTime <= 23) {
 		bestTime = max;
@@ -299,6 +300,8 @@ function switchDir() {
 		carryQuery += "&dir=out";
 	} else if (getQueryVariable("dir") == "out") {
 		carryQuery += "&dir=in";
+	} else {
+		carryQuery += "&dir=out";
 	}
 	
 	window.location = "../route" + carryQuery;
