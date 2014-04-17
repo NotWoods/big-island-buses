@@ -1,5 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
-
 body {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
@@ -140,9 +138,9 @@ nav a:hover, nav a:active {
 	background-color: #eee;
 	padding-bottom: 2.5em;
 	border-bottom: 0.2rem solid #ddd;
-	background-image: url('assets/lines.svg');
+	/*background-image: url('assets/lines.svg');
 	background-repeat: no-repeat;
-	background-position: left bottom;
+	background-position: left bottom;*/
 }
 #route-list h1 {
 	padding: 0.5em 1.5em;
