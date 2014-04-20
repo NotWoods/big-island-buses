@@ -18,12 +18,783 @@
 			]
 		},
 		"hilo-keaukaha": {
-			"in": [
-			
+			"name": "Hilo - Keaukaha",
+			"details": "Buses between downtown Hilo and Keaukaha by way of Aupuni Center, Hilo shopping center, UH, Hawai'i Community College and Prince Kuhio plaza",
+			"consistent": "hour",
+			"hours": [
+				7, 8, 9, 10, 11, 13, 14, 15, 16
 			],
-			"out": [
-			
-			]
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
+			"in": {
+				"7": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 0
+					},
+					{
+						"id": "ki",
+						"name": "Kalanianaole (Richardson)",
+						"add": 3
+					},
+					{
+						"id": "ko",
+						"name": "Kalanianaole (Onekahakaha)",
+						"add": 8
+					},
+					{
+						"id": "ok",
+						"name": "Oceanfront Kitchen",
+						"sub": "Chinese Take-Out",
+						"add": 10
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 20
+					}
+				],
+				"8": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 0
+					},
+					{
+						"id": "ki",
+						"name": "Kalanianaole (Richardson)",
+						"add": 3
+					},
+					{
+						"id": "ko",
+						"name": "Kalanianaole (Onekahakaha)",
+						"add": 8
+					},
+					{
+						"id": "ok",
+						"name": "Oceanfront Kitchen",
+						"sub": "Chinese Take-Out",
+						"add": 10
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 20
+					}
+				],
+				"9": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 0
+					},
+					{
+						"id": "ki",
+						"name": "Kalanianaole (Richardson)",
+						"add": 3
+					},
+					{
+						"id": "ko",
+						"name": "Kalanianaole (Onekahakaha)",
+						"add": 8
+					},
+					{
+						"id": "ok",
+						"name": "Oceanfront Kitchen",
+						"sub": "Chinese Take-Out",
+						"add": 10
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 20
+					}
+				],
+				"10": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 0
+					},
+					{
+						"id": "ki",
+						"name": "Kalanianaole (Richardson)",
+						"add": 3
+					},
+					{
+						"id": "ko",
+						"name": "Kalanianaole (Onekahakaha)",
+						"add": 8
+					},
+					{
+						"id": "ok",
+						"name": "Oceanfront Kitchen",
+						"sub": "Chinese Take-Out",
+						"add": 10
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 20
+					}
+				],
+				"11": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 0
+					},
+					{
+						"id": "ki",
+						"name": "Kalanianaole (Richardson)",
+						"add": 3
+					},
+					{
+						"id": "ko",
+						"name": "Kalanianaole (Onekahakaha)",
+						"add": 8
+					},
+					{
+						"id": "ok",
+						"name": "Oceanfront Kitchen",
+						"sub": "Chinese Take-Out",
+						"add": 10
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 20
+					}
+				],
+				"13": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 35
+					},
+					{
+						"id": "ki",
+						"name": "Kalanianaole (Richardson)",
+						"add": 38
+					},
+					{
+						"id": "ko",
+						"name": "Kalanianaole (Onekahakaha)",
+						"add": 43
+					},
+					{
+						"id": "ok",
+						"name": "Oceanfront Kitchen",
+						"sub": "Chinese Take-Out",
+						"add": 45
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 50
+					},
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 55
+					}
+				],
+				"14": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 35
+					},
+					{
+						"id": "ki",
+						"name": "Kalanianaole (Richardson)",
+						"add": 38
+					},
+					{
+						"id": "ko",
+						"name": "Kalanianaole (Onekahakaha)",
+						"add": 43
+					},
+					{
+						"id": "ok",
+						"name": "Oceanfront Kitchen",
+						"sub": "Chinese Take-Out",
+						"add": 45
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 50
+					},
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 55
+					}
+				],
+				"15": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 35
+					},
+					{
+						"id": "ki",
+						"name": "Kalanianaole (Richardson)",
+						"add": 38
+					},
+					{
+						"id": "ko",
+						"name": "Kalanianaole (Onekahakaha)",
+						"add": 43
+					},
+					{
+						"id": "ok",
+						"name": "Oceanfront Kitchen",
+						"sub": "Chinese Take-Out",
+						"add": 45
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 50
+					},
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 55
+					}
+				],
+				"16": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 35
+					},
+					{
+						"id": "ki",
+						"name": "Kalanianaole (Richardson)",
+						"add": 38
+					},
+					{
+						"id": "ko",
+						"name": "Kalanianaole (Onekahakaha)",
+						"add": 43
+					},
+					{
+						"id": "ok",
+						"name": "Oceanfront Kitchen",
+						"sub": "Chinese Take-Out",
+						"add": 45
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 50
+					},
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 55
+					}
+				]
+			},
+			"out": {
+				"7": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 25
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 30
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 33
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 35
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 40
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 45
+					},
+					{
+						"id": "mt",
+						"name": "Keaukaha Market",
+						"add": 50
+					},
+					{
+						"id": "bs",
+						"name": "Baker Street/Krauss Street",
+						"add": 53
+					},
+					{
+						"id": "se",
+						"name": "Seaside Restaurant",
+						"add": 55
+					},
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 60
+					}
+				],
+				"8": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 25
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 30
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 33
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 35
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 40
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 45
+					},
+					{
+						"id": "mt",
+						"name": "Keaukaha Market",
+						"add": 50
+					},
+					{
+						"id": "bs",
+						"name": "Baker Street/Krauss Street",
+						"add": 53
+					},
+					{
+						"id": "se",
+						"name": "Seaside Restaurant",
+						"add": 55
+					},
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 60
+					}
+				],
+				"9": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 25
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 30
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 33
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 35
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 40
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 45
+					},
+					{
+						"id": "mt",
+						"name": "Keaukaha Market",
+						"add": 50
+					},
+					{
+						"id": "bs",
+						"name": "Baker Street/Krauss Street",
+						"add": 53
+					},
+					{
+						"id": "se",
+						"name": "Seaside Restaurant",
+						"add": 55
+					},
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 60
+					}
+				],
+				"10": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 25
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 30
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 33
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 35
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 40
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 45
+					},
+					{
+						"id": "mt",
+						"name": "Keaukaha Market",
+						"add": 50
+					},
+					{
+						"id": "bs",
+						"name": "Baker Street/Krauss Street",
+						"add": 53
+					},
+					{
+						"id": "se",
+						"name": "Seaside Restaurant",
+						"add": 55
+					},
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 60
+					}
+				],
+				"13": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 8
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 10
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 15
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					},
+					{
+						"id": "mt",
+						"name": "Keaukaha Market",
+						"add": 25
+					},
+					{
+						"id": "bs",
+						"name": "Baker Street/Krauss Street",
+						"add": 28
+					},
+					{
+						"id": "se",
+						"name": "Seaside Restaurant",
+						"add": 30
+					},
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 35
+					}
+				],
+				"14": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 8
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 10
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 15
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					},
+					{
+						"id": "mt",
+						"name": "Keaukaha Market",
+						"add": 25
+					},
+					{
+						"id": "bs",
+						"name": "Baker Street/Krauss Street",
+						"add": 28
+					},
+					{
+						"id": "se",
+						"name": "Seaside Restaurant",
+						"add": 30
+					},
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 35
+					}
+				],
+				"15": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 8
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 10
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 15
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					},
+					{
+						"id": "mt",
+						"name": "Keaukaha Market",
+						"add": 25
+					},
+					{
+						"id": "bs",
+						"name": "Baker Street/Krauss Street",
+						"add": 28
+					},
+					{
+						"id": "se",
+						"name": "Seaside Restaurant",
+						"add": 30
+					},
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 35
+					}
+				],
+				"16": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mo'oheau Bus Terminal",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 8
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 10
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 15
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					},
+					{
+						"id": "mt",
+						"name": "Keaukaha Market",
+						"add": 25
+					},
+					{
+						"id": "bs",
+						"name": "Baker Street/Krauss Street",
+						"add": 28
+					},
+					{
+						"id": "se",
+						"name": "Seaside Restaurant",
+						"add": 30
+					},
+					{
+						"id": "kl",
+						"name": "King's Landing",
+						"add": 35
+					}
+				]
+			}
 		},
 		"hilo-waikea": {
 			"in": [
@@ -1217,6 +1988,15 @@
 		}
 	},
 	"station": {
+		"ac": {
+			"name": "Aupuni Center",
+			"id": "ac",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
 		"al": {
 			"name": "Alii Drive",
 			"id": "al",
@@ -1233,6 +2013,33 @@
 			"lng": -156.042925,
 			"connections": [
 				"kona"
+			]
+		},
+		"bd": {
+			"name": "Banyan Drive",
+			"id": "bd",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
+		"bs": {
+			"name": "Baker Street/Krauss Street",
+			"id": "bs",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
+		"cc": {
+			"name": "Hawaii Community College",
+			"id": "cc",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
 			]
 		},
 		"ct": {
@@ -1316,6 +2123,15 @@
 				"waimea", "kohala-kona"
 			]
 		},
+		"hs": {
+			"name": "Hilo Shopping Center",
+			"id": "hs",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
 		"hw": {
 			"name": "Highway 19 & 250 Intersection",
 			"id": "hw",
@@ -1379,6 +2195,15 @@
 				"kona"
 			]
 		},
+		"ki": {
+			"name": "Kalanianaole (Richardson)",
+			"id": "ki",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
 		"kk": {
 			"name": "Kealakekua",
 			"id": "kk",
@@ -1388,6 +2213,15 @@
 				"kona"
 			]
 		},
+		"kl": {
+			"name": "King's Landing",
+			"id": "kl",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
 		"km": {
 			"name": "Kmart/Macy's",
 			"id": "km",
@@ -1395,6 +2229,15 @@
 			"lng": -155.9990835,
 			"connections": [
 				"kona", "kohala-kona"
+			]
+		},
+		"ko": {
+			"name": "Kalanianaole (Onekahakaha)",
+			"id": "ko",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
 			]
 		},
 		"kr": {
@@ -1433,6 +2276,15 @@
 				"waimea"
 			]
 		},
+		"mb": {
+			"name": "Mo'oheau Bus Terminal",
+			"id": "ok",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
 		"mk": {
 			"name": "Mauna Kea Beach",
 			"id": "mk",
@@ -1469,6 +2321,15 @@
 				"kona"
 			]
 		},
+		"mt": {
+			"name": "Keaukaha Market",
+			"id": "mt",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
 		"pc": {
 			"name": "Parker Square",
 			"id": "kd",
@@ -1476,6 +2337,15 @@
 			"lng": 1,
 			"connections": [
 				"kohala-kona"
+			]
+		},
+		"pk": {
+			"name": "Prince Kuhio Plaza",
+			"id": "pk",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
 			]
 		},
 		"pr": {
@@ -1505,6 +2375,33 @@
 				"kona"
 			]
 		},
+		"ok": {
+			"name": "Oceanfront Kitchen",
+			"id": "ok",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
+		"or": {
+			"name": "Orchid Mauna Lani",
+			"id": "or",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-resort"
+			]
+		},
+		"se": {
+			"name": "Seaside Restaurant",
+			"id": "se",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
+			]
+		},
 		"sk": {
 			"name": "Sheraton Keauhou Resort",
 			"id": "sk",
@@ -1512,6 +2409,15 @@
 			"lng": -155.965523,
 			"connections": [
 				"kona"
+			]
+		},
+		"uh": {
+			"name": "University of Hawaii Hilo",
+			"id": "uh",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-keaukaha"
 			]
 		},
 		"wc": {
