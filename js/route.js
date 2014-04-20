@@ -86,6 +86,19 @@ function requestFailed(e) {
 	loadRoute();
 }
 
+function genLink(stopId, stopName, subtitle) {
+	var theLink;
+	if (subtitle == null) {
+		theLink = '<a class="name" href="../stop/?id=' + 
+			stopId + '">' + stopName + '</a>'
+	} else {
+		theLink = '<a class="name sub" href="../stop/?id=' + 
+			stopId + '">' + stopName + '<br><span>' + 
+			subtitle + '</span></a>'
+	}
+	return theLink
+}
+
 function timeAdd(hrBase, minBase) {
 	var newTime;
 	var meridiem = " AM";
@@ -204,6 +217,7 @@ function isInArray(value, array) {
 }
 
 var schHour;
+var prop;
 
 function loadRoute() {
 	var routeName = getQueryVariable("name");
@@ -228,34 +242,46 @@ function loadRoute() {
 	
 	// Load details and operating days from data
 	document.getElementById("desc").innerHTML = routeData.details;
-	if (routeData.consistent == true) {
+	if (routeData.consistent == "yes") {
 		document.getElementById("days").innerHTML = "Operates <strong>" +
 			week[routeData.days[0]] + "</strong> through <strong>" +
 			week[routeData.days[routeData.days.length - 1]] + "</strong>";
-	} else if (routeData.consistent == false) {
+	} else if (routeData.consistent == "hour") {
 		document.getElementById("days").innerHTML = "Operates <strong>" +
 			week[routeData[direction][schHour.toString()][0][0]] + "</strong> through <strong>" +
 			week[routeData[direction][schHour.toString()][0][routeData[direction][schHour.toString()][0].length - 1]] + "</strong>";
+	} else if (routeData.consistent == "day") {
+		document.getElementById("days").innerHTML = "Operates ";
+			for (var day in routeData[direction]) {
+				document.getElementById("days").innerHTML += "<strong>";
+				if (day.length == 3) {
+					document.getElementById("days").innerHTML += week[parseInt(day.charAt(0),10)] +
+						" to " + week[parseInt(day.charAt(2),10)] + "</strong> and ";
+				} else if (day.length == 1) {
+					document.getElementById("days").innerHTML += week[parseInt(day,10)] +
+						"</strong> and ";
+				}
+			}
+			document.getElementById("days").innerHTML = document.getElementById("days").innerHTML.substr(0, document.getElementById("days").innerHTML.length-5); 
 	}
 	
 	var list = document.getElementsByClassName("route-list")[0]; 
 	
-	if (routeData.consistent == true) {
+	if (routeData.consistent == "yes") {
 		for (var i = 0; i < routeData[direction].length; i++) {
 			//var li = list.createElement("li");
 			list.innerHTML += '<li><div class="lines">' + '<span class="icon ' +
 				routeName + '">' + routeData[direction][i].id + '</span>' +
 				'<span class="marker ' + routeName + '"></span>' + 
 				'<span class="marker ' + routeName + '"></div><!--' +
-				
-				'--><span class="stop"><a class="name" href="../stop/?id=' + 
-				routeData[direction][i].id + '">' + routeData[direction][i].name +
-				'</a><time>' + timeAdd(schHour, routeData[direction][i].add) +
+				'--><span class="stop">' + 
+				genLink(routeData[direction][i].id, routeData[direction][i].name, routeData[direction][i].sub) +	
+				'<time>' + timeAdd(schHour, routeData[direction][i].add) +
 				'</time><div class="data"><div class="connections">' +
 				loadConnections(routeData[direction][i].id, routeName) + '</div></div>' +
 				'</span></li>';
 		}
-	} else if (routeData.consistent == false) {
+	} else if (routeData.consistent == "hour") {
 		if (routeData[direction][schHour.toString()] == null) {
 			for (var s = 1; s < 24; s++) {
 				if (routeData[direction][(schHour + s).toString()] != null) {
@@ -271,8 +297,38 @@ function loadRoute() {
 				routeName + '">' + schedule[i].id + '</span>' +
 				'<span class="marker ' + routeName + '"></span>' + 
 				'<span class="marker ' + routeName + '"></div><!--' +
-				'--><span class="stop"><a class="name" href="../stop/?id=' + 
-				schedule[i].id + '">' + schedule[i].name + '</a><time>' + 
+				'--><span class="stop">' + 
+				genLink(schedule[i].id, schedule[i].name, schedule[i].sub) +
+				'<time>' + timeAdd(schHour, schedule[i].add) +
+				'</time><div class="data"><div class="connections">' +
+				loadConnections(schedule[i].id, routeName) + 
+				'</div></div>' + '</span></li>';
+		}
+	} else if (routeData.consistent == "day") {
+		var today = new Date().getDay();
+		var params = new Array();
+		for (value in routeData[direction]) {
+			if (value.length == 1) {
+				params[0] = value.charAt(0);
+				params[1] = value.charAt(0);
+			} else if (value.length == 3) {
+				params[0] = value.charAt(0);
+				params[1] = value.charAt(2);
+			}
+			
+			if (today >= params[0] && today <= params[1]) {
+				prop = value;
+			}
+		}
+		var schedule = JSON.parse(JSON.stringify(routeData[direction][prop]));
+		for (var i = 0; i < schedule.length; i++) {
+			list.innerHTML += '<li><div class="lines">' + '<span class="icon ' +
+				routeName + '">' + schedule[i].id + '</span>' +
+				'<span class="marker ' + routeName + '"></span>' + 
+				'<span class="marker ' + routeName + '"></div><!--' +
+				'--><span class="stop">' +
+				genLink(schedule[i].id, schedule[i].name, schedule[i].sub) +
+				'<time>' + 
 				timeAdd(schHour, schedule[i].add) +
 				'</time><div class="data"><div class="connections">' +
 				loadConnections(schedule[i].id, routeName) + 
@@ -281,10 +337,22 @@ function loadRoute() {
 	}
 	
 	for (var m = 0; m < routeData.hours.length; m++) {
-		document.querySelector(".times select").innerHTML += '<option value="' + 
-			routeData.hours[m] + '">' +
-			timeAdd(routeData.hours[m],0) + ' - ' + 
-			timeAdd(routeData.hours[m] + 1,0) + '</option>';
+		if (routeData.consistent == "yes") {
+			document.querySelector(".times select").innerHTML += '<option value="' + 
+				routeData.hours[m] + '">' +
+				timeAdd(routeData.hours[m], routeData[direction][0].add) + ' - ' + 
+				timeAdd(routeData.hours[m], routeData[direction][routeData[direction].length - 1].add) + '</option>';
+		} else if (routeData.consistent == "hour") {
+			document.querySelector(".times select").innerHTML += '<option value="' + 
+				routeData.hours[m] + '">' +
+				timeAdd(routeData.hours[m], routeData[direction][schHour.toString()][1].add) + ' - ' + 
+				timeAdd(routeData.hours[m], routeData[direction][schHour.toString()][routeData[direction][schHour.toString()].length - 1].add) + '</option>';
+		} else if (routeData.consistent == "day") {
+			document.querySelector(".times select").innerHTML += '<option value="' + 
+				routeData.hours[m] + '">' +
+				timeAdd(routeData.hours[m], routeData[direction][prop][0].add) + ' - ' + 
+				timeAdd(routeData.hours[m], routeData[direction][prop][routeData[direction][prop].length - 1].add) + '</option>';
+		}
 	}
 	selectLoad();
 	loadMap();
@@ -340,13 +408,17 @@ function loadMap() {
 	}
 	
 	var markers = new Array();
-	if (data.route[routeName].consistent) {
+	if (data.route[routeName].consistent == "yes") {
 		for (var n = 0; n < data.route[routeName][direction].length; n++) {
 			markers.push(data.station[data.route[routeName][direction][n].id]);
 		}
-	} else if (!data.route[routeName].consistent) {
+	} else if (data.route[routeName].consistent == "hour") {
 		for (var n = 1; n < data.route[routeName][direction][schHour.toString()].length; n++) {
 			markers.push(data.station[data.route[routeName][direction][schHour.toString()][n].id]);
+		}
+	} else if (data.route[routeName].consistent == "day") {
+		for (var n = 1; n < data.route[routeName][direction][prop].length; n++) {
+			markers.push(data.station[data.route[routeName][direction][prop][n].id]);
 		}
 	}
 	

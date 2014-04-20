@@ -68,7 +68,7 @@
 		"kona": {
 			"name": "Intra Kona",
 			"details": "Buses travel from Kailua-Kona, (with service to Palani Road), out to Capt. Cook.",
-			"consistent": false,
+			"consistent": "hour",
 			"hours": [
 				5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 18
 			],
@@ -781,21 +781,317 @@
 			}
 		},
 		"kohala-resort": {
+			"name": "North Kohala to Waimea and Kailua Kona",
+			"details": "Operates from Kapaau to South Kohala",
+			"consistent": "yes",
+			"hours": [
+				7
+			],
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
 			"in": [
-			
+				{
+					"id": "kd",
+					"name": "Kapaau",
+					"add": -40
+				},
+				{
+					"id": "hi",
+					"name": "Hawi",
+					"add": -35
+				},
+				{
+					"id": "mk",
+					"name": "Mauna Kea Beach",
+					"add": -10
+				},
+				{
+					"id": "ha",
+					"name": "Hapuna Prince",
+					"add": 0
+				},
+				{
+					"id": "or",
+					"name": "Orchid Mauna Lani",
+					"add": 15
+				},
+				{
+					"id": "ml",
+					"name": "Mauna Lani Bay",
+					"add": 20
+				},
+				{
+					"id": "mr",
+					"name": "Marriott",
+					"add": 35
+				},
+				{
+					"id": "hl",
+					"name": "Hilton Waikoloa",
+					"add": 40
+				}
 			],
 			"out": [
-			
+				{
+					"id": "hl",
+					"name": "Hilton Waikoloa",
+					"add": 555
+				},
+				{
+					"id": "mr",
+					"name": "Marriott",
+					"add": 560
+				},
+				{
+					"id": "or",
+					"name": "Orchid Mauna Lani",
+					"add": 570
+				},
+				{
+					"id": "ml",
+					"name": "Mauna Lani Bay",
+					"add": 575
+				},
+				{
+					"id": "ha",
+					"name": "Hapuna Prince",
+					"add": 585
+				},
+				{
+					"id": "mk",
+					"name": "Mauna Kea Beach",
+					"add": 595
+				},
+				{
+					"id": "hi",
+					"name": "Hawi",
+					"add": 630
+				},
+				{
+					"id": "kd",
+					"name": "Kapaau",
+					"add": 635
+				}
 			]
 		},
 		"kohala-kona": {
-			"name": "North Kohala to Waimea and Kailia Kona",
-			"in": [
-			
+			"name": "North Kohala to Waimea and Kailua Kona",
+			"details": "Kapaau to Waimea and Kona",
+			"consistent": "day",
+			"hours": [
+				7
 			],
-			"out": [
-			
-			]
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
+			"in": {
+				"1-5": [
+					{
+						"id": "kd",
+						"name": "Kapaau Dispensary",
+						"add": -15
+					},
+					{
+						"id": "hi",
+						"name": "Hawi Intersection",
+						"add": -10
+					},
+					{
+						"id": "kr",
+						"name": "Kawaihae Road",
+						"add": 15
+					},
+					{
+						"id": "hw",
+						"name": "Highway 19 & 250 Intersection",
+						"add": 30
+					},
+					{
+						"id": "pc",
+						"name": "Parker Square",
+						"add": 35
+					},
+					{
+						"id": "ps",
+						"name": "Parker School",
+						"sub": "across by church",
+						"add": 40
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 45
+					},
+					{
+						"id": "wp",
+						"name": "Waimea Park",
+						"add": 80
+					},
+					{
+						"id": "wv",
+						"name": "Waikoloa Village Paniolo Avenue",
+						"sub": "South of Laie Intersection",
+						"add": 105
+					},
+					{
+						"id": "km",
+						"name": "Kmart",
+						"add": 150
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 160
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 170
+					}
+				],
+				"6": [
+					{
+						"id": "kd",
+						"name": "Kapaau Dispensary",
+						"add": 135
+					},
+					{
+						"id": "hi",
+						"name": "Hawi Intersection",
+						"add": 140
+					},
+					{
+						"id": "wv",
+						"name": "Waikoloa Village",
+						"add": 180
+					},
+					{
+						"id": "km",
+						"name": "Kmart",
+						"add": 255
+					},
+					{
+						"id": "wm",
+						"name": "Walmart",
+						"add": 265
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 270
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 285
+					}
+				]
+			},
+			"out": {
+				"1-5": [
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 395
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 410
+					},
+					{
+						"id": "km",
+						"name": "Kmart",
+						"add": 420
+					},
+					{
+						"id": "wv",
+						"name": "Waikoloa Village Paniolo Avenue",
+						"sub": "South of Laie Intersection",
+						"add": 465
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 505
+					},
+					{
+						"id": "ps",
+						"name": "Parker School",
+						"add": 510
+					},
+					{
+						"id": "wp",
+						"name": "Waimea Park",
+						"add": 515
+					},
+					{
+						"id": "hp",
+						"name": "HPA Lower Campus",
+						"add": 520
+					},
+					{
+						"id": "hw",
+						"name": "Highway 19 & 250 Intersection",
+						"add": 525
+					},
+					{
+						"id": "kr",
+						"name": "Kawaihae Road",
+						"add": 540
+					},
+					{
+						"id": "hi",
+						"name": "Hawi Intersection",
+						"add": 590
+					},
+					{
+						"id": "kd",
+						"name": "Kapaau Dispensary",
+						"add": 595
+					}
+				],
+				"6": [
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 450
+					},
+					{
+						"id": "al",
+						"name": "Alii Drive",
+						"add": 460
+					},
+					{
+						"id": "wm",
+						"name": "Walmart",
+						"add": 480
+					},
+					{
+						"id": "km",
+						"name": "Kmart",
+						"add": 490
+					},
+					{
+						"id": "wv",
+						"name": "Waikoloa Village",
+						"add": 535
+					},
+					{
+						"id": "hi",
+						"name": "Hawi Intersection",
+						"add": 570
+					},
+					{
+						"id": "kd",
+						"name": "Kapaau Dispensary",
+						"add": 575
+					}
+				]
+			}
 		},
 		"pahala-kona": {
 			"in": [
@@ -816,7 +1112,7 @@
 		"waimea": {
 			"name": "Waimea Shuttle",
 			"details": "Waimea shuttle buses between Lakeland and Kamuela view estates by way of Hawaiian Homes/Kuhio Viillage, Parker Ranch shopping center, HPA lower campus and Waimea park.",
-			"consistent": true,
+			"consistent": "yes",
 			"hours": [
 				6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
 			],
@@ -925,43 +1221,91 @@
 			"name": "Alii Drive",
 			"id": "al",
 			"lat": 19.5972026,
-			"lng": -155.9735565
+			"lng": -155.9735565,
+			"connections": [
+				"kona", "kohala-kona"
+			]
 		},
 		"ap": {
 			"name": "Kona Airport",
 			"id": "ap",
 			"lat": 19.736916,
-			"lng": -156.042925
+			"lng": -156.042925,
+			"connections": [
+				"kona"
+			]
 		},
 		"ct": {
 			"name": "Costco",
 			"id": "ct",
 			"lat": 19.685446,
-			"lng": -156.016626
+			"lng": -156.016626,
+			"connections": [
+				"kona"
+			]
 		},
 		"cy": {
 			"name": "Capt. Cook Yano Hall",
 			"id": "cy",
 			"lat": 19.489593,
-			"lng": -155.910193
+			"lng": -155.910193,
+			"connections": [
+				"kona"
+			]
 		},
 		"fp": {
 			"name": "The Friendly Place Campus",
 			"id": "fp",
 			"lat": 19.644532,
-			"lng": -155.999311
+			"lng": -155.999311,
+			"connections": [
+				"kona"
+			]
 		},
 		"fs": {
 			"name": "Fujihara Store",
 			"id": "fs",
 			"lat": 19.39684,
-			"lng": -155.879339
+			"lng": -155.879339,
+			"connections": [
+				"kona"
+			]
+		},
+		"ha": {
+			"name": "Hapuna Prince",
+			"id": "ha",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-resort"
+			]
+		},
+		"hi": {
+			"name": "Hawi Intersection",
+			"id": "hi",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-kona", "kohala-resort"
+			]
+		},
+		"hl": {
+			"name": "Hilton Waikoloa",
+			"id": "hl",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-resort"
+			]
 		},
 		"ho": {
 			"name": "Honaunau",
 			"id": "ho",
 			"lat": 19.426944,
-			"lng": -155.9130556
+			"lng": -155.9130556,
+			"connections": [
+				"kona"
+			]
 		},
 		"hp": {
 			"name": "HPA Lower Campus",
@@ -972,71 +1316,167 @@
 				"waimea", "kohala-kona"
 			]
 		},
+		"hw": {
+			"name": "Highway 19 & 250 Intersection",
+			"id": "hw",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-kona"
+			]
+		},
 		"ji": {
 			"name": "Jacaranda Inn",
 			"id": "ji",
 			"lat": 20.026589,
-			"lng": -155.686335
+			"lng": -155.686335,
+			"connections": [
+				"waimea"
+			]
 		},
 		"ka": {
 			"name": "Kainaliu Honalo",
 			"id": "ka",
 			"lat": 19.5349997,
-			"lng": -155.9288889
+			"lng": -155.9288889,
+			"connections": [
+				"kona"
+			]
 		},
 		"kc": {
 			"name": "West Hawaii Civic Center",
 			"id": "kc",
 			"lat": 19.673514,
-			"lng": -156.003909
+			"lng": -156.003909,
+			"connections": [
+				"kona"
+			]
+		},
+		"kd": {
+			"name": "Kapaau Dispensary",
+			"id": "kd",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-kona", "kohala-resort"
+			]
 		},
 		"ke": {
 			"name": "Kealakehe",
 			"id": "ke",
 			"lat": 19.668344,
-			"lng": -155.99802
+			"lng": -155.99802,
+			"connections": [
+				"kona"
+			]
 		},
 		"kh": {
 			"name": "Kona Hospital",
 			"id": "kh",
 			"lat": 19.520084,
-			"lng": -155.9174645
+			"lng": -155.9174645,
+			"connections": [
+				"kona"
+			]
 		},
 		"kk": {
 			"name": "Kealakekua",
 			"id": "kk",
 			"lat": 19.517688,
-			"lng": -155.922165
+			"lng": -155.922165,
+			"connections": [
+				"kona"
+			]
 		},
 		"km": {
 			"name": "Kmart/Macy's",
 			"id": "km",
 			"lat": 19.6527875,
-			"lng": -155.9990835
+			"lng": -155.9990835,
+			"connections": [
+				"kona", "kohala-kona"
+			]
+		},
+		"kr": {
+			"name": "Kawaihae Road",
+			"id": "kr",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-kona"
+			]
 		},
 		"ks": {
 			"name": "Keauhou Shopping Center",
 			"id": "ks",
 			"lat": 19.572346,
-			"lng": -155.961807
+			"lng": -155.961807,
+			"connections": [
+				"kona", "kohala-kona"
+			]
 		},
 		"kv": {
 			"name": "Kamuela View Estates",
 			"id": "kv",
 			"lat": 20.0264092,
-			"lng": -155.7210179
+			"lng": -155.7210179,
+			"connections": [
+				"waimea"
+			]
 		},
 		"ll": {
 			"name": "Lakeland",
 			"id": "ll",
 			"lat": 20.0426189,
-			"lng": -155.5971596
+			"lng": -155.5971596,
+			"connections": [
+				"waimea"
+			]
+		},
+		"mk": {
+			"name": "Mauna Kea Beach",
+			"id": "mk",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-resort"
+			]
+		},
+		"ml": {
+			"name": "Mauna Lani Bay",
+			"id": "ml",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-resort"
+			]
+		},
+		"mr": {
+			"name": "Marriott",
+			"id": "mr",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-resort"
+			]
 		},
 		"ms": {
 			"name": "Matsuyama Store",
 			"id": "ms",
 			"lat": 19.716086,
-			"lng": -155.977471
+			"lng": -155.977471,
+			"connections": [
+				"kona"
+			]
+		},
+		"pc": {
+			"name": "Parker Square",
+			"id": "kd",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-kona"
+			]
 		},
 		"pr": {
 			"name": "Parker Ranch Shopping Center",
@@ -1047,29 +1487,50 @@
 				"waimea", "kohala-kona"
 			]
 		},
+		"ps": {
+			"name": "Parker School",
+			"id": "ps",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-kona"
+			]
+		},
 		"oa": {
 			"name": "Old Airport",
 			"id": "oa",
 			"lat": 19.645641,
-			"lng": -156.012899
+			"lng": -156.012899,
+			"connections": [
+				"kona"
+			]
 		},
 		"sk": {
 			"name": "Sheraton Keauhou Resort",
 			"id": "sk",
 			"lat": 19.55823,
-			"lng": -155.965523
+			"lng": -155.965523,
+			"connections": [
+				"kona"
+			]
 		},
 		"wc": {
 			"name": "Waimea Civic Center",
 			"id": "wc",
 			"lat": 20.0238641,
-			"lng": -155.6618867
+			"lng": -155.6618867,
+			"connections": [
+				"waimea"
+			]
 		},
 		"wm": {
 			"name": "Walmart",
 			"id": "wm",
 			"lat": 19.6462325,
-			"lng": -155.9906295
+			"lng": -155.9906295,
+			"connections": [
+				"kona"
+			]
 		},
 		"wp": {
 			"name": "Waimea Park",
@@ -1078,6 +1539,15 @@
 			"lng": -155.6712065,
 			"connections": [
 				"waimea", "kohala-kona"
+			]
+		},
+		"wv": {
+			"name": "Waikoloa Village Paniolo Avenue",
+			"id": "wv",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"kohala-kona"
 			]
 		}
 	}
