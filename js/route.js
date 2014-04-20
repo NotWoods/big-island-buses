@@ -103,6 +103,11 @@ function timeAdd(hrBase, minBase) {
 	var newTime;
 	var meridiem = " AM";
 	
+	if (hrBase % 1 == 0.5) {
+		hrBase -= 0.5;
+		minBase += 30;
+	}
+	
 	// If there are more than 60 minutes to add
 	if (minBase >= 60) {
 		hrBase += Math.floor(minBase / 60);
@@ -185,15 +190,42 @@ function loadConnections(stationId, routeName, displayTitle) {
 	}
 }
 
-function getBestTime(hours, now) {
+function getBestTime(hours, now, possible) {
 	var bestTime;
 	var min = hours[0];
 	var max = hours[hours.length - 1];
 	
+	if (possible != false && possible != null) {
+		var newHours = new Array();
+		for (var t = 0; t < hours.length; t++) {
+			if (possible[hours[t].toString()] != null) {
+				newHours.push(hours[t]);
+			}
+		}
+		hours = newHours;
+		min = newHours[0];
+		max = newHours[newHours.length - 1];
+	}
+	
+	var hasFloat = false;
+	for (var u = 0; u < hours.length; u++) {
+		if (hours[u] % 1 != 0) {
+			hasFloat = true;
+			break;
+		}
+	}
+	
 	if (now == null || now == false) {
 		bestTime = new Date().getHours();
+		if (new Date().getMinutes >= 30 && hasFloat) {
+			bestTime += 0.5;
+		}
 	} else {
-		bestTime = parseInt(now);
+		if (hasFloat) {
+			bestTime = parseFloat(now);
+		} else {
+			bestTime = parseInt(now);
+		}
 	}
 	if (bestTime > max && bestTime <= 23) {
 		bestTime = max;
@@ -202,10 +234,19 @@ function getBestTime(hours, now) {
 	} else if (isInArray(bestTime, hours)) {
 		bestTime = bestTime;
 	} else if (!isInArray(bestTime, hours)) {
-		for (var r = 1; r < 24; r++) {
-			if (isInArray(bestTime + r, hours)) {
-				bestTime += r;
-				break;
+		if (hasFloat) {
+			for (var r = 0.5; r < 24; r+=0.5) {
+				if (isInArray(bestTime + r, hours)) {
+					bestTime += r;
+					break;
+				}
+			}
+		} else {
+			for (var r = 1; r < 24; r++) {
+				if (isInArray(bestTime + r, hours)) {
+					bestTime += r;
+					break;
+				}
 			}
 		}
 	}
@@ -230,11 +271,19 @@ function loadRoute() {
 		return;
 	}
 	
-	schHour = getBestTime(routeData.hours, time);
-	
 	// If no direction is specified, set the direction to "in".
 	if (!direction) {
 		direction = "in";
+	}
+	
+	if (routeData.dir != null) {
+		direction = "dir";
+	}
+	
+	if (routeData.consistent == "hour") {
+		schHour = getBestTime(routeData.hours, time, routeData[direction]);
+	} else if (routeData.consistent == "yes" || routeData.consistent == "day") {
+		schHour = getBestTime(routeData.hours, time, false);
 	}
 	
 	document.getElementById("route-heading").className = routeName;
@@ -359,20 +408,24 @@ function loadRoute() {
 }
 
 function switchDir() {
-	carryQuery = "?name=" + getQueryVariable("name");
-	if (getQueryVariable("time") != false) {
-		carryQuery += "&time=" + getQueryVariable("time");
-	}
-	
-	if (getQueryVariable("dir") == "in") {
-		carryQuery += "&dir=out";
-	} else if (getQueryVariable("dir") == "out") {
-		carryQuery += "&dir=in";
+	if (data.route[getQueryVariable("name")].dir == null) {
+		carryQuery = "?name=" + getQueryVariable("name");
+		if (getQueryVariable("time") != false) {
+			carryQuery += "&time=" + getQueryVariable("time");
+		}
+		
+		if (getQueryVariable("dir") == "in") {
+			carryQuery += "&dir=out";
+		} else if (getQueryVariable("dir") == "out") {
+			carryQuery += "&dir=in";
+		} else {
+			carryQuery += "&dir=out";
+		}
+		
+		window.location = "../route" + carryQuery;
 	} else {
-		carryQuery += "&dir=out";
+		return;
 	}
-	
-	window.location = "../route" + carryQuery;
 }
 
 function selectChange() {
@@ -407,6 +460,10 @@ function loadMap() {
 		direction = "in";
 	}
 	
+	if (data.route[routeName].dir != null) {
+		direction = "dir";
+	}
+	
 	var markers = new Array();
 	if (data.route[routeName].consistent == "yes") {
 		for (var n = 0; n < data.route[routeName][direction].length; n++) {
@@ -431,13 +488,13 @@ function loadMap() {
     var lat_lng = new Array();
     var latlngbounds = new google.maps.LatLngBounds();
 	var infoWindow = new google.maps.InfoWindow();
-	for (var p = 0; p < markers.length; p++) {
+	for (var p in markers) {
 		var myLatlng = new google.maps.LatLng(markers[p].lat, markers[p].lng);
 		lat_lng.push(myLatlng);
 		var marker = new google.maps.Marker({
 			position: myLatlng,
 			map: map,
-			title: markers[p].id
+			title: p
 		});
 		google.maps.event.addListener(marker, "click", function() {
 			infoWindow.setContent('<a class="h2 ' + routeName + 

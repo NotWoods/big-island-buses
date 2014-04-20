@@ -1865,12 +1865,489 @@
 			}
 		},
 		"pahala-kona": {
-			"in": [
-			
+			"name": "Pahala/Ocean View - West Hawaii",
+			"details": "Buses between Pahala and South Kohala resorts",
+			"consistent": "hour",
+			"hours": [
+				4, 6, 8, 15, 17
 			],
-			"out": [
-			
-			]
+			"days": [
+				0, 1, 2, 3, 4, 5, 6
+			],
+			"in": {
+				"4": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pm",
+						"name": "Pahala Shopping Center",
+						"add": -30
+					},
+					{
+						"id": "nl",
+						"name": "Naalehu",
+						"add": -10
+					},
+					{
+						"id": "wy",
+						"name": "Wong Yuen Store",
+						"add": -5
+					},
+					{
+						"id": "ov",
+						"name": "Ocean View Park and Ride Lot",
+						"add": 20
+					},
+					{
+						"id": "fs",
+						"name": "Fujihara Store",
+						"add": 60
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 65
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 80
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 90
+					},
+					{
+						"id": "kp",
+						"name": "Kona Palisades @ Queen K Hwy",
+						"add": 100
+					},
+					{
+						"id": "sh",
+						"name": "Four Seasons @ Hualalai",
+						"add": 115
+					},
+					{
+						"id": "hl",
+						"name": "Hilton Waikoloa",
+						"add": 140
+					},
+					{
+						"id": "fo",
+						"name": "Fairmont Orchid",
+						"add": 155
+					},
+					{
+						"id": "ml",
+						"name": "Mauna Lani Bay",
+						"add": 160
+					},
+					{
+						"id": "mk",
+						"name": "Mauna Kea Beach Hotel",
+						"add": 175
+					}
+				],
+				"6": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pm",
+						"name": "Pahala Shopping Center",
+						"add": -20
+					},
+					{
+						"id": "nl",
+						"name": "Naalehu",
+						"add": 0
+					},
+					{
+						"id": "wy",
+						"name": "Wong Yuen Store",
+						"add": 5
+					},
+					{
+						"id": "ov",
+						"name": "Ocean View Park and Ride Lot",
+						"add": 30
+					},
+					{
+						"id": "fs",
+						"name": "Fujihara Store",
+						"add": 70
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 75
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 90
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 105
+					},
+					{
+						"id": "al",
+						"name": "Ali'i Drive",
+						"add": 110
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 120
+					},
+					{
+						"id": "kp",
+						"name": "Kona Palisades @ Queen K Hwy",
+						"add": 130
+					},
+					{
+						"id": "ap",
+						"name": "Keahole Airport",
+						"add": 140
+					}
+				],
+				"8": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pm",
+						"name": "Pahala Shopping Center",
+						"add": 0
+					},
+					{
+						"id": "nl",
+						"name": "Naalehu School",
+						"add": 20
+					},
+					{
+						"id": "wy",
+						"name": "Wong Yuen Store",
+						"add": 25
+					},
+					{
+						"id": "ov",
+						"name": "Ocean View Park and Ride Lot",
+						"add": 50
+					},
+					{
+						"id": "fs",
+						"name": "Fujihara Store",
+						"add": 80
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 85
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 100
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 115
+					},
+					{
+						"id": "al",
+						"name": "Ali'i Drive",
+						"add": 120
+					},
+					{
+						"id": "oa",
+						"name": "Old Airport/Kona Commons",
+						"add": 125
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 130
+					},
+					{
+						"id": "kp",
+						"name": "Kona Palisades @ Queen K Hwy",
+						"add": 140
+					},
+					{
+						"id": "sh",
+						"name": "Four Seasons @ Hualalai",
+						"add": 155
+					},
+					{
+						"id": "hl",
+						"name": "Hilton Waikoloa",
+						"add": 180
+					},
+					{
+						"id": "fo",
+						"name": "Fairmont Orchid",
+						"add": 195
+					},
+					{
+						"id": "ml",
+						"name": "Mauna Lani Bay",
+						"add": 200
+					},
+					{
+						"id": "mk",
+						"name": "Mauna Kea Beach Hotel",
+						"add": 210
+					}
+				]
+			},
+			"out": {
+				"8": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mk",
+						"name": "Mauna Kea Beach Hotel",
+						"add": -45
+					},
+					{
+						"id": "fo",
+						"name": "Fairmont Orchid",
+						"add": -30
+					},
+					{
+						"id": "ml",
+						"name": "Mauna Lani Bay",
+						"add": -25
+					},
+					{
+						"id": "hl",
+						"name": "Hilton Waikoloa",
+						"add": -10
+					},
+					{
+						"id": "sh",
+						"name": "Four Seasons Resort @ Hualalai",
+						"add": 15
+					},
+					{
+						"id": "ap",
+						"name": "Keahole Airport",
+						"add": 30
+					},
+					{
+						"id": "kp",
+						"name": "Kona Palisades @ Queen K Hwy",
+						"add": 40
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 50
+					},
+					{
+						"id": "oa",
+						"name": "Kona Commons",
+						"add": 55
+					},
+					{
+						"id": "al",
+						"name": "Ali'i Drive",
+						"add": 60
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 70
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 85
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 100
+					},
+					{
+						"id": "fs",
+						"name": "Fujihara Store Kealia",
+						"add": 105
+					},
+					{
+						"id": "ov",
+						"name": "Ocean View Park and Ride Lot",
+						"add": 145
+					},
+					{
+						"id": "wy",
+						"name": "Wong Yuen Store",
+						"add": 170
+					},
+					{
+						"id": "nl",
+						"name": "Naalehu School",
+						"add": 175
+					},
+					{
+						"id": "pm",
+						"name": "Pahala Shopping Center",
+						"add": 195
+					}
+				],
+				"15": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mk",
+						"name": "Mauna Kea Beach Hotel",
+						"add": -30
+					},
+					{
+						"id": "fo",
+						"name": "Fairmont Orchid",
+						"add": -15
+					},
+					{
+						"id": "ml",
+						"name": "Mauna Lani Bay",
+						"add": -10
+					},
+					{
+						"id": "hl",
+						"name": "Hilton Waikoloa",
+						"add": 5
+					},
+					{
+						"id": "sh",
+						"name": "Four Seasons Resort @ Hualalai",
+						"add": 30
+					},
+					{
+						"id": "kp",
+						"name": "Kona Palisades @ Queen K Hwy",
+						"add": 45
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 55
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 65
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 80
+					},
+					{
+						"id": "fs",
+						"name": "Fujihara Store Kealia",
+						"add": 85
+					},
+					{
+						"id": "ov",
+						"name": "Ocean View Park and Ride Lot",
+						"add": 125
+					},
+					{
+						"id": "wy",
+						"name": "Wong Yuen Store",
+						"add": 150
+					},
+					{
+						"id": "nl",
+						"name": "Naalehu School",
+						"add": 155
+					},
+					{
+						"id": "pm",
+						"name": "Pahala Shopping Center",
+						"add": 175
+					}
+				],
+				"17": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "ap",
+						"name": "Keahole Airport",
+						"add": -10
+					},
+					{
+						"id": "kp",
+						"name": "Kona Palisades @ Queen K Hwy",
+						"add": 0
+					},
+					{
+						"id": "km",
+						"name": "Kmart/Macy's",
+						"add": 10
+					},
+					{
+						"id": "oa",
+						"name": "Kona Commons",
+						"add": 15
+					},
+					{
+						"id": "al",
+						"name": "Ali'i Drive",
+						"add": 20
+					},
+					{
+						"id": "ks",
+						"name": "Keauhou Shopping Center",
+						"add": 30
+					},
+					{
+						"id": "ka",
+						"name": "Kainaliu Honalo",
+						"add": 45
+					},
+					{
+						"id": "cy",
+						"name": "Capt. Cook Yano Hall",
+						"add": 60
+					},
+					{
+						"id": "fs",
+						"name": "Fujihara Store Kealia",
+						"add": 65
+					},
+					{
+						"id": "ov",
+						"name": "Ocean View Park and Ride Lot",
+						"add": 100
+					},
+					{
+						"id": "wy",
+						"name": "Wong Yuen Store",
+						"add": 125
+					},
+					{
+						"id": "nl",
+						"name": "Naalehu School",
+						"add": 130
+					},
+					{
+						"id": "pm",
+						"name": "Pahala Shopping Center",
+						"add": 150
+					}
+				]
+			}
 		},
 		"hilo-pahala": {
 			"in": [
@@ -1979,12 +2456,86 @@
 			]
 		},
 		"waikoloa": {
-			"in": [
-			
+			"name": "Waikoloa Village Shuttle",
+			"details": "Waikoloa Village Shuttle operates Monday - Saturday, 6:30 a.m. - 5:10 p.m., by Polynesian Adventure Tours",
+			"consistent": "hour",
+			"hours": [
+				6.5, 7, 7.5, 8, 8.5, 9.5, 10, 11, 11.5, 13, 13.5, 14, 14.5, 15, 16, 16.5
 			],
-			"out": [
-			
-			]
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
+			"dir": {
+				"6.5": [
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 0
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 2
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 5
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 10
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 13
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 14
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 20
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 22
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 25
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 27
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 30
+					},
+					{
+						"id": "ws",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 32
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 35
+					}
+				]
+			}
 		}
 	},
 	"station": {
@@ -2012,7 +2563,15 @@
 			"lat": 19.736916,
 			"lng": -156.042925,
 			"connections": [
-				"kona"
+				"kona", "pahala-kona"
+			]
+		},
+		"bc": {
+			"name": "Waikoloa Baptist Church",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
 			]
 		},
 		"bd": {
@@ -2042,6 +2601,14 @@
 				"hilo-keaukaha"
 			]
 		},
+		"cp": {
+			"name": "Waikoloa Community Park",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
+			]
+		},
 		"ct": {
 			"name": "Costco",
 			"id": "ct",
@@ -2057,7 +2624,16 @@
 			"lat": 19.489593,
 			"lng": -155.910193,
 			"connections": [
-				"kona"
+				"kona", "pahala-kona"
+			]
+		},
+		"fo": {
+			"name": "Fairmont Orchid",
+			"id": "fo",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"pahala-kona"
 			]
 		},
 		"fp": {
@@ -2075,7 +2651,7 @@
 			"lat": 19.39684,
 			"lng": -155.879339,
 			"connections": [
-				"kona"
+				"kona", "pahala-kona"
 			]
 		},
 		"ha": {
@@ -2096,13 +2672,21 @@
 				"kohala-kona", "kohala-resort"
 			]
 		},
+		"hk": {
+			"name": "Hooko Street",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
+			]
+		},
 		"hl": {
 			"name": "Hilton Waikoloa",
 			"id": "hl",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"kohala-resort"
+				"kohala-resort", "pahala-kona"
 			]
 		},
 		"ho": {
@@ -2132,6 +2716,14 @@
 				"hilo-keaukaha"
 			]
 		},
+		"hu": {
+			"name": "Hulu St.",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
+			]
+		},
 		"hw": {
 			"name": "Highway 19 & 250 Intersection",
 			"id": "hw",
@@ -2156,7 +2748,7 @@
 			"lat": 19.5349997,
 			"lng": -155.9288889,
 			"connections": [
-				"kona"
+				"kona", "pahala-kona"
 			]
 		},
 		"kc": {
@@ -2240,6 +2832,15 @@
 				"hilo-keaukaha"
 			]
 		},
+		"kp": {
+			"name": "Kona Palisades @ Queen K Hwy",
+			"id": "kp",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"pahala-kona"
+			]
+		},
 		"kr": {
 			"name": "Kawaihae Road",
 			"id": "kr",
@@ -2255,7 +2856,7 @@
 			"lat": 19.572346,
 			"lng": -155.961807,
 			"connections": [
-				"kona", "kohala-kona"
+				"kona", "kohala-kona", "pahala-kona"
 			]
 		},
 		"kv": {
@@ -2267,6 +2868,23 @@
 				"waimea"
 			]
 		},
+		"li": {
+			"name": "Lina Poepoe Street",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
+			]
+		},
+		"lk": {
+			"name": "Lua Kula",
+			"id": "lk",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
+			]
+		},
 		"ll": {
 			"name": "Lakeland",
 			"id": "ll",
@@ -2274,6 +2892,15 @@
 			"lng": -155.5971596,
 			"connections": [
 				"waimea"
+			]
+		},
+		"lp": {
+			"name": "Laie/Paniolo",
+			"id": "lp",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
 			]
 		},
 		"mb": {
@@ -2286,12 +2913,12 @@
 			]
 		},
 		"mk": {
-			"name": "Mauna Kea Beach",
+			"name": "Mauna Kea Beach Hotel",
 			"id": "mk",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"kohala-resort"
+				"kohala-resort", "pahala-kona"
 			]
 		},
 		"ml": {
@@ -2300,7 +2927,7 @@
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"kohala-resort"
+				"kohala-resort", "pahala-kona"
 			]
 		},
 		"mr": {
@@ -2330,6 +2957,15 @@
 				"hilo-keaukaha"
 			]
 		},
+		"nl": {
+			"name": "Naalehu",
+			"id": "nl",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"pahala-kona"
+			]
+		},
 		"pc": {
 			"name": "Parker Square",
 			"id": "kd",
@@ -2346,6 +2982,24 @@
 			"lng": 1,
 			"connections": [
 				"hilo-keaukaha"
+			]
+		},
+		"pm": {
+			"name": "Pahala Shopping Center",
+			"id": "pm",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"pahala-kona"
+			]
+		},
+		"po": {
+			"name": "Waikoloa Post Office",
+			"id": "po",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
 			]
 		},
 		"pr": {
@@ -2367,12 +3021,12 @@
 			]
 		},
 		"oa": {
-			"name": "Old Airport",
+			"name": "Old Airport/Kona Commons",
 			"id": "oa",
 			"lat": 19.645641,
 			"lng": -156.012899,
 			"connections": [
-				"kona"
+				"kona", "pahala-kona"
 			]
 		},
 		"ok": {
@@ -2393,6 +3047,15 @@
 				"kohala-resort"
 			]
 		},
+		"ov": {
+			"name": "Ocean View Park and Ride Lot",
+			"id": "pm",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"pahala-kona"
+			]
+		},
 		"se": {
 			"name": "Seaside Restaurant",
 			"id": "se",
@@ -2400,6 +3063,15 @@
 			"lng": 1,
 			"connections": [
 				"hilo-keaukaha"
+			]
+		},
+		"sh": {
+			"name": "Four Seasons @ Hualalai",
+			"id": "sh",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"pahala-kona"
 			]
 		},
 		"sk": {
@@ -2429,6 +3101,30 @@
 				"waimea"
 			]
 		},
+		"we": {
+			"name": "Waikoloa Elementary",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
+			]
+		},
+		"wf": {
+			"name": "Waikoloa Village Market",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
+			]
+		},
+		"wk": {
+			"name": "Waikoloa Park",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"waikoloa"
+			]
+		},
 		"wm": {
 			"name": "Walmart",
 			"id": "wm",
@@ -2454,6 +3150,15 @@
 			"lng": 1,
 			"connections": [
 				"kohala-kona"
+			]
+		},
+		"wy": {
+			"name": "Wong Yuen Store",
+			"id": "wy",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"pahala-kona"
 			]
 		}
 	}
