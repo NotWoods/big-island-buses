@@ -1552,7 +1552,7 @@
 			}
 		},
 		"kohala-resort": {
-			"name": "North Kohala to Waimea and Kailua Kona",
+			"name": "North Kohala to South Kohala Resorts",
 			"details": "Operates from Kapaau to South Kohala",
 			"consistent": "yes",
 			"hours": [
@@ -2350,12 +2350,1680 @@
 			}
 		},
 		"hilo-pahala": {
-			"in": [
-			
+			"name":	"Pahoa/Pohoiki/Hilo",
+			"details": "Maku'u & Paradise",
+			"consistent": "both",
+			"hours": [
+				5, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21
 			],
-			"out": [
-			
-			]
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
+			"in": {
+				"1-5": {
+					"5": [
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 20
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 25
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 40
+						},
+						{
+							"id": "ai",
+							"name": "Ainaloa",
+							"add": 75
+						},
+						{
+							"id": "hf",
+							"name": "Hawaiian Paradise Park",
+							"sub": "Makuu/Paradise",
+							"add": 85
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 110
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 135
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 138
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 140
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 142
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 145
+						},
+						{
+							"id": "st",
+							"name": "St. Joseph",
+							"add": 150
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 155
+						}
+					],
+					"8": [
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 15
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 35
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 45
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 50
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 53
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 58
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 60
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 65
+						}
+					],
+					"9": [
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": -10
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": 5
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 25
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 40
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 45
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 50
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 85
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 95
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 100
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 103
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 108
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 110
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 115
+						}
+					],
+					"11": [
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 20
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 30
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 40
+						},
+						{
+							"id": "hf",
+							"name": "Hawaiian Paradise Park",
+							"sub": "Makuu/Paradise",
+							"add": 75
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 95
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 105
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 110
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 115
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 118
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 120
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 125
+						}
+					],
+					"12": [
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 0
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 5
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 15
+						},
+						{
+							"id": "ai",
+							"name": "Ainaloa",
+							"add": 50
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 60
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 70
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 75
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 78
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 81
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 85
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 90
+						}
+					],
+					"14": [
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": -25
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": -10
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 10
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 25
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 30
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 40
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 70
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 80
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 85
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 88
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 91
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 95
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 100
+						}
+					],
+					"16": [
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": -5
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 0
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 30
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 33
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 36
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 40
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 45
+						}
+					],
+					"17": [
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": -40
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": -35
+						},
+						{
+							"id": "ai",
+							"name": "Ainaloa",
+							"add": -25
+						},
+						{
+							"id": "hf",
+							"name": "Hawaiian Paradise Park",
+							"sub": "Makuu/Paradise",
+							"add": -15
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 5
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 25
+						}
+					],
+					"18": [
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": -5
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 0
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 20
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 30
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 35
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 38
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 41
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 45
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 50
+						}
+					],
+					"20": [
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": -15
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": 0
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 20
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 35
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 50
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 60
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 65
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 68
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 71
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 75
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 80
+						}
+					],
+					"21": [
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": -20
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": -15
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": -10
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 30
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 40
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 45
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 48
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 51
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 55
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 60
+						}
+					]
+				},
+				"6": {
+					"7": [
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": -55
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": -50
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": -40
+						},
+						{
+							"id": "hf",
+							"name": "Hawaiian Paradise Park",
+							"sub": "Makuu/Paradise",
+							"add": -10
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 0
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 18
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 20
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 22
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 25
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 30
+						}
+					],
+					"9": [
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": -10
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": 5
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 25
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 40
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 45
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 50
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 85
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 95
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 100
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 103
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 108
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 110
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 115
+						}
+					],
+					"15": [
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 15
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 20
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 35
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 45
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 48
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 50
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 52
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 55
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 60
+						}
+					],
+					"18": [
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": -5
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": 10
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 30
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 45
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 50
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 60
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 90
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 100
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 105
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 108
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 113
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 115
+						},
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 120
+						}
+					]
+				}
+			},
+			"out": {
+				"1-5": {
+					"7": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 15
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 30
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 65
+						}
+					],
+					"8": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": -30
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -25
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": -20
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": -15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": -10
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": -5
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 5
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 30
+						},
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": 50
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": 65
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 85
+						}
+					],
+					"10": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 8
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 13
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 30
+						},
+						{
+							"id": "hf",
+							"name": "Hawaiian Paradise Park",
+							"sub": "Makuu/Paradise",
+							"add": 45
+						},
+						{
+							"id": "ai",
+							"name": "Ainaloa",
+							"add": 65
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 75
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 80
+						}
+					],
+					"11": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 8
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 13
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 30
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 55
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 60
+						}
+					],
+					"12": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 20
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 25
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 30
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 35
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 40
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 50
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 75
+						},
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": 95
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": 110
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 130
+						}
+					],
+					"14": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 20
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 35
+						},
+						{
+							"id": "hf",
+							"name": "Hawaiian Paradise Park",
+							"sub": "Makuu/Paradise",
+							"add": 50
+						},
+						{
+							"id": "ai",
+							"name": "Ainaloa",
+							"add": 65
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 85
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 110
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 115
+						}
+					],
+					"15": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": -20
+						},
+						{
+							"id": "st",
+							"name": "St. Joseph",
+							"add": -15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -7
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": -5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 0
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 5
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 10
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 25
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 45
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 70
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 80
+						}
+					],
+					"16": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 7
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 12
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 35
+						},
+						{
+							"id": "hf",
+							"name": "Hawaiian Paradise Park",
+							"sub": "Makuu/Paradise",
+							"add": 50
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 80
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 110
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 115
+						}
+					],
+					"18": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": -15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -10
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": -8
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": -3
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 0
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 5
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 20
+						},
+						{
+							"id": "ai",
+							"name": "Ainaloa",
+							"add": 35
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 55
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 75
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 80
+						},
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": 105
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": 120
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 140
+						}
+					],
+					"19": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 10
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 13
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 17
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 20
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 40
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 65
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 90
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 100
+						}
+					],
+					"21": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 30
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 35
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 38
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 40
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 45
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 48
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 60
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 80
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 100
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 105
+						}
+					]
+				},
+				"6": {
+					"7": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 30
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 35
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 40
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 45
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 50
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 55
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 65
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 90
+						},
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": 110
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": 125
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 145
+						}
+					],
+					"14": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": -15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -10
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": -5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 0
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 5
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 10
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 20
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 40
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 65
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 75
+						}
+					],
+					"16": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 8
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 13
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 30
+						},
+						{
+							"id": "hf",
+							"name": "Hawaiian Paradise Park",
+							"sub": "Makuu/Paradise",
+							"add": 45
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 70
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 95
+						},
+						{
+							"id": "pb",
+							"name": "Pohoiki",
+							"add": 115
+						},
+						{
+							"id": "sv",
+							"name": "Seaview Estates",
+							"add": 130
+						},
+						{
+							"id": "le",
+							"name": "Leilani Estates",
+							"add": 150
+						}
+					],
+					"20": [
+						{
+							"id": "mb",
+							"name": "Mooheau Bus Terminal",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "hs",
+							"name": "Hilo Shopping Center",
+							"add": 8
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 13
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						},
+						{
+							"id": "ku",
+							"name": "Keaau",
+							"add": 30
+						},
+						{
+							"id": "hb",
+							"name": "Hawaiian Beaches",
+							"add": 45
+						},
+						{
+							"id": "ph",
+							"name": "Pahoa",
+							"add": 60
+						},
+						{
+							"id": "nn",
+							"name": "Nanawale",
+							"add": 65
+						}
+					]
+				}
+			}
 		},
 		"waimea": {
 			"name": "Waimea Shuttle",
@@ -2448,12 +4116,1060 @@
 			]
 		},
 		"hilo-waimea": {
-			"in": [
-			
+			"name": "Waimea - Hilo",
+			"details": "Buses between Waimea and Hilo",
+			"consistent": "hour",
+			"hours": [
+				0, 3.5, 4, 4.5, 5, 5.5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 16.5, 17, 17.5, 19
 			],
-			"out": [
-			
-			]
+			"days": [
+				0, 1, 2, 3, 4, 5, 6
+			],
+			"in": {
+				"0": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "cb",
+						"name": "Horse's Statue",
+						"add": -5
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 15
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 20
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 35
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 45
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 50
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 60
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 65
+					}
+				],
+				"7": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 45
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 90
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 95
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 115
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 135
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 145
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 155
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 165
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 175
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 177
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 180
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 182
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 185
+					}
+				],
+				"8": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 25
+					},
+					{
+						"id": "gy",
+						"name": "Gym Complex",
+						"sub": "Upper Parking Lot, Honokaa",
+						"add": 45
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 50
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 65
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 75
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 80
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 90
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 95
+					}
+				],
+				"11": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "kv",
+						"name": "Kamuela View Estates",
+						"add": 0
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 15
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 50
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 55
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 70
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 90
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 100
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 110
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 120
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 125
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 127
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 130
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 132
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 135
+					}
+				],
+				"14": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 55
+					},
+					{
+						"id": "gy",
+						"name": "Gym Complex",
+						"sub": "Upper Parking Lot, Honokaa",
+						"add": 75
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 85
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 95
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 110
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 115
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 125
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 130
+					}
+				],
+				"15": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 55
+					},
+					{
+						"id": "gy",
+						"name": "Gym Complex",
+						"sub": "Upper Parking Lot, Honokaa",
+						"add": 75
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 85
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 95
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 115
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 120
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 130
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 135
+					}
+				],
+				"16": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 35
+					},
+					{
+						"id": "gy",
+						"name": "Gym Complex",
+						"sub": "Upper Parking Lot, Honokaa",
+						"add": 55
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 105
+					}
+				],
+				"16.5": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 15
+					},
+					{
+						"id": "gy",
+						"name": "Gym Complex",
+						"sub": "Upper Parking Lot, Honokaa",
+						"add": 35
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 45
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 55
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 75
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 80
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 90
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 95
+					}
+				],
+				"17": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": -10
+					},
+					{
+						"id": "gy",
+						"name": "Gym Complex",
+						"sub": "Upper Parking Lot, Honokaa",
+						"add": 10
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 20
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 30
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 50
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 55
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 65
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 70
+					}
+				],
+				"17.5": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": -15
+					},
+					{
+						"id": "gy",
+						"name": "Gym Complex",
+						"sub": "Upper Parking Lot, Honokaa",
+						"add": 15
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 20
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 40
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 60
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 70
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 80
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 90
+					}
+				]
+			},
+			"out": {
+				"3.5": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 0
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 5
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 20
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 25
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 40
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 50
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 60
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 80
+					}
+				],
+				"4": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": -10
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": -5
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 10
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 20
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 30
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 40
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 50
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 70
+					}
+				],
+				"4.5": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 25
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 75
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 95
+					}
+				],
+				"5": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 5
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 10
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 20
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 25
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 45
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 50
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 65
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 85
+					}
+				],
+				"5.5": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": -15
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": -10
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 0
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 5
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 20
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 25
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 40
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 60
+					}
+				],
+				"6": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": -40
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": -35
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": -25
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": -20
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": -5
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 5
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 20
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 40
+					}
+				],
+				"9": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 0
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 5
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 8
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 13
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 15
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 25
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 35
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 40
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 55
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 65
+					},
+					{
+						"id": "bi",
+						"name": "Blane's Drive In",
+						"sub": "Honokaa",
+						"add": 80
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 105
+					}
+				],
+				"11": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 15
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 20
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 30
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 35
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 55
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 80
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 85
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 105
+					}
+				],
+				"12": [
+					[
+						1, 2, 3, 4, 5
+					],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 0
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 10
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 20
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 25
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 40
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 55
+					},
+					{
+						"id": "bi",
+						"name": "Blane's Drive Inn",
+						"sub": "Honokaa",
+						"add": 70
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 90
+					}
+				],
+				"13": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 10
+					},
+					{
+						"id": "cc",
+						"name": "Hawaii Community College",
+						"add": 12
+					},
+					{
+						"id": "uh",
+						"name": "University of Hawaii Hilo",
+						"add": 15
+					},
+					{
+						"id": "hs",
+						"name": "Hilo Shopping Center",
+						"add": 17
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 20
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 30
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 40
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 50
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 55
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 70
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 85
+					},
+					{
+						"id": "bi",
+						"name": "Blane's Drive Inn",
+						"sub": "Honokaa",
+						"add": 100
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 140
+					}
+				],
+				"19": [
+					[
+						0, 1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 30
+					},
+					{
+						"id": "pi",
+						"name": "Papaikou",
+						"add": 35
+					},
+					{
+						"id": "hn",
+						"name": "Honomu",
+						"add": 45
+					},
+					{
+						"id": "hh",
+						"name": "Hakalau",
+						"add": 50
+					},
+					{
+						"id": "la",
+						"name": "Laupahoehoe",
+						"add": 65
+					},
+					{
+						"id": "pa",
+						"name": "Paauilo",
+						"add": 75
+					},
+					{
+						"id": "hg",
+						"name": "76 Gas Station",
+						"sub": "Honokaa",
+						"add": 85
+					},
+					{
+						"id": "pr",
+						"name": "Parker Ranch Shopping Center",
+						"sub": "back",
+						"add": 105
+					}
+				]
+			}
 		},
 		"waikoloa": {
 			"name": "Waikoloa Village Shuttle",
@@ -2467,6 +5183,9 @@
 			],
 			"dir": {
 				"6.5": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
 					{
 						"id": "po",
 						"name": "Waikoloa Post Office",
@@ -2524,7 +5243,7 @@
 						"add": 30
 					},
 					{
-						"id": "ws",
+						"id": "wf",
 						"name": "Waikoloa Village Market",
 						"sub": "shelter",
 						"add": 32
@@ -2533,6 +5252,1086 @@
 						"id": "po",
 						"name": "Waikoloa Post Office",
 						"add": 35
+					}
+				],
+				"7": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 5
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 7
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 10
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 15
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 18
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 19
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 25
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 27
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 30
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 32
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 35
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 37
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 40
+					}
+				],
+				"7.5": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 10
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 12
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 15
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 20
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 23
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 24
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 30
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 32
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 35
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 37
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 40
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 42
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 45
+					}
+				],
+				"8": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 15
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 17
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 20
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 25
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 28
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 29
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 35
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 37
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 40
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 42
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 45
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 47
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 50
+					}
+				],
+				"8.5": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 20
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 22
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 25
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 30
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 33
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 34
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 40
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 42
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 45
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 47
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 50
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 52
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 55
+					}
+				],
+				"9.5": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 15
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 17
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 20
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 25
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 28
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 29
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 35
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 37
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 40
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 42
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 45
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 47
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 50
+					}
+				],
+				"10": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 20
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 22
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 25
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 30
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 33
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 34
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 40
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 42
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 45
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 47
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 50
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 52
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 55
+					}
+				],
+				"11": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": -5
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": -3
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 0
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 5
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 8
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 9
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 15
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 17
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 20
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 22
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 25
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 27
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 30
+					}
+				],
+				"11.5": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 0
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 2
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 5
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 10
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 13
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 14
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 20
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 22
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 25
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 27
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 30
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 32
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 35
+					}
+				],
+				"13": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 0
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 2
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 5
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 10
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 13
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 14
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 20
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 22
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 25
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 27
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 30
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 32
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 35
+					}
+				],
+				"13.5": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 5
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 7
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 10
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 15
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 18
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 19
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 25
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 27
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 30
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 32
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 35
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 37
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 40
+					}
+				],
+				"14": [	
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 10
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 12
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 15
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 20
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 23
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 24
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 30
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 32
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 35
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 37
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 40
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 42
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 45
+					}
+				],
+				"14.5": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 15
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 17
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 20
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 25
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 28
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 29
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 35
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 37
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 40
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 42
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 45
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 47
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 50
+					}
+				],
+				"15": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 20
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 22
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 25
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 30
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 33
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 34
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 40
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 42
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 45
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 47
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 50
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 52
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 55
+					}
+				],
+				"16": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 0
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 2
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 5
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 10
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 13
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 14
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 20
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 22
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 25
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 27
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 30
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 32
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 35
+					}
+				],
+				"16.5": [
+					[
+						1, 2, 3, 4, 5, 6
+					],
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 5
+					},
+					{
+						"id": "lk",
+						"name": "Lua Kula",
+						"sub": "Elima Lani",
+						"add": 7
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 10
+					},
+					{
+						"id": "cp",
+						"name": "Waikoloa Community Park",
+						"add": 15
+					},
+					{
+						"id": "li",
+						"name": "Lina Poepoe St.",
+						"add": 18
+					},
+					{
+						"id": "hk",
+						"name": "Hooko St.",
+						"add": 19
+					},
+					{
+						"id": "wk",
+						"name": "Waikoloa Park",
+						"add": 25
+					},
+					{
+						"id": "we",
+						"name": "Waikoloa Elem.",
+						"add": 27
+					},
+					{
+						"id": "bc",
+						"name": "Waikoloa Baptist Church",
+						"add": 30
+					},
+					{
+						"id": "hu",
+						"name": "Hulu St.",
+						"add": 32
+					},
+					{
+						"id": "lp",
+						"name": "Laie/Paniolo",
+						"add": 35
+					},
+					{
+						"id": "wf",
+						"name": "Waikoloa Village Market",
+						"sub": "shelter",
+						"add": 37
+					},
+					{
+						"id": "po",
+						"name": "Waikoloa Post Office",
+						"add": 40
 					}
 				]
 			}
@@ -2545,7 +6344,15 @@
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
+			]
+		},
+		"ai": {
+			"name": "Ainaloa",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
 			]
 		},
 		"al": {
@@ -2583,6 +6390,14 @@
 				"hilo-keaukaha"
 			]
 		},
+		"bi": {
+			"name": "Blane's Drive Inn",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-waimea"
+			]
+		},
 		"bs": {
 			"name": "Baker Street/Krauss Street",
 			"id": "bs",
@@ -2592,13 +6407,21 @@
 				"hilo-keaukaha"
 			]
 		},
+		"cb": {
+			"name": "Horse's Statue",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-waimea"
+			]
+		},
 		"cc": {
 			"name": "Hawaii Community College",
 			"id": "cc",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
 			]
 		},
 		"cp": {
@@ -2654,6 +6477,14 @@
 				"kona", "pahala-kona"
 			]
 		},
+		"gy": {
+			"name": "Gym Complex",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-waimea"
+			]
+		},
 		"ha": {
 			"name": "Hapuna Prince",
 			"id": "ha",
@@ -2661,6 +6492,38 @@
 			"lng": 1,
 			"connections": [
 				"kohala-resort"
+			]
+		},
+		"hb": {
+			"name": "Hawaiian Beaches",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
+			]
+		},
+		"hf": {
+			"name": "Hawaiian Paradise Park",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
+			]
+		},
+		"hg": {
+			"name": "76 Gas Station",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-waimea"
+			]
+		},
+		"hh": {
+			"name": "Hakalau",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-waimea"
 			]
 		},
 		"hi": {
@@ -2689,6 +6552,14 @@
 				"kohala-resort", "pahala-kona"
 			]
 		},
+		"hn": {
+			"name": "Honomu",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-waimea"
+			]
+		},
 		"ho": {
 			"name": "Honaunau",
 			"id": "ho",
@@ -2713,7 +6584,7 @@
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
 			]
 		},
 		"hu": {
@@ -2859,6 +6730,14 @@
 				"kona", "kohala-kona", "pahala-kona"
 			]
 		},
+		"ku": {
+			"name": "Keaau",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
+			]
+		},
 		"kv": {
 			"name": "Kamuela View Estates",
 			"id": "kv",
@@ -2866,6 +6745,22 @@
 			"lng": -155.7210179,
 			"connections": [
 				"waimea"
+			]
+		},
+		"la": {
+			"name": "Laupahoehoe",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-waimea"
+			]
+		},
+		"le": {
+			"name": "Leilani Estates",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
 			]
 		},
 		"li": {
@@ -2905,16 +6800,14 @@
 		},
 		"mb": {
 			"name": "Mo'oheau Bus Terminal",
-			"id": "ok",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
 			]
 		},
 		"mk": {
 			"name": "Mauna Kea Beach Hotel",
-			"id": "mk",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
@@ -2923,7 +6816,6 @@
 		},
 		"ml": {
 			"name": "Mauna Lani Bay",
-			"id": "ml",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
@@ -2932,7 +6824,6 @@
 		},
 		"mr": {
 			"name": "Marriott",
-			"id": "mr",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
@@ -2966,6 +6857,30 @@
 				"pahala-kona"
 			]
 		},
+		"nn": {
+			"name": "Nanawale",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
+			]
+		},
+		"pa": {
+			"name": "Paauilo",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-waimea"
+			]
+		},
+		"pb": {
+			"name": "Pohoiki",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
+			]
+		},
 		"pc": {
 			"name": "Parker Square",
 			"id": "kd",
@@ -2975,13 +6890,29 @@
 				"kohala-kona"
 			]
 		},
+		"ph": {
+			"name": "Pahoa",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
+			]
+		},
+		"pi": {
+			"name": "Papaikou",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-waimea"
+			]
+		},
 		"pk": {
 			"name": "Prince Kuhio Plaza",
 			"id": "pk",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
 			]
 		},
 		"pm": {
@@ -2995,7 +6926,6 @@
 		},
 		"po": {
 			"name": "Waikoloa Post Office",
-			"id": "po",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
@@ -3008,7 +6938,7 @@
 			"lat": 20.0192935,
 			"lng": -155.666389,
 			"connections": [
-				"waimea", "kohala-kona"
+				"waimea", "kohala-kona", "hilo-waimea"
 			]
 		},
 		"ps": {
@@ -3083,13 +7013,29 @@
 				"kona"
 			]
 		},
+		"st": {
+			"name": "St. Joseph",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
+			]
+		},
+		"sv": {
+			"name": "Seaview Estates",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-pahala"
+			]
+		},
 		"uh": {
 			"name": "University of Hawaii Hilo",
 			"id": "uh",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
 			]
 		},
 		"wc": {

@@ -535,6 +535,7 @@ nav a:hover, nav a:active {
 	padding: 0.5em 0;
 }
 .route-list li:first-child .name.sub, .route-list li:last-child .name.sub {
+	line-height: 1rem;
 	padding: 1.5em 0
 }
 .route-list .name.sub span {
@@ -551,14 +552,14 @@ nav a:hover, nav a:active {
 .route-list .data {
 	display: inline-block;
 	width: 2em;
-	margin: 0.9rem 0;
-	height: 1.2rem;
+	margin: 0.1rem 0;
+	height: 2.8rem;
 	float: right;
 	margin-right: 3em;
 }
 .route-list li:first-child .data, .route-list li:last-child .data {
-	margin: 1.9rem 0;
-	height: 1.2rem;
+	margin: 1.1rem 0;
+	height: 2.8rem;
 	margin-right: 3em;
 }
 
@@ -590,6 +591,34 @@ nav a:hover, nav a:active {
 .route-list .connections:hover .tooltip {
 	opacity: 100;
 	display: block;
+}
+.route-list .connections.sz-1 {
+	height: 0.4rem;
+	margin: 1.2rem 0;
+}
+.route-list .connections.sz-2 {
+	height: 0.8rem;
+	margin: 1rem 0;
+}
+.route-list .connections.sz-3 {
+	height: 1.2rem;
+	margin: 0.8rem 0;
+}
+.route-list .connections.sz-4 {
+	height: 1.6rem;
+	margin: 0.6rem 0;
+}
+.route-list .connections.sz-5 {
+	height: 2rem;
+	margin: 0.4rem 0;
+}
+.route-list .connections.sz-6 {
+	height: 2.4rem;
+	margin: 0.2rem 0;
+}
+.route-list .connections.sz-7 {
+	height: 2.8rem;
+	margin: 0 0;
 }
 
 .route-list .connections .line {
@@ -687,10 +716,17 @@ nav a:hover, nav a:active {
 #switch:active {
 	background: #e0e0e0;
 }
+#switch.hide {
+	display: none;
+}
 .times {
 	margin-left: 0;
 	float: right;
 	display: inline-block;
+}
+.times.hide {
+	float: none;
+	display: block;
 }
 
 .connect {

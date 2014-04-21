@@ -142,6 +142,7 @@ function loadStation() {
 		return;
 	}
 	
+	document.title = stationData.name;
 	document.getElementById("station-heading").innerHTML = stationData.name;
 	
 	var list = document.getElementsByClassName("connect")[0]; 
