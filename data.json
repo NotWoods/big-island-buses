@@ -1,21 +1,3412 @@
 {
 	"version": 1,
 	"route": {
-		"hilo-kaumana": {
-			"in": [
-			
+		"hilo": {
+			"name": "Mo'oheau Bus Terminal/UH-Hilo-Prince Kuhio Plaza",
+			"details": "Mo`oheau Bus Terminal/UH-Hilo/Prince Kuhio Plaza Bus",
+			"consistent": "both",
+			"hours": [
+				5, 7, 7.5, 8, 8.5, 9, 9.5, 9.75, 10, 10.5, 11, 12, 13, 13.5, 14, 14.25, 14.5, 14.75, 15, 15.5, 16, 16.25, 16.5, 18, 19, 20
 			],
-			"out": [
-			
-			]
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
+			"in": {
+				"1-5": {
+					"7": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 0
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 15
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 20
+						}
+					],
+					"7.5": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": -15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": -12
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": -10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -5
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 5
+						}
+					],
+					"8": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 7
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 20
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 25
+						}
+					],
+					"8.5": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 35
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 40
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 42
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 50
+						}
+					],
+					"9": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Kailua-Kona'",
+							"add": 0
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 8
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 13
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 15
+						}
+					],
+					"10": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 20
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 25
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 30
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 33
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 40
+						}
+					],
+					"10.5": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 13
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 20
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 25
+						}
+					],
+					"13": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Kailua-Kona'",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 18
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 25
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 30
+						}
+					],
+					"15": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 45
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 25
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 28
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 35
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 40
+						}
+					],
+					"16": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 20
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 25
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 30
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 33
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 25
+						}
+					],
+					"18": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 35
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 40
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 45
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 50
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 55
+						}
+					],
+					"19": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 13
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 20
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 25
+						}
+					]
+				},
+				"6": {
+					"7": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 0
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 15
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 20
+						}
+					],
+					"7.5": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": -15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": -12
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": -10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -5
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 5
+						}
+					],
+					"8": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 7
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 20
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 25
+						}
+					],
+					"8.5": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 35
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 40
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 42
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 50
+						}
+					],
+					"9": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Kailua-Kona'",
+							"add": 0
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 8
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 13
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 15
+						}
+					],
+					"10": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 20
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 25
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 30
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 33
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 40
+						}
+					],
+					"10.5": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 13
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 20
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 25
+						}
+					],
+					"13": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Kailua-Kona'",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 18
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 25
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 30
+						}
+					],
+					"15": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 45
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 25
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 28
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 35
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 40
+						}
+					],
+					"16": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 20
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 25
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 30
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 33
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 25
+						}
+					],
+					"18": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 35
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 40
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 45
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 50
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 55
+						}
+					],
+					"19": [
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"sub": "Bus is marked 'Downtown Hilo'",
+							"add": 40
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 45
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 48
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 55
+						},
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"add": 60
+						}
+					]
+				}
+			},
+			"out": {
+				"1-5": {
+					"5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Volcano'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 3
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 10
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 15
+						}
+					],
+					"7": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Waiakea Uka'",
+							"add": 5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 15
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 20
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 23
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						}
+					],
+					"7.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": -5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 0
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 10
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 15
+						}
+					],
+					"8": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Volcano'",
+							"add": -20
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -17
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": -10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": -5
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 0
+						}
+					],
+					"8.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": -5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 0
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 10
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 15
+						}
+					],
+					"9": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 25
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 30
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 35
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 40
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 45
+						}
+					],
+					"9.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Waiakea Uka'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 17
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"10": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 13
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"10.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": -5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 0
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 10
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 15
+						}
+					],
+					"11": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Waiakea Uka'",
+							"add": -10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 7
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 10
+						}
+					],
+					"12": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": 15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 20
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 30
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 35
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 40
+						}
+					],
+					"13": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"13.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Volcano'",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 13
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 20
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						}
+					],
+					"14": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"14.25": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": -15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 0
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 5
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 10
+						}
+					],
+					"14.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Ka'u'",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 20
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 25
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 30
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 40
+						}
+					],
+					"14.75": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": -5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 8
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 20
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						}
+					],
+					"15": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"15.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Waiakea Uka'",
+							"add": -10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 3
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 6
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 10
+						}
+					],
+					"16": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"16.25": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": -15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": -3
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 0
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 5
+						}
+					],
+					"16.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Volcano'",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 15
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 20
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 25
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 30
+						}
+					],
+					"18": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": -15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": -3
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 0
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 5
+						}
+					],
+					"19": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": 5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 17
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 20
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						}
+					],
+					"20": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": 30
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 35
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 40
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 45
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 48
+						}
+					]
+				},
+				"6": {
+					"5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Volcano'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 3
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 10
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 15
+						}
+					],
+					"7": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Waiakea Uka'",
+							"add": 5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 15
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 20
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 23
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						}
+					],
+					"7.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 20
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						}
+					],
+					"8": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": -20
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -17
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": -10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": -5
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 0
+						}
+					],
+					"8.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": -5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 0
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 5
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 10
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 15
+						}
+					],
+					"9": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 25
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 30
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 35
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 40
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 45
+						}
+					],
+					"9.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Waiakea Uka'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 17
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"9.75": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Prince kuhio'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 17
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"10": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 30
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 35
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 40
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 45
+						}
+					],
+					"10.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Waiakea Uka'",
+							"add": 20
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 25
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 35
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 37
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 40
+						}
+					],
+					"12": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Waiakea Uka'",
+							"add": 5
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 20
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 22
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						}
+					],
+					"13": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"13.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Volcano'",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 13
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 15
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 20
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 25
+						}
+					],
+					"14": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"14.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Ka'u'",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 20
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 25
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 30
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 40
+						}
+					],
+					"15": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"15.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Waiakea Uka'",
+							"add": -10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 3
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 6
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 10
+						}
+					],
+					"16": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Keaukaha'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 10
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					],
+					"16.25": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": -15
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": -10
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": -3
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 0
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 5
+						}
+					],
+					"16.5": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Volcano'",
+							"add": 10
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 15
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 20
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 25
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 30
+						}
+					],
+					"20": [
+						{
+							"id": "mb",
+							"name": "Mo'oheau Bus Terminal",
+							"sub": "Bus is marked 'Pahoa'",
+							"add": 0
+						},
+						{
+							"id": "ac",
+							"name": "Aupuni Center",
+							"add": 5
+						},
+						{
+							"id": "uh",
+							"name": "University of Hawaii Hilo",
+							"add": 13
+						},
+						{
+							"id": "cc",
+							"name": "Hawaii Community College",
+							"add": 15
+						},
+						{
+							"id": "pk",
+							"name": "Prince Kuhio Plaza",
+							"add": 20
+						}
+					]
+				}
+			}
+		},
+		"hilo-kaumana": {
+			"name": "Downtown Hilo-Aupuni Center-Prince Kuhio",
+			"details": "Buses between downtown Hilo, Aupuni Center and Prince Kuhio Plaza shopping center",
+			"consistent": "hour",
+			"hours": [
+				7, 8, 9, 10, 11, 12, 14, 15, 16
+			],
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
+			"in": {
+				"7": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 15
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 25
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 35
+					},
+					{
+						"id": "hm",
+						"name": "Hilo Medical Center",
+						"add": 45
+					},
+					{
+						"id": "an",
+						"name": "Ainako/Kaumana",
+						"add": 50
+					}
+				],
+				"8": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 30
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 35
+					},
+					{
+						"id": "hr",
+						"name": "Hilo Library",
+						"add": 40
+					},
+					{
+						"id": "hm",
+						"name": "Hilo Medical Center",
+						"add": 45
+					},
+					{
+						"id": "an",
+						"name": "Ainako/Kaumana",
+						"add": 50
+					},
+					{
+						"id": "kn",
+						"name": "Kaumana City",
+						"add": 60
+					}
+				],
+				"10": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 10
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 20
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 25
+					},
+					{
+						"id": "hr",
+						"name": "Hilo Library",
+						"add": 30
+					},
+					{
+						"id": "hm",
+						"name": "Hilo Medical Center",
+						"add": 35
+					},
+					{
+						"id": "an",
+						"name": "Ainako/Kaumana",
+						"add": 40
+					}
+				],
+				"11": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 30
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 40
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 50
+					},
+					{
+						"id": "hr",
+						"name": "Hilo Library",
+						"add": 55
+					},
+					{
+						"id": "hm",
+						"name": "Hilo Medical Center",
+						"add": 60
+					},
+					{
+						"id": "an",
+						"name": "Ainako/Kaumana",
+						"add": 65
+					},
+					{
+						"id": "kn",
+						"name": "Kaumana City",
+						"add": 75
+					}
+				],
+				"14": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 20
+					},
+					{
+						"id": "hr",
+						"name": "Hilo Library",
+						"add": 25
+					},
+					{
+						"id": "hm",
+						"name": "Hilo Medical Center",
+						"add": 30
+					},
+					{
+						"id": "an",
+						"name": "Ainako/Kaumana",
+						"add": 35
+					},
+					{
+						"id": "ch",
+						"name": "Chong/Kaumana",
+						"add": 40
+					},
+					{
+						"id": "kn",
+						"name": "Kaumana City",
+						"add": 50
+					}
+				],
+				"16": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 38
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 45
+					},
+					{
+						"id": "hr",
+						"name": "Hilo Library",
+						"add": 50
+					},
+					{
+						"id": "hm",
+						"name": "Hilo Medical Center",
+						"add": 55
+					},
+					{
+						"id": "an",
+						"name": "Ainako/Kaumana",
+						"add": 60
+					},
+					{
+						"id": "gs",
+						"name": "Gentry Subdivison",
+						"add": 70
+					},
+					{
+						"id": "kn",
+						"name": "Kaumana City",
+						"add": 80
+					}
+				]
+			},
+			"out": {
+				"8": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "an",
+						"name": "Ainako",
+						"add": -10
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 30
+					}
+				],
+				"9": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "kn",
+						"name": "Kaumana CIty",
+						"add": 0
+					},
+					{
+						"id": "gs",
+						"name": "Gentry Subdivison",
+						"add": 5
+					},
+					{
+						"id": "ch",
+						"name": "Chong/Kaumana",
+						"add": 10
+					},
+					{
+						"id": "kt",
+						"name": "Kaumana Terrace",
+						"add": 15
+					},
+					{
+						"id": "an",
+						"name": "Ainako",
+						"add": 20
+					},
+					{
+						"id": "kw",
+						"name": "Kawaena Lapaau",
+						"add": 25
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 30
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 35
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 50
+					}
+				],
+				"11": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "an",
+						"name": "Ainako",
+						"add": -20
+					},
+					{
+						"id": "kw",
+						"name": "Kawaena Lapaau",
+						"add": -15
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": -10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": -5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 10
+					},
+					{
+						"id": "bd",
+						"name": "Banyan Drive",
+						"add": 40
+					}
+				],
+				"12": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "kn",
+						"name": "Kaumana CIty",
+						"add": 15
+					},
+					{
+						"id": "gs",
+						"name": "Gentry Subdivison",
+						"add": 20
+					},
+					{
+						"id": "ch",
+						"name": "Chong/Kaumana",
+						"add": 25
+					},
+					{
+						"id": "kt",
+						"name": "Kaumana Terrace",
+						"add": 30
+					},
+					{
+						"id": "an",
+						"name": "Ainako",
+						"add": 35
+					},
+					{
+						"id": "kw",
+						"name": "Kawaena Lapaau",
+						"add": 40
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 45
+					}
+				],
+				"15": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "kn",
+						"name": "Kaumana CIty",
+						"add": -10
+					},
+					{
+						"id": "gs",
+						"name": "Gentry Subdivison",
+						"add": -5
+					},
+					{
+						"id": "ch",
+						"name": "Chong/Kaumana",
+						"add": 0
+					},
+					{
+						"id": "kt",
+						"name": "Kaumana Terrace",
+						"add": 5
+					},
+					{
+						"id": "an",
+						"name": "Ainako",
+						"add": 10
+					},
+					{
+						"id": "kw",
+						"name": "Kawaena Lapaau",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 20
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 25
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 40
+					}
+				]
+			}
 		},
 		"hilo-downtown": {
-			"in": [
-			
+			"name": "Downtown Hilo-Aupuni Center-Prince Kuhio",
+			"details": "Buses between downtown Hilo, Aupuni Center and Prince Kuhio Plaza shopping center",
+			"consistent": "hour",
+			"hours": [
+				5, 7, 7.25, 7.5, 7.75, 8, 8.5, 9, 9.25, 9.5, 9.75, 10, 10.5, 10.75, 11, 12, 12.5, 12.75, 13, 13.5, 13.75, 14, 14.5, 15, 15.5, 16, 16.5, 18, 18.5, 19, 20, 21, 21.5
 			],
-			"out": [
-			
-			]
+			"days": [
+				1, 2, 3, 4, 5, 6
+			],
+			"in": {
+				"5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Volcano'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 3
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 15
+					}
+				],
+				"7": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '6 Waiakea Uka'",
+						"add": 5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 15
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 25
+					}
+				],
+				"7.25": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Keaukaha'",
+						"add": 10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 15
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"7.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 25
+					}
+				],
+				"7.75": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Volcano'",
+						"add": -5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": -2
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 15
+					}
+				],
+				"8": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					}
+				],
+				"8.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Keaukaha'",
+						"add": -5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 0
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 15
+					}
+				],
+				"9.25": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Keaukaha'",
+						"add": 10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 15
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"9.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '6 Waiakea Uka'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"9.75": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 10
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"10": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"10.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Keaukaka'",
+						"add": -5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 0
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 15
+					}
+				],
+				"10.75": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '6 Waiakea Uka'",
+						"add": 5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 10
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 25
+					}
+				],
+				"11": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"12": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '6 Waiakea Uka'",
+						"add": 5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 10
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 25
+					}
+				],
+				"12.5": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": -15
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": -10
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 10
+					}
+				],
+				"13": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Keaukaha'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"13.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Volcano'",
+						"add": 10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 13
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 25
+					}
+				],
+				"13.75": [
+					[ 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 25
+					}
+				],
+				"14": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 25
+					}
+				],
+				"14.5": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": 10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 23
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 40
+					}
+				],
+				"15": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Keaukaha'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"15.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '6 Waiakea Uka'",
+						"add": -10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": -5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 10
+					}
+				],
+				"16": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa' or 'Keaukaha'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"16.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked 'Volcano'",
+						"add": 10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 15
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 30
+					}
+				],
+				"18": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": -15
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": -10
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 5
+					}
+				],
+				"19": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": 5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 10
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 25
+					}
+				],
+				"20": [
+					[ 6 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 20
+					}
+				],
+				"21": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"sub": "Bus is marked '9 Pahoa'",
+						"add": 30
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 35
+					},
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"add": 48
+					}
+				]
+			},
+			"out": {
+				"7": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 20
+					}
+				],
+				"7.25": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 10
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 20
+					}
+				],
+				"7.75": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked 'Keaukaha'",
+						"add": 0
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 35
+					}
+				],
+				"8": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 20
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 25
+					}
+				],
+				"8.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 15
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 42
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 50
+					}
+				],
+				"9": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked 'Waimea'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 13
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 15
+					}
+				],
+				"10": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '4 Kaumana'",
+						"add": 10
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 25
+					}
+				],
+				"10.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": -10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 3
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 10
+					}
+				],
+				"10.75": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": -10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 5
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 10
+					}
+				],
+				"11": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '4 Kaumana'",
+						"add": 30
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 50
+					}
+				],
+				"12": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 45
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 60
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 65
+					}
+				],
+				"12.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 20
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 40
+					}
+				],
+				"12.75": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 25
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 30
+					}
+				],
+				"13": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '16 Kailua-Kona'",
+						"add": 10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 20
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 30
+					}
+				],
+				"14": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"sub": "Bus is marked '4 Kaumana'",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 20
+					}
+				],
+				"14.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked 'Keaukaha'",
+						"add": -10
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 25
+					}
+				],
+				"15": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 20
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 35
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 40
+					}
+				],
+				"15.5": [
+					[ 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 15
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 25
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 30
+					}
+				],
+				"16": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 20
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 38
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 45
+					}
+				],
+				"16.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": -5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 10
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 15
+					}
+				],
+				"18": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 30
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 45
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 50
+					}
+				],
+				"18.5": [
+					[ 1, 2, 3, 4, 5, 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 5
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 20
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 25
+					}
+				],
+				"19": [
+					[ 6 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 40
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 55
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 60
+					}
+				],
+				"21": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 0
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 15
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 20
+					}
+				],
+				"21.5": [
+					[ 1, 2, 3, 4, 5 ],
+					{
+						"id": "pk",
+						"name": "Prince Kuhio Plaza",
+						"sub": "Bus is marked '7 Downtown Hilo'",
+						"add": 10
+					},
+					{
+						"id": "ac",
+						"name": "Aupuni Center",
+						"add": 25
+					},
+					{
+						"id": "mb",
+						"name": "Mooheau Bus Terminal",
+						"add": 30
+					}
+				]
+			}
 		},
 		"hilo-keaukaha": {
 			"name": "Hilo - Keaukaha",
@@ -6344,7 +9735,7 @@
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", "hilo-downtown", "hilo", "hilo-kaumana"
 			]
 		},
 		"ai": {
@@ -6362,6 +9753,14 @@
 			"lng": -155.9735565,
 			"connections": [
 				"kona", "kohala-kona"
+			]
+		},
+		"an": {
+			"name": "Ainako/Kaumana",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-kaumana"
 			]
 		},
 		"ap": {
@@ -6387,7 +9786,7 @@
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha"
+				"hilo-keaukaha", "hilo-kaumana"
 			]
 		},
 		"bi": {
@@ -6421,7 +9820,15 @@
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", "hilo"
+			]
+		},
+		"ch": {
+			"name": "Chong/Kaumana",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-kaumana"
 			]
 		},
 		"cp": {
@@ -6475,6 +9882,14 @@
 			"lng": -155.879339,
 			"connections": [
 				"kona", "pahala-kona"
+			]
+		},
+		"gs": {
+			"name": "Gentry Subdivison",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-kaumana"
 			]
 		},
 		"gy": {
@@ -6552,6 +9967,14 @@
 				"kohala-resort", "pahala-kona"
 			]
 		},
+		"hm": {
+			"name": "Hilo Medical Center",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-kaumana"
+			]
+		},
 		"hn": {
 			"name": "Honomu",
 			"lat": 1,
@@ -6578,13 +10001,21 @@
 				"waimea", "kohala-kona"
 			]
 		},
+		"hr": {
+			"name": "Hilo Library",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-kaumana"
+			]
+		},
 		"hs": {
 			"name": "Hilo Shopping Center",
 			"id": "hs",
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", "hilo"
 			]
 		},
 		"hu": {
@@ -6694,6 +10125,14 @@
 				"kona", "kohala-kona"
 			]
 		},
+		"kn": {
+			"name": "Kaumana City",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-kaumana"
+			]
+		},
 		"ko": {
 			"name": "Kalanianaole (Onekahakaha)",
 			"id": "ko",
@@ -6730,6 +10169,14 @@
 				"kona", "kohala-kona", "pahala-kona"
 			]
 		},
+		"kt": {
+			"name": "Kaumana Terrace",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-kaumana"
+			]
+		},
 		"ku": {
 			"name": "Keaau",
 			"lat": 1,
@@ -6745,6 +10192,14 @@
 			"lng": -155.7210179,
 			"connections": [
 				"waimea"
+			]
+		},
+		"kw": {
+			"name": "Kawaena Lapaau",
+			"lat": 1,
+			"lng": 1,
+			"connections": [
+				"hilo-kaumana"
 			]
 		},
 		"la": {
@@ -6803,7 +10258,7 @@
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", "hilo-downtown", "hilo", "hilo-kaumana"
 			]
 		},
 		"mk": {
@@ -6912,7 +10367,7 @@
 			"lat": 1,
 			"lng": 1,
 			"connections": [
-				"hilo-keaukaha", "hilo-waimea", "hilo-pahala"
+				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", "hilo", "hilo-downtown", "hilo-kaumana"
 			]
 		},
 		"pm": {

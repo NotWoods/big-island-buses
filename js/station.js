@@ -88,12 +88,12 @@ function loadConnections(stationId, routeName, displayTitle) {
 	if (data.station[stationId].connections != null) {
 		var connect;
 		if (routeName == false || routeName == null) {
-			connect = data.station[stationId].connections;
+			connect = JSON.parse(JSON.stringify(data.station[stationId].connections));
 		} else {
+			connect = JSON.parse(JSON.stringify(data.station[stationId].connections));
 			// Remove the current route and leave the others
-			var index = data.station[stationId].connections.indexOf(routeName);
-			data.station[stationId].connections.splice(index, 1);
-			connect = data.station[stationId].connections;
+			var index = connect.indexOf(routeName);
+			connect.splice(index, 1);
 		}
 		
 		var returnThis = "";
@@ -112,9 +112,9 @@ function loadConnections(stationId, routeName, displayTitle) {
 			} else {
 				for (var k = 0; k < connect.length; k++) {
 					if (k == (connect.length - 1)) {
-						returnThis += 'and "' + data.route[connect[0]].name + '"';
+						returnThis += 'and "' + data.route[connect[k]].name + '"';
 					} else {
-						returnThis += '"' + data.route[connect[0]].name + '", ';
+						returnThis += '"' + data.route[connect[k]].name + '", ';
 					}
 				}
 			}

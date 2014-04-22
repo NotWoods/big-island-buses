@@ -106,6 +106,12 @@ function timeAdd(hrBase, minBase) {
 	if (hrBase % 1 == 0.5) {
 		hrBase -= 0.5;
 		minBase += 30;
+	} else if (hrBase % 1 == 0.25) {
+		hrBase -= 0.25;
+		minBase += 15;
+	} else if (hrBase % 1 == 0.75) {
+		hrBase -= 0.75;
+		minBase += 45;
 	}
 	
 	// If there are more than 60 minutes to add
@@ -172,9 +178,9 @@ function loadConnections(stationId, routeName, displayTitle) {
 			} else {
 				for (var k = 0; k < connect.length; k++) {
 					if (k == (connect.length - 1)) {
-						returnThis += 'and "' + data.route[connect[0]].name + '"';
+						returnThis += 'and "' + data.route[connect[k]].name + '"';
 					} else {
-						returnThis += '"' + data.route[connect[0]].name + '", ';
+						returnThis += '"' + data.route[connect[k]].name + '", ';
 					}
 				}
 			}
@@ -212,19 +218,25 @@ function getBestTime(hours, now, possible) {
 	
 	var hasFloat = false;
 	for (var u = 0; u < hours.length; u++) {
-		if (hours[u] % 1 != 0) {
-			hasFloat = true;
+		if (hours[u] % 1 == 0.5) {
+			hasFloat = 1;
+		} else if (hours[u] % 1 == 0.25 || hours[u] % 1 == 0.75) {
+			hasFloat = 3;
 			break;
 		}
 	}
 	
 	if (now === null || now === false) {
 		bestTime = new Date().getHours();
-		if (new Date().getMinutes >= 30 && hasFloat) {
+		if (new Date().getMinutes >= 30 && hasFloat != false) {
 			bestTime += 0.5;
+		} else if (new Date().getMinutes >= 15 && hasFloat == 3 && new Date().getMinutes < 30) {
+			bestTime += 0.25;
+		} else if (new Date().getMinutes >= 45 && hasFloat == 3) {
+			bestTime += 0.25;
 		}
 	} else {
-		if (hasFloat) {
+		if (hasFloat == 1 || hasFloat == 2) {
 			bestTime = parseFloat(now);
 		} else {
 			bestTime = parseInt(now);
@@ -237,8 +249,15 @@ function getBestTime(hours, now, possible) {
 	} else if (isInArray(bestTime, hours)) {
 		bestTime = bestTime;
 	} else if (!isInArray(bestTime, hours)) {
-		if (hasFloat) {
+		if (hasFloat == 1) {
 			for (var r = 0.5; r < 24; r+=0.5) {
+				if (isInArray(bestTime + r, hours)) {
+					bestTime += r;
+					break;
+				}
+			}
+		} else if (hasFloat == 3) {
+			for (var r = 0.25; r < 24; r+=0.25) {
 				if (isInArray(bestTime + r, hours)) {
 					bestTime += r;
 					break;

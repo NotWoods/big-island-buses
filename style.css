@@ -765,6 +765,10 @@ nav a:hover, nav a:active {
 	min-height: 3em;
 }
 
+.hilo {
+	background-color: #960000;
+	color: white;
+}
 .hilo-kaumana {
 	background-color: #00a0e2;
 	color: black;
