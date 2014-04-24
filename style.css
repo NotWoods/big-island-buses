@@ -78,6 +78,40 @@ nav a:hover, nav a:active {
 	}
 }
 
+footer {
+	background: #2d3039;
+	color: lightgray;
+	border-bottom: #1E2026 0.2rem solid;
+	border-top: 0.2rem solid #ddd;
+	padding: 0.5em;
+	text-align: center;
+}
+footer a:link, footer a:visited {
+	color: #4d74ab;
+}
+footer a:hover, footer a:active {
+	color: #465777;
+}
+footer p {
+	margin-bottom: 0;
+}
+footer > a {
+	margin-left: 0.7em;
+	text-decoration: none;
+}
+footer > a::after {
+	content: "\2022";
+	margin-left: 0.7em;
+	color: white;
+}
+footer > a:first-of-type {
+	margin-left: 0;
+}
+footer > a:last-of-type::after {
+	content: none;
+	margin-left: 0;
+}
+
 #disclaimer {
 	color: white;
 	background-color: #FF851B;
@@ -552,7 +586,7 @@ nav a:hover, nav a:active {
 .route-list .data {
 	display: inline-block;
 	width: 2em;
-	margin: 0.1rem 0;
+	margin: 0 0;
 	height: 2.8rem;
 	float: right;
 	margin-right: 3em;
@@ -594,30 +628,37 @@ nav a:hover, nav a:active {
 }
 .route-list .connections.sz-1 {
 	height: 0.4rem;
-	margin: 1.2rem 0;
+	margin: 1.3rem 0;
 }
 .route-list .connections.sz-2 {
 	height: 0.8rem;
-	margin: 1rem 0;
+	margin: 1.1rem 0;
 }
 .route-list .connections.sz-3 {
 	height: 1.2rem;
-	margin: 0.8rem 0;
+	margin: 0.9rem 0;
 }
 .route-list .connections.sz-4 {
 	height: 1.6rem;
-	margin: 0.6rem 0;
+	margin: 0.7rem 0;
 }
 .route-list .connections.sz-5 {
 	height: 2rem;
-	margin: 0.4rem 0;
+	margin: 0.5rem 0;
 }
 .route-list .connections.sz-6 {
 	height: 2.4rem;
-	margin: 0.2rem 0;
+	margin: 0.3rem 0;
 }
 .route-list .connections.sz-7 {
 	height: 2.8rem;
+	margin: 0.1rem 0;
+}
+.route-list .connections.sz-8, 
+.route-list .connections.sz-9, 
+.route-list .connections.sz-10,
+.route-list .connections.sz-11 {
+	height: 3rem;
 	margin: 0 0;
 }
 
@@ -625,6 +666,18 @@ nav a:hover, nav a:active {
 	display: block;
 	height: 0.4em;
 	width: 2em;
+}
+.route-list .connections.sz-8 .line {
+	height: 0.375em;
+}
+.route-list .connections.sz-9 .line {
+	height: 0.33em;
+}
+.route-list .connections.sz-10 .line {
+	height: 0.3em;
+}
+.route-list .connections.sz-10 .line {
+	height: 0.2727em;
 }
 
 @media all and (max-width: 60rem) {

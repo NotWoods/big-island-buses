@@ -289,7 +289,7 @@ function loadRoute() {
 	var routeData = data.route[routeName];
 	
 	if (!routeName) {
-		window.location = "http://www.tigeroakes.com/heleon";
+		window.location = "../";
 		return;
 	}
 	
