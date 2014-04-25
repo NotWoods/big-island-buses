@@ -1,4 +1,4 @@
-# Hele-On Schedule
+# Big Island Buses
 
 This program is written with HTML5, CSS, and JavaScript and can run in any modern browser.  It is used to serve the bus schedule to users, based on data from the [Hawai'i County Mass Transit Agency](http://heleonbus.org/).  It is an alternative to the pdf schedules avaliable there, which are not very useful on mobile devices.  
 
