@@ -165,11 +165,15 @@ function loadStation() {
 	address.send();
 }
 
-function loadMap() {
+function loadMap(usrLat, usrLng) {
 	var id = getQueryVariable("id");
 	var latitude = getQueryVariable("lat");
 	var longitude = getQueryVariable("lng");
 	var pos = new google.maps.LatLng(data.station[id].lat,data.station[id].lng);
+	
+	if (usrLat != null && usrLng != null) {
+		pos = new google.maps.LatLng(usrLat, usrLng);
+	}
 	
 	var mapOptions = {
 		center: pos,

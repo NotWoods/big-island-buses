@@ -6741,8 +6741,8 @@
 			}
 		},
 		"hilo-volcano": {
-			"name": "Kona/Hilo",
-			"details": "Bus operates from Kealia to Hilo.",
+			"name": "Ka'u-Volcano-Hilo",
+			"details": "Buses between Ka'u (as far as Ocean View), Volcano and Hilo",
 			"consistent": "hour",
 			"hours": [
 				5, 6, 8, 9, 14, 15, 17
@@ -14234,8 +14234,8 @@
 		"ac": {
 			"name": "Aupuni Center",
 			"id": "ac",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.718956,  
+			"lng": -155.078531,
 			"connections": [
 				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", 
 				"hilo-downtown", "hilo", "hilo-kaumana", 
@@ -14244,9 +14244,9 @@
 			]
 		},
 		"ai": {
-			"name": "Ainaloa",
-			"lat": 1,
-			"lng": 1,
+			"name": "Ainaloa Dr & Haihai St",
+			"lat": 19.672812, 
+			"lng": -155.092533,
 			"connections": [
 				"hilo-pahala", "hilo-waikea"
 			]
@@ -14254,16 +14254,16 @@
 		"al": {
 			"name": "Ali'i Drive",
 			"id": "al",
-			"lat": 19.5972026,
-			"lng": -155.9735565,
+			"lat": 19.637881, 
+			"lng": -155.993039,
 			"connections": [
 				"kona", "kohala-kona", "hilo-kona"
 			]
 		},
 		"an": {
 			"name": "Ainako/Kaumana",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.708934, 
+			"lng": -155.109828,
 			"connections": [
 				"hilo-kaumana"
 			]
@@ -14271,16 +14271,16 @@
 		"ap": {
 			"name": "Kona Airport",
 			"id": "ap",
-			"lat": 19.736916,
-			"lng": -156.042925,
+			"lat": 19.737571, 
+			"lng": -156.040336,
 			"connections": [
 				"kona", "pahala-kona"
 			]
 		},
 		"bc": {
 			"name": "Waikoloa Baptist Church",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.942992, 
+			"lng": -155.791423,
 			"connections": [
 				"waikoloa"
 			]
@@ -14288,8 +14288,8 @@
 		"bd": {
 			"name": "Banyan Drive",
 			"id": "bd",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.727129, 
+			"lng": -155.067175,
 			"connections": [
 				"hilo-keaukaha", "hilo-kaumana", "hilo-waikea"
 			]
@@ -14297,16 +14297,16 @@
 		"bf": {
 			"name": "Bayfront Parking Lot",
 			"id": "bd",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.722555, 
+			"lng": -155.075018,
 			"connections": [
 				"hilo-resort"
 			]
 		},
 		"bi": {
 			"name": "Blane's Drive Inn",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.078622, 
+			"lng": -155.466758,
 			"connections": [
 				"hilo-waimea", "hilo-kona", "hilo-honokaa"
 			]
@@ -14314,16 +14314,16 @@
 		"bs": {
 			"name": "Baker Street/Krauss Street",
 			"id": "bs",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.723473, 
+			"lng": -155.041122,
 			"connections": [
 				"hilo-keaukaha"
 			]
 		},
 		"cb": {
 			"name": "Horse's Statue",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.021094, 
+			"lng": -155.667684,
 			"connections": [
 				"hilo-waimea"
 			]
@@ -14331,8 +14331,8 @@
 		"cc": {
 			"name": "Hawaii Community College",
 			"id": "cc",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.704046, 
+			"lng": -155.069725,
 			"connections": [
 				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", 
 				"hilo", "hilo-waikea", "hilo-kona", "hilo-volcano",
@@ -14341,16 +14341,16 @@
 		},
 		"ch": {
 			"name": "Chong/Kaumana",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.694579, 
+			"lng": -155.121684,
 			"connections": [
 				"hilo-kaumana"
 			]
 		},
 		"cp": {
 			"name": "Waikoloa Community Park",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.938831, 
+			"lng": -155.787330,
 			"connections": [
 				"waikoloa"
 			]
@@ -14358,8 +14358,8 @@
 		"ct": {
 			"name": "Costco",
 			"id": "ct",
-			"lat": 19.685446,
-			"lng": -156.016626,
+			"lat": 19.687143, 
+			"lng": -156.017559,
 			"connections": [
 				"kona"
 			]
@@ -14367,16 +14367,16 @@
 		"cy": {
 			"name": "Capt. Cook Yano Hall",
 			"id": "cy",
-			"lat": 19.489593,
-			"lng": -155.910193,
+			"lat": 19.488932, 
+			"lng": -155.910097,
 			"connections": [
 				"kona", "pahala-kona", "hilo-kona"
 			]
 		},
 		"fa": {
 			"name": "Fern Acres",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.513706, 
+			"lng": -155.071382,
 			"connections": [
 				"hilo-volcano"
 			]
@@ -14384,8 +14384,8 @@
 		"fo": {
 			"name": "Fairmont Orchid",
 			"id": "fo",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.951109, 
+			"lng": -155.859483,
 			"connections": [
 				"pahala-kona"
 			]
@@ -14393,8 +14393,8 @@
 		"fp": {
 			"name": "The Friendly Place Campus",
 			"id": "fp",
-			"lat": 19.644532,
-			"lng": -155.999311,
+			"lat": 19.643789, 
+			"lng": -155.999247,
 			"connections": [
 				"kona"
 			]
@@ -14402,24 +14402,24 @@
 		"fs": {
 			"name": "Fujihara Store",
 			"id": "fs",
-			"lat": 19.39684,
-			"lng": -155.879339,
+			"lat": 19.396837, 
+			"lng": -155.879543,
 			"connections": [
 				"kona", "pahala-kona", "hilo-kona"
 			]
 		},
 		"gs": {
-			"name": "Gentry Subdivison",
-			"lat": 1,
-			"lng": 1,
+			"name": "Gentry Subdivision",
+			"lat": 19.676564,
+			"lng": -155.141902,
 			"connections": [
 				"hilo-kaumana"
 			]
 		},
 		"gy": {
 			"name": "Gym Complex",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.077132, 
+			"lng": -155.467592,
 			"connections": [
 				"hilo-waimea", "hilo-honokaa"
 			]
@@ -14427,32 +14427,32 @@
 		"ha": {
 			"name": "Hapuna Prince",
 			"id": "ha",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.995666, 
+			"lng": -155.822728,
 			"connections": [
 				"kohala-resort", "hilo-resort", "hilo-kona"
 			]
 		},
 		"hb": {
 			"name": "Hawaiian Beaches",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.529090, 
+			"lng": -154.920036,
 			"connections": [
 				"hilo-pahala"
 			]
 		},
 		"hf": {
 			"name": "Hawaiian Paradise Park",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.546767, 
+			"lng": -154.978384,
 			"connections": [
 				"hilo-pahala"
 			]
 		},
 		"hg": {
 			"name": "76 Gas Station",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.078622, 
+			"lng": -155.466758,
 			"connections": [
 				"hilo-waimea", "hilo-resort", 
 				"hilo-kona", "hilo-honokaa"
@@ -14460,8 +14460,8 @@
 		},
 		"hh": {
 			"name": "Hakalau",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.898577, 
+			"lng": -155.129412,
 			"connections": [
 				"hilo-waimea", "hilo-kona", "hilo-honokaa"
 			]
@@ -14469,16 +14469,16 @@
 		"hi": {
 			"name": "Hawi Intersection",
 			"id": "hi",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.238016, 
+			"lng": -155.830493,
 			"connections": [
 				"kohala-kona", "kohala-resort"
 			]
 		},
 		"hk": {
 			"name": "Hooko Street",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.943885, 
+			"lng": -155.784451,
 			"connections": [
 				"waikoloa"
 			]
@@ -14486,8 +14486,8 @@
 		"hl": {
 			"name": "Hilton Waikoloa",
 			"id": "hl",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.924451, 
+			"lng": -155.887667,
 			"connections": [
 				"kohala-resort", "pahala-kona", "hilo-resort", 
 				"hilo-kona"
@@ -14495,16 +14495,16 @@
 		},
 		"hm": {
 			"name": "Hilo Medical Center",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.717609, 
+			"lng": -155.112447,
 			"connections": [
 				"hilo-kaumana"
 			]
 		},
 		"hn": {
 			"name": "Honomu Plantation Store",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.728301, 
+			"lng": -155.065555,
 			"connections": [
 				"hilo-waimea", "hilo-kona", "hilo-honokaa"
 			]
@@ -14512,8 +14512,8 @@
 		"ho": {
 			"name": "Honaunau",
 			"id": "ho",
-			"lat": 19.426944,
-			"lng": -155.9130556,
+			"lat": 19.425908, 
+			"lng": -155.911709,
 			"connections": [
 				"kona"
 			]
@@ -14521,16 +14521,16 @@
 		"hp": {
 			"name": "HPA Lower Campus",
 			"id": "hp",
-			"lat": 20.0271181,
-			"lng": -155.6880357,
+			"lat": 20.022246, 
+			"lng": -155.673909,
 			"connections": [
 				"waimea", "kohala-kona"
 			]
 		},
 		"hr": {
 			"name": "Hilo Library",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.724246, 
+			"lng": -155.090700,
 			"connections": [
 				"hilo-kaumana"
 			]
@@ -14538,8 +14538,8 @@
 		"hs": {
 			"name": "Hilo Shopping Center",
 			"id": "hs",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.710273, 
+			"lng": -155.076427,
 			"connections": [
 				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", 
 				"hilo", "hilo-waikea", "hilo-kona", "hilo-honokaa"
@@ -14547,8 +14547,8 @@
 		},
 		"hu": {
 			"name": "Hulu St.",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.940870, 
+			"lng": -155.795693,
 			"connections": [
 				"waikoloa"
 			]
@@ -14556,8 +14556,8 @@
 		"hw": {
 			"name": "Highway 19 & 250 Intersection",
 			"id": "hw",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.026760, 
+			"lng": -155.698942,
 			"connections": [
 				"kohala-kona"
 			]
@@ -14565,8 +14565,8 @@
 		"ji": {
 			"name": "Jacaranda Inn",
 			"id": "ji",
-			"lat": 20.026589,
-			"lng": -155.686335,
+			"lat": 20.025853, 
+			"lng": -155.686319,
 			"connections": [
 				"waimea"
 			]
@@ -14582,8 +14582,8 @@
 		},
 		"kb": {
 			"name": "Kilauea/Haihai",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.674663, 
+			"lng": -155.066699,
 			"connections": [
 				"hilo-waikea"
 			]
@@ -14599,32 +14599,32 @@
 		},
 		"kd": {
 			"name": "Kapaau Dispensary",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.234456, 
+			"lng": -155.812890,
 			"connections": [
 				"kohala-kona", "kohala-resort"
 			]
 		},
 		"ke": {
 			"name": "Kealakehe",
-			"lat": 19.668344,
-			"lng": -155.99802,
+			"lat": 19.673018, 
+			"lng": -156.002766,
 			"connections": [
 				"kona", "hilo-kona"
 			]
 		},
 		"kh": {
 			"name": "Kona Hospital",
-			"lat": 19.520084,
-			"lng": -155.9174645,
+			"lat": 19.519973, 
+			"lng": -155.918234,
 			"connections": [
 				"kona"
 			]
 		},
 		"ki": {
 			"name": "Kalanianaole (Richardson)",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.734791, 
+			"lng": -155.012895,
 			"connections": [
 				"hilo-keaukaha"
 			]
@@ -14632,8 +14632,8 @@
 		"kk": {
 			"name": "Kealakekua",
 			"id": "kk",
-			"lat": 19.517688,
-			"lng": -155.922165,
+			"lat": 19.509107, 
+			"lng": -155.916649,
 			"connections": [
 				"kona", "hilo-kona"
 			]
@@ -14641,8 +14641,8 @@
 		"kl": {
 			"name": "King's Landing",
 			"id": "kl",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.735926, 
+			"lng": -155.011877,
 			"connections": [
 				"hilo-keaukaha"
 			]
@@ -14650,16 +14650,16 @@
 		"km": {
 			"name": "Kmart/Macy's",
 			"id": "km",
-			"lat": 19.6527875,
-			"lng": -155.9990835,
+			"lat": 19.653298, 
+			"lng": -156.000253,
 			"connections": [
 				"kona", "kohala-kona", "hilo-kona"
 			]
 		},
 		"kn": {
 			"name": "Kaumana City",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.685470, 
+			"lng": -155.141376,
 			"connections": [
 				"hilo-kaumana"
 			]
@@ -14667,8 +14667,8 @@
 		"ko": {
 			"name": "Kalanianaole (Onekahakaha)",
 			"id": "ko",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.734953, 
+			"lng": -155.038980,
 			"connections": [
 				"hilo-keaukaha"
 			]
@@ -14676,8 +14676,8 @@
 		"kp": {
 			"name": "Kona Palisades @ Queen K Hwy",
 			"id": "kp",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.725414, 
+			"lng": -156.031620,
 			"connections": [
 				"pahala-kona"
 			]
@@ -14685,8 +14685,8 @@
 		"kr": {
 			"name": "Kawaihae Road",
 			"id": "kr",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.039032, 
+			"lng": -155.829587,
 			"connections": [
 				"kohala-kona"
 			]
@@ -14702,16 +14702,16 @@
 		},
 		"kt": {
 			"name": "Kaumana Terrace",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.702711, 
+			"lng": -155.113404,
 			"connections": [
 				"hilo-kaumana"
 			]
 		},
 		"ku": {
 			"name": "Keaau",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.621563, 
+			"lng": -155.039981,
 			"connections": [
 				"hilo-pahala", "hilo-volcano"
 			]
@@ -14727,24 +14727,24 @@
 		},
 		"kw": {
 			"name": "Kawaena Lapaau",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.713634, 
+			"lng": -155.096510,
 			"connections": [
 				"hilo-kaumana"
 			]
 		},
 		"kx": {
 			"name": "Kurtistown",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.600601, 
+			"lng": -155.053616,
 			"connections": [
 				"hilo-volcano"
 			]
 		},
 		"la": {
 			"name": "Laupahoehoe",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.985373, 
+			"lng": -155.236138,
 			"connections": [
 				"hilo-waimea", "hilo-resort", "hilo-kona", 
 				"hilo-honokaa"
@@ -14752,24 +14752,24 @@
 		},
 		"lc": {
 			"name": "Life Care Center",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.682809, 
+			"lng": -155.095117,
 			"connections": [
 				"hilo-waikea"
 			]
 		},
 		"le": {
 			"name": "Leilani Estates",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.461766, 
+			"lng": -154.940858,
 			"connections": [
 				"hilo-pahala"
 			]
 		},
 		"li": {
 			"name": "Lina Poepoe Street",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.940411, 
+			"lng": -155.790826,
 			"connections": [
 				"waikoloa"
 			]
@@ -14777,8 +14777,8 @@
 		"lk": {
 			"name": "Lua Kula",
 			"id": "lk",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.929232, 
+			"lng": -155.787115,
 			"connections": [
 				"waikoloa"
 			]
@@ -14795,16 +14795,16 @@
 		"lp": {
 			"name": "Laie/Paniolo",
 			"id": "lp",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.937253, 
+			"lng": -155.791100,
 			"connections": [
 				"waikoloa"
 			]
 		},
 		"mb": {
 			"name": "Mo'oheau Bus Terminal",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.723835, 
+			"lng": -155.084741,
 			"connections": [
 				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", 
 				"hilo-downtown", "hilo", "hilo-kaumana", 
@@ -14814,8 +14814,8 @@
 		},
 		"mk": {
 			"name": "Mauna Kea Beach Hotel",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.006922, 
+			"lng": -155.823948,
 			"connections": [
 				"kohala-resort", "pahala-kona", "hilo-resort", 
 				"hilo-kona"
@@ -14823,16 +14823,16 @@
 		},
 		"ml": {
 			"name": "Mauna Lani Bay",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.945867, 
+			"lng": -155.866229,
 			"connections": [
 				"kohala-resort", "pahala-kona", "hilo-kona"
 			]
 		},
 		"mr": {
 			"name": "Marriott",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.916729, 
+			"lng": -155.883673,
 			"connections": [
 				"kohala-resort", "hilo-resort", "hilo-kona"
 			]
@@ -14848,88 +14848,88 @@
 		},
 		"mt": {
 			"name": "Keaukaha Market",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.725616, 
+			"lng": -155.036786,
 			"connections": [
 				"hilo-keaukaha"
 			]
 		},
 		"mv": {
 			"name": "Mountain View",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.507037, 
+			"lng": -155.141399,
 			"connections": [
 				"hilo-volcano"
 			]
 		},
 		"ni": {
 			"name": "Ninole",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.938732, 
+			"lng": -155.169066,
 			"connections": [
 				"hilo-kona"
 			]
 		},
 		"nl": {
 			"name": "Naalehu",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.060669, 
+			"lng": -155.586246,
 			"connections": [
 				"pahala-kona", "hilo-volcano"
 			]
 		},
 		"nn": {
 			"name": "Nanawale",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.491989, 
+			"lng": -154.922948,
 			"connections": [
 				"hilo-pahala"
 			]
 		},
 		"pa": {
 			"name": "Paauilo",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.039134, 
+			"lng": -155.367940,
 			"connections": [
 				"hilo-waimea", "hilo-kona", "hilo-honokaa"
 			]
 		},
 		"pb": {
 			"name": "Pohoiki",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.471782, 
+			"lng": -154.892541,
 			"connections": [
 				"hilo-pahala"
 			]
 		},
 		"pc": {
 			"name": "Parker Square",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.022314, 
+			"lng": -155.674496,
 			"connections": [
 				"kohala-kona"
 			]
 		},
 		"pe": {
 			"name": "Pepeekeo",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.834300, 
+			"lng": -155.103816,
 			"connections": [
 				"hilo-kona"
 			]
 		},
 		"ph": {
 			"name": "Pahoa",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.491569, 
+			"lng": -154.940782,
 			"connections": [
 				"hilo-pahala"
 			]
 		},
 		"pi": {
 			"name": "Papaikou",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.785308, 
+			"lng": -155.091973,
 			"connections": [
 				"hilo-waimea", "hilo-resort", "hilo-kona", 
 				"hilo-honokaa"
@@ -14937,8 +14937,8 @@
 		},
 		"pk": {
 			"name": "Prince Kuhio Plaza",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.695269, 
+			"lng": -155.064184,
 			"connections": [
 				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", 
 				"hilo", "hilo-downtown", "hilo-kaumana", 
@@ -14947,24 +14947,24 @@
 		},
 		"pm": {
 			"name": "Pahala Shopping Center",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.201435, 
+			"lng": -155.477141,
 			"connections": [
 				"pahala-kona", "hilo-volcano"
 			]
 		},
 		"po": {
 			"name": "Waikoloa Post Office",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.925176, 
+			"lng": -155.787312,
 			"connections": [
 				"waikoloa"
 			]
 		},
 		"pi": {
 			"name": "Papaaloa",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.975681, 
+			"lng": -155.220253,
 			"connections": [
 				"hilo-kona"
 			]
@@ -14979,16 +14979,16 @@
 		},
 		"ps": {
 			"name": "Parker School",
-			"lat": 1,
-			"lng": 1,
+			"lat": 20.022027, 
+			"lng": -155.670188,
 			"connections": [
 				"kohala-kona"
 			]
 		},
 		"pu": {
 			"name": "Punaluu",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.148114, 
+			"lng": -155.511475,
 			"connections": [
 				"hilo-volcano"
 			]
@@ -15004,8 +15004,8 @@
 		"ok": {
 			"name": "Oceanfront Kitchen",
 			"id": "ok",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.726601, 
+			"lng": -155.056245,
 			"connections": [
 				"hilo-keaukaha"
 			]
@@ -15013,16 +15013,16 @@
 		"or": {
 			"name": "Orchid Mauna Lani",
 			"id": "or",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.951140, 
+			"lng": -155.859548,
 			"connections": [
 				"kohala-resort", "hilo-resort"
 			]
 		},
 		"ov": {
 			"name": "Ocean View Park and Ride Lot",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.083647, 
+			"lng": -155.776251,
 			"connections": [
 				"pahala-kona", "hilo-volcano"
 			]
@@ -15030,8 +15030,8 @@
 		"se": {
 			"name": "Seaside Restaurant",
 			"id": "se",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.733064, 
+			"lng": -155.028432,
 			"connections": [
 				"hilo-keaukaha"
 			]
@@ -15039,8 +15039,8 @@
 		"sh": {
 			"name": "Four Seasons @ Hualalai",
 			"id": "sh",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.826818, 
+			"lng": -155.991423,
 			"connections": [
 				"pahala-kona", "hilo-resort", "hilo-kona"
 			]
@@ -15048,24 +15048,24 @@
 		"sk": {
 			"name": "Sheraton Keauhou Resort",
 			"id": "sk",
-			"lat": 19.55823,
-			"lng": -155.965523,
+			"lat": 19.559509, 
+			"lng": -155.964103,
 			"connections": [
 				"kona"
 			]
 		},
 		"st": {
 			"name": "St. Joseph",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.729539, 
+			"lng": -155.089983,
 			"connections": [
 				"hilo-pahala", "hilo-volcano"
 			]
 		},
 		"sv": {
 			"name": "Seaview Estates",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.362664, 
+			"lng": -154.966686,
 			"connections": [
 				"hilo-pahala"
 			]
@@ -15073,8 +15073,8 @@
 		"uh": {
 			"name": "University of Hawaii Hilo",
 			"id": "uh",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.699147, 
+			"lng": -155.080462,
 			"connections": [
 				"hilo-keaukaha", "hilo-waimea", "hilo-pahala", 
 				"hilo-waikea", "hilo", "hilo-kona", "hilo-volcano"
@@ -15082,64 +15082,64 @@
 		},
 		"vp": {
 			"name": "Volcano National Park Visitor's Center",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.429420, 
+			"lng": -155.257232,
 			"connections": [
 				"hilo-volcano"
 			]
 		},
 		"vv": {
 			"name": "Volcano Village",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.435574, 
+			"lng": -155.223068,
 			"connections": [
 				"hilo-volcano"
 			]
 		},
 		"wc": {
 			"name": "Waimea Civic Center",
-			"lat": 20.0238641,
-			"lng": -155.6618867,
+			"lat": 20.024532, 
+			"lng": -155.661629,
 			"connections": [
 				"waimea"
 			]
 		},
 		"we": {
 			"name": "Waikoloa Elementary",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.946168, 
+			"lng": -155.789198,
 			"connections": [
 				"waikoloa"
 			]
 		},
 		"wf": {
 			"name": "Waikoloa Village Market",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.927834, 
+			"lng": -155.786533,
 			"connections": [
 				"waikoloa"
 			]
 		},
 		"wg": {
 			"name": "Waiakea-Uka Gym",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.665486, 
+			"lng": -155.106577,
 			"connections": [
 				"hilo-waikea"
 			]
 		},
 		"wk": {
 			"name": "Waikoloa Park",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.951132, 
+			"lng": -155.790153,
 			"connections": [
 				"waikoloa"
 			]
 		},
 		"wm": {
 			"name": "Walmart",
-			"lat": 19.6462325,
-			"lng": -155.9906295,
+			"lat": 19.645585, 
+			"lng": -155.988729,
 			"connections": [
 				"kona"
 			]
@@ -15154,24 +15154,24 @@
 		},
 		"wt": {
 			"name": "Waikoloa Pyramid Square",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.876625, 
+			"lng": -155.721640,
 			"connections": [
 				"hilo-kona"
 			]
 		},
 		"wv": {
 			"name": "Waikoloa Village Paniolo Avenue",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.933581, 
+			"lng": -155.788195,
 			"connections": [
 				"kohala-kona"
 			]
 		},
 		"wy": {
 			"name": "Wong Yuen Store",
-			"lat": 1,
-			"lng": 1,
+			"lat": 19.060999, 
+			"lng": -155.584206,
 			"connections": [
 				"pahala-kona", "hilo-volcano"
 			]
