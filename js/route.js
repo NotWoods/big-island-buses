@@ -565,7 +565,7 @@ function loadRoute() {
 }
 
 function switchDir() {
-	if (data.route[getQueryVariable("name")].dir === null) {
+	if (data.route[getQueryVariable("name")].dir !== null) {
 		carryQuery = "?name=" + getQueryVariable("name");
 		if (getQueryVariable("time") != false) {
 			carryQuery += "&time=" + getQueryVariable("time");
