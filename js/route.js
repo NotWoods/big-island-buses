@@ -625,22 +625,30 @@ function loadMap() {
 	switch (data.route[routeName].consistent) {
 	case "yes":
 		for (var n = 0; n < data.route[routeName][direction].length; n++) {
-			markers.push(data.station[data.route[routeName][direction][n].id]);
+			var pushObject = data.station[data.route[routeName][direction][n].id];
+			pushObject["id"] = data.route[routeName][direction][n].id;
+			markers.push(pushObject);
 		}
 		break;
 	case "hour":
 		for (var n = 1; n < data.route[routeName][direction][schHour.toString()].length; n++) {
-			markers.push(data.station[data.route[routeName][direction][schHour.toString()][n].id]);
+			var pushObject = data.station[data.route[routeName][direction][schHour.toString()][n].id];
+			pushObject["id"] = data.route[routeName][direction][schHour.toString()][n].id;
+			markers.push(pushObject);
 		}
 		break;
 	case "day":
-		for (var n = 1; n < data.route[routeName][direction][prop].length; n++) {
-			markers.push(data.station[data.route[routeName][direction][prop][n].id]);
+		for (var n = 0; n < data.route[routeName][direction][prop].length; n++) {
+			var pushObject = data.station[data.route[routeName][direction][prop][n].id];
+			pushObject["id"] = data.route[routeName][direction][prop][n].id;
+			markers.push(pushObject);
 		}
 		break;
 	case "both": 
-		for (var n = 1; n < data.route[routeName][direction][prop][schHour.toString()].length; n++) {
-			markers.push(data.station[data.route[routeName][direction][prop][schHour.toString()][n].id]);
+		for (var n = 0; n < data.route[routeName][direction][prop][schHour.toString()].length; n++) {
+			var pushObject = data.station[data.route[routeName][direction][prop][schHour.toString()][n].id];
+			pushObject["id"] = data.route[routeName][direction][prop][schHour.toString()][n].id;
+			markers.push(pushObject);
 		}
 		break;
 	}
@@ -654,13 +662,13 @@ function loadMap() {
     var lat_lng = new Array();
     var latlngbounds = new google.maps.LatLngBounds();
 	var infoWindow = new google.maps.InfoWindow();
-	for (var p in markers) {
+	for (var p = 0; p < markers.length; p++) {
 		var myLatlng = new google.maps.LatLng(markers[p].lat, markers[p].lng);
 		lat_lng.push(myLatlng);
 		var marker = new google.maps.Marker({
 			position: myLatlng,
 			map: map,
-			title: p
+			title: markers[p].id
 		});
 		google.maps.event.addListener(marker, "click", function() {
 			infoWindow.setContent('<a class="h2 ' + routeName + 
