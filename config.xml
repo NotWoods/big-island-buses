@@ -30,6 +30,4 @@
     <icon src="icon/xxhdpi.png" gap:platform="android" gap:qualifier="xxhdpi" />
     <icon src="icon/xxxhdpi.png" gap:platform="android" gap:qualifier="xxxhdpi" />
     <gap:plugin name="org.apache.cordova.geolocation" version="0.3.6" />
-    <feature name="http://api.phonegap.com/1.0/geolocation" required="true" />
-    
 </widget>
