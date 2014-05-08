@@ -4,6 +4,11 @@ body {
 	background-color: #eee;
 }
 
+nav a, .route-list * {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent; /* For some Androids */
+}
+
 header {
 	height: auto;
 	font-size: 15px;
