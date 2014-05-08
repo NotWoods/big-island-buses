@@ -1,4 +1,10 @@
-<widget id="com.eightislandlabs.bus" version="0.0.1">
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns       = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        xmlns:android   = "http://schemas.android.com/apk/res/android"
+        id          = "com.eightislandlabs.bus"
+        versionCode = "1" 
+        version     = "1.0.0" >
     <name>Big Island Buses</name>
     <description>
         A far easier to use unofficial schedule for the Hawaii Hele-On Bus.
@@ -7,15 +13,19 @@
         Tiger Oakes
     </author>
     <content src="index.html" />
-    <access origin="https://*.googleapis.com" />
-    <access origin="http://tigeroakes.com" />
-    <preference name="Fullscreen" value="false" />
-    <preference name="Orientation" value="default" />
+    <access origin="*" subdomains="true" />
+    <preference name="fullscreen" value="false" />
+    <preference name="orientation" value="default" />
     <preference name="DisallowOverscroll" value="false"/>
     <preference name="BackgroundColor" value="0xffeeeeee"/>
-    <platform name="android">
-        <feature name="Geolocation">
-            <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
-        </feature>
-    </platform>
+    <gap:platform name="android" />
+    <preference name="android-maxSdkVersion" value="19" />
+    <preference name="android-targetSdkVersion" value="19" />
+    <icon src="icon.png" />
+    <icon src="icon/mdpi.png" gap:platform="android" gap:qualifier="mdpi" />
+    <icon src="icon/hdpi.png" gap:platform="android" gap:qualifier="hdpi" />
+    <icon src="icon/xhdpi.png" gap:platform="android" gap:qualifier="xhdpi" />
+    <icon src="icon/xxhdpi.png" gap:platform="android" gap:qualifier="xxhdpi" />
+    <icon src="icon/xxxhdpi.png" gap:platform="android" gap:qualifier="xxxhdpi" />
+    <gap:plugin name="org.apache.cordova.geolocation" version="0.3.6" />
 </widget>
