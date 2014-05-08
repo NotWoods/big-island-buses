@@ -883,10 +883,6 @@ footer > a:last-of-type::after {
 	background-color: #e6b900;
 	color: black;
 }
-.holiday {
-	background-color: FireBrick;
-	color: white;
-}
 .waikoloa {
 	background-color: #d05f0e;
 	color: black;

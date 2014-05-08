@@ -1,0 +1,21 @@
+<widget id="com.eightislandlabs.bus" version="0.0.1">
+    <name>Big Island Buses</name>
+    <description>
+        A far easier to use unofficial schedule for the Hawaii Hele-On Bus.
+    </description>
+    <author email="tigeroakes@gmail.com" href="http://tigeroakes.com">
+        Tiger Oakes
+    </author>
+    <content src="index.html" />
+    <access origin="https://*.googleapis.com" />
+    <access origin="http://tigeroakes.com" />
+    <preference name="Fullscreen" value="false" />
+    <preference name="Orientation" value="default" />
+    <preference name="DisallowOverscroll" value="false"/>
+    <preference name="BackgroundColor" value="0xffeeeeee"/>
+    <platform name="android">
+        <feature name="Geolocation">
+            <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
+        </feature>
+    </platform>
+</widget>
