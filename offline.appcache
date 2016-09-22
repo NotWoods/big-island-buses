@@ -1,0 +1,16 @@
+CACHE MANIFEST
+style.css
+polyfill.js
+jszip.js
+load.js
+main.js
+google_transit.zip
+assets/logo.svg
+assets/lines.svg
+roboto/Roboto-Regular.ttf
+roboto/Roboto-Medium.ttf
+NETWORK:
+#GMaps & Chitika ads
+*
+SETTINGS:
+prefer-online

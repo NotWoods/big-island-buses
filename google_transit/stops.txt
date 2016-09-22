@@ -1,0 +1,112 @@
+stop_id,stop_name,stop_lat,stop_lon
+ac,Aupuni Center,19.718956,-155.078531
+ai,Ainaloa Dr & Haihai St,19.672812,-155.092533
+ao,Ainaloa,19.527616,-154.993385
+al,Ali'i Drive,19.637881,-155.993039
+an,Ainako/Kaumana,19.708934,-155.109828
+ap,Kona Airport,19.737571,-156.040336
+bc,Waikoloa Baptist Church,19.942992,-155.791423
+bd,Banyan Drive,19.727129,-155.067175
+bf,Bayfront Parking Lot,19.722555,-155.075018
+bs,Baker Street/Krauss Street,19.723473,-155.041122
+cc,Hawaii Community College,19.704046,-155.069725
+ch,Chong/Kaumana,19.694579,-155.121684
+cp,Waikoloa Community Park,19.938831,-155.787330
+ct,Costco,19.687143,-156.017559
+cy,Capt. Cook Yano Hall,19.488932,-155.910097
+fa,Fern Acres,19.513706,-155.071382
+fp,The Friendly Place Campus,19.643789,-155.999247
+fs,Fujihara Store,19.396837,-155.879543
+gs,Gentry Subdivision,19.676564,-155.141902
+gy,Gym Complex,20.077132,-155.467592
+ha,Hapuna Prince,19.995666,-155.822728
+hb,Hawaiian Beaches,19.529090,-154.920036
+hf,Hawaiian Paradise Park,19.546767,-154.978384
+hg,Honokaa 76 Gas Station,20.078622,-155.466758
+hh,Hakalau,19.898577,-155.129412
+hi,Hawi Intersection,20.238016,-155.830493
+hk,Hooko Street,19.943885,-155.784451
+hl,Hilton Waikoloa,19.924451,-155.887667
+hm,Hilo Medical Center,19.717609,-155.112447
+hx,Honomu,19.874991,-155.111058
+ho,Honaunau,19.425908,-155.911709
+hp,HPA Lower Campus,20.022246,-155.673909
+hr,Hilo Library,19.724246,-155.090700
+hs,Hilo Shopping Center,19.710273,-155.076427
+hu,Hulu St.,19.940870,-155.795693
+hw,Highway 19 & 250 Intersection,20.026760,-155.698942
+ji,Jacaranda Inn,20.025853,-155.686319
+ka,Kainaliu Honalo,19.5349997,-155.9288889
+kb,Kilauea/Haihai,19.674663,-155.066699
+kc,West Hawaii Civic Center,19.673514,-156.003909
+kd,Kapaau Dispensary,20.230692,-155.798939
+ke,Kealakehe,19.673018,-156.002766
+kh,Kona Hospital,19.519973,-155.918234
+ki,Kalanianaole (Richardson),19.734791,-155.012895
+kk,Kealakekua,19.509107,-155.916649
+kl,King's Landing,19.735926,-155.011877
+km,Kmart/Macy's,19.653298,-156.000253
+kn,Kaumana City,19.685470,-155.141376
+ko,Kalanianaole (Onekahakaha),19.734953,-155.038980
+kp,Kona Palisades @ Queen K Hwy,19.725414,-156.031620
+kq,Kaiser Permanente,19.674409,-156.014672
+kr,Kawaihae Road,20.039032,-155.829587
+ks,Keauhou Shopping Center,19.572346,-155.961807
+kt,Kaumana Terrace,19.702711,-155.113404
+ku,Keaau,19.621563,-155.039981
+kv,Kamuela View Estates,20.0264092,-155.7210179
+kw,Kawaena Lapaau,19.713634,-155.096510
+kx,Kurtistown,19.600601,-155.053616
+la,Laupahoehoe,19.985373,-155.236138
+lc,Life Care Center,19.682809,-155.095117
+le,Leilani Estates,19.461766,-154.940858
+lh,Lokahi Apartments,19.712810,-156.012695
+li,Lina Poepoe Street,19.940411,-155.790826
+lk,Lua Kula,19.929232,-155.787115
+ll,Lakeland,20.0426189,-155.5971596
+lp,Laie/Paniolo,19.937253,-155.791100
+mb,Mo'oheau Bus Terminal,19.723835,-155.084741
+mk,Mauna Kea Beach Hotel,20.006922,-155.823948
+ml,Mauna Lani Bay,19.945867,-155.866229
+mr,Marriott,19.916729,-155.883673
+ms,Matsuyama Store,19.716086,-155.977471
+mt,Keaukaha Market,19.725616,-155.036786
+mv,Mountain View,19.507037,-155.141399
+ni,Ninole,19.938732,-155.169066
+nl,Naalehu,19.060669,-155.586246
+nn,Nanawale,19.491989,-154.922948
+pa,Paauilo,20.039134,-155.367940
+pb,Pohoiki,19.471782,-154.892541
+pc,Parker Square,20.022314,-155.674496
+pe,Pepeekeo,19.834300,-155.103816
+ph,Pahoa,19.491569,-154.940782
+pi,Papaikou,19.785308,-155.091973
+pk,Prince Kuhio Plaza,19.695269,-155.064184
+pm,Pahala Shopping Center,19.201435,-155.477141
+po,Waikoloa Post Office,19.925176,-155.787312
+pp,Papaaloa,19.975681,-155.220253
+pr,Parker Ranch Shopping Center,20.0192935,-155.666389
+ps,Parker School,20.022027,-155.670188
+pu,Punaluu,19.148114,-155.511475
+oa,Old Airport/Kona Commons,19.648772,-156.003715
+ok,Oceanfront Kitchen,19.726601,-155.056245
+or,Fairmont Orchid Mauna Lani,19.951140,-155.859548
+ov,Ocean View Park and Ride Lot,19.083647,-155.776251
+se,Seaside Restaurant,19.733064,-155.028432
+sh,Four Seasons @ Hualalai,19.826818,-155.991423
+sk,Sheraton Keauhou Resort,19.559509,-155.964103
+st,St. Joseph,19.729539,-155.089983
+sv,Seaview Estates,19.362664,-154.966686
+uh,University of Hawaii Hilo,19.699147,-155.080462
+vp,Volcano National Park Visitor's Center,19.429420,-155.257232
+vv,Volcano Village,19.435574,-155.223068
+wc,Waimea Civic Center,20.024532,-155.661629
+we,Waikoloa Elementary,19.946168,-155.789198
+wf,Waikoloa Village Market,19.927834,-155.786533
+wg,Waiakea-Uka Gym,19.665486,-155.106577
+wk,Waikoloa Park,19.951132,-155.790153
+wm,Walmart,19.645585,-155.988729
+wp,Waimea Park,20.0219156,-155.6712065
+wt,Waikoloa Pyramid Stone,19.876625,-155.721640
+wv,Waikoloa Village Paniolo Avenue,19.933581,-155.788195
+wy,Wong Yuen Store,19.060999,-155.584206

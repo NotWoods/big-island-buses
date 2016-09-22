@@ -1,14 +1,11 @@
-# OS files
-.DS_Store?
-ehthumbs.db
-Icon?
 Thumbs.db
-
-# Publishing version will be stored here
+snapshots/
 min/
-
-video/
-device/
-talk.txt
-
-template.html
+about.css
+about.html
+index.php
+redirect.htaccess
+robots.txt
+sitemap.xml
+assets/about-devices.png
+assets/about-stops.png
