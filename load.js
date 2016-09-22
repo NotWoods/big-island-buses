@@ -27,54 +27,46 @@ Active = {
 		STOP: View.MAP_PRIMARY
 	}
 },
-updateEvent = new CustomEvent("pageupdate"), updateLocation = new CustomEvent("locationupdate"); 
+updateEvent = new CustomEvent("pageupdate"), updateLocation = new CustomEvent("locationupdate");
 
 var map, streetview, autocomplete, boundsAllStops, markers, userMapMarker, stopMarker;
 
 var normal = {
-	path: "M12,2C8.1,2,5,5.1,5,9c0,5.2,7,13,7,13s7-7.8,7-13C19,5.1,15.9,2,12,2z"+
-		"M12,11.5c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5c1.4,0,2.5,1.1,2.5,2.5S13.4,11.5,12,11.5z",
-	scale: 1,
-	fillColor: "#e51c23",
-	fillOpacity: 1,
-	strokeColor: "#b0120a"
+	url: "assets/pins.png",
+	size: {height: 26, width: 24},
+	scaledSize: {height: 26, width: 120},
+	origin: {x: 0, y: 0},
+	anchor: {x: 12, y: 12}
 }, unimportant = {
-	path: "M12,2C8.1,2,5,5.1,5,9c0,5.2,7,13,7,13s7-7.8,7-13C19,5.1,15.9,2,12,2z"+
-		"M12,11.5c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5c1.4,0,2.5,1.1,2.5,2.5S13.4,11.5,12,11.5z",
-	scale: 0.9,
-	fillColor: "#f69988",
-	fillOpacity: 1,
-	strokeColor: "#b0120a"
+	url: "assets/pins.png",
+	size: {height: 26, width: 24},
+	scaledSize: {height: 26, width: 120},
+	origin: {x: 96, y: 0},
+	anchor: {x: 12, y: 12}
 }, userShape = {
-	path: "M19,2H5C3.9,2,3,2.9,3,4v14c0,1.1,0.9,2,2,2h4l3,3l3-3h4c1.1,0,2-0.9,2-2V4C21,2.9,20.1,2,19,2z"+
-		"M12,5.3c1.5,0,2.7,1.2,2.7,2.7c0,1.5-1.2,2.7-2.7,2.7c-1.5,0-2.7-1.2-2.7-2.7C9.3,6.5,10.5,5.3,12,5.3z"+
-		"M18,16H6v-0.9c0-2,4-3.1,6-3.1c2,0,6,1.1,6,3.1V16z",
-	scale: 1,
-	fillColor: "#03a9f4",
-	fillOpacity: 1,
-	strokeColor: "#01579b",
-	zIndex: 1000
+	url: "assets/pins.png",
+	size: {height: 26, width: 24},
+	scaledSize: {height: 26, width: 120},
+	origin: {x: 48, y: 0},
+	anchor: {x: 12, y: 12}
 }, placeShape = {
-	path: "M3,12L12 12 12 21 13 21 21 3 3 11 z",
-	scale: 1,
-	fillColor: "#009688",
-	fillOpacity: 1,
-	strokeColor: "#004d40",
-	zIndex: 1000
+	url: "assets/pins.png",
+	size: {height: 26, width: 24},
+	scaledSize: {height: 26, width: 120},
+	origin: {x: 72, y: 0},
+	anchor: {x: 12, y: 23}
 }, stopShape = {
-	path: "M12,2C8.1,2,5,5.1,5,9c0,5.2,7,13,7,13s7-7.8,7-13C19,5.1,15.9,2,12,2z"+
-		"M12,11.5c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5c1.4,0,2.5,1.1,2.5,2.5S13.4,11.5,12,11.5z",
-	scale: 1,
-	fillColor: "#3f51b5",
-	fillOpacity: 1,
-	strokeColor: "#1a237e",
-	zIndex: 300
+	url: "assets/pins.png",
+	size: {height: 26, width: 24},
+	scaledSize: {height: 26, width: 120},
+	origin: {x: 24, y: 0},
+	anchor: {x: 12, y: 20}
 };
 
 /**
- * Grabs google_transit.zip and parses the data into a 
+ * Grabs google_transit.zip and parses the data into a
  * GTFSData object for the rest of the program.
- * @param  {string} mode "folder" or "gtfs". Will grab the 
+ * @param  {string} mode "folder" or "gtfs". Will grab the
  *                       google_transit folder or zip file depending on input
  * @return {Promise}     Promise returns parsed GTFS data file for the rest of the program
  */
@@ -88,7 +80,7 @@ function getScheduleData(mode) {
 
 	var variable = new GTFSData();
 
-	fileList = ["agency.txt", "calendar.txt", "fare_attributes.txt", "feed_info.txt", 
+	fileList = ["agency.txt", "calendar.txt", "fare_attributes.txt", "feed_info.txt",
 		"routes.txt", "stop_times.txt", "stops.txt", "trips.txt"];
 
 	return new Promise(function(resolve, reject) {
@@ -158,11 +150,11 @@ function getScheduleData(mode) {
 			}
 			for (var s = 0; s < json.stops.length; s++) {
 				var ts = json.stops[s], vs = variable.stops;
-				vs[ts.stop_id] = ts; vs[ts.stop_id].trips = []; vs[ts.stop_id].routes = []; 
+				vs[ts.stop_id] = ts; vs[ts.stop_id].trips = []; vs[ts.stop_id].routes = [];
 			}
 			for (var c = 0; c < json.calendar.length; c++) {
 				var tc = json.calendar[c], vc = variable.calendar;
-				vc[tc.service_id] = tc; vc[tc.service_id].days = [iB(tc.sunday), iB(tc.monday), iB(tc.tuesday), iB(tc.wednesday), 
+				vc[tc.service_id] = tc; vc[tc.service_id].days = [iB(tc.sunday), iB(tc.monday), iB(tc.tuesday), iB(tc.wednesday),
 					iB(tc.thursday), iB(tc.friday), iB(tc.saturday)];
 				switch (vc[tc.service_id].days.join(", ")) {
 					case "true, true, true, true, true, true, true": vc[tc.service_id].text_name = "Daily"; break;
@@ -170,7 +162,7 @@ function getScheduleData(mode) {
 					case "false, true, true, true, true, true, false": vc[tc.service_id].text_name = "Monday - Friday"; break;
 					case "true, false, false, false, false, false, true": vc[tc.service_id].text_name = "Saturday - Sunday"; break;
 					case "false, false, false, false, false, false, true": vc[tc.service_id].text_name = "Saturday"; break;
-					default: 
+					default:
 						var firstDay; var lastDay;
 						for (var sItr = 0; sItr < vc[tc.service_id].days.length; sItr++) {if (vc[tc.service_id].days[sItr]) {firstDay = sItr; break;}}
 						for (var sItr2 = vc[tc.service_id].days.length-1; sItr2 >= 0; sItr2--) {if (vc[tc.service_id].days[sItr2]) {lastDay = sItr2; break;}}
@@ -186,7 +178,7 @@ function getScheduleData(mode) {
 					if (variable.routes[tsr].trips[tst.trip_id]) {
 						variable.routes[tsr].trips[tst.trip_id].stop_times[tst.stop_sequence] = tst;
 						if (vst.trips.indexOf(tst.trip_id) == -1) vst.trips.push({
-							trip: tst.trip_id, 
+							trip: tst.trip_id,
 							dir: variable.routes[tsr].trips[tst.trip_id].direction_id,
 							route: tsr,
 							sequence: tst.stop_sequence,
@@ -206,7 +198,7 @@ function getScheduleData(mode) {
  * Locates the nearest bus stop to the user or custom location
  * @param  {Promise} schedulePromise Schedule promise to wait for
  * @param  {Geoposition.coords} customLocation Location to use instead of GPS
- * @return {Promise} 
+ * @return {Promise}
  */
 var runOnce = false;
 function locateUser(busPromise, customLocation) {
@@ -217,7 +209,7 @@ function locateUser(busPromise, customLocation) {
 			busPromise.then(function(schedule) {
 				for (var i in schedule.stops) {
 					var stop = schedule.stops[i],
-					distance = Math.sqrt(Math.pow(userPos.latitude - parseFloat(stop.stop_lat),2) + 
+					distance = Math.sqrt(Math.pow(userPos.latitude - parseFloat(stop.stop_lat),2) +
 						Math.pow(userPos.longitude - parseFloat(stop.stop_lon),2));
 					if (distance < closestDistance) { closestStop = i; closestDistance = distance; }
 				}
@@ -253,7 +245,7 @@ function documentLoad() {
 }
 
 /**
- * Turns a number into a boolean. 
+ * Turns a number into a boolean.
  * @param  {int} i   0 returns false, 1 returns true
  * @return {boolean}
  */
@@ -293,7 +285,7 @@ function pageLink(type, value) {
 
 			if (Active.Route.TRIP !== null) {
 				link += "&trip=" + Active.Route.TRIP;
-			} 
+			}
 
 			if (Active.STOP !== null) {
 				link += "&stop=" + Active.STOP;
@@ -337,9 +329,9 @@ function dynamicLinkNode(type, value, update) {
 
 /**
  * Used for the click event of a dynamicLinkNode
- * @param  {Event} e 
+ * @param  {Event} e
  */
-function clickEvent(e) { 
+function clickEvent(e) {
 	if (e.preventDefault) {e.preventDefault();}
 	if (e.stopPropagation) {e.stopPropagation();}
 	var state = Active, val = this.Value, newLink = pageLink(this.Type, val);
@@ -409,7 +401,7 @@ function stringTime(date) {
 /**
  * Returns a date object based on the string given
  * @param  {string} string in format 13:00:00, from gtfs data
- * @return {Date}         
+ * @return {Date}
  */
 function gtfsArrivalToDate(string) {
 	var timeArr = string.split(":");
