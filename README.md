@@ -5,7 +5,14 @@ users can access the website while offline.
 
 The `app-challenge` branch contains the original version of the app, which I
 wrote in 2014. This version won the Congressional App Challenge, and I later
-iterated on the program into newer versions.
+iterated on the program into newer versions. It's old, but it still runs fine
+(except for the outdated schedule).
+
+## Installation
+The app can be run on your own device by cloning this branch or downloading it
+as a zip file. Install a program to run a server on your computer, such as
+[http-server from npm](https://www.npmjs.com/package/http-server).
+To avoid some bugs, place the code in a subdirectory named `./heleon`.
 
 ---
 
