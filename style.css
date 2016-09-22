@@ -444,16 +444,16 @@ footer > a:last-of-type::after {
 	display: block;
 	margin-bottom: 0.5em;
 }
-.route-list li {
+.route-list > li {
 	display: block;
 	height: 3em;
 	position: relative;
 	transition: background 0.2s ease;
 }
-.route-list li:hover {
+.route-list > li:hover {
 	background: #e1eded !important;
 }
-.route-list li::after {
+.route-list > li::after {
 	content: "\bb";
 	color: #4d74ab;
 	position: absolute;
@@ -462,17 +462,17 @@ footer > a:last-of-type::after {
 	line-height: 3rem;
 	font-size: 2rem;
 }
-.route-list li:nth-child(odd) {
+.route-list > li:nth-child(odd) {
 	background-color: #f7f7f7;
 }
-.route-list li:nth-child(even) {
+.route-list > li:nth-child(even) {
 	background-color: #fff;
 }
 
-.route-list li:first-child, .route-list li:last-child {
+.route-list > li:first-child, .route-list > li:last-child {
 	height: 5em;
 }
-.route-list li:first-child::after, .route-list li:last-child::after {
+.route-list > li:first-child::after, .route-list > li:last-child::after {
 	line-height: 5rem;
 }
 
@@ -482,11 +482,11 @@ footer > a:last-of-type::after {
 	vertical-align: top;
 	width: calc(100% - 4rem);
 }
-.route-list li:first-child .stop, .route-list li:last-child .stop {
+.route-list > li:first-child .stop, .route-list > li:last-child .stop {
 	height: 5em;
 }
 
-.route-list li:first-child .lines, .route-list li:last-child .lines {
+.route-list > li:first-child .lines, .route-list > li:last-child .lines {
 	width: calc(4em - 2px);
 	height: calc(100% - 2px);
 	display: inline-block;
@@ -503,24 +503,24 @@ footer > a:last-of-type::after {
 	font-size: 0.8em;
 	text-transform:uppercase;
 }
-.route-list li:first-child .icon, .route-list li:last-child .icon {
+.route-list > li:first-child .icon, .route-list > li:last-child .icon {
 	margin-top: 1.2rem;
 	margin-bottom: 1.8rem;
 	margin-left: auto;
 	margin-right: auto;
 }
-.route-list li:not(:first-child):not(:last-child) .icon {
+.route-list > li:not(:first-child):not(:last-child) .icon {
 	position: absolute;
 	top: calc(50% - 1em);
 	left: calc(2rem + 0.7em);
 	z-index: 1;
 }
-.route-list li:first-child .lines span:nth-child(2), .route-list li:last-child .lines span:nth-child(2) {
+.route-list > li:first-child .lines span:nth-child(2), .route-list > li:last-child .lines span:nth-child(2) {
 	width: 100%;
 	height: 0.3em;
 	display: block;
 }
-.route-list li:first-child .lines span:last-child, .route-list li:last-child .lines span:last-child {
+.route-list > li:first-child .lines span:last-child, .route-list > li:last-child .lines span:last-child {
 	display: none;
 }
 
@@ -560,7 +560,7 @@ footer > a:last-of-type::after {
 	white-space: nowrap;
 	overflow: hidden;
 }
-.route-list li:first-child .name, .route-list li:last-child .name {
+.route-list > li:first-child .name, .route-list > li:last-child .name {
 	line-height: 5rem;
 	font-size: 1.1em;
 }
@@ -569,7 +569,7 @@ footer > a:last-of-type::after {
 	height: 2em;
 	padding: 0.5em 0;
 }
-.route-list li:first-child .name.sub, .route-list li:last-child .name.sub {
+.route-list > li:first-child .name.sub, .route-list > li:last-child .name.sub {
 	line-height: 1rem;
 	padding: 1.5em 0
 }
@@ -592,7 +592,7 @@ footer > a:last-of-type::after {
 	float: right;
 	margin-right: 3em;
 }
-.route-list li:first-child .data, .route-list li:last-child .data {
+.route-list > li:first-child .data, .route-list > li:last-child .data {
 	margin: 1.1rem 0;
 	height: 2.8rem;
 	margin-right: 3em;
@@ -696,7 +696,6 @@ footer > a:last-of-type::after {
 	}
 	.times {
 		display: block !important;
-		float: none !important;
 		margin-top: 0.5em;
 	}
 	#map {
@@ -728,7 +727,7 @@ footer > a:last-of-type::after {
 	text-align: right;
 	display: inline-block;
 }
-.route-list li:first-child time, .route-list li:last-child time {
+.route-list > li:first-child time, .route-list > li:last-child time {
 	line-height: 5em;
 }
 
@@ -775,11 +774,9 @@ footer > a:last-of-type::after {
 }
 .times {
 	margin-left: 0;
-	float: right;
 	display: inline-block;
 }
 .times.hide {
-	float: none;
 	display: block;
 }
 
