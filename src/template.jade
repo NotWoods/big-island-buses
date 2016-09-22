@@ -1,0 +1,267 @@
+doctype html
+html(lang="en-US")
+	head
+		meta(charset="utf-8")
+		style.
+			a,aside,div,form,h1,h2,header,html,img,li,nav,p,section,span,ul,button{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}
+			article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+			ol,ul{list-style:none}#search_input:focus,#trip_select:focus,button:focus{outline:0}#map{width:100%;height:calc(100vh - 56px);}
+			button{width:40px;height:40px;background-color:transparent;border-radius:50%;position:relative}
+			button svg{padding:8px;position:relative}body{line-height:1;margin:0;font-family:Roboto,sans-serif}
+			#route-select,.star,.normal_search,#bus-stop-parent,#schedule,.location_found,.saved,#search_results,#toolbar_action{display:none}
+			#toolbar{position:relative;z-index:2;height:56px;line-height:56px;background-color:#4d74ab;fill:#fff;
+			padding:0 8px;color:#fff;font-size:20px;display:block;
+			box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.4)}
+			#toolbar button{margin:8px 0}#route_name{display:inline-block;vertical-align:top;font-size:24px;overflow:hidden;}
+		link(rel="prefetch", href="/api.json", probability="1.0")
+		if routeInfo && routeInfo.long_name
+			title= routeInfo.long_name
+		else
+			title Big Island Buses
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		link(rel="shortcut icon", href="/favicon.ico")
+		if routeInfo && routeInfo.route_color
+			meta(name="theme-color", content=routeInfo.route_color)
+		else
+			meta(name="theme-color", content="#4d74ab")
+		link(
+			href='https://fonts.googleapis.com/css?family=Roboto:400,500', 
+			rel='stylesheet',
+			type='text/css'
+		)
+		script.
+			function loadCSS(e,n,o,t){"use strict";var d=window.document.createElement("link"),
+			i=n||window.document.getElementsByTagName("script")[0],r=window.document.styleSheets;
+			return d.rel="stylesheet",d.href=e,d.media="only x",t&&(d.onload=t),i.parentNode.insertBefore(d,i),
+			d.onloadcssdefined=function(e){for(var n,o=0;o<r.length;o++)r[o].href&&r[o].href===d.href&&(n=!0);
+			n?e():setTimeout(function(){d.onloadcssdefined(e)})},d.onloadcssdefined(function(){d.media=o||"all"}),d}
+			loadCSS("style.css");
+		script(async, src="/js/ui.js")
+		noscript
+			link(rel="stylesheet", type="text/css", href="/style.css")
+	body
+		if routeInfo
+			header#toolbar(style="background-color:#{routeInfo.route_color};color:#{routeInfo.textColor};fill:#{routeInfo.textColor}")
+				button#menu(title="Menu")
+					svg(viewBox="0 0 24 24", height="24", width="24")
+						path(d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z")
+				aside#route-select
+					header#sidenav_toolbar
+						img(
+							src="/icon/bus-icon-24.png", 
+							srcset="/icon/bus-icon-24.png 1x, /icon/bus-icon-48.png 2x, /icon/bus-icon-72.png 3x"
+						)
+						h2 Big Island Buses
+					ul#nearby_routes
+		
+					ul#other_routes
+						if routeList
+							each route in routeList
+								li.route_item(tabindex="0")
+									a(href="/s/#{route.route_id}/", data-route-id=route.route_id)
+										svg.marker(viewBox="0 0 24 24", height="40", width="40", fill=route.route_color)
+											circle(r="10", cx="12", cy="12")
+											path.star(fill="white", d="M 12,15.45 16.23,18 15.11,13.18 18.84,9.95 13.92,9.53 12,5 10.08,9.54 5.16,9.96 8.89,13.19 7.77,18 Z")
+										span.name route.route_long_name
+					ul#information_links
+						li: a(target="_blank", href="/about/") About this app
+						li: a(target="_blank", href="http://www.heleonbus.org/how-to-ride-hele-on/rules-and-regulations/") Rules and regulations
+						li: a(target="_blank", href="http://www.heleonbus.org/how-to-ride-hele-on/fares-and-fees/") Fares and fees
+						li: a(target="_blank", href="http://www.heleonbus.org/how-to-ride-hele-on/getting-on-and-off/") Getting on and off
+				h1#route_name= routeInfo.long_name
+				nav#toolbar_actions
+					button#search(title="Search")
+						svg(viewBox="0 0 24 24", height="24", width="24")
+							path.offline_search(d="M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z")
+							path.normal_search(d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z")
+					form#search_bar(autocomplete="off")
+						button#run_search
+							svg(viewBox="0 0 24 24", height="24", width="24")
+								path(d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z")
+						button#close_search(title="Cancel")
+							svg(viewBox="0 0 24 24", height="24", width="24")
+								path(d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z")
+						input#search_input(type="search", name="search")
+						div#search_results
+							ul#place_results
+							ul#route_results
+							ul#stop_results
+					button#location(title="My Location")
+						svg(viewBox="0 0 24 24", height="24", width="24")
+							path.location_searching(d="M20.94 11c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z")
+							circle.location_found(r="4", cx="12", cy="12")
+					button#save(title="Save Route")
+						svg(viewBox="0 0 24 24", height="24", width="24")
+							path.unsaved(d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z")
+							path.saved(d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z")
+		else 
+			header#toolbar
+				button#menu(title="Menu")
+					svg(viewBox="0 0 24 24", height="24", width="24")
+						path(d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z")
+				aside#route-select
+					header#sidenav_toolbar
+						img(
+							src="/icon/bus-icon-24.png", 
+							srcset="/icon/bus-icon-24.png 1x, /icon/bus-icon-48.png 2x, /icon/bus-icon-72.png 3x"
+						)
+						h2 Big Island Buses
+					menu#nearby_routes
+		
+					menu#other_routes
+						if routeList
+							each route in routeList
+								a.route_item(href="/s/#{route.route_id}/", tabindex="0", data-route-id=route.route_id)
+									svg.marker(viewBox="0 0 24 24", height="40", width="40", fill=route.route_color)
+										circle(r="10", cx="12", cy="12")
+										path.star(fill="white", d="M 12,15.45 16.23,18 15.11,13.18 18.84,9.95 13.92,9.53 12,5 10.08,9.54 5.16,9.96 8.89,13.19 7.77,18 Z")
+									span.name route.route_long_name
+					ul#information_links
+						li: a(target="_blank", href="/about/") About this app
+						li: a(target="_blank", href="http://www.heleonbus.org/how-to-ride-hele-on/rules-and-regulations/") Rules and regulations
+						li: a(target="_blank", href="http://www.heleonbus.org/how-to-ride-hele-on/fares-and-fees/") Fares and fees
+						li: a(target="_blank", href="http://www.heleonbus.org/how-to-ride-hele-on/getting-on-and-off/") Getting on and off
+				if routeInfo && routeInfo.long_name
+					h1#route_name= routeInfo.long_name
+				else
+					h1#route_name Big Island Buses
+				nav#toolbar_actions
+					button#search(title="Search")
+						svg(viewBox="0 0 24 24", height="24", width="24")
+							path.offline_search(d="M20 19.59V8l-6-6H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c.45 0 .85-.15 1.19-.4l-4.43-4.43c-.8.52-1.74.83-2.76.83-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 1.02-.31 1.96-.83 2.75L20 19.59zM9 13c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z")
+							path.normal_search(d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z")
+					form#search_bar(autocomplete="off")
+						button#run_search
+							svg(viewBox="0 0 24 24", height="24", width="24")
+								path(d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z")
+						button#close_search(title="Cancel")
+							svg(viewBox="0 0 24 24", height="24", width="24")
+								path(d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z")
+						input#search_input(type="search", name="search")
+						div#search_results
+							ul#place_results
+							ul#route_results
+							ul#stop_results
+					button#location(title="My Location")
+						svg(viewBox="0 0 24 24", height="24", width="24")
+							path.location_searching(d="M20.94 11c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z")
+							circle.location_found(r="4", cx="12", cy="12")
+					button#save(title="Save Route")
+						svg(viewBox="0 0 24 24", height="24", width="24")
+							path.unsaved(d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z")
+							path.saved(d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z")
+		section#schedule
+			div#trip_select(tabindex="0")
+				if routeInfo.active_trip
+					span#trip_select_selected(data-trip-id=routeInfo.active_trip)
+				else
+					span#trip_select_selected
+				div#trip_select_options
+					ul#direction_0
+					if routeTrips
+						each trip in routeTrips.dir0
+							li.trip_select_item
+								if routeInfo.active_trip && routeInfo.active_trip == trip.trip_id
+									a.selected(href="/s/#{routeInfo.route_id}/#{trip.trip_id}/", data-trip-id=trip.trip_id).
+										trip.trip_short_name
+								else 
+									a(href="/s/#{routeInfo.route_id}/#{trip.trip_id}/", data-trip-id=trip.trip_id).
+										trip.trip_short_name
+					ul#direction_1
+					if routeTrips
+						each trip in routeTrips.dir1
+							li.trip_select_item
+								if routeInfo.active_trip && routeInfo.active_trip == trip.trip_id
+									a.selected(href="/s/#{routeInfo.route_id}/#{trip.trip_id}/", data-trip-id=trip.trip_id).
+										trip.trip_short_name
+								else 
+									a(href="/s/#{routeInfo.route_id}/#{trip.trip_id}/", data-trip-id=trip.trip_id).
+										trip.trip_short_name
+			p#route_info
+				if routeInfo
+					if routeInfo.start_time
+						span#time #{routeInfo.start_time} - #{routeInfo.end_time}
+					else 
+						span#time
+					span#middot &middot;
+					if (routeTrips.dir0[routeInfo.active_trip])
+						span#days= trip[routeInfo.active_trip].service_name
+					else if (routeTrips.dir1[routeInfo.active_trip])
+						span#days= trip[routeInfo.active_trip].service_name
+					else 
+						span#days
+					br
+					span#locations Travels from 
+						if routeInfo.start_stop
+							span#location_start= routeInfo.start_stop
+							span to 
+							span#location_end= routeInfo.end_stop
+						else
+							span#location_start= routeInfo.start_stop
+							span to 
+							span#location_end= routeInfo.end_stop
+				else
+					span#time
+					span#middot &middot;
+					span#days
+					br
+					span#locations Travels from 
+						span#location_start
+						span  to 
+						span#location_end
+			div#next_stop
+				span Reaches 
+					span#next_stop_name
+					span in
+					span#next_stop_time
+				if routeInfo
+					div#next_stop_progress(style="background-color:#{routeInfo.route_color}")
+				else 
+					div#next_stop_progress
+			div#schedule_items
+				if stopTimes
+					each item in stopTimes 
+						a(href="/s/#{routeInfo.route_id}/#{routeInfo.active_trip}/?stop=#{item.stop_id}", data-stop-id=item.stop_id)
+							.marks
+								.line(style=route.route_color)
+								.bullet(style=route.route_color)
+							span.stop_name item.stop_name
+							time.arrival_time item.arrival_time
+			p#schedule_disclaimer
+		section#map
+		if stopInfo
+			div#bus-stop-parent
+				section#bus-stop(data-stop-id=stopInfo.stop_id)
+					header#stop_toolbar
+						h1#stop_name= stopInfo.stop_name
+						div#stop_actions
+							button#pin_drop(title="Pinpoint", data-stop-lat=stopInfo.stop_lat, data-stop-lon=stopInfo.stop_lon)
+								svg(viewBox="0 0 24 24", height="24", width="24")
+									path(d="M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z")
+							button#connections(title="Connections")
+								svg(viewBox="0 0 24 24", height="24", width="24")
+									path(d="")
+								#connection_list
+									if stopInfo.routes
+										each connection in stopInfo.routes
+											a.route_item(tabindex="0", data-route-id=connection.route_id, href="/s/#{connection.route_id}/?stop=#{stopInfo.stop_id}")
+												svg.marker(viewBox="0 0 24 24", height="24", width="24", fill=connection.route_color)
+													circle(r="10", cx="12", cy="12")
+													path.star(fill="white", d="M 12,15.45 16.23,18 15.11,13.18 18.84,9.95 13.92,9.53 12,5 10.08,9.54 5.16,9.96 8.89,13.19 7.77,18 Z")
+												span.name connection.route_long_name
+					div#stop_image
+		else
+			div#bus-stop-parent
+				section#bus-stop
+					div#stop_actions
+						button#pin_drop(title="Pinpoint")
+							svg(viewBox="0 0 24 24", height="24", width="24")
+								path(d="M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z")
+						button#connections(title="Connections")
+							svg(viewBox="0 0 24 24", height="24", width="24")
+								path.drop_shadow(d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
+								path(d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z")
+							.connection_list
+					div#stop_image
+					h1#stop_name
+		#animater

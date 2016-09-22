@@ -1,0 +1,16 @@
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" width="300" height="83" viewBox="0 0 141 39">
+	<style>path, line, circle, rect, polyline, polygon {stroke-linejoin: round;stroke-width: 1.5;stroke: #eee;fill: transparent;} .filled, polygon {fill: #eee;}</style>
+	<polyline points="22,31 5,31 1,24 2,9 7,1 138,1 134,10 140,21 137,31 117,31" style="fill:#e1e5e8;stroke:#e1e5e8"/>
+	<line x1="38" x2="101" y1="31" y2="31" style="stroke:#e1e5e8"/>
+	<line x1="1" x2="45" y1="19" y2="19" style="stroke:#4d74ab;stroke-width:1;"/>
+	<line x1="54" x2="120" y1="19" y2="19" style="stroke:#4d74ab;stroke-width:1;"/>
+	<circle r="8.5" cx="30" cy="30" style="fill:#424242;stroke:transparent"/>
+	<circle r="8.5" cx="109" cy="30" style="fill:#424242;stroke:transparent"/>
+	<rect width="9" height="22" x="45" y="4" rx="3" ry="3" style="stroke:#4d74ab"/>
+	<rect width="9" height="22" x="120" y="4" rx="3" ry="3" style="stroke:#4d74ab"/>
+	<polygon points="134,10 140,21 134,21" style="fill:#263238;stroke:#263238"/>
+	<polygon points="1.75,13 7,13 10,8 2.7,8 2.1,9" style="fill:#263238;stroke:#263238"/>
+	<polygon points="12,13 38,13 41,8 15,8" style="fill:#263238;stroke:#263238"/>
+	<polygon points="57,13 83,13 86,8 60,8" style="fill:#263238;stroke:#263238"/>
+	<polygon points="88,13 114,13 117,8 91,8" style="fill:#263238;stroke:#263238"/>
+</svg>

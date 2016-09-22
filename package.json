@@ -1,0 +1,15 @@
+{
+	"dependencies": {
+		"archiver": "0.14.4",
+		"csv": "0.4.5",
+		"lazystream": "0.1.0",
+		"metalsmith-jade": "2.0.2",
+		"metalsmith": "2.0.1",
+		"mongodb": "2.0.35",
+		"mongoose": "4.0.6",
+		"node-minify": "1.1.0",
+		"node-vibrant": "1.1.1",
+		"sitemap": "0.9.0",
+		"then-jade": "2.4.1"
+	}
+}
