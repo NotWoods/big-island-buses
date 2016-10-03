@@ -10,6 +10,10 @@ The app was updated with an enhanced map interface along with server rendering. 
 this version of the code is from before I added server rendering, but backports a couple features. You can see the source code for the 
 final version in the [server-render](https://github.com/NotWoods/big-island-buses/tree/server-render) branch.
 
+The program went on to be featured in [West Hawaii Today](http://westhawaiitoday.com/news/local-news/hele-schedule-be-available-app), 
+[Hawaii Public Radio](http://www.bytemarkscafe.org/2015/04/29/episode-348-sounding-rockets-apr-29-2015/), 
+and [Hawaii](https://www.youtube.com/watch?v=MHPlJsosHDc) [TechWorks](https://www.youtube.com/watch?v=yl_3d7PSKMY).
+
 The app implements the AppCache API to allow it to run offline, 
 and uses the JavaScript geolocation API to locate nearby bus stops and routes for the user.
 
