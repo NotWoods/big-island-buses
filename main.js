@@ -229,7 +229,7 @@ function uiEvents() {
 	select.Type = Type.TRIP;
 	select.addEventListener("change", function(e) {
 		select.Value = select.options[select.selectedIndex].value;
-		clickEvent(e);
+		clickEvent.call(select, e);
 	});
 	document.getElementById("screen-cover").addEventListener("click", function() {
 		document.getElementById("aside").classList.remove("open");
