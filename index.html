@@ -5,7 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="style.css"/>
 		<title>Big Island Buses</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI&sensor=true&libraries=places"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI&libraries=places"></script>
 		<script src="polyfill.js"></script>
 		<script src="jszip.js"></script>
 		<script src="load.js"></script>
@@ -32,7 +32,6 @@
 		  ga('require', 'linkid', 'linkid.js');
 		  ga('send', 'pageview');
 		</script>
-		<script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
 	</head>
 	<body>
 		<noscript>
@@ -80,16 +79,6 @@
 
 			</ul>
 
-			<div id="asideAd"><script type="text/javascript">
-			  ( function() {
-			    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
-			    var unit = {"calltype":"async[2]","publisher":"NotWoods","width":200,"height":200,"sid":"Chitika Default","color_site_link":"4d74ab","color_text":"			ffffff","color_bg":"2d3039","color_button":"2b416a","color_button_text":"f5f5f5"};
-			    var placement_id = window.CHITIKA.units.length;
-			    window.CHITIKA.units.push(unit);
-			    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
-				}());
-			</script></div>
-
 			<h2>Information</h2>
 			<ul id="info">
 				<li><a target="_blank" href="about.html" itemprop="sameAs">About this app</a></li>
@@ -120,17 +109,6 @@
 		<main id="main">
 			<section id="map">
 				<div id="map-canvas"></div>
-				<div id="adDiv">
-				<script type="text/javascript">
-				  ( function() {
-				    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
-				    var unit = {"calltype":"async[2]","publisher":"NotWoods","width":468,"height":60,"sid":"Chitika Default"};
-				    var placement_id = window.CHITIKA.units.length;
-				    window.CHITIKA.units.push(unit);
-				    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
-					}());
-				</script>
-				</div>
 				<header id="map-header">
 					<button id="menu" title="Menu">
 						<svg viewBox="0 0 24 24"><path d="M3,18h18v-2H3V18z M3,13h18v-2H3V13z M3,6v2h18V6H3z"></path></svg>
