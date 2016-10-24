@@ -1,7 +1,7 @@
-import { createReadStream, createWriteStream } from 'fs';
-import { join, extname } from 'path';
-import { Parse } from 'unzip';
-import { Converter } from 'csvtojson';
+const { createReadStream, createWriteStream, stat } = require('fs');
+const { join, extname } = require('path');
+const { Parse } = require('unzip');
+const { Converter } = require('csvtojson');
 
 function promisePipe(source, dest) {
 	return new Promise((resolve, reject) => {
@@ -19,6 +19,19 @@ function promisePipe(source, dest) {
 	});
 }
 
+function exists(path) {
+	return new Promise((resolve, reject) => {
+		stat(path, (err, result) => {
+			if (err) {
+				if (err.code === 'ENOENT') resolve(false);
+				else reject(err);
+			}
+
+			resolve(true);
+		})
+	})
+}
+
 /**
  * Streams in a ZIP file and converts its CSV contents to JSON files in the
  * provided directory.
@@ -26,8 +39,12 @@ function promisePipe(source, dest) {
  * @param {string} outputDir
  * @returns {Promise<void>} resolves when completed
  */
-export default function extractGTFS(zipPath, outputDir) {
+module.exports = function extractGTFS(zipPath, outputDir) {
 	return new Promise((resolve, reject) => {
+		if (!zipPath || !outputDir) {
+			reject(new TypeError('Missing parameter'));
+		}
+
 		const outputStreams = [];
 		let foundErr = false;
 
@@ -52,7 +69,8 @@ export default function extractGTFS(zipPath, outputDir) {
 					return;
 				}
 
-				const output = promisePipe(entry, join(outputDir, entry.path));
+				const destPath = join(outputDir, `${entry.path.slice(0, -4)}.json`);
+				const output = promisePipe(entry, destPath);
 				outputStreams.push(output);
 			});
 
@@ -62,5 +80,5 @@ export default function extractGTFS(zipPath, outputDir) {
 
 if (require.main === module) {
 	const [,, zipPath, outputDir] = process.argv;
-	extractGTFS(zipPath, outputDir);
+	module.exports(zipPath, outputDir);
 }
