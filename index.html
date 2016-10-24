@@ -1,11 +1,11 @@
 <!doctype html>
 <html manifest="offline.appcache">
 	<head>
-		<meta charset="utf-8"> 
+		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="style.css"/>
 		<title>Big Island Buses</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI&sensor=true&libraries=places"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI&libraries=places"></script>
 		<script src="polyfill.js"></script>
 		<script src="jszip.js"></script>
 		<script src="load.js"></script>
@@ -16,24 +16,18 @@
 		<link rel="apple-touch-icon" sizes="120x120" href="icon/120.png">
 		<link rel="apple-touch-icon" sizes="152x152" href="icon/152.png">
 		<link rel="icon" href="icon/favicon.ico" sizes="16x16 32x32 48x48 256x256">
-		<meta name="keywords" content="hele on, bus, hawaii, big island, transport, schedule, app, mass transit, hawaii county mass transit agency">
-		<meta name="description" content="Stop fumbling with paper schedules and never miss the Hawaii bus again! Use Big Island Buses, a brand-new app created in partnership with Hele-On. Find bus stops near you, see live GPS locations of buses, and look for the schedules from the comfort of your phone.">
 		<meta name="author" content="Tiger Oakes">
-		<meta charset="UTF-8">
-		<meta name="fragment" content="!">
 		<noscript><style>#aside,#screen-cover,#main{display:none}</style></noscript>
-
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		
-		  ga('create', 'UA-37324002-5', 'auto');
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-37324002-1', 'auto');
 		  ga('require', 'linkid', 'linkid.js');
 		  ga('send', 'pageview');
 		</script>
-		<script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
 	</head>
 	<body>
 		<noscript>
@@ -73,23 +67,13 @@
 
 			<h2>Nearby Routes</h2>
 			<ul id="nearby">
-				
+
 			</ul>
 
 			<h2>Other Routes</h2>
 			<ul id="other">
-				
-			</ul>
 
-			<div id="asideAd"><script type="text/javascript">
-			  ( function() {
-			    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
-			    var unit = {"calltype":"async[2]","publisher":"NotWoods","width":200,"height":200,"sid":"Chitika Default","color_site_link":"4d74ab","color_text":"			ffffff","color_bg":"2d3039","color_button":"2b416a","color_button_text":"f5f5f5"};
-			    var placement_id = window.CHITIKA.units.length;
-			    window.CHITIKA.units.push(unit);
-			    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
-				}());
-			</script></div>
+			</ul>
 
 			<h2>Information</h2>
 			<ul id="info">
@@ -99,7 +83,7 @@
 				<li><a target="_blank" href="http://www.heleonbus.org/how-to-ride-hele-on/getting-on-and-off/">Getting on and off</a></li>
 			</ul>
 
-			<p itemscope itemtype="http://schema.org/Person">Created by 
+			<p itemscope itemtype="http://schema.org/Person">Created by
 				<a href="http://tigeroakes.com" itemprop="url">
 					<span itemprop="name">Tiger Oakes</span>
 					<meta itemprop="sameAs" content="http://tigeroakes.com">
@@ -110,7 +94,7 @@
 
 			<p itemprop="permissions">Finding routes near your location requires the Location permission.</p>
 
-			<meta itemprop="browserRequirements" 
+			<meta itemprop="browserRequirements"
 				content="Nearby routes requires Geolocation support. Offline functionality requires appcache support">
 
 			<img src="assets/lines.svg" class="footer-lines" width="239" height="68">
@@ -121,17 +105,6 @@
 		<main id="main">
 			<section id="map">
 				<div id="map-canvas"></div>
-				<div id="adDiv">
-				<script type="text/javascript">
-				  ( function() {
-				    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
-				    var unit = {"calltype":"async[2]","publisher":"NotWoods","width":468,"height":60,"sid":"Chitika Default"};
-				    var placement_id = window.CHITIKA.units.length;
-				    window.CHITIKA.units.push(unit);
-				    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
-					}());
-				</script>
-				</div>
 				<header id="map-header">
 					<button id="menu" title="Menu">
 						<svg viewBox="0 0 24 24"><path d="M3,18h18v-2H3V18z M3,13h18v-2H3V13z M3,6v2h18V6H3z"></path></svg>
@@ -165,14 +138,14 @@
 							</label>
 							<select id="trip-select"></select>
 						</div>
-	
+
 						<div id="place" title="Bus route location">
 							<svg viewBox="0 0 24 24">
 								<path d="M20.5,3c-0.1,0-0.1,0-0.2,0L15,5.1L9,3L3.4,4.9C3.2,5,3,5.1,3,5.4v15.1C3,20.8,3.2,21,3.5,21c0.1,0,0.1,0,0.2,	0L9,18.9l6,2.1l5.6-1.9c0.2-0.1,0.4-0.3,0.4-0.5V3.5C21,3.2,20.8,3,20.5,3z M15,19l-6-2.1V5l6,2.1V19z"></path>
 							</svg>
 							<span id="place-value"></span>
 						</div>
-	
+
 						<div id="time" title="Bus route time">
 							<svg viewBox="0 0 24 24">
 								<path d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8c4.4,	0,8,3.6,8,8S16.4,20,12,20z"></path>
@@ -180,7 +153,7 @@
 							</svg>
 							<span id="time-value"></span>
 						</div>
-	
+
 						<div id="next-stop" title="Next bus stop">
 							<svg viewBox="0 0 24 24">
 								<path d="M4,16c0,0.9,0.4,1.7,1,2.2V20c0,0.6,0.4,1,1,1h1c0.6,0,1-0.4,1-1v-1h8v1c0,0.6,0.4,1,1,1h1c0.6,0,1-0.4,1-1v-1.8c0.6-0.5,1-1.3,1-2.2V6c0-3.5-3.6-4-8-4C7.6,2,4,2.5,4,6V16z M7.5,17C6.7,17,6,16.3,6,15.5S6.7,14,7.5,14C8.3,14,9,14.7,9,15.5S8.3,17,7.5,17z M16.5,17c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5c0.8,0,1.5,0.7,1.5,1.5S17.3,17,16.5,17z M18,11H6V6h12V11z"></path>
@@ -196,7 +169,7 @@
 							<span id="week-days-value"></span>
 						</div>
 					</section>
-	
+
 					<section id="schedule"></section>
 				</div>
 

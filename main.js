@@ -43,9 +43,9 @@ function loadMap() {
 
 	function mapLoad() {
 		return new Promise(function(mapDone, mapErr) {
-			var mapElement = Active.View.STOP == View.MAP_PRIMARY ? 
+			var mapElement = Active.View.STOP == View.MAP_PRIMARY ?
 				document.getElementById("map-canvas") : document.getElementById("streetview-canvas"),
-			panoElement = Active.View.STOP == View.STREET_PRIMARY ? 
+			panoElement = Active.View.STOP == View.STREET_PRIMARY ?
 				document.getElementById("map-canvas") : document.getElementById("streetview-canvas"),
 			hawaiiCenter = new google.maps.LatLng(19.6, -155.56);
 
@@ -64,7 +64,7 @@ function loadMap() {
 				pov: {heading: 34, pitch: 0},
 				scrollwheel: false,
 				panControlOptions: {position: google.maps.ControlPosition.RIGHT_CENTER},
-				zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL, 
+				zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL,
 					position: google.maps.ControlPosition.RIGHT_CENTER},
   			addressControl: false
 			});
@@ -92,7 +92,7 @@ function loadMap() {
 					openStop(position.stop);
 				});
 			});
-			mapDone(map); 
+			mapDone(map);
 		});
 	}
 
@@ -184,7 +184,7 @@ function updateAside(schedule) {
 	}
 }
 
-documentPromise.then(function() {uiEvents();loadAd();});
+documentPromise.then(function() {uiEvents();});
 
 Promise.all([documentPromise, schedulePromise]).then(function(results) {
 	if (!window.history.state && window.location.search.indexOf("#!") > -1) {
@@ -201,7 +201,7 @@ Promise.all([documentPromise, schedulePromise]).then(function(results) {
 		var bestTripAlt = openRoute(Active.Route.ID);
 		openStop(Active.STOP);
 		openTrip(Active.Route.TRIP ? Active.Route.TRIP : bestTripAlt);
-	} 
+	}
 });
 
 window.onhashchange = function(e) {
@@ -229,7 +229,7 @@ function uiEvents() {
 	select.Type = Type.TRIP;
 	select.addEventListener("change", function(e) {
 		select.Value = select.options[select.selectedIndex].value;
-		clickEvent(e);
+		clickEvent.call(select, e);
 	});
 	document.getElementById("screen-cover").addEventListener("click", function() {
 		document.getElementById("aside").classList.remove("open");
@@ -310,7 +310,7 @@ function openRoute(route_id) {
 	document.getElementById("alt-menu").style.fill = "#" + thisRoute.route_text_color;
 
 	var firstStop, lastStop, largest = 0;
-	var earliest = new Date(0, 0, 0, 23, 59, 59, 0), 
+	var earliest = new Date(0, 0, 0, 23, 59, 59, 0),
 	latest = new Date(0, 0, 0, 0, 0, 0, 0), earliestTrip, earliestTripStop;
 
 	var nowTime = nowDateTime();
@@ -337,10 +337,10 @@ function openRoute(route_id) {
 				routeStops.push(thisRoute.trips[trip].stop_times[stop].stop_id);
 			}
 
-			var timeDate = gtfsArrivalToDate(thisRoute.trips[trip].stop_times[stop].arrival_time); 
+			var timeDate = gtfsArrivalToDate(thisRoute.trips[trip].stop_times[stop].arrival_time);
 			if (timeDate > latest) {
 				latest = timeDate;
-			} 
+			}
 			if (timeDate < earliest) {
 				earliest = timeDate;
 				earliestTrip = thisRoute.trips[trip].trip_id; earliestTripStop = thisRoute.trips[trip].stop_times[stop].stop_id;
@@ -362,7 +362,7 @@ function openRoute(route_id) {
 	}
 
 	var minString = Math.floor(closestTripTime/60000) != 1 ? Math.floor(closestTripTime/60000) + " minutes" : "1 minute";
-	document.getElementById("place-value").textContent = "Between " + 
+	document.getElementById("place-value").textContent = "Between " +
 		buses.stops[firstStop].stop_name + " - " + buses.stops[lastStop].stop_name;
 	document.getElementById("time-value").textContent = stringTime(earliest) + " - " + stringTime(latest);
 	document.getElementById("next-stop-value").textContent = "Reaches " + buses.stops[closestTripStop].stop_name + " in " + minString;
@@ -394,7 +394,7 @@ function openRoute(route_id) {
 		google.maps.event.trigger(streetview, "resize");
 	}
 
-	
+
 	this.dispatchEvent(updateEvent);
 	openTrip(closestTrip);
 	return closestTrip;
@@ -425,7 +425,7 @@ function openStop(stop_id) {
 				markers[mkr].setIcon(normal);
 			} else if (Active.Route.ID !== null) {
 				markers[mkr].setIcon(unimportant);
-			} 
+			}
 			if (markers[mkr].stop_id == buses.stops[stop_id].stop_id) {
 				stopMarker = markers[mkr];
 			}
@@ -456,7 +456,7 @@ function openStop(stop_id) {
 		var listItem = document.createElement("li");
 		var linkItem = dynamicLinkNode(Type.ROUTE, buses.stops[stop_id].routes[i], false);
 		linkItem.style.borderColor = "#" + route.route_color;
-		linkItem.textContent = route.route_long_name; 
+		linkItem.textContent = route.route_long_name;
 
 		listItem.appendChild(linkItem);
 		if (Active.Route.ID == buses.stops[stop_id].routes[i]) {
@@ -500,7 +500,7 @@ function openTrip(trip_id) {
 	for (var i = 0; i < stopSequence.length; i++) {
 		var tripStop = trip.stop_times[stopSequence[i]];
 		var routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id);
-		
+
 		var lines = document.createElement("div");
 		lines.className = "lines";
 		for (var j = 0; j < 2; j++) {
