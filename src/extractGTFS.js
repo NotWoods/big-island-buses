@@ -59,3 +59,8 @@ export default function extractGTFS(zipPath, outputDir) {
 		Promise.all(outputStreams).then(resolve, rejectAndEnd);
 	});
 }
+
+if (require.main === module) {
+	const [,, zipPath, outputDir] = process.argv;
+	extractGTFS(zipPath, outputDir);
+}
