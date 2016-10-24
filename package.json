@@ -1,0 +1,12 @@
+{
+  "name": "big-island-buses",
+  "dependencies": {
+    "csvtojson": "^1.0.3",
+    "unzip": "^0.1.11"
+  },
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "eslint-config-airbnb-base": "^9.0.0",
+    "eslint-plugin-import": "^2.0.1"
+  }
+}
