@@ -10,6 +10,8 @@ export const GTFS_VERSION = 20160203;
 export default function handleUpgradeNeeded(db) {
 	/* eslint-disable no-unused-vars */
 
+	if (db.oldVersion >= GTFS_VERSION) return;
+
 	const agency = db.createObjectStore('agency', { keyPath: 'agency_id' });
 
 	const stops = db.createObjectStore('stops', { keyPath: 'stop_id' });
