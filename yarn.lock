@@ -493,6 +493,10 @@ has@^1.0.1:
   dependencies:
     function-bind "^1.0.2"
 
+idb:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/idb/-/idb-1.1.4.tgz#dee3be42b04e35ec5aa69fe99a27e906d7740b71"
+
 ignore@^3.1.5:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.0.tgz#8d88f03c3002a0ac52114db25d2c673b0bf1e435"
