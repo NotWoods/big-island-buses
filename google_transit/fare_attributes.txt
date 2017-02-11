@@ -1,7 +1,0 @@
-fare_id,price,currency_type,payment_method,transfers,agency_id
-g,2.00,USD,0,0,HOB
-d,1.00,USD,0,0,HOB
-gs,15.00,USD,1,,HOB
-ds,7.50,USD,1,,HOB
-gp,60.00,USD,1,,HOB
-dp,45.00,USD,1,,HOB
