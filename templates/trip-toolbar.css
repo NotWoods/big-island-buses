@@ -1,0 +1,75 @@
+.toolbar {
+	background: #4d74ab;
+	color: white;
+	background: var(--route-color);
+	color: var(--route-text-color);
+}
+
+.toolbar-top, .route-tabs {
+	display: flex;
+	align-items: center;
+}
+
+.toolbar-button {
+	cursor: pointer;
+	text-align: center;
+
+	line-height: 3em;
+	width: 3em;
+}
+#show-route-info:checked ~ .main-area .info-button {
+	background: rgba(0,0,0,0.3);
+}
+
+
+.trip-name {
+	font-size: 1em;
+	font-weight: normal;
+	background: rgba(0, 0, 0, 0.1);
+
+	padding: 0.2em 0.5em;
+	margin: 0;
+	margin-right: auto;
+}
+
+.route-name {
+	font-size: 1.5em;
+	font-weight: normal;
+
+	margin: 0;
+}
+
+
+.route-tabs {
+	font-weight: bold;
+
+	position: relative;
+	margin: auto;
+	max-width: 40em;
+}
+.route-tabs::after {
+	background: white;
+	transition: transform 0.3s ease;
+	transform: none;
+
+	height: 0.2em;
+	width: 50%;
+	position: absolute;
+	content: '';
+	bottom: 0;
+	left: 0;
+}
+.route-tab {
+	text-align: center;
+	cursor: pointer;
+
+	flex: 1;
+	padding: 1em;
+}
+.route-tab:active {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+#show-map:checked ~ .toolbar .route-tabs::after {
+	transform: translateX(100%);
+}
