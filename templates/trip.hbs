@@ -2,113 +2,107 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>{{trip.title}} | {{route.name}}</title>
 		<link href="trip.css" rel="stylesheet">
 		<style>
-			body {
+			/*body {
 				--route-color: {{route.color}};
 				--route-text-color: {{route.text_color}};
-			}
+			}*/
 		</style>
 	</head>
-	<body>
-		<input id="show-route-info" type="checkbox" hidden>
-		<link href="trip-info.css" rel="stylesheet">
-		<section class="route-info-container">
-			<section class="route-info">
-				<div class="route-info-box route-location">
-					<img width="24" height="24" alt="Bus route location">
-					<span class="route-info-text">{{route.info.location}}</span>
-				</div>
-				<div class="route-info-box trip-next-stop">
-					<img width="24" height="24" alt="Next bus stop">
-					<span class="route-info-text">{{trip.info.next_stop}}</span>
-				</div>
-				<div class="route-info-box trip-days">
-					<img width="24" height="24" alt="Service days">
-					<span class="route-info-text">{{trip.info.days}}</span>
-				</div>
-			</section>
-			<ul class="trip-selection">
-				{{#each route.trip}}
-				<li class="trip-item">
-					<a class="trip-item-link" href="{{link}}">{{title}}</a>
-				</li>
-				{{/each}}
-			</ul>
-		</section>
-		<div class="main-area">
-			<input id="show-schedule" name="route-tabs" type="radio" hidden checked>
-			<input id="show-map" name="route-tabs" type="radio" hidden>
-			<link href="trip-toolbar.css" rel="stylesheet">
-			<header class="toolbar">
-				<div class="toolbar-top">
-					<h3 class="trip-name">{{ trip.title }}</h3>
+	<body><div class="main-area">
+		<input id="show-schedule" name="route-tabs" type="radio" hidden checked>
+		<input id="show-map" name="route-tabs" type="radio" hidden>
 
-					<label
-						class="toolbar-button info-button"
-						for="show-route-info"
-						aria-role="button"
-					>
-						Info
-					</label>
-				</div>
-				<h2 class="route-name">{{ route.name }}</h2>
-				<nav class="route-tabs">
-					<label class="route-tab" for="show-schedule">
-						Schedule
-					</label>
-					<label class="route-tab" for="show-map">
-						Map
-					</label>
-				</nav>
-			</header>
+		<link href="trip-toolbar.css" rel="stylesheet">
+		<header class="toolbar">
+			<a class="toolbar-button" title="Up" href="/">
+				Up
+			</a>
+			<h1 class="app-name">Big Island Buses</h1>
+			<a class="toolbar-button" title="About" href="/about">
+				About
+			</a>
+		</header>
+		<nav class="route-tabs">
+			<label class="route-tab" for="show-schedule">
+				Schedule
+			</label>
+			<label class="route-tab" for="show-map">
+				Map
+			</label>
+		</nav>
 
-			<main class="tab-content">
-				<link href="trip-schedule.css" rel="stylesheet">
-				<section class="schedule">
-					<div class="schedule-list">
-						<div class="change-trip prev-trip">
-							<i class="change-trip-icon"></i>
-							<a class="change-trip-text" href="{{ trip.prev.link }}">
-								{{ trip.prev.title }}
-							</a>
-						</div>
-						<ul class="trip-schedule">
-							{{#each trip.times}}
-							<li class="schedule-row">
-								<i class="schedule-icon"></i>
-								<a class="schedule-stop" href="{{stop.link}}">{{stop.name}}</a>
-								<time class="schedule-time">{{arrival_time}}</time>
-								<ul class="schedule-connections">
-									{{#each stop.connections}}
-									<li class="connection">
-										<a
-											class="connection-link"
-											href="{{link}}" title="{{name}}"
-										>
-											-
-										</a>
-									</li>
-								</ul>
-							</li>
-							{{/each}}
-						</ul>
-						<div class="change-trip next-trip">
-							<i class="change-trip-icon"></i>
-							<a class="change-trip-text" href="{{ trip.next.link }}">
-								{{ trip.next.title }}
-							</a>
-						</div>
+		<main class="tab-content">
+			<article class="schedule">
+				<link href="trip-info.css" rel="stylesheet">
+				<header class="route-info">
+					<div class="route-title">
+						<label for="trip-select" class="trip-title-container">
+							<h3 class="trip-title">{{trip.title}}</h3>
+						</label>
+						<select id="trip-select" class="trip-select">
+							<option value="value1">Value 1</option>
+							<option value="value2" selected>Value 2</option>
+							<option value="value3">Value 3</option>
+						</select>
+
+						<h2 class="route-name">{{route.name}}</h2>
 					</div>
-				</section>
-				<link href="trip-map.css" rel="stylesheet">
-				<section class="map">
-					<noscript>
-						<p class="map-popup error">JavaScript must be enabled to view the map</p>
-					</noscript>
-				</section>
-			</main>
-		</div>
-	</body>
+
+					<div class="info-box">
+						<p class="route-info-text route-location">{{route.info.location}}</p>
+						<p class="route-info-text trip-days">{{trip.info.days}}</p>
+						<hr class="info-box-break">
+						<p class="route-info-text trip-next-stop">{{trip.info.next_stop}}</p>
+					</div>
+				</header>
+
+				<link href="trip-schedule.css" rel="stylesheet">
+				<div class="schedule-list-container">
+					<div class="change-trip prev-trip">
+						<i class="change-trip-icon"></i>
+						<a class="change-trip-text" href="{{ trip.prev.link }}">
+							{{ trip.prev.title }}
+						</a>
+					</div>
+					<ul class="schedule-list">
+						{{#each trip.times}}
+						<li class="schedule-row">
+							<i class="schedule-icon"></i>
+							<a class="schedule-stop" href="{{stop.link}}">{{stop.name}}</a>
+							<time class="schedule-time">{{arrival_time}}</time>
+							<ul class="schedule-connections">
+								<!--{{#each stop.connections}}-->
+								<li class="connection">
+									<a
+										class="connection-link"
+										href="{{link}}" title="{{name}}"
+									>
+										-
+									</a>
+								</li>
+								<!--{{/each}}-->
+							</ul>
+						</li>
+						{{/each}}
+					</ul>
+					<div class="change-trip next-trip">
+						<i class="change-trip-icon"></i>
+						<a class="change-trip-text" href="{{ trip.next.link }}">
+							{{ trip.next.title }}
+						</a>
+					</div>
+				</div>
+			</article>
+			<link href="trip-map.css" rel="stylesheet">
+			<section class="map">
+				<noscript>
+					<p class="map-popup error">JavaScript must be enabled to view the map</p>
+				</noscript>
+			</section>
+		</main>
+	</div></body>
 </html>

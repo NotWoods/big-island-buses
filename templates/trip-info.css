@@ -1,50 +1,56 @@
-.route-info-container {
-	height: var(--info-height);
-	overflow-y: auto;
-}
-.trip-selection {
-	margin: 0;
-	padding: 0;
-}
-.trip-item {
-	display: block;
-	padding: 0.5em 1em;
-
-	position: relative;
-}
-.trip-item-link {
-	color: inherit;
-}
-.trip-item::after {
-	background: black;
-	opacity: 0;
-	transition: opacity 0.1s ease;
-
-	position: absolute;
-	content: '';
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: -1;
-}
-.trip-item:hover::after {
-	opacity: 0.2;
-}
-
 .route-info {
-	font-size: 0.9em;
-	color: #444;
-	box-shadow: 0 0.1em 0.1em rgba(0,0,0,0.3);
-
-	padding: 0.25em 1em;
+	padding: 0.5em;
 }
 
-.route-info-box {
-	padding: 0.5em 0;
-	display: flex;
-	align-items: center;
+.route-title {
+	background: var(--route-color);
+	color: var(--route-text-color);
+
+	padding: 0.5em;
 }
+
+.trip-title {
+	font-size: 1em;
+	font-weight: normal;
+	background: rgba(0, 0, 0, 0.3);
+
+	display: inline-block;
+	padding: 0.3em;
+	margin: 0;
+}
+
+.route-name {
+	font-size: 1.5em;
+	font-weight: normal;
+
+	margin: 0;
+}
+
+.trip-select {
+	border: 0;
+	font: inherit;
+
+	display: none;
+}
+.trip-title-container:hover + select,
+.trip-select:hover,
+.trip-select:focus {
+	display: block;
+}
+
+.info-box {
+	background: #ddd;
+
+	margin-top: 1em;
+	padding: 0.5em;
+}
+
 .route-info-text {
-	margin-left: 0.5em;
+	margin-top: 0;
+	margin-bottom: 0.3em;
+}
+
+.info-box-break {
+	border: 0;
+	border-bottom: 1px solid gray
 }

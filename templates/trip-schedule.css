@@ -1,7 +1,4 @@
-.schedule {
-	width: 50%;
-}
-.schedule-list {
+.schedule-list-container {
 	background: white;
 
 	margin: 1em auto;
@@ -14,7 +11,7 @@
 	}
 }
 
-.trip-schedule {
+.schedule-list {
 	margin: 0;
 	padding: 0;
 }
@@ -29,21 +26,21 @@
 .schedule-icon {
 	border-radius: 50%;
 	background: #fafafa;
-	border: 0.4em solid #404040;
+	border: 0.3em solid #404040;
 
 	position: relative;
-	height: 0.75em;
-	width: 0.75em;
-	min-width: 0.75em;
+	height: 0.65em;
+	width: 0.65em;
+	min-width: 0.65em;
 	margin-right: 1em;
-	margin-left: 0.5em;
+	margin-left: 0.6em;
 }
 .schedule-row::before {
 	background: var(--route-color);
 
 	content: '';
 	height: 100%;
-	width: 0.5em;
+	width: 0.4em;
 	position: absolute;
 	left: 1em;
 }
@@ -62,7 +59,7 @@
 }
 
 .schedule-connections {
-	padding-left: 1em;
+	padding-left: 0.5em;
 }
 .connection {
 	display: block;
@@ -79,6 +76,7 @@
 	height: 100%;
 	width: 1.5em;
 }
+
 .connection-link:hover {
 	transform: translateX(-0.5em);
 }
@@ -94,9 +92,9 @@
 .change-trip-icon {
 	background: var(--route-color);
 
-	margin-left: 0.5em;
+	margin-left: 0.45em;
 	margin-right: 1em;
-	height: 0.5em;
+	height: 0.4em;
 	width: 1.5em;
 }
 .change-trip::before {
@@ -105,7 +103,7 @@
 	height: 50%;
 	position: absolute;
 	content: '';
-	width: 0.5em;
+	width: 0.4em;
 	left: 1em;
 }
 .prev-trip::before { bottom: 0; }
