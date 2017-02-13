@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{{trip.title}} | {{route.name}}</title>
-		<link href="trip.css" rel="stylesheet">
+		<title>{{trip.title}} | {{route.name}} | {{app.name}}</title>
+		<link href="core.css" rel="stylesheet">
 		<style>
 			/*body {
 				--route-color: {{route.color}};
@@ -16,12 +16,12 @@
 		<input id="show-schedule" name="route-tabs" type="radio" hidden checked>
 		<input id="show-map" name="route-tabs" type="radio" hidden>
 
-		<link href="trip-toolbar.css" rel="stylesheet">
+		<link href="toolbar.css" rel="stylesheet">
 		<header class="toolbar">
 			<a class="toolbar-button" title="Up" href="/">
 				Up
 			</a>
-			<h1 class="app-name">Big Island Buses</h1>
+			<h1 class="app-name">{{app.name}}</h1>
 			<a class="toolbar-button" title="About" href="/about">
 				About
 			</a>
@@ -36,27 +36,22 @@
 		</nav>
 
 		<main class="tab-content">
-			<article class="schedule">
+			<article class="list">
 				<link href="trip-info.css" rel="stylesheet">
 				<header class="route-info">
 					<div class="route-title">
-						<label for="trip-select" class="trip-title-container">
+						<a href="../" class="trip-title-container">
 							<h3 class="trip-title">{{trip.title}}</h3>
-						</label>
-						<select id="trip-select" class="trip-select">
-							<option value="value1">Value 1</option>
-							<option value="value2" selected>Value 2</option>
-							<option value="value3">Value 3</option>
-						</select>
+						</a>
 
 						<h2 class="route-name">{{route.name}}</h2>
 					</div>
 
 					<div class="info-box">
 						<p class="route-info-text route-location">{{route.info.location}}</p>
-						<p class="route-info-text trip-days">{{trip.info.days}}</p>
+						<p class="route-info-text trip-next-stop">{{route.info.next_stop}}</p>
 						<hr class="info-box-break">
-						<p class="route-info-text trip-next-stop">{{trip.info.next_stop}}</p>
+						<p class="route-info-text trip-days">{{trip.info.days}}</p>
 					</div>
 				</header>
 
@@ -75,7 +70,7 @@
 							<a class="schedule-stop" href="{{stop.link}}">{{stop.name}}</a>
 							<time class="schedule-time">{{arrival_time}}</time>
 							<ul class="schedule-connections">
-								<!--{{#each stop.connections}}-->
+								{{#each stop.connections}}
 								<li class="connection">
 									<a
 										class="connection-link"
@@ -84,7 +79,7 @@
 										-
 									</a>
 								</li>
-								<!--{{/each}}-->
+								{{/each}}
 							</ul>
 						</li>
 						{{/each}}

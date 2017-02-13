@@ -9,6 +9,10 @@
 	padding: 0.5em;
 }
 
+.trip-title-container {
+	color: inherit;
+	text-decoration: none;
+}
 .trip-title {
 	font-size: 1em;
 	font-weight: normal;
@@ -24,18 +28,6 @@
 	font-weight: normal;
 
 	margin: 0;
-}
-
-.trip-select {
-	border: 0;
-	font: inherit;
-
-	display: none;
-}
-.trip-title-container:hover + select,
-.trip-select:hover,
-.trip-select:focus {
-	display: block;
 }
 
 .info-box {

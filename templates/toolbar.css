@@ -78,3 +78,9 @@
 #show-map:checked ~ .route-tabs::after {
 	transform: translateX(100%);
 }
+
+@media (min-width: 35em) {
+	.route-tabs {
+		display: none;
+	}
+}

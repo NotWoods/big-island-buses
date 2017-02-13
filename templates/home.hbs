@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{{app.name}}</title>
+		<link href="core.css" rel="stylesheet">
+		<style>
+			/*body {
+				--route-color: {{route.color}};
+				--route-text-color: {{route.text_color}};
+			}*/
+		</style>
+	</head>
+	<body><div class="main-area">
+		<input id="show-schedule" name="route-tabs" type="radio" hidden checked>
+		<input id="show-map" name="route-tabs" type="radio" hidden>
+
+		<link href="toolbar.css" rel="stylesheet">
+		<link href="home-toolbar.css" rel="stylesheet">
+		<header class="toolbar">
+			<img class="app-logo" src="/assets/logo.svg" height="48" width="48" alt="">
+			<h1 class="app-name">{{app.name}}</h1>
+		</header>
+		<nav class="route-tabs">
+			<label class="route-tab" for="show-schedule">
+				List
+			</label>
+			<label class="route-tab" for="show-map">
+				Map
+			</label>
+		</nav>
+
+		<main class="tab-content">
+			<link href="home-route-list.css" rel="stylesheet">
+			<nav class="list">
+				<h3 class="route-list-header">Nearby</h3>
+				<button type="button" class="load-nearby">
+					Load nearby bus routes
+				</button>
+				<ul class="route-list"></ul>
+
+				<h3 class="route-list-header">Routes</h3>
+				<ul class="route-list">
+					{{#each routes}}
+					<li class="route-list-item" style="border-left-color: {{color}}">
+						<a class="route-link" href="{{link}}">{{name}}</a>
+					</li>
+					{{/each}}
+				</ul>
+
+				<h3 class="route-list-header">Information</h3>
+				<ul class="route-list">
+					<li class="route-list-item info-item">
+						<a class="route-link" href="/about">About</a>
+					</li>
+					<li class="route-list-item info-item">
+						<a
+							class="route-link"
+							href="http://www.heleonbus.org/how-to-ride-hele-on/rules-and-regulations/"
+						>
+							Rules and Regulations
+						</a>
+					</li>
+					<li class="route-list-item info-item">
+						<a
+							class="route-link"
+							href="http://www.heleonbus.org/how-to-ride-hele-on/fares-and-fees/"
+						>
+							Fares and Fees
+						</a>
+					</li>
+					<li class="route-list-item info-item">
+						<a
+							class="route-link"
+							href="http://www.heleonbus.org/how-to-ride-hele-on/getting-on-and-off/"
+						>
+							Getting on and off
+						</a>
+					</li>
+				</ul>
+			</nav>
+			<link href="trip-map.css" rel="stylesheet">
+			<section class="map">
+				<noscript>
+					<p class="map-popup error">JavaScript must be enabled to view the map</p>
+				</noscript>
+			</section>
+		</main>
+	</div></body>
+</html>
