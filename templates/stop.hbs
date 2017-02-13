@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{{route.name}} | {{app.name}}</title>
+		<link href="core.css" rel="stylesheet">
+		<style>
+			/*body {
+				--route-color: {{route.color}};
+				--route-text-color: {{route.text_color}};
+			}*/
+		</style>
+	</head>
+	<body><div class="main-area">
+		<input id="show-schedule" name="route-tabs" type="radio" hidden checked>
+		<input id="show-map" name="route-tabs" type="radio" hidden>
+
+		<link href="toolbar.css" rel="stylesheet">
+		<header class="toolbar">
+			<a class="toolbar-button" title="Up" href="/">
+				Up
+			</a>
+			<h1 class="app-name">{{app.name}}</h1>
+			<a class="toolbar-button" title="About" href="/about">
+				About
+			</a>
+		</header>
+		<nav class="route-tabs">
+			<label class="route-tab" for="show-schedule">
+				Info
+			</label>
+			<label class="route-tab" for="show-map">
+				Map
+			</label>
+		</nav>
+
+		<main class="tab-content">
+			<link href="route-list.css" rel="stylesheet">
+			<article class="list">
+				<link href="trip-info.css" rel="stylesheet">
+				<link href="stop-info.css" rel="stylesheet">
+				<header class="route-info stop-info">
+					<div class="stop-street-view">
+						<img class="street-view-fallback" src="{{stop.info.streetview}}" alt="">
+					</div>
+
+					<div class="route-title stop-title">
+						<h2 class="route-name">{{stop.name}}</h2>
+					</div>
+
+					<div class="info-box">
+						<p
+							title="Bus stop address"
+							class="route-info-text stop-info-text stop-address"
+						>
+							{{stop.info.address}}
+						</p>
+					</div>
+				</header>
+
+				<h3 class="route-list-header">Connects to</h3>
+				<ul class="route-list">
+					{{#each routes}}
+					<li class="route-list-item" style="border-left-color: {{color}}">
+						<a class="route-link" href="{{link}}">{{name}}</a>
+					</li>
+					{{/each}}
+				</ul>
+			</article>
+			<link href="trip-map.css" rel="stylesheet">
+			<section class="map">
+				<noscript>
+					<p class="map-popup error">JavaScript must be enabled to view the map</p>
+				</noscript>
+			</section>
+		</main>
+	</div></body>
+</html>

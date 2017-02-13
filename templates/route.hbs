@@ -21,7 +21,7 @@
 			<a class="toolbar-button" title="Up" href="/">
 				Up
 			</a>
-			<h1 class="app-name">Big Island Buses</h1>
+			<h1 class="app-name">{{app.name}}</h1>
 			<a class="toolbar-button" title="About" href="/about">
 				About
 			</a>
@@ -44,8 +44,18 @@
 					</div>
 
 					<div class="info-box">
-						<p class="route-info-text route-location">{{route.info.location}}</p>
-						<p class="route-info-text trip-next-stop">{{route.info.next_stop}}</p>
+						<p
+							title="Bus route location"
+							class="route-info-text route-location"
+						>
+							{{route.info.location}}
+						</p>
+						<p
+							title="Next bus stop reached"
+							class="route-info-text trip-next-stop"
+						>
+							{{route.info.next_stop}}
+						</p>
 					</div>
 				</header>
 

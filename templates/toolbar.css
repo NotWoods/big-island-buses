@@ -1,13 +1,13 @@
 .toolbar {
-	background: #4d74ab;
+	background: var(--theme-color);
 	color: white;
 
 	min-height: 3em;
 }
 
-.toolbar, .route-tabs {
+.toolbar {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 }
 
 .app-name {
@@ -15,6 +15,7 @@
 	font-size: 1.2em;
 
 	margin: 0 auto 0 0.5em;
+	align-self: center;
 }
 
 .toolbar-button {
@@ -48,6 +49,8 @@
 	color: white;
 	border-bottom: #1e2026 var(--border-width) solid;
 
+	display: flex;
+	align-items: center;
 	position: relative;
 	margin: auto;
 	width: 100%;

@@ -1,0 +1,7 @@
+.street-view-fallback {
+	display: block;
+}
+
+.stop-title {
+	background: var(--theme-color);
+}

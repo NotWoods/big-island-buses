@@ -5,14 +5,16 @@
 
 .load-nearby {
 	font: inherit;
+	font-size: 1.1em;
+	font-weight: 500;
 	color: white;
-	background: #2d3039;
+	background: var(--accent-color);
 	border: 0;
 	border-radius: 0.2em;
 	cursor: pointer;
 
 	display: block;
-	margin: auto;
+	margin-left: 0.5em;
 	padding: 0.5em 1em;
 }
 
@@ -43,9 +45,24 @@
 .route-link:hover::after {
 	opacity: 0.2;
 }
+.route-link:active::after {
+	opacity: 0.3;
+}
 
 .info-item {
 	border-left: 0;
 
 	margin: 0.15em 0;
+}
+
+.app-info {
+	color: #666;
+	margin: 1em 2em;
+}
+.app-info p {
+	margin: 0 0 0.5em;
+}
+.app-info a {
+	color: #0277bd;
+	text-decoration: underline;
 }

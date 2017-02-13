@@ -48,10 +48,25 @@
 					</div>
 
 					<div class="info-box">
-						<p class="route-info-text route-location">{{route.info.location}}</p>
-						<p class="route-info-text trip-next-stop">{{route.info.next_stop}}</p>
+						<p
+							title="Bus route location"
+							class="route-info-text route-location"
+						>
+							{{route.info.location}}
+						</p>
+						<p
+							title="Next bus stop reached"
+							class="route-info-text trip-next-stop"
+						>
+							{{route.info.next_stop}}
+						</p>
 						<hr class="info-box-break">
-						<p class="route-info-text trip-days">{{trip.info.days}}</p>
+						<p
+							title="Service days"
+							class="route-info-text trip-days"
+						>
+							{{trip.info.days}}
+						</p>
 					</div>
 				</header>
 
