@@ -1,18 +1,11 @@
 {
   "name": "big-island-buses",
+  "version": "4.0.0",
   "dependencies": {
-    "csvtojson": "^1.0.3",
-    "idb": "^1.1.4",
-    "mkdirp": "^0.5.1",
-    "unzip": "^0.1.11"
+    "gtfs-to-pouch": "^1.1.0"
   },
   "devDependencies": {
-    "eslint": "^3.8.1",
-    "eslint-config-airbnb-base": "^9.0.0",
-    "eslint-plugin-import": "^2.0.1",
-    "rollup": "^0.36.3"
-  },
-  "scripts": {
-    "extract": "node scripts/extractGTFS.js google_transit.zip api/"
+    "typescript": "^2.3.0",
+    "webpack": "^2.5.1"
   }
 }
