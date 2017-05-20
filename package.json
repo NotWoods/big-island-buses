@@ -2,7 +2,8 @@
   "name": "big-island-buses",
   "version": "4.0.0",
   "dependencies": {
-    "gtfs-to-pouch": "^1.1.0"
+    "gtfs-to-pouch": "^1.2.0",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "typescript": "^2.3.0",
