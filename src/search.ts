@@ -51,4 +51,9 @@ export class DBSearcher {
 		const [stop1, stop2] = this.searchStops(input);
 		return [route1, route2, stop1, stop2].filter(Boolean);
 	}
+
+	destroy() {
+		this.routes.clear();
+		this.stops.clear();
+	}
 }
