@@ -36,7 +36,7 @@ const BusRouteInfo: SFC<BusRouteInfoProps> = props => {
 	return (
 		<p
 			title="Bus route location"
-			className="route-info-text route-location"
+			className="info-text route-info-text route-location"
 		>
 			{location}
 		</p>

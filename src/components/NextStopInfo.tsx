@@ -33,7 +33,7 @@ const NextStopInfo: SFC<NextStopInfoProps> = props => {
 	return (
 		<p
 			title="Next bus stop reached"
-			className="route-info-text trip-next-stop"
+			className="info-text route-info-text trip-next-stop"
 		>
 			{nextStop}
 		</p>
