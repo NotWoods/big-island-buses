@@ -25,6 +25,12 @@
   version "19.2.3"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-19.2.3.tgz#61748040e8589a891dfc2ec1d16a2dd74482980e"
 
+"@types/moment-range@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/moment-range/-/moment-range-3.0.0.tgz#2d7e611c5ea34990611561c0a2f4a8455674bc19"
+  dependencies:
+    moment "^2.18.1"
+
 "@types/node@*", "@types/node@^7.0.22":
   version "7.0.22"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.22.tgz#4593f4d828bdd612929478ea40c67b4f403ca255"

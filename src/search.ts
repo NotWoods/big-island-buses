@@ -1,5 +1,7 @@
 import { Route, Stop } from 'gtfs-to-pouch/es/interfaces';
 
+type SearcherCB<T> = (result: T) => void;
+
 export class DBSearcher {
 	routes: Map<string, Route>
 	stops: Map<string, Stop>
@@ -32,24 +34,45 @@ export class DBSearcher {
 		}
 	}
 
-	*searchRoutes(input: string): IterableIterator<Route> {
-		for (const name of this.routes.keys()) {
-			if (name.includes(input))
-				yield this.routes.get(name) as Route;
-		}
+	searchRoutes(input: string, callback?: SearcherCB<Route>): Route[] {
+		let results: Route[] = [];
+		this.routes.forEach((route, name) => {
+			if (name.includes(input)) {
+				results.push(route);
+				if (callback) callback(route);
+			}
+		});
+		return results;
 	}
 
-	*searchStops(input: string): IterableIterator<Stop> {
-		for (const name of this.stops.keys()) {
-			if (name.includes(input))
-				yield this.stops.get(name) as Stop;
-		}
+	searchStops(input: string, callback?: SearcherCB<Stop>): Stop[] {
+		let results: Stop[] = [];
+		this.stops.forEach((stop, name) => {
+			if (name.includes(input)) {
+				results.push(stop);
+				if (callback) callback(stop);
+			}
+		});
+		return results;
 	}
 
-	search(input: string): (Route | Stop)[] {
-		const [route1, route2] = this.searchRoutes(input);
-		const [stop1, stop2] = this.searchStops(input);
-		return [route1, route2, stop1, stop2].filter(Boolean);
+	search(input: string, callback?: SearcherCB<Route|Stop>): (Route | Stop)[] {
+		let i = 0;
+		let results: (Route | Stop)[] = [];
+
+		this.searchRoutes(input, route => {
+			if (i < 2) results.push(route);
+			i++;
+		})
+
+		i = 0;
+
+		this.searchRoutes(input, stop => {
+			if (i < 2) results.push(stop);
+			i++;
+		})
+
+		return results;
 	}
 
 	destroy() {
