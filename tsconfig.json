@@ -1,28 +1,31 @@
 {
-	"compilerOptions": {
-		"allowJs": true,
-		"strict": true,
-		"skipLibCheck": true,
-		"noImplicitAny": false,
-		"noImplicitReturns": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"suppressImplicitAnyIndexErrors": true,
-
-		"target": "es2017",
-		"lib": [
-			"es2016", "es2017.object",
-			"dom", "dom.iterable"
-		],
-		"moduleResolution": "node",
-
-		"jsx": "react",
-		"jsxFactory": "createElement"
-	},
-	"include": [
-		"src/**/*"
-	],
-	"exclude": [
-		"node_modules"
-	]
+  "compilerOptions": {
+    "outDir": "build/dist",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "sourceMap": true,
+    "allowJs": true,
+    "strict": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
+  ],
+  "types": [
+    "typePatches"
+  ]
 }
