@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 import * as moment from 'moment';
 import { timeOnly } from '../utils';
 
@@ -15,7 +15,7 @@ export interface NextStopInfoProps {
  * Displays a link to the next stop reached by a bus route,
  * along with the time until that stop is reached
  */
-const NextStopInfo: SFC<NextStopInfoProps> = props => {
+const NextStopInfo: React.SFC<NextStopInfoProps> = props => {
 	let nextStop: React.ReactNode = '';
 	const { now = moment() } = props;
 

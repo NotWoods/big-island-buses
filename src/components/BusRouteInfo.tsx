@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 
 export interface BusRouteInfoProps {
 	location: {
@@ -13,7 +13,7 @@ export interface BusRouteInfoProps {
  * Displays text representing the first and last stop of the bus
  * route, and links to those specific stops
  */
-const BusRouteInfo: SFC<BusRouteInfoProps> = props => {
+const BusRouteInfo: React.SFC<BusRouteInfoProps> = props => {
 	let location: React.ReactNode = null;
 
 	if (props.location) {

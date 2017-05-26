@@ -1,4 +1,4 @@
-import { createElement, Component } from 'react';
+import * as React from 'react';
 
 export interface StopStreetViewProps {
 	fallbackURL: string
@@ -7,7 +7,7 @@ export interface StopStreetViewProps {
 /**
  * Shows street view at the location of a stop
  */
-export default class StopStreetView extends Component<StopStreetViewProps, void> {
+export default class StopStreetView extends React.Component<StopStreetViewProps, void> {
 	render() {
 		return (
 			<div className="stop-street-view">

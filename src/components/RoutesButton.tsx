@@ -1,9 +1,9 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 
 /**
  * An up button that returns to the routes page
  */
-const RoutesButton: SFC<void> = () => (
+const RoutesButton: React.SFC<void> = () => (
 	<a
 		className="toolbar-button up-button"
 		href="/routes"

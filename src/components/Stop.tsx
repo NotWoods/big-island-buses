@@ -1,4 +1,4 @@
-import { createElement, Component } from 'react';
+import * as React from 'react';
 import StopStreetView from './StopStreetView';
 import StopName from './StopName';
 import StopAddressInfo from './StopAddressInfo';
@@ -16,7 +16,7 @@ export interface StopProps {
 	}[]
 }
 
-export default class Stop extends Component<StopProps, void> {
+export default class Stop extends React.Component<StopProps, void> {
 	render() {
 		return (
 			<article className="list">

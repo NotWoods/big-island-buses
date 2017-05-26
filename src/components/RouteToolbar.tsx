@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 import * as moment from 'moment';
 import SearchButton from './SearchButton';
 import InfoButton from './InfoButton';
@@ -14,7 +14,7 @@ interface RouteToolbarProps {
 /**
  * Toolbar to be shown on the top of the route screen
  */
-const RouteToolbar: SFC<RouteToolbarProps> = props => {
+const RouteToolbar: React.SFC<RouteToolbarProps> = props => {
 	let tripHeader: React.ReactNode = null;
 	if (props.trip_start) {
 		tripHeader = (

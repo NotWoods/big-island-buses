@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 
 export interface StopAddressInfoProps {
 	address: string
@@ -7,7 +7,7 @@ export interface StopAddressInfoProps {
 /**
  * Displays the address of a stop
  */
-const StopAddressInfo: SFC<StopAddressInfoProps> = props => {
+const StopAddressInfo: React.SFC<StopAddressInfoProps> = props => {
 	return (
 		<p
 			title="Bus stop address"

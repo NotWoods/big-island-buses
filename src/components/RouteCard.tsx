@@ -1,4 +1,4 @@
-import { createElement, Component } from 'react';
+import * as React from 'react';
 import { getRouteName } from 'gtfs-to-pouch/es/read';
 import { Route } from 'gtfs-to-pouch/es/interfaces';
 import { getURL } from '../utils';
@@ -15,7 +15,7 @@ interface RouteCardState {
  * A card with an image representing a route, mainly to show on the
  * homepage.
  */
-export default class RouteCard extends Component<RouteCardProps, RouteCardState> {
+export default class RouteCard extends React.Component<RouteCardProps, RouteCardState> {
 	constructor(props: RouteCardProps) {
 		super(props);
 

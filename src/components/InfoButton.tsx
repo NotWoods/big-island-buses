@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 
 interface InfoButtonProps {
 	pressed: boolean
@@ -9,7 +9,7 @@ interface InfoButtonProps {
  * An info button for the toolbar. When clicked it should
  * toggle its 'pressed' state
  */
-const InfoButton: SFC<InfoButtonProps> = (props) => (
+const InfoButton: React.SFC<InfoButtonProps> = props => (
 	<button
 		type="button"
 		className="toolbar-button info-button"

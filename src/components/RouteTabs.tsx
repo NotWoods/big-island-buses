@@ -1,8 +1,8 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 
 interface RouteTabsProps {
 	selected: 'schedule' | 'map'
-	onChange(newSelected: 'schedule' | 'map')
+	onChange(newSelected: 'schedule' | 'map'): void
 	mapDisabled: boolean
 }
 
@@ -10,7 +10,7 @@ interface RouteTabsProps {
  * A pair of tabs ('Schedule' and 'Map') to display in a route
  * header.
  */
-const RouteTabs: SFC<RouteTabsProps> = props => {
+const RouteTabs: React.SFC<RouteTabsProps> = props => {
 	const { selected, onChange, mapDisabled } = props;
 	const useMap = selected === 'map';
 

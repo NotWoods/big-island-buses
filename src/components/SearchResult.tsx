@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 import { getURL, getStopURL } from '../utils'
 
 interface PlaceSearchResultProps {
@@ -25,7 +25,7 @@ type SearchResultProps = PlaceSearchResultProps | GTFSSearchResultProps;
  * A single search result. Should be displayed in a list under
  * a search box
  */
-const SearchResult: SFC<SearchResultProps> = props => {
+const SearchResult: React.SFC<SearchResultProps> = props => {
 	let href = '#';
 	switch (props.type) {
 		case 'route':

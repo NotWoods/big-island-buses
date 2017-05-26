@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 import { getURL } from '../utils';
 
 interface ConnectionLinkSmallProps {
@@ -22,7 +22,7 @@ export type ConnectionLinkProps = ConnectionLinkSmallProps | ConnectionLinkLarge
  * Used to link to connecting routes. Can either be small and only show a color,
  * or large and show the title of the route (determined by showTitle)
  */
-const ConnectionLink: SFC<ConnectionLinkProps> = props => {
+const ConnectionLink: React.SFC<ConnectionLinkProps> = props => {
 	const linkProps: React.HTMLProps<HTMLAnchorElement> = {
 		className: 'connection-link',
 		style: {

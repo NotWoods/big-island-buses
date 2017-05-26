@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 import { getURL } from '../utils';
 
 export interface SiblingTripLinkProps {
@@ -11,7 +11,7 @@ export interface SiblingTripLinkProps {
 /**
  * Displays a link to a sibling trip, meant to bookend a trip schedule.
  */
-const SiblingTripLink: SFC<SiblingTripLinkProps> = props => (
+const SiblingTripLink: React.SFC<SiblingTripLinkProps> = props => (
 	<div className={`change-trip ${props.mode}-trip`}>
 		<i className="change-trip-icon" />
 		<a className="change-trip-text" href={getURL(props.route_id, props.trip_id)}>

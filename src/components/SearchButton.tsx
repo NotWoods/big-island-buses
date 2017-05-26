@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 
 interface SearchButtonProps {
 	onClick(): void
@@ -7,7 +7,7 @@ interface SearchButtonProps {
 /**
  * A search button for the toolbar
  */
-const SearchButton: SFC<SearchButtonProps> = (props) => (
+const SearchButton: React.SFC<SearchButtonProps> = (props) => (
 	<button
 		type="button"
 		className="toolbar-button search-button"

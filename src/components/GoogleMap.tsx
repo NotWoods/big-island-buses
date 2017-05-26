@@ -1,4 +1,4 @@
-import { createElement, Component } from 'react';
+import * as React from 'react';
 
 interface GoogleMapProps {
 	selected: string[],
@@ -8,7 +8,7 @@ interface GoogleMapProps {
 	} | null
 }
 
-export default class GoogleMap extends Component<GoogleMapProps, void> {
+export default class GoogleMap extends React.Component<GoogleMapProps, void> {
 	displayMarkers(geojson: GeoJSON.FeatureCollection<GeoJSON.Point>) {
 
 	}

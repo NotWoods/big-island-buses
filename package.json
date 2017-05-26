@@ -9,6 +9,7 @@
     "redux": "^3.6.0"
   },
   "devDependencies": {
+    "@types/geojson": "^1.0.2",
     "@types/googlemaps": "^3.26.11",
     "@types/jest": "^19.2.3",
     "@types/node": "^7.0.22",

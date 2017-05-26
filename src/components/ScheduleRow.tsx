@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 import * as moment from 'moment';
 import { getStopURL } from '../utils';
 import ConnectionLink from './ConnectionLink';
@@ -19,7 +19,7 @@ export interface ScheduleRowProps {
  * corresponding stop and a time element with a datetime attribute.
  * Also shows a list of small ConnectionLink components
  */
-const ScheduleRow: SFC<ScheduleRowProps> = props => (
+const ScheduleRow: React.SFC<ScheduleRowProps> = props => (
 	<li className="schedule-row">
 		<i className="schedule-icon" />
 		<a className="schedule-stop" href={getStopURL(props.stop_id)}>

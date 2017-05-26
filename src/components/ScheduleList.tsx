@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react';
+import * as React from 'react';
 import ScheduleRow, { ScheduleRowProps } from './ScheduleRow';
 import SiblingTripLink from './SiblingTripLink';
 
@@ -14,7 +14,7 @@ export interface ScheduleListProps {
 /**
  * Displays a trip schedule
  */
-const ScheduleList: SFC<ScheduleListProps> = props => (
+const ScheduleList: React.SFC<ScheduleListProps> = props => (
 	<div className="schedule-list-container">
 		<SiblingTripLink
 			mode="prev"
