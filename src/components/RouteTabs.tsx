@@ -1,4 +1,7 @@
 import * as React from 'react';
+import Tabs from './Tabs';
+
+const routeTabs = { schedule: 'Schedule', map: 'Map' };
 
 interface RouteTabsProps {
 	selected: 'schedule' | 'map'
@@ -11,29 +14,13 @@ interface RouteTabsProps {
  * header.
  */
 const RouteTabs: React.SFC<RouteTabsProps> = props => {
-	const { selected, onChange, mapDisabled } = props;
-	const useMap = selected === 'map';
-
 	return (
-		<nav className="route-tabs">
-			<button
-				className={'route-tab' + !useMap
-					? 'is-selected'
-					: ''}
-				onClick={useMap ? () => onChange('schedule') : undefined}
-			>
-				Schedule
-			</button>
-			<button
-				disabled={mapDisabled}
-				className={'route-tab' + useMap
-					? 'is-selected'
-					: ''}
-				onClick={!useMap ? () => onChange('map') : undefined}
-			>
-				Map
-			</button>
-		</nav>
+		<Tabs
+			tabs={routeTabs as any}
+			selected={props.selected}
+			onChange={props.onChange}
+			disabled={props.mapDisabled ? ['disabled'] : undefined}
+		/>
 	);
 }
 

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import './App.css';
 
+import Tabs from './components/Tabs';
+
 const logo = require('./logo.svg');
 
 class App extends React.Component<{}, null> {
@@ -14,6 +16,7 @@ class App extends React.Component<{}, null> {
         <p className="App-intro">
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <Tabs tabs={{ schedule: 'Schedule', map: 'Map' }} />
       </div>
     );
   }
