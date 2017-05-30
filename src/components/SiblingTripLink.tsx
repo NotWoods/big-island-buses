@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as moment from 'moment';
 import { Weekdays } from 'gtfs-to-pouch/es/read';
 import { getURL } from '../utils';
-import TripHeader, { TripHeaderProps } from './TripHeader';
+import TripHeader from './TripHeader';
 
 interface SiblingTripLinkProps {
   mode: 'prev' | 'next';
@@ -14,17 +14,39 @@ interface SiblingTripLinkProps {
   route_days: Set<Weekdays>;
   trip_days?: Set<Weekdays>;
   trip_range?: moment.Range;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 /**
  * Displays a link to a sibling trip, meant to bookend a trip schedule.
  */
-const SiblingTripLink: React.SFC<SiblingTripLinkProps> = ({ mode, route_id, ...props }) => {
+const SiblingTripLink: React.SFC<SiblingTripLinkProps> = props => {
+  const { trip_id } = props;
+
+  let headerText: React.ReactNode = '...';
+  if (trip_id) {
+    headerText = (
+      <TripHeader
+        trip_id={trip_id}
+        service_id={props.service_id}
+        trip_short_name={props.trip_short_name}
+        trip_headsign={props.trip_headsign}
+        route_days={props.route_days}
+        trip_days={props.trip_days}
+        trip_range={props.trip_range}
+      />
+    );
+  }
+
   return (
-    <div className={`change-trip ${mode}-trip`}>
+    <div className={`change-trip ${props.mode}-trip`}>
       <i className="change-trip-icon" />
-      <a className="change-trip-text" href={getURL(route_id, props.trip_id)}>
-        {props.trip_id ? <TripHeader {...props as TripHeaderProps} /> : '...'}
+      <a
+        className="change-trip-text"
+        href={trip_id ? getURL(props.route_id, trip_id) : undefined}
+        onClick={props.onClick}
+      >
+        {headerText}
       </a>
     </div>
   );

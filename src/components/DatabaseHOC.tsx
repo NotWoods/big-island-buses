@@ -1,4 +1,4 @@
-// import * as React from 'react';
+import * as React from 'react';
 import * as GTFS from 'gtfs-to-pouch/es/interfaces';
 import { Databases } from 'gtfs-to-pouch/es/dbs';
 
@@ -22,5 +22,18 @@ export function useDatabase<T>(
   ...list: (keyof Databases)[]
 ): (component: React.ComponentClass<T & DatabasesProps>) => React.ComponentClass<T> {
   // TODO: a HOC that applies the above database props to a component
-  return component => component;
+  return component => {
+    const databases = {} as Partial<DatabasesProps>;
+
+    class WrappedComponent extends React.Component<T, void> {
+      render() {
+        return React.createElement(
+          component,
+          Object.assign({}, this.props, databases as DatabasesProps)
+        );
+      }
+    }
+
+    return WrappedComponent;
+  };
 }

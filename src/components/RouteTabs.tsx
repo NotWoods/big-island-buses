@@ -16,10 +16,10 @@ interface RouteTabsProps {
 const RouteTabs: React.SFC<RouteTabsProps> = props => {
   return (
     <Tabs
-      tabs={routeTabs as {}}
+      tabs={routeTabs}
       selected={props.selected}
       onChange={props.onChange}
-      disabled={props.mapDisabled ? ['disabled'] : undefined}
+      disabled={props.mapDisabled ? ['map'] : undefined}
     />
   );
 };

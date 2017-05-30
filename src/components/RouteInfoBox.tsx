@@ -1,9 +1,12 @@
 import * as React from 'react';
 import * as moment from 'moment';
+
 import {
   firstAndLastStop, nextStopOfRoute, getStop, currentTrip
 } from 'gtfs-to-pouch/es/read';
 import { Trip, StopTime, Stop } from 'gtfs-to-pouch/es/interfaces';
+
+import { useDatabase, DatabasesProps } from './DatabaseHOC';
 import BusRouteInfo from './BusRouteInfo';
 import NextStopInfo from './NextStopInfo';
 
@@ -11,9 +14,6 @@ import '../css/InfoBox.css';
 
 interface RouteInfoBoxProps {
   route_id: string;
-  tripDB: PouchDB.Database<Trip>;
-  stopTimeDB: PouchDB.Database<StopTime>;
-  stopDB: PouchDB.Database<Stop>;
   now?: moment.Moment;
 }
 
@@ -31,24 +31,20 @@ interface RouteInfoBoxState {
   } | null;
 }
 
+type PropsWithDB = RouteInfoBoxProps & DatabasesProps;
+
 /**
  * An info box displaying some data relevant to the route.
  */
-export default class RouteInfoBox
-extends React.Component<RouteInfoBoxProps, RouteInfoBoxState> {
-  tripDB: PouchDB.Database<Trip>;
-  stopTimeDB: PouchDB.Database<StopTime>;
-  stopDB: PouchDB.Database<Stop>;
+class RouteInfoBox extends React.Component<PropsWithDB, RouteInfoBoxState> {
   getStop: (stopID: string) => Promise<Stop>;
   nextStopOfRoute: (routeID: string) => Promise<StopTime>;
 
-  constructor(props: RouteInfoBoxProps) {
+  constructor(props: PropsWithDB) {
     super(props);
-    const { tripDB, stopTimeDB, stopDB } = props;
-    Object.assign(this, { tripDB, stopTimeDB, stopDB });
 
-    this.getStop = getStop(stopDB);
-    this.nextStopOfRoute = nextStopOfRoute(this.tripDB, this.stopTimeDB);
+    this.getStop = getStop(props.stopDB);
+    this.nextStopOfRoute = nextStopOfRoute(props.tripDB, props.stopTimeDB);
   }
 
   componentDidMount() {
@@ -90,11 +86,11 @@ extends React.Component<RouteInfoBoxProps, RouteInfoBoxState> {
   async locationInfo(routeID: string) {
     this.setState({ location: null });
 
-    const current = await currentTrip(this.tripDB, this.stopTimeDB)(routeID);
+    const current = await currentTrip(this.props.tripDB, this.props.stopTimeDB)(routeID);
     const {
       first_stop_id,
       last_stop_id,
-    } = await firstAndLastStop(this.stopTimeDB)(current.trip_id);
+    } = await firstAndLastStop(this.props.stopTimeDB)(current.trip_id);
 
     const [firstStop, lastStop] = await Promise.all([
       this.getStop(first_stop_id), this.getStop(last_stop_id)
@@ -119,3 +115,5 @@ extends React.Component<RouteInfoBoxProps, RouteInfoBoxState> {
     );
   }
 }
+
+export default useDatabase<RouteInfoBoxProps>('trips', 'stops', 'stop_times')(RouteInfoBox);

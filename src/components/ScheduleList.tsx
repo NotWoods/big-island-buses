@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as moment from 'moment';
 
-import { StopTime } from 'gtfs-to-pouch/es/interfaces';
-import { getTrip, getTripSchedule, getStop, siblingTrips, scheduleRange, connectedRoutes } from 'gtfs-to-pouch/es/read';
+import { Trip, StopTime } from 'gtfs-to-pouch/es/interfaces';
+import { getTripSchedule, getStop, siblingTrips, scheduleRange, connectedRoutes } from 'gtfs-to-pouch/es/read';
 
 import { useDatabase, DatabasesProps } from './DatabaseHOC';
 import BasicScheduleList from './BasicScheduleList';
@@ -11,29 +11,15 @@ import { ScheduleRowProps } from './ScheduleRow';
 export interface ScheduleListProps {
   route_id: string;
   route_days: Set<number>;
-  trip_id: string;
+  trip: Trip;
+  changeTrip(newTrip: string | Trip): void;
 }
 
 interface ScheduleListState {
   items: ScheduleRowProps[];
-  prev: {
-    trip_id?: string;
-    service_id?: string;
-    trip_short_name?: string;
-    trip_headsign?: string;
-  } | null;
-  next: {
-    trip_id?: string;
-    service_id?: string;
-    trip_short_name?: string;
-    trip_headsign?: string;
-  } | null;
-  current: {
-    trip_short_name?: string;
-    trip_headsign?: string;
-    service_id?: string;
-    trip_range: moment.Range;
-  };
+  prev: Trip | null;
+  next: Trip | null;
+  currentTripRange: moment.Range;
 }
 
 type PropsWithDB = ScheduleListProps & DatabasesProps;
@@ -49,9 +35,7 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
       items: [],
       prev: null,
       next: null,
-      current: {
-        trip_range: moment.range(''),
-      },
+      currentTripRange: moment.range(''),
     };
   }
 
@@ -61,7 +45,7 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
   }
 
   componentWillReceiveProps(nextProps: ScheduleListProps) {
-    if (nextProps.trip_id !== this.props.trip_id) {
+    if (nextProps.trip.trip_id !== this.props.trip.trip_id) {
       this.getItems();
       this.getTrips();
     }
@@ -100,12 +84,9 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
   }
 
   async getItems() {
-    const times = await getTripSchedule(this.props.stopTimeDB)(this.props.trip_id);
+    const times = await getTripSchedule(this.props.stopTimeDB)(this.props.trip.trip_id);
     this.setState({
-      current: {
-        ...this.state.current,
-        trip_range: scheduleRange(times),
-      },
+      currentTripRange: scheduleRange(times),
       items: times.map(time => ({
         stop_id: time.stop_id,
         stop_name: '...',
@@ -119,34 +100,14 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
   }
 
   async getTrips() {
-    const current = await getTrip(this.props.tripDB)(this.props.trip_id, this.props.route_id);
-    this.setState({
-      current: {
-        trip_short_name: current.trip_short_name,
-        trip_headsign: current.trip_headsign,
-        service_id: current.service_id,
-        trip_range: this.state.current.trip_range,
-      },
-    });
-
     const {
       previous,
       following,
-    } = await siblingTrips(this.props.tripDB, this.props.stopTimeDB)(current);
+    } = await siblingTrips(this.props.tripDB, this.props.stopTimeDB)(this.props.trip);
 
     this.setState({
-      prev: previous ? {
-        trip_id: previous.trip_id,
-        service_id: previous.service_id,
-        trip_short_name: previous.trip_short_name,
-        trip_headsign: previous.trip_headsign,
-      } : null,
-      next: following ? {
-        trip_id: following.trip_id,
-        service_id: following.service_id,
-        trip_short_name: following.trip_short_name,
-        trip_headsign: following.trip_headsign,
-      } : null,
+      prev: previous,
+      next: following,
     });
   }
 
@@ -156,12 +117,11 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
         route_id={this.props.route_id}
         route_days={this.props.route_days}
         items={this.state.items}
-        current={{
-          ...this.state.current,
-          trip_id: this.props.trip_id,
-        }}
+        current={this.props.trip}
+        currentTripRange={this.state.currentTripRange}
         prev={this.state.prev}
         next={this.state.next}
+        changeTrip={this.props.changeTrip}
       />
     );
   }
