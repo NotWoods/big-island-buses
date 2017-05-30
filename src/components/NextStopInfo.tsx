@@ -2,12 +2,14 @@ import * as React from 'react';
 import * as moment from 'moment';
 import { timeOnly } from '../utils';
 
+import '../css/utils.css';
+
 export interface NextStopInfoProps {
   nextStop: {
     stop_name: string,
     stop_id: string,
     arrival_time: moment.Moment,
-  };
+  } | null;
   now?: moment.Moment;
 }
 

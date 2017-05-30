@@ -1,0 +1,14 @@
+.info-box {
+  color: #444;
+  background: white;
+  text-align: left;
+  border-radius: 0.1em;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+
+  margin: 1em;
+  padding: 1em;
+}
+
+.info-text {
+  margin: 0;
+}

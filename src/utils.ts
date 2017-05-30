@@ -3,11 +3,11 @@ import * as moment from 'moment';
 export const URL_PREFIX = '';
 
 export function getURL(route_id: string, trip_id?: string) {
-	return URL_PREFIX + `/${route_id}/${trip_id || ''}`;
+  return URL_PREFIX + `/${route_id}/${trip_id || ''}`;
 }
 
 export function getStopURL(stop_id: string) {
-	return `?stop_id=${stop_id}`;
+  return `?stop_id=${stop_id}`;
 }
 
 /**
@@ -15,10 +15,10 @@ export function getStopURL(stop_id: string) {
  * smaller units
  */
 export function timeOnly(base: moment.Moment): moment.Moment {
-	return moment().set({
-		hour: base.hour(),
-		minute: base.minute(),
-		second: base.second(),
-		millisecond: base.millisecond(),
-	});
+  return moment().set({
+    hour: base.hour(),
+    minute: base.minute(),
+    second: base.second(),
+    millisecond: base.millisecond(),
+  });
 }

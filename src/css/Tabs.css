@@ -20,7 +20,7 @@
 
 .tab-indicator {
 	background: var(--accent-color);
-	transition: transform 0.3s ease;
+	transition: transform 0.2s ease;
 	transform: translateX(0);
 
 	height: var(--border-width);

@@ -1,0 +1,51 @@
+.toolbar {
+	--toolbar-color: var(--accent-color);
+
+	background: var(--toolbar-color);
+	color: white;
+	text-align: left;
+
+	min-height: 3em;
+	display: flex;
+	flex-flow: column;
+}
+
+.toolbar-top {
+	display: flex;
+}
+
+.toolbar-top-header {
+	margin: 0;
+	margin-right: auto;
+}
+
+.app-name {
+	font-weight: normal;
+	font-size: 1.2em;
+
+	margin: 0 auto 0 0.5em;
+	align-self: center;
+}
+
+.toolbar-button {
+	cursor: pointer;
+	text-align: center;
+	color: inherit;
+
+	line-height: 3em;
+	width: 3em;
+}
+#show-route-info:checked ~ .main-area .info-button {
+	background: rgba(0,0,0,0.3);
+}
+
+
+.trip-name {
+	font-size: 1em;
+	font-weight: normal;
+	background: rgba(0, 0, 0, 0.1);
+
+	padding: 0.2em 0.5em;
+	margin: 0;
+	margin-right: auto;
+}

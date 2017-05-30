@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import '../css/utils.css';
+
 export interface BusRouteInfoProps {
   location: {
     first_stop_id: string,
@@ -24,13 +26,13 @@ const BusRouteInfo: React.SFC<BusRouteInfoProps> = props => {
 
     location = [
       (
-        <a className="invsible" href={`?stop_id=${first_stop_id}`}>
+        <a className="invisible" href={`?stop_id=${first_stop_id}`}>
           {first_stop_name}
         </a>
       ),
       ' - ',
       (
-        <a className="invsible" href={`?stop_id=${last_stop_id}`}>
+        <a className="invisible" href={`?stop_id=${last_stop_id}`}>
           {last_stop_name}
         </a>
       ),

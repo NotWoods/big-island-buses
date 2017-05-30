@@ -1,21 +1,22 @@
 import * as React from 'react';
-import './App.css';
 
+import * as moment from 'moment';
+import RouteToolbar from './components/RouteToolbar';
 import Tabs from './components/Tabs';
 
-const logo = require('./logo.svg');
+/* tslint:disable no-console */
 
 class App extends React.Component<{}, null> {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+      <div>
+        <RouteToolbar
+          trip_start={moment('7:00:00', 'H:mm:ss')}
+          route_name="Intra Kona"
+          infoPressed={false}
+          onSearchClick={() => console.log('Search clicked')}
+          onInfoClick={() => console.log('Info clicked')}
+        />
         <Tabs tabs={{ schedule: 'Schedule', map: 'Map' }} />
       </div>
     );
