@@ -40,14 +40,14 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
   }
 
   componentDidMount() {
-    this.getItems();
-    this.getTrips();
+    this.getItems(this.props.trip.trip_id);
+    this.getTrips(this.props.trip);
   }
 
   componentWillReceiveProps(nextProps: ScheduleListProps) {
     if (nextProps.trip.trip_id !== this.props.trip.trip_id) {
-      this.getItems();
-      this.getTrips();
+      this.getItems(nextProps.trip.trip_id);
+      this.getTrips(nextProps.trip);
     }
   }
 
@@ -83,8 +83,8 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
     });
   }
 
-  async getItems() {
-    const times = await getTripSchedule(this.props.stopTimeDB)(this.props.trip.trip_id);
+  async getItems(tripID: string) {
+    const times = await getTripSchedule(this.props.stopTimeDB)(tripID);
     this.setState({
       currentTripRange: scheduleRange(times),
       items: times.map(time => ({
@@ -99,11 +99,11 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
     this.loadConnections(times);
   }
 
-  async getTrips() {
+  async getTrips(trip: Trip) {
     const {
       previous,
       following,
-    } = await siblingTrips(this.props.tripDB, this.props.stopTimeDB)(this.props.trip);
+    } = await siblingTrips(this.props.tripDB, this.props.stopTimeDB)(trip);
 
     this.setState({
       prev: previous,

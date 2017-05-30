@@ -37,36 +37,46 @@ class TripHeader extends React.Component<PropsWithDB, TripHeaderState> {
   }
 
   componentDidMount() {
-    if (!this.props.trip_days) { this.loadDays(); }
-    if (!this.props.trip_range) { this.loadRange(); }
+    if (!this.props.trip_days) {
+      this.loadDays(this.props.trip_id, this.props.service_id);
+    }
+    if (!this.props.trip_range) {
+      this.loadRange(this.props.trip_id);
+    }
   }
 
   componentWillReceiveProps(nextProps: TripHeaderProps) {
     if (nextProps.trip_id !== this.props.trip_id) {
-      if (!nextProps.trip_days) { this.loadDays(); }
-      if (!nextProps.trip_range) { this.loadRange(); }
+      if (!nextProps.trip_days) {
+        this.loadDays(nextProps.trip_id, nextProps.service_id);
+      }
+      if (!nextProps.trip_range) {
+        this.loadRange(nextProps.trip_id);
+      }
     } else if (nextProps.service_id !== this.props.service_id) {
-      if (!nextProps.trip_days) { this.loadDays(); }
+      if (!nextProps.trip_days) {
+        this.loadDays(nextProps.trip_id, nextProps.service_id);
+      }
     }
   }
 
-  async loadDays() {
-    if (!this.props.service_id) {
-      console.warn(`Cannot load days for trip ${this.props.trip_id} without a service_id`);
+  async loadDays(tripID: string, serviceID?: string) {
+    if (!serviceID) {
+      console.warn(`Cannot load days for trip ${tripID} without a service_id`);
       return;
     }
 
     this.setState({ trip_days: null });
 
-    const days = await getDays(this.props.calendarDB)(this.props.service_id);
+    const days = await getDays(this.props.calendarDB)(serviceID);
 
     this.setState({ trip_days: days });
   }
 
-  async loadRange() {
+  async loadRange(tripID: string) {
     this.setState({ trip_range: null });
 
-    const range = await tripTimes(this.props.stopTimeDB)(this.props.trip_id);
+    const range = await tripTimes(this.props.stopTimeDB)(tripID);
 
     this.setState({ trip_range: range });
   }

@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 interface RouteHeaderProps {
-  route_long_name: string;
-  route_short_name: string;
+  routeName: string;
   route_text_color?: string;
   route_color?: string;
   infoPressed: boolean;
@@ -13,7 +12,6 @@ interface RouteHeaderProps {
  * Header to be shown on the top of the route screen
  */
 const RouteHeader: React.SFC<RouteHeaderProps> = props => {
-  const name = props.route_long_name || props.route_short_name;
   const styles: React.CSSProperties = {
     backgroundColor: `#${props.route_color || '000'}`,
     color: `#${props.route_text_color || 'fff'}`,
@@ -21,7 +19,7 @@ const RouteHeader: React.SFC<RouteHeaderProps> = props => {
 
   return (
     <div className="route-header" style={styles}>
-      <h1 className="route-name">{name}</h1>
+      <h1 className="route-name">{props.routeName}</h1>
 
       <button
         className="icon-button"

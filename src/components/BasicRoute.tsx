@@ -10,8 +10,7 @@ interface BasicRouteProps {
   now?: moment.Moment;
   disableMap?: boolean;
   route_id: string;
-  route_long_name: string;
-  route_short_name: string;
+  routeName: string;
   route_text_color?: string;
   route_color?: string;
   route_days?: Set<number>;
@@ -46,8 +45,7 @@ export default class BasicRoute extends React.Component<BasicRouteProps, BasicRo
       <article className="route">
         <header className="route-header">
           <RouteHeader
-            route_long_name={this.props.route_long_name}
-            route_short_name={this.props.route_short_name}
+            routeName={this.props.routeName}
             route_text_color={this.props.route_text_color}
             route_color={this.props.route_color}
             infoPressed={this.state.infoPressed}
