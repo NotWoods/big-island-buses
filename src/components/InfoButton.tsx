@@ -2,7 +2,7 @@ import * as React from 'react';
 
 interface InfoButtonProps {
   pressed: boolean;
-  onClick(): void;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 /**
@@ -12,12 +12,12 @@ interface InfoButtonProps {
 const InfoButton: React.SFC<InfoButtonProps> = props => (
   <button
     type="button"
-    className="toolbar-button info-button"
+    className="toolbar-button icon-button info-button"
     onClick={props.onClick}
     aria-pressed={String(props.pressed)}
-    title="Info"
+    title="Toggle route info"
   >
-    <img width={24} height={24} src=""/>
+    <img width={24} height={24} src="" alt="Toggle route info"/>
   </button>
 );
 

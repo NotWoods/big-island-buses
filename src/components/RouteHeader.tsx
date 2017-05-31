@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import InfoButton from './InfoButton';
+
 interface RouteHeaderProps {
   routeName: string;
   route_text_color?: string;
@@ -21,14 +23,7 @@ const RouteHeader: React.SFC<RouteHeaderProps> = props => {
     <div className="route-header" style={styles}>
       <h1 className="route-name">{props.routeName}</h1>
 
-      <button
-        className="icon-button"
-        type="button"
-        title="Toggle route info"
-        aria-pressed={String(props.infoPressed)}
-      >
-        <img src="" alt="Toggle route info" />
-      </button>
+      <InfoButton pressed={props.infoPressed} onClick={props.onInfoPress} />
     </div>
   );
 };

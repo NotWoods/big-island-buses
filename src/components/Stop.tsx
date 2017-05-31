@@ -1,44 +1,81 @@
 import * as React from 'react';
-import StopStreetView from './StopStreetView';
-import StopName from './StopName';
-import StopAddressInfo from './StopAddressInfo';
-import ConnectionLink from './ConnectionLink';
 
-export interface StopProps {
-  stop_name: string;
-  address: string;
-  fallbackURL: string;
-  routes: {
-    route_id: string
-    route_color: string
-    route_name: string
-    route_text_color: string
-  }[];
+import { getStop, connectedRoutes } from 'gtfs-to-pouch/es/read';
+import { Route } from 'gtfs-to-pouch/es/interfaces';
+
+import { useDatabase, DatabasesProps } from './DatabaseHOC';
+import BasicStop from './BasicStop';
+
+interface StopProps {
+  stop_id: string;
 }
 
-export default class Stop extends React.Component<StopProps, void> {
+interface StopState {
+  stop_name: string;
+  stop_lat?: number;
+  stop_lon?: number;
+  fallbackURL: string;
+  routes: Route[];
+}
+
+class Stop extends React.Component<StopProps & DatabasesProps, StopState> {
+  constructor(props: StopProps & DatabasesProps) {
+    super(props);
+    this.state = {
+      stop_name: '',
+      fallbackURL: '',
+      routes: [],
+    };
+  }
+
+  componentDidMount() {
+    this.loadStop(this.props.stop_id);
+    this.loadConnections(this.props.stop_id);
+  }
+
+  componentWillReceiveProps(nextProps: StopProps) {
+    if (nextProps.stop_id !== this.props.stop_id) {
+      this.loadStop(nextProps.stop_id);
+      this.loadConnections(nextProps.stop_id);
+    }
+  }
+
+  async loadStop(stopID: string) {
+    this.setState({
+      stop_name: '',
+      stop_lat: undefined,
+      stop_lon: undefined,
+    });
+
+    const stop = await getStop(this.props.stopDB)(stopID);
+    this.setState({
+      stop_name: stop.stop_name,
+      stop_lat: stop.stop_lat,
+      stop_lon: stop.stop_lon,
+    });
+  }
+
+  async loadConnections(stopID: string) {
+    this.setState({ routes: [] });
+
+    const routes = await connectedRoutes(
+      this.props.stopTimeDB, this.props.tripDB, this.props.routeDB
+    )(stopID);
+
+    this.setState({ routes });
+  }
+
   render() {
     return (
-      <article className="list">
-        <header className="info stop-info">
-          <StopStreetView fallbackURL={this.props.fallbackURL} />
-
-          <StopName>{this.props.stop_name}</StopName>
-
-          <div className="info-box">
-            <StopAddressInfo address={this.props.address} />
-          </div>
-        </header>
-
-        <h3 className="route-list-header">Connects to</h3>
-        <ul className="route-list">
-          {this.props.routes.map(route => (
-            <li className="route-list-item">
-              <ConnectionLink showTitle={true} {...route} />
-            </li>
-          ))}
-        </ul>
-      </article>
+      <BasicStop
+        stop_id={this.props.stop_id}
+        stop_name={this.state.stop_name}
+        stop_lat={this.state.stop_lat}
+        stop_lon={this.state.stop_lon}
+        routes={this.state.routes}
+      />
     );
   }
 }
+
+export default useDatabase<StopProps>()(Stop);

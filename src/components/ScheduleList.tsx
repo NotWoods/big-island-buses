@@ -12,7 +12,6 @@ export interface ScheduleListProps {
   route_id: string;
   route_days: Set<number>;
   trip: Trip;
-  changeTrip(newTrip: string | Trip): void;
 }
 
 interface ScheduleListState {
@@ -121,7 +120,6 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
         currentTripRange={this.state.currentTripRange}
         prev={this.state.prev}
         next={this.state.next}
-        changeTrip={this.props.changeTrip}
       />
     );
   }

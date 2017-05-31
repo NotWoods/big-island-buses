@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as moment from 'moment';
+import { connect } from 'react-redux';
 import { Weekdays } from 'gtfs-to-pouch/es/read';
+import { setTrip } from '../redux/page';
 import { getURL } from '../utils';
 import TripHeader from './TripHeader';
 
@@ -52,4 +54,13 @@ const SiblingTripLink: React.SFC<SiblingTripLinkProps> = props => {
   );
 };
 
-export default SiblingTripLink;
+export default connect(
+  null,
+  (dispatch, { trip_id }: SiblingTripLinkProps) => {
+    const onClick: React.MouseEventHandler<HTMLAnchorElement> = e => {
+      e.preventDefault();
+      dispatch(setTrip(trip_id));
+    };
+    return { onClick };
+  }
+)(SiblingTripLink);

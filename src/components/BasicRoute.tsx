@@ -15,7 +15,6 @@ interface BasicRouteProps {
   route_color?: string;
   route_days?: Set<number>;
   currentTrip?: Trip;
-  changeTrip(newTrip: string | Trip): void;
 }
 
 interface BasicRouteState {
@@ -66,7 +65,6 @@ export default class BasicRoute extends React.Component<BasicRouteProps, BasicRo
           route_id={this.props.route_id}
           route_days={this.props.route_days}
           trip={this.props.currentTrip}
-          changeTrip={this.props.changeTrip}
         /> : null}
       </article>
     );

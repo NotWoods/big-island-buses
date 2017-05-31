@@ -13,18 +13,6 @@ export interface BasicScheduleListProps {
   next: Trip | null;
   current: Trip;
   currentTripRange: moment.Range;
-  changeTrip(newTrip: string | Trip): void;
-}
-
-function createClickHandler(
-  changeTrip: (newTrip: string | Trip) => void,
-  trip?: string | Trip,
-): React.MouseEventHandler<HTMLAnchorElement> | undefined {
-  if (!trip) { return undefined; }
-  return e => {
-    e.preventDefault();
-    changeTrip(trip);
-  };
 }
 
 /**
@@ -42,7 +30,6 @@ const BasicScheduleList: React.SFC<BasicScheduleListProps> = props => {
         trip_short_name={prev.trip_short_name}
         trip_headsign={prev.trip_headsign}
         route_days={props.route_days}
-        onClick={createClickHandler(props.changeTrip, prev)}
       /> : null}
       <section className="schedule-list-main">
         <header className="current-trip-title">
@@ -69,7 +56,6 @@ const BasicScheduleList: React.SFC<BasicScheduleListProps> = props => {
         trip_short_name={next.trip_short_name}
         trip_headsign={next.trip_headsign}
         route_days={props.route_days}
-        onClick={createClickHandler(props.changeTrip, next)}
       /> : null}
     </div>
   );

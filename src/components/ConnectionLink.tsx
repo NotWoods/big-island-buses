@@ -1,45 +1,71 @@
 import * as React from 'react';
-import { getURL } from '../utils';
 
-interface ConnectionLinkSmallProps {
-  showTitle?: false;
+import { getRoute } from 'gtfs-to-pouch/es/read';
+import { useDatabase, DatabasesProps } from './DatabaseHOC';
+import BasicConnectionLink from './BasicConnectionLink';
+
+interface ConnectionLinkProps {
+  showTitle?: boolean;
   route_id: string;
-  route_color: string;
-  route_name: string;
+  stop_id?: string;
 }
 
-interface ConnectionLinkLargeProps {
-  showTitle: true;
-  route_id: string;
+interface ConnectionLinkState {
   route_color: string;
   route_text_color: string;
-  route_name: string;
+  routeName: string;
 }
 
-export type ConnectionLinkProps = ConnectionLinkSmallProps | ConnectionLinkLargeProps;
+class ConnectionLink
+extends React.Component<ConnectionLinkProps & DatabasesProps, ConnectionLinkState> {
+  constructor(props: ConnectionLinkProps & DatabasesProps) {
+    super(props);
 
-/**
- * Used to link to connecting routes. Can either be small and only show a color,
- * or large and show the title of the route (determined by showTitle)
- */
-const ConnectionLink: React.SFC<ConnectionLinkProps> = props => {
-  const linkProps: React.HTMLProps<HTMLAnchorElement> = {
-    className: 'connection-link',
-    style: {
-      backgroundColor: `#${props.route_color}`
-    },
-    href: getURL(props.route_id),
-    children: ''
-  };
-
-  if (props.showTitle) {
-    (linkProps.style as React.CSSProperties).color = `#${props.route_text_color}`;
-    linkProps.children = props.route_name;
-  } else {
-    linkProps.title = props.route_name;
+    this.state = {
+      route_color: '000',
+      route_text_color: 'fff',
+      routeName: '',
+    };
   }
 
-  return <a {...linkProps} />;
-};
+  componentDidMount() {
+    this.loadRoute(this.props.route_id);
+  }
 
-export default ConnectionLink;
+  componentWillReceiveProps(nextProps: ConnectionLinkProps) {
+    if (this.props.route_id !== nextProps.route_id) {
+      this.loadRoute(nextProps.route_id);
+    }
+  }
+
+  async loadRoute(routeID: string) {
+    this.setState({
+      route_color: '000',
+      route_text_color: 'fff',
+      routeName: '',
+    });
+
+    const route = await getRoute(this.props.routeDB)(routeID);
+
+    this.setState({
+      route_color: route.route_color || '000',
+      route_text_color: route.route_text_color || 'fff',
+      routeName: route.route_short_name || route.route_long_name,
+    });
+  }
+
+  render() {
+    return (
+      <BasicConnectionLink
+        showTitle={this.props.showTitle}
+        route_id={this.props.route_id}
+        stop_id={this.props.stop_id}
+        route_color={this.state.route_color}
+        route_text_color={this.state.route_text_color}
+        route_name={this.state.routeName}
+      />
+    );
+  }
+}
+
+export default useDatabase<ConnectionLinkProps>('routes')(ConnectionLink);

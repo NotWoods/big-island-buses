@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as moment from 'moment';
 
-import { getRoute, routeDays, currentTrip, getTrip } from 'gtfs-to-pouch/es/read';
+import { getRoute, routeDays, currentTrip } from 'gtfs-to-pouch/es/read';
 import { Trip } from 'gtfs-to-pouch/es/interfaces';
 
 import { useDatabase, DatabasesProps } from './DatabaseHOC';
@@ -31,8 +31,6 @@ class Route extends React.Component<RouteProps & DatabasesProps, RouteState> {
     this.state = {
       routeName: '',
     };
-
-    this.handleTripChange = this.handleTripChange.bind(this);
   }
 
   componentDidMount() {
@@ -54,16 +52,6 @@ class Route extends React.Component<RouteProps & DatabasesProps, RouteState> {
       if (!nextProps.trip) {
         this.loadCurrentTrip(nextProps.route_id);
       }
-    }
-  }
-
-  async handleTripChange(newTrip: string | Trip) {
-    if (typeof newTrip === 'string') {
-      this.setState({ trip: undefined });
-      const trip = await getTrip(this.props.tripDB)(newTrip, this.props.route_id);
-      this.setState({ trip });
-    } else {
-      this.setState({ trip: newTrip });
     }
   }
 
@@ -105,7 +93,6 @@ class Route extends React.Component<RouteProps & DatabasesProps, RouteState> {
         route_color={this.state.route_color}
         route_days={this.state.route_days}
         currentTrip={this.props.trip || this.state.trip}
-        changeTrip={this.handleTripChange}
       />
     );
   }
