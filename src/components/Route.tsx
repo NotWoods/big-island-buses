@@ -98,4 +98,4 @@ class Route extends React.Component<RouteProps & DatabasesProps, RouteState> {
   }
 }
 
-export default useDatabase<RouteProps>()(Route);
+export default useDatabase<RouteProps>('routes', 'trips', 'stop_times', 'calendar')(Route);

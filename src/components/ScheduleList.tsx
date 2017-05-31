@@ -125,4 +125,4 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
   }
 }
 
-export default useDatabase<ScheduleListProps>()(ScheduleList);
+export default useDatabase<ScheduleListProps>('routes', 'trips', 'stops', 'stop_times')(ScheduleList);

@@ -1,0 +1,3 @@
+{"version":"1.2.9","db_type":"leveldb","start_time":"2017-05-31T23:18:43.632Z","db_info":{"doc_count":2,"update_seq":2,"backend_adapter":"MemDOWN","db_name":"agency","auto_compaction":false,"adapter":"memory"}}
+{"docs":[{"agency_id":"HOB","agency_name":"Hele-On Bus","agency_url":"http://heleonbus.org","agency_timezone":"Pacific/Honolulu","agency_phone":"808-961-8744","agency_lang":"en","_id":"HOB","_rev":"1-f800ec1f4154a7a1662de59d28e595ac"},{"agency_id":"RBH","agency_name":"Robert's Hawaii","agency_url":"http://robertshawaii.com","agency_timezone":"Pacific/Honolulu","agency_phone":"800-831-5541","agency_lang":"en","_id":"RBH","_rev":"1-d92f7f2188c138ec251f089267a2aebd"}]}
+{"seq":2}

@@ -78,4 +78,4 @@ class Stop extends React.Component<StopProps & DatabasesProps, StopState> {
   }
 }
 
-export default useDatabase<StopProps>()(Stop);
+export default useDatabase<StopProps>('routes', 'trips', 'stops', 'stop_times')(Stop);
