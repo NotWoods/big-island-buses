@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as moment from 'moment';
-import { Trip } from 'gtfs-to-pouch/es/interfaces';
-import ScheduleRow, { ScheduleRowProps } from './ScheduleRow';
-import TripHeader  from './TripHeader';
-import SiblingTripLink from './SiblingTripLink';
+import { Trip } from 'query-pouch-gtfs';
+import ScheduleRow, { ScheduleRowProps } from '../ScheduleRow';
+import TripHeader  from '../container/TripHeader';
+import SiblingTripLink from '../SiblingTripLink';
 
 export interface BasicScheduleListProps {
   route_id: string;

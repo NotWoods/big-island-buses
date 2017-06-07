@@ -1,10 +1,12 @@
 import * as React from 'react';
 
-import { getStop, connectedRoutes } from 'gtfs-to-pouch/es/read';
-import { Route } from 'gtfs-to-pouch/es/interfaces';
+import {
+  getStop, connectedRoutes
+  Route,
+} from 'query-pouch-gtfs';
 
 import { useDatabase, DatabasesProps } from './DatabaseHOC';
-import BasicStop from './BasicStop';
+import BasicStop from '../presentational/Stop';
 
 interface StopProps {
   stop_id: string;

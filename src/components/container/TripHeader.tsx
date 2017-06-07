@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as moment from 'moment';
 
-import { getDays, tripTimes, Weekdays } from 'gtfs-to-pouch/es/read';
+import { getDays, tripTimes, Weekdays } from 'query-pouch-gtfs';
 
 import { useDatabase, DatabasesProps } from './DatabaseHOC';
-import BasicTripHeader from './BasicTripHeader';
+import BasicTripHeader from '../presentational/TripHeader';
 
 export interface TripHeaderProps {
   trip_id: string;

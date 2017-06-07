@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getURL, getStopURL } from '../utils';
-import { openConnection } from '../redux/page';
+import { getURL, getStopURL } from '../../utils';
+import { openConnection } from '../../redux/page';
 
 interface BasicConnectionLinkProps {
   showTitle?: boolean;

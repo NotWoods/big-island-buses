@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as moment from 'moment';
 import { Trip } from 'gtfs-to-pouch/es/interfaces';
-import RouteHeader from './RouteHeader';
-import RouteInfoBox from './RouteInfoBox';
-import Tabs from './Tabs';
-import ScheduleList from './ScheduleList';
+import RouteHeader from './../RouteHeader';
+import RouteInfoBox from './../RouteInfoBox';
+import Tabs from './../Tabs';
+import ScheduleList from './../ScheduleList';
 
 interface BasicRouteProps {
   now?: moment.Moment;

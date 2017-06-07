@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Route } from 'gtfs-to-pouch/es/interfaces';
-import StopStreetView from './StopStreetView';
-import StopName from './StopName';
-import StopAddressInfo from './StopAddressInfo';
-import BasicConnectionLink from './BasicConnectionLink';
+import { Route } from 'query-pouch-gtfs';
+import StopStreetView from '../StopStreetView';
+import StopName from '../StopName';
+import StopAddressInfo from '../StopAddressInfo';
+import BasicConnectionLink from './ConnectionLink';
 
 export interface BasicStopProps {
   stop_id: string;

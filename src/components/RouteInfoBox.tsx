@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import {
   firstAndLastStop, nextStopOfRoute, getStop, currentTrip
 } from 'gtfs-to-pouch/es/read';
-import { Trip, StopTime, Stop } from 'gtfs-to-pouch/es/interfaces';
+import { StopTime, Stop } from 'gtfs-to-pouch/es/interfaces';
 
 import { useDatabase, DatabasesProps } from './DatabaseHOC';
 import BusRouteInfo from './BusRouteInfo';

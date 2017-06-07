@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as moment from 'moment';
 
-import { dateRangeString, Weekdays } from 'gtfs-to-pouch/es/read';
+import { dateRangeString, Weekdays } from 'query-pouch-gtfs';
 
 export interface BasicTripHeaderProps {
   trip_id: string;

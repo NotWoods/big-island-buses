@@ -1,6 +1,5 @@
 import * as React from 'react';
-import * as GTFS from 'gtfs-to-pouch/es/interfaces';
-import { Databases } from 'gtfs-to-pouch/es/dbs';
+import * as GTFS from 'query-pouch-gtfs/es/interfaces';
 
 export interface DatabasesProps {
   agencyDB: PouchDB.Database<GTFS.Agency>;
@@ -19,7 +18,7 @@ export interface DatabasesProps {
 }
 
 export function useDatabase<T>(
-  ...list: (keyof Databases)[]
+  ...list: string[]
 ): (component: React.ComponentClass<T & DatabasesProps>) => React.ComponentClass<T> {
   // TODO: a HOC that applies the above database props to a component
   return component => {

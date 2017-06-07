@@ -3,7 +3,7 @@
   "version": "4.0.0",
   "private": true,
   "dependencies": {
-    "gtfs-to-pouch": "^1.5.1",
+    "query-pouch-gtfs": "^2.0.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
@@ -20,6 +20,7 @@
     "@types/react-dom": "^15.5.0",
     "@types/react-redux": "^4.4.40",
     "@types/redux-actions": "^1.2.4",
+    "gtfs-to-pouch": "^2.0.1",
     "react-scripts-ts": "2.2.0"
   },
   "scripts": {
