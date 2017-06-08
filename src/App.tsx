@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import Route from './components/route/Route';
+import Stop from './components/stop/Stop';
 import store from './redux/store';
 
 import './css/core.css';
@@ -11,7 +11,7 @@ class App extends React.Component<{}, null> {
   render() {
     return (
       <Provider store={store}>
-        <Route route_id="hilo-kona" />
+        <Stop stop_id="bd" />
       </Provider>
     );
   }

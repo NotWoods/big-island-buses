@@ -9,6 +9,7 @@ export interface ScheduleRowProps {
   stop_id: string;
   stop_name: string;
   time: moment.Moment;
+  route_color: string;
 }
 
 /**
@@ -18,7 +19,7 @@ export interface ScheduleRowProps {
  */
 const ScheduleRow: React.SFC<ScheduleRowProps> = props => (
   <li className="schedule-row">
-    <i className="schedule-icon" />
+    <i className="schedule-icon" style={{ color: `#${props.route_color}` }} />
     <a className="schedule-stop" href={getStopURL(props.stop_id)}>
       {props.stop_name}
     </a>

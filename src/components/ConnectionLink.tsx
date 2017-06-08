@@ -8,6 +8,7 @@ interface ConnectionLinkProps {
   route_id: string;
   stop_id?: string;
   className?: string;
+  currentRouteID?: string;
 }
 
 interface ConnectionLinkState {
@@ -59,6 +60,7 @@ extends React.Component<ConnectionLinkProps & DatabasesProps, ConnectionLinkStat
       <BasicConnectionLink
         showTitle={this.props.showTitle}
         route_id={this.props.route_id}
+        currentRouteID={this.props.currentRouteID}
         stop_id={this.props.stop_id}
         route_color={this.state.route_color}
         route_text_color={this.state.route_text_color}

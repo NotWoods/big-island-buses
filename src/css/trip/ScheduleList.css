@@ -1,10 +1,13 @@
 .current-trip-title {
   background: #ddd;
   font-weight: bold;
-  padding: 0.3em 1.2em;
   color: #333;
+
+  padding: 0.3em 1.2em;
 }
 
 .schedule-list {
+  background: white;
+
   margin: 0;
 }

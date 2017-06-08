@@ -8,6 +8,7 @@ import '../css/ConnectionLink.css';
 interface BasicConnectionLinkProps {
   showTitle?: boolean;
   route_id: string;
+  currentRouteID?: string;
   stop_id?: string;
   route_color: string;
   route_text_color?: string;
@@ -21,6 +22,11 @@ interface BasicConnectionLinkProps {
  * or large and show the title of the route (determined by showTitle)
  */
 const BasicConnectionLink: React.SFC<BasicConnectionLinkProps> = props => {
+  if (props.currentRouteID === props.route_id) {
+    // tslint:disable-next-line
+    return null as any;
+  }
+
   let href = getURL(props.route_id);
   if (props.stop_id) { href += getStopURL(props.stop_id); }
 

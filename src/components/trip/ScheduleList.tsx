@@ -15,6 +15,7 @@ extendMoment(moment);
 
 export interface ScheduleListProps {
   route_id: string;
+  route_color: string;
   route_days: Set<number>;
   trip: Trip;
 }
@@ -72,6 +73,7 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
     this.setState({
       currentTripRange: scheduleRange(times),
       items: times.map(time => ({
+        route_color: this.props.route_color,
         stop_id: time.stop_id,
         stop_name: '...',
         time: moment(time.arrival_time, 'H:mm:ss'),

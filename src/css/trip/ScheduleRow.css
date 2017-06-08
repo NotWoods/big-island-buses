@@ -1,10 +1,7 @@
 .schedule-row {
-  padding: 0.4em 0;
+  padding: 0.5em 0;
   display: flex;
   align-items: center;
-}
-.schedule-row:nth-child(odd) {
-  background: rgba(0, 0, 0, 0.05);
 }
 
 .schedule-icon {
@@ -16,18 +13,18 @@
 .schedule-icon::before, .schedule-icon::after {
   content: '';
   position: absolute;
-  top: -0.4em; bottom: -0.4em;
+  top: -0.5em; bottom: -0.5em;
   left: 0; right: 0;
   margin: auto;
 }
 .schedule-icon::before {
-  background: var(--primary-color);
+  background: currentColor;
 
   width: 4px;
 }
 .schedule-icon::after {
   background: white;
-  border: var(--primary-color) 2px solid;
+  border: currentColor 2px solid;
   border-radius: 50%;
 
   width: 10px;

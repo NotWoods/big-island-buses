@@ -59,6 +59,7 @@ export default class BasicRoute extends React.Component<BasicRouteProps, BasicRo
         </RouteHeader>
         {(this.props.currentTrip && this.props.route_days) ? <ScheduleList
           route_id={this.props.route_id}
+          route_color={this.props.route_color || '000'}
           route_days={this.props.route_days}
           trip={this.props.currentTrip}
         /> : null}

@@ -6,7 +6,7 @@ export interface StopStreetViewProps {
   address?: string;
   width: number;
   height: number;
-  apiKey?: string;
+  apiKey: string;
 }
 
 /**
