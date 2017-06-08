@@ -11,7 +11,7 @@ class App extends React.Component<{}, null> {
   render() {
     return (
       <Provider store={store}>
-        <Route route_id="hilo-honokaa" />
+        <Route route_id="hilo-kona" />
       </Provider>
     );
   }

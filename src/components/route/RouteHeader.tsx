@@ -9,6 +9,7 @@ interface RouteHeaderProps {
   routeName: string;
   route_text_color?: string;
   route_color?: string;
+  routeDays?: Set<number>;
 }
 
 /**
@@ -32,7 +33,10 @@ const RouteHeader: React.SFC<RouteHeaderProps> = props => {
 
         <div className="route-header-right">
           <h1 className="route-name">{props.routeName}</h1>
-          <RouteInfoBox route_id={props.route_id} />
+          <RouteInfoBox
+            route_id={props.route_id}
+            routeDays={props.routeDays || null}
+          />
         </div>
       </div>
       {props.children}

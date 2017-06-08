@@ -1,0 +1,22 @@
+.acrylic {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.acrylic-img, .acrylic-tint, .acrylic::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.acrylic-img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(35px);
+}
+
+.acrylic::after {
+  content: '';
+  background-image: url(http://api.thumbr.it/whitenoise-200x200.png?background=ffffff00&noise=000000&density=10&opacity=10);
+}

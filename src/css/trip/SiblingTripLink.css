@@ -10,7 +10,7 @@
   position: relative;
   align-self: stretch;
   width: 15px;
-  margin: 0 1em 0 2em;
+  margin: 0 1em;
 }
 .change-trip-icon::before {
   border: var(--primary-color) 2px dotted;

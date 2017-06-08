@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as moment from 'moment';
 import { extendMoment } from 'moment-range';
 import {
-  getTripSchedule, getStop, siblingTrips, scheduleRange, connectedRoutes,
+  getTripSchedule, getStop, siblingTrips, scheduleRange,
   Trip, StopTime,
 } from 'query-pouch-gtfs';
 import { useDatabase, DatabasesProps } from '../useDatabase';
@@ -55,26 +55,6 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
     }
   }
 
-  async loadConnections(times: StopTime[]) {
-    const _connectedRoutes = connectedRoutes(
-      this.props.stopTimeDB,
-      this.props.tripDB,
-      this.props.routeDB,
-    );
-    const routesList = await Promise.all(times.map(time => _connectedRoutes(time.stop_id)));
-
-    this.setState({
-      items: this.state.items.map((item, index) => {
-        const connections = routesList[index].map(route => ({
-          route_id: route.route_id,
-          route_color: route.route_color || '000',
-          route_name: route.route_short_name || route.route_long_name,
-        }));
-        return { ...item, connections };
-      })
-    });
-  }
-
   async loadStopNames(times: StopTime[]) {
     const _getStop = getStop(this.props.stopDB);
     const stops = await Promise.all(times.map(time => _getStop(time.stop_id)));
@@ -100,7 +80,6 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
     });
 
     this.loadStopNames(times);
-    this.loadConnections(times);
   }
 
   async getTrips(trip: Trip) {
