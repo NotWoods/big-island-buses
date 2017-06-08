@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { getRouteName } from 'gtfs-to-pouch/es/read';
-import { Route } from 'gtfs-to-pouch/es/interfaces';
-import { getURL } from '../utils';
+import {
+  getRouteName,
+  Route,
+} from 'query-pouch-gtfs';
+import { getURL } from '../../utils';
 
 interface RouteCardProps extends Route {
   imgSrc?: string;

@@ -2,13 +2,13 @@ import * as React from 'react';
 import * as moment from 'moment';
 
 import {
-  firstAndLastStop, nextStopOfRoute, getStop, currentTrip
-} from 'gtfs-to-pouch/es/read';
-import { StopTime, Stop } from 'gtfs-to-pouch/es/interfaces';
+  firstAndLastStop, nextStopOfRoute, getStop, currentTrip,
+  StopTime, Stop,
+} from 'query-pouch-gtfs';
 
 import { useDatabase, DatabasesProps } from './DatabaseHOC';
-import BusRouteInfo from './BusRouteInfo';
-import NextStopInfo from './NextStopInfo';
+import BusRouteInfo from '../BusRouteInfo';
+import NextStopInfo from '../NextStopInfo';
 
 import '../css/InfoBox.css';
 

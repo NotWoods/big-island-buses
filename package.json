@@ -14,13 +14,13 @@
     "@types/googlemaps": "^3.26.11",
     "@types/jest": "^19.2.3",
     "@types/moment-range": "^3.0.0",
-    "@types/node": "^7.0.22",
     "@types/pouchdb": "^6.1.0",
     "@types/react": "^15.0.25",
     "@types/react-dom": "^15.5.0",
     "@types/react-redux": "^4.4.40",
     "@types/redux-actions": "^1.2.4",
-    "gtfs-to-pouch": "^2.0.1",
+    "gtfs-to-pouch": "^2.0.4",
+    "pouchdb-server": "^2.3.7",
     "react-scripts-ts": "2.2.0"
   },
   "scripts": {
@@ -28,6 +28,7 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "gtfs": "gtfs-to-pouch -i google_transit.zip -o ./public/gtfs-dump"
+    "gtfs": "gtfs-to-pouch -i google_transit.zip -o ./gtfs-db",
+    "db-server": "pouchdb-server -d gtfs-db"
   }
 }

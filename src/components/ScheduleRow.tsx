@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as moment from 'moment';
 import { getStopURL } from '../utils';
-import ConnectionLink from './BasicConnectionLink';
+import ConnectionLink from './presentational/ConnectionLink';
 
 export interface ScheduleRowProps {
   stop_id: string;

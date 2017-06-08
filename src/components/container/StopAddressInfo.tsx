@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { stopAddress } from 'gtfs-to-pouch/es/read';
-import { Stop } from 'gtfs-to-pouch/es/interfaces';
+import {
+  stopAddress,
+  Stop,
+} from 'query-pouch-gtfs';
 
 interface StopAddressInfoProps {
   lat?: number;

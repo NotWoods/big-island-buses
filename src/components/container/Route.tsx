@@ -3,7 +3,7 @@ import * as moment from 'moment';
 
 import {
   getRoute, routeDays, currentTrip,
-  Trip
+  Trip,
 } from 'query-pouch-gtfs';
 
 import { useDatabase, DatabasesProps } from './DatabaseHOC';
