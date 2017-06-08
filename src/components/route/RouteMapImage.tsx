@@ -45,7 +45,11 @@ extends React.Component<RouteMapImageProps & DatabasesProps, RouteMapImageState>
       stopIDs.map(getStopCoordinates(this.props.stopDB))
     );
 
-    return coordinates.map(coords => coords.reverse().join()).join('|');
+    const markerList = coordinates
+      .map(coords => coords.reverse().join())
+      .join('|');
+
+    this.setState({ markerList });
   }
 
   getSrc(): string {

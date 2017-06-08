@@ -48,6 +48,7 @@ export default class BasicRoute extends React.Component<BasicRouteProps, BasicRo
           routeName={this.props.routeName}
           route_text_color={this.props.route_text_color}
           route_color={this.props.route_color}
+          routeDays={this.props.route_days}
         >
           {/*<Tabs
             tabs={routeTabs}

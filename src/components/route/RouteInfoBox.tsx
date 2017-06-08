@@ -3,16 +3,18 @@ import * as moment from 'moment';
 import * as classNames from 'classnames';
 import {
   firstAndLastStop, nextStopOfRoute, getStop, currentTrip,
-  StopTime, Stop,
+  StopTime, Stop, Weekdays,
 } from 'query-pouch-gtfs';
 import { useDatabase, DatabasesProps } from '../useDatabase';
 import BusRouteInfo from './BusRouteInfo';
 import NextStopInfo from './NextStopInfo';
+import RouteDaysInfo from './RouteDaysInfo';
 
 interface RouteInfoBoxProps {
   route_id: string;
   now?: moment.Moment;
   className?: string;
+  routeDays: Set<Weekdays> | null;
 }
 
 interface RouteInfoBoxState {
@@ -114,6 +116,7 @@ class RouteInfoBox extends React.Component<PropsWithDB, RouteInfoBoxState> {
       <div className={classNames('route-info', this.props.className)}>
         <BusRouteInfo location={this.state.location} />
         <NextStopInfo nextStop={this.state.nextStop} now={this.props.now} />
+        <RouteDaysInfo routeDays={this.props.routeDays} />
       </div>
     );
   }
