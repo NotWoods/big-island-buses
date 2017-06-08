@@ -41,6 +41,11 @@ class RouteInfoBox extends React.Component<PropsWithDB, RouteInfoBoxState> {
   constructor(props: PropsWithDB) {
     super(props);
 
+    this.state = {
+      location: null,
+      nextStop: null,
+    };
+
     this.getStop = getStop(props.stopDB);
     this.nextStopOfRoute = nextStopOfRoute(props.tripDB, props.stopTimeDB);
   }

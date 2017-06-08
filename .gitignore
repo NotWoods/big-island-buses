@@ -21,3 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 
 gtfs-db
+log.txt

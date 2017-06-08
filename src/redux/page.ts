@@ -8,9 +8,9 @@ export interface PageState {
 
 type ConnectionPayload = { route_id: string, stop_id?: string };
 
-export const setRoute = createAction('SET_ROUTE');
-export const setTrip = createAction('SET_TRIP');
-export const setStop = createAction('SET_STOP');
+export const setRoute = createAction<string|undefined>('SET_ROUTE');
+export const setTrip = createAction<string|undefined>('SET_TRIP');
+export const setStop = createAction<string|undefined>('SET_STOP');
 export const openConnection = createAction(
   'OPEN_CONNECTION',
   (route_id: string, stop_id: string) => ({ route_id, stop_id })

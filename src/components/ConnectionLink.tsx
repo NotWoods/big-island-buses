@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getRoute } from 'query-pouch-gtfs';
-import { useDatabase, DatabasesProps } from './DatabaseHOC';
-import BasicConnectionLink from '../presentational/ConnectionLink';
+import { useDatabase, DatabasesProps } from './useDatabase';
+import BasicConnectionLink from './BasicConnectionLink';
 
 interface ConnectionLinkProps {
   showTitle?: boolean;

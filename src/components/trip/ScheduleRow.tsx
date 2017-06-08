@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as moment from 'moment';
 import { getStopURL } from '../../utils';
-import ConnectionLink from '../ConnectionLink';
+import BasicConnectionLink from '../BasicConnectionLink';
 
 export interface ScheduleRowProps {
   stop_id: string;
@@ -32,7 +32,7 @@ const ScheduleRow: React.SFC<ScheduleRowProps> = props => (
     <ul className="schedule-connections">
       {props.connections.map(connection => (
         <li className="connection">
-          <ConnectionLink
+          <BasicConnectionLink
             key={connection.route_id}
             route_id={connection.route_id}
             route_color={connection.route_color}

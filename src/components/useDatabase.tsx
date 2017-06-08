@@ -1,3 +1,4 @@
+import * as PouchDB from 'pouchdb-browser';
 import * as React from 'react';
 import * as GTFS from 'query-pouch-gtfs/es/interfaces';
 
@@ -44,6 +45,7 @@ export function useDatabase<T>(
     if (!cache[dbName]) {
       const db = new PouchDB(name);
       PouchDB.replicate(`http://localhost:5984/${name}`, db);
+      cache[dbName] = db;
     }
   });
 

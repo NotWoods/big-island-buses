@@ -12,7 +12,7 @@ export interface LocationState {
   error: PositionErrorCode | null;
 }
 
-export const updateLocation = createAction('UPDATE_LOCATION');
+export const updateLocation = createAction<Position|PositionError>('UPDATE_LOCATION');
 
 export default handleAction(
   updateLocation, {
