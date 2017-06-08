@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as moment from 'moment';
-import { timeOnly } from '../utils';
+import { timeOnly } from '../../utils';
 
-import '../css/utils.css';
+import '../../css/utils.css';
 
 export interface NextStopInfoProps {
   nextStop: {

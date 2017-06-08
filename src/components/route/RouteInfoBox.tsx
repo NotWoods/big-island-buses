@@ -1,16 +1,14 @@
 import * as React from 'react';
 import * as moment from 'moment';
-
 import {
   firstAndLastStop, nextStopOfRoute, getStop, currentTrip,
   StopTime, Stop,
 } from 'query-pouch-gtfs';
+import { useDatabase, DatabasesProps } from '../useDatabase';
+import BusRouteInfo from './BusRouteInfo';
+import NextStopInfo from './NextStopInfo';
 
-import { useDatabase, DatabasesProps } from './DatabaseHOC';
-import BusRouteInfo from '../BusRouteInfo';
-import NextStopInfo from '../NextStopInfo';
-
-import '../css/InfoBox.css';
+import '../../css/InfoBox.css';
 
 interface RouteInfoBoxProps {
   route_id: string;

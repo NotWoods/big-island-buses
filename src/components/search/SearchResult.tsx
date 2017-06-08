@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getURL, getStopURL } from '../utils';
+import { getURL, getStopURL } from '../../utils';
 
 interface PlaceSearchResultProps {
   matched: string;

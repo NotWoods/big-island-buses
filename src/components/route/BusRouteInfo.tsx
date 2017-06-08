@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import '../css/utils.css';
+import '../../css/utils.css';
 
 export interface BusRouteInfoProps {
   location: {

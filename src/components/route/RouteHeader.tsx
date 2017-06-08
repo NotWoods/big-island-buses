@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import InfoButton from './InfoButton';
 
 interface RouteHeaderProps {

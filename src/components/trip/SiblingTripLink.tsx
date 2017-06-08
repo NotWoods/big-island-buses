@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as moment from 'moment';
 import { connect } from 'react-redux';
 import { Weekdays } from 'query-pouch-gtfs';
-import { setTrip } from '../redux/page';
-import { getURL } from '../utils';
-import TripHeader from './container/TripHeader';
+import { setTrip } from '../../redux/page';
+import { getURL } from '../../utils';
+import TripHeader from './TripHeader';
 
 interface SiblingTripLinkProps {
   mode: 'prev' | 'next';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Tabs from './Tabs';
+import Tabs from '../Tabs';
 
 const routeTabs = { schedule: 'Schedule', map: 'Map' };
 

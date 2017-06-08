@@ -1,13 +1,11 @@
 import * as React from 'react';
 import * as moment from 'moment';
-
 import {
   getRoute, routeDays, currentTrip,
   Trip,
 } from 'query-pouch-gtfs';
-
-import { useDatabase, DatabasesProps } from './DatabaseHOC';
-import BasicRoute from '../presentational/Route';
+import { useDatabase, DatabasesProps } from '../useDatabase';
+import BasicRoute from './BasicRoute';
 
 interface RouteProps {
   now?: moment.Moment;

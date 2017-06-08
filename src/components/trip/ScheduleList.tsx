@@ -1,14 +1,12 @@
 import * as React from 'react';
 import * as moment from 'moment';
-
 import {
   getTripSchedule, getStop, siblingTrips, scheduleRange, connectedRoutes,
   Trip, StopTime,
 } from 'query-pouch-gtfs';
-
-import { useDatabase, DatabasesProps } from './DatabaseHOC';
-import BasicScheduleList from '../presentational/ScheduleList';
-import { ScheduleRowProps } from '../ScheduleRow';
+import { useDatabase, DatabasesProps } from '../useDatabase';
+import BasicScheduleList from './BasicScheduleList';
+import { ScheduleRowProps } from './ScheduleRow';
 
 export interface ScheduleListProps {
   route_id: string;
