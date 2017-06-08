@@ -3,6 +3,9 @@ import * as moment from 'moment';
 import { getStopURL } from '../../utils';
 import BasicConnectionLink from '../BasicConnectionLink';
 
+import '../../css/vars.css';
+import '../../css/trip/ScheduleRow.css';
+
 export interface ScheduleRowProps {
   stop_id: string;
   stop_name: string;
@@ -22,6 +25,20 @@ export interface ScheduleRowProps {
  */
 const ScheduleRow: React.SFC<ScheduleRowProps> = props => (
   <li className="schedule-row">
+    <ul className="schedule-connections">
+      {props.connections.map(connection => (
+        <li className="schedule-connection" key={connection.route_id}>
+          <BasicConnectionLink
+            key={connection.route_id}
+            route_id={connection.route_id}
+            route_color={connection.route_color}
+            route_text_color={connection.route_text_color}
+            route_name={connection.route_name}
+            className="schedule-connection-link"
+          />
+        </li>
+      ))}
+    </ul>
     <i className="schedule-icon" />
     <a className="schedule-stop" href={getStopURL(props.stop_id)}>
       {props.stop_name}
@@ -29,19 +46,6 @@ const ScheduleRow: React.SFC<ScheduleRowProps> = props => (
     <time className="schedule-time" dateTime={props.time.format('H:mm:ss')}>
       {props.time.format('h:mm a')}
     </time>
-    <ul className="schedule-connections">
-      {props.connections.map(connection => (
-        <li className="connection">
-          <BasicConnectionLink
-            key={connection.route_id}
-            route_id={connection.route_id}
-            route_color={connection.route_color}
-            route_text_color={connection.route_text_color}
-            route_name={connection.route_name}
-          />
-        </li>
-      ))}
-    </ul>
   </li>
 );
 

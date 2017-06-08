@@ -9,7 +9,6 @@ interface RouteHeaderProps {
   routeName: string;
   route_text_color?: string;
   route_color?: string;
-  children?: React.ReactNode;
 }
 
 /**
@@ -25,8 +24,8 @@ const RouteHeader: React.SFC<RouteHeaderProps> = props => {
     <header className="route-header" style={styles}>
       <div className="route-header-top">
         <RouteMapImage
-          width={64}
-          height={64}
+          width={128}
+          height={128}
           route_id={props.route_id}
           apiKey=""
         />

@@ -1,0 +1,24 @@
+.change-trip {
+  font-style: italic;
+
+  display: flex;
+  align-items: center;
+  padding: 0.4em 0;
+}
+
+.change-trip-icon {
+  position: relative;
+  align-self: stretch;
+  width: 15px;
+  margin: 0 1em 0 2em;
+}
+.change-trip-icon::before {
+  border: var(--primary-color) 2px dotted;
+
+  content: '';
+  position: absolute;
+  top: -0.4em; bottom: -0.4em;
+  left: 0; right: 0;
+  margin: auto;
+  width: 0;
+}

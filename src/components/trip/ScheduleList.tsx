@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as moment from 'moment';
+import { extendMoment } from 'moment-range';
 import {
   getTripSchedule, getStop, siblingTrips, scheduleRange, connectedRoutes,
   Trip, StopTime,
@@ -7,6 +8,10 @@ import {
 import { useDatabase, DatabasesProps } from '../useDatabase';
 import BasicScheduleList from './BasicScheduleList';
 import { ScheduleRowProps } from './ScheduleRow';
+
+import '../../css/trip/ScheduleList.css';
+
+extendMoment(moment);
 
 export interface ScheduleListProps {
   route_id: string;

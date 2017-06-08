@@ -12,6 +12,7 @@ export interface TripHeaderProps {
   route_days: Set<Weekdays>;
   trip_days?: Set<Weekdays>;
   trip_range?: moment.Range;
+  className?: string;
 }
 
 interface TripHeaderState {
@@ -88,6 +89,7 @@ class TripHeader extends React.Component<PropsWithDB, TripHeaderState> {
         route_days={this.props.route_days}
         trip_range={this.state.trip_range || this.props.trip_range}
         trip_days={this.props.trip_days || this.state.trip_days || this.props.route_days}
+        className={this.props.className}
       />
     );
   }

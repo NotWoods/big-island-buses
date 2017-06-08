@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { getURL, getStopURL } from '../utils';
 import { openConnection } from '../redux/page';
 
+import '../css/ConnectionLink.css';
+
 interface BasicConnectionLinkProps {
   showTitle?: boolean;
   route_id: string;
@@ -10,6 +12,7 @@ interface BasicConnectionLinkProps {
   route_color: string;
   route_text_color?: string;
   route_name: string;
+  className?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
@@ -34,8 +37,13 @@ const BasicConnectionLink: React.SFC<BasicConnectionLinkProps> = props => {
   if (props.showTitle) {
     (linkProps.style as React.CSSProperties).color = `#${props.route_text_color || 'fff'}`;
     linkProps.children = props.route_name;
+    linkProps.className += ' with-title';
   } else {
     linkProps.title = props.route_name;
+  }
+
+  if (props.className) {
+    linkProps.className += ` ${props.className}`;
   }
 
   return <a {...linkProps} />;

@@ -1,6 +1,9 @@
 import * as React from 'react';
 import * as moment from 'moment';
+import * as classNames from 'classnames';
 import { dateRangeString, Weekdays } from 'query-pouch-gtfs';
+
+import '../../css/trip/TripHeader.css';
 
 export interface BasicTripHeaderProps {
   trip_id: string;
@@ -9,6 +12,7 @@ export interface BasicTripHeaderProps {
   route_days: Set<Weekdays>;
   trip_days: Set<Weekdays>;
   trip_range?: moment.Range;
+  className?: string;
 }
 
 function sameDays(a: Set<Weekdays>, b: Set<Weekdays>): boolean {
@@ -44,9 +48,9 @@ const BasicTripHeader: React.SFC<BasicTripHeaderProps> = props => {
   }
 
   return (
-    <h2 className="trip-header">
+    <h2 className={classNames('trip-header', props.className)}>
       {tripName}
-      {'('}
+      {' ('}
       {tripTime}
       {tripDaysString}
       {')'}

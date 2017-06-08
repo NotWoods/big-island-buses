@@ -26,13 +26,13 @@ const BusRouteInfo: React.SFC<BusRouteInfoProps> = props => {
 
     location = [
       (
-        <a className="invisible" href={`?stop_id=${first_stop_id}`}>
+        <a key="first" className="invisible" href={`?stop_id=${first_stop_id}`}>
           {first_stop_name}
         </a>
       ),
       ' - ',
       (
-        <a className="invisible" href={`?stop_id=${last_stop_id}`}>
+        <a key="last" className="invisible" href={`?stop_id=${last_stop_id}`}>
           {last_stop_name}
         </a>
       ),

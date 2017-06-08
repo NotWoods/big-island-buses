@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
+    "moment-range": "^3.0.3",
     "pouchdb-browser": "^6.2.0",
     "query-pouch-gtfs": "file:..\\query-pouch-gtfs",
     "react": "^15.5.4",
@@ -23,6 +24,7 @@
     "@types/react-dom": "^15.5.0",
     "@types/react-redux": "^4.4.40",
     "@types/redux-actions": "^1.2.4",
+    "concurrently": "^3.4.0",
     "gtfs-to-pouch": "^2.0.4",
     "pouchdb-server": "^2.3.7",
     "react-scripts-ts": "2.2.0"

@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as moment from 'moment';
 import { Trip } from 'query-pouch-gtfs';
 import RouteHeader from './RouteHeader';
-import Tabs from '../Tabs';
+// import Tabs from '../Tabs';
 import ScheduleList from '../trip/ScheduleList';
 
 import '../../css/route/Route.css';
@@ -23,7 +23,7 @@ interface BasicRouteState {
   selectedTab: 'schedule' | 'map';
 }
 
-const routeTabs = { schedule: 'Schedule', map: 'Map' };
+// const routeTabs = { schedule: 'Schedule', map: 'Map' };
 
 export default class BasicRoute extends React.Component<BasicRouteProps, BasicRouteState> {
   constructor(props: BasicRouteProps) {
@@ -43,21 +43,19 @@ export default class BasicRoute extends React.Component<BasicRouteProps, BasicRo
   render() {
     return (
       <article className="route">
-        <header className="route-header-container">
-          <RouteHeader
-            route_id={this.props.route_id}
-            routeName={this.props.routeName}
-            route_text_color={this.props.route_text_color}
-            route_color={this.props.route_color}
-          >
-            <Tabs
-              tabs={routeTabs}
-              selected={this.state.selectedTab}
-              onChange={this.handleTabChange}
-              disabled={this.props.disableMap ? ['map'] : undefined}
-            />
-          </RouteHeader>
-        </header>
+        <RouteHeader
+          route_id={this.props.route_id}
+          routeName={this.props.routeName}
+          route_text_color={this.props.route_text_color}
+          route_color={this.props.route_color}
+        >
+          {/*<Tabs
+            tabs={routeTabs}
+            selected={this.state.selectedTab}
+            onChange={this.handleTabChange}
+            disabled={this.props.disableMap ? ['map'] : undefined}
+          />*/}
+        </RouteHeader>
         {(this.props.currentTrip && this.props.route_days) ? <ScheduleList
           route_id={this.props.route_id}
           route_days={this.props.route_days}

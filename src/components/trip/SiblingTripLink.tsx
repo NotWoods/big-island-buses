@@ -6,6 +6,8 @@ import { setTrip } from '../../redux/page';
 import { getURL } from '../../utils';
 import TripHeader from './TripHeader';
 
+import '../../css/trip/SiblingTripLink.css';
+
 interface SiblingTripLinkProps {
   mode: 'prev' | 'next';
   route_id: string;
@@ -29,6 +31,7 @@ const SiblingTripLink: React.SFC<SiblingTripLinkProps> = props => {
   if (trip_id) {
     headerText = (
       <TripHeader
+        className="change-trip-header"
         trip_id={trip_id}
         service_id={props.service_id}
         trip_short_name={props.trip_short_name}

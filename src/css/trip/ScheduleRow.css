@@ -1,0 +1,55 @@
+.schedule-row {
+  padding: 0.4em 0;
+  display: flex;
+  align-items: center;
+}
+.schedule-row:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.schedule-icon {
+  position: relative;
+  align-self: stretch;
+  width: 15px;
+  margin: 0 1em;
+}
+.schedule-icon::before, .schedule-icon::after {
+  content: '';
+  position: absolute;
+  top: -0.4em; bottom: -0.4em;
+  left: 0; right: 0;
+  margin: auto;
+}
+.schedule-icon::before {
+  background: var(--primary-color);
+
+  width: 4px;
+}
+.schedule-icon::after {
+  background: white;
+  border: var(--primary-color) 2px solid;
+  border-radius: 50%;
+
+  width: 10px;
+  height: 10px;
+}
+
+.schedule-stop {
+  margin-right: 1em;
+}
+
+.schedule-time {
+  margin: 0 0.5em 0 auto;
+}
+
+.schedule-connection {
+  display: block;
+  width: 1em;
+}
+.schedule-connection-link {
+  transition: transform 0.2s ease;
+  transform-origin: left;
+}
+.schedule-connection-link:hover {
+  transform: scaleX(1.5);
+}

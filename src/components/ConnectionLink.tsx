@@ -7,6 +7,7 @@ interface ConnectionLinkProps {
   showTitle?: boolean;
   route_id: string;
   stop_id?: string;
+  className?: string;
 }
 
 interface ConnectionLinkState {
