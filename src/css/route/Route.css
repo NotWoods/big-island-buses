@@ -1,0 +1,9 @@
+@media (min-width: 50em) {
+  .info-box.hide {
+    display: block;
+  }
+
+  .info-button {
+    display: none;
+  }
+}

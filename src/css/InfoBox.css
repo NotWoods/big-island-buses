@@ -12,3 +12,7 @@
 .info-text {
   margin: 0;
 }
+
+.info-box.hide {
+  display: none;
+}

@@ -1,0 +1,35 @@
+.route-header {
+	padding: 0.5em;
+	display: flex;
+	align-items: center;
+}
+
+.route-name {
+	margin: 0;
+	margin-right: auto;
+}
+
+.toolbar-button {
+	border: 0;
+	background: none;
+}
+
+.icon-button {
+	align-items: center;
+	font: inherit;
+	color: inherit;
+	cursor: pointer;
+
+	padding: 0.5em;
+	display: flex;
+}
+.button-icon {
+	margin-right: 0.5em;
+}
+
+.icon-button:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
+.icon-button:active {
+	background: rgba(255, 255, 255, 0.2);
+}

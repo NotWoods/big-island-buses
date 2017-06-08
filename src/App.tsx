@@ -3,13 +3,15 @@ import { Provider } from 'react-redux';
 import Route from './components/route/Route';
 import store from './redux/store';
 
+import './css/core.css';
+
 /* tslint:disable no-console */
 
 class App extends React.Component<{}, null> {
   render() {
     return (
       <Provider store={store}>
-        <Route route_id="" />
+        <Route route_id="hilo-honokaa" />
       </Provider>
     );
   }

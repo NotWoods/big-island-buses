@@ -3,8 +3,9 @@
   "version": "4.0.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.5",
     "pouchdb-browser": "^6.2.0",
-    "query-pouch-gtfs": "^2.0.4",
+    "query-pouch-gtfs": "file:..\\query-pouch-gtfs",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
@@ -12,6 +13,7 @@
     "redux-actions": "^2.0.3"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.0",
     "@types/geojson": "^1.0.2",
     "@types/googlemaps": "^3.26.11",
     "@types/jest": "^19.2.3",

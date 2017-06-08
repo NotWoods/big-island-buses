@@ -1,66 +1,16 @@
-:root {
-	--info-height: 17em;
-	--route-color: #4d74ab;
-	--route-text-color: white;
-	--theme-color: #2d3039;
-	--accent-color: #4d74ab;
-}
-
 body {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	background: #eee;
-	color: #212121;
+	font-family: system-ui;
+	background: #ebefee;
+	color: #000;
 
 	margin: 0;
-}
-
-h3 {
-	font-weight: 500;
-	text-transform: uppercase;
-	font-size: 0.9em;
-
-	margin: 0.5rem;
 }
 
 ul {
 	padding: 0;
 }
 
-a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.main-area {
-	width: 100%;
-	min-height: 100vh;
-	display: flex;
-	flex-flow: column;
-	overflow-x: hidden;
-}
-
-.tab-content {
-	transition: transform 0.3s ease;
-
-	width: 200%;
-	flex: 1;
-	position: relative;
-}
-
-.list, .map {
-	width: 50%;
-}
-
-#show-map:checked ~ .tab-content {
-	transform: translateX(-50%);
-}
-
-@media (min-width: 35em) {
-	.tab-content {
-		width: 100%;
-	}
-
-	#show-map:checked ~ .tab-content {
-		transform: none;
-	}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	margin-top: 0;
 }

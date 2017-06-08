@@ -1,12 +1,15 @@
 import * as React from 'react';
-import InfoButton from './InfoButton';
+import RouteMapImage from './RouteMapImage';
+import RouteInfoBox from './RouteInfoBox';
+
+import '../../css/route/RouteHeader.css';
 
 interface RouteHeaderProps {
+  route_id: string;
   routeName: string;
   route_text_color?: string;
   route_color?: string;
-  infoPressed: boolean;
-  onInfoPress: React.MouseEventHandler<HTMLButtonElement>;
+  children?: React.ReactNode;
 }
 
 /**
@@ -19,11 +22,22 @@ const RouteHeader: React.SFC<RouteHeaderProps> = props => {
   };
 
   return (
-    <div className="route-header" style={styles}>
-      <h1 className="route-name">{props.routeName}</h1>
+    <header className="route-header" style={styles}>
+      <div className="route-header-top">
+        <RouteMapImage
+          width={64}
+          height={64}
+          route_id={props.route_id}
+          apiKey=""
+        />
 
-      <InfoButton pressed={props.infoPressed} onClick={props.onInfoPress} />
-    </div>
+        <div className="route-header-right">
+          <h1 className="route-name">{props.routeName}</h1>
+          <RouteInfoBox route_id={props.route_id} />
+        </div>
+      </div>
+      {props.children}
+    </header>
   );
 };
 
