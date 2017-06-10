@@ -18,6 +18,7 @@ interface SiblingTripLinkProps {
   route_days: Set<Weekdays>;
   trip_days?: Set<Weekdays>;
   trip_range?: moment.Range;
+  iconStyle?: React.CSSProperties;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
@@ -45,7 +46,7 @@ const SiblingTripLink: React.SFC<SiblingTripLinkProps> = props => {
 
   return (
     <div className={`change-trip ${props.mode}-trip`}>
-      <i className="change-trip-icon" />
+      <i className="change-trip-icon" style={props.iconStyle} />
       <a
         className="change-trip-text"
         href={trip_id ? getURL(props.route_id, trip_id) : undefined}

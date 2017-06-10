@@ -13,7 +13,7 @@
   margin: 0 1em;
 }
 .change-trip-icon::before {
-  border: var(--primary-color) 2px dotted;
+  border: currentColor 2px dotted;
 
   content: '';
   position: absolute;

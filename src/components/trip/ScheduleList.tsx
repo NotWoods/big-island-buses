@@ -101,6 +101,7 @@ class ScheduleList extends React.Component<PropsWithDB, ScheduleListState> {
       <BasicScheduleList
         route_id={this.props.route_id}
         route_days={this.props.route_days}
+        route_color={this.props.route_color}
         items={this.state.items}
         current={this.props.trip}
         currentTripRange={this.state.currentTripRange}

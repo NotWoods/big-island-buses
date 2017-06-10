@@ -1,101 +1,84 @@
 import * as React from 'react';
 import * as moment from 'moment';
+import { connect } from 'react-redux';
 import {
-  getRoute, routeDays, currentTrip,
+  currentTrip, getTrip,
   Trip,
 } from 'query-pouch-gtfs';
+import { ReduxState } from '../../redux/store';
 import { useDatabase, DatabasesProps } from '../useDatabase';
-import BasicRoute from './BasicRoute';
+import RouteWithTrip from './RouteWithTrip';
 
 interface RouteProps {
   now?: moment.Moment;
   disableMap?: boolean;
   route_id: string;
-  trip?: Trip;
-  routeName?: string;
-  route_text_color?: string;
-  route_color?: string;
+  trip_id?: string;
+  routeMeta?: {
+    name: string;
+    text_color?: string;
+    color?: string;
+  };
 }
 
 interface RouteState {
-  routeName: string;
-  route_text_color?: string;
-  route_color?: string;
-  route_days?: Set<number>;
-  trip?: Trip;
+  trip: Trip | null;
 }
 
 class Route extends React.Component<RouteProps & DatabasesProps, RouteState> {
   constructor(props: RouteProps & DatabasesProps) {
     super(props);
     this.state = {
-      routeName: '',
+      trip: null,
     };
   }
 
   componentDidMount() {
-    this.loadDays(this.props.route_id);
-    if (!this.props.routeName && !this.props.route_color && !this.props.route_text_color) {
-      this.loadRoute(this.props.route_id);
-    }
-    if (!this.props.trip) {
-      this.loadCurrentTrip(this.props.route_id);
-    }
+    this.loadTrip(this.props.route_id, this.props.trip_id);
   }
 
   componentWillReceiveProps(nextProps: RouteProps) {
-    if (nextProps.route_id !== this.props.route_id) {
-      this.loadDays(nextProps.route_id);
-      if (!nextProps.routeName && !nextProps.route_color && !nextProps.route_text_color) {
-        this.loadRoute(nextProps.route_id);
-      }
-      if (!nextProps.trip) {
-        this.loadCurrentTrip(nextProps.route_id);
-      }
+    if (nextProps.route_id !== this.props.route_id
+    || nextProps.trip_id !== this.props.trip_id) {
+      this.loadTrip(nextProps.route_id, nextProps.trip_id);
     }
   }
 
-  async loadRoute(routeID: string) {
-    this.setState({
-      routeName: '',
-      route_text_color: undefined,
-      route_color: undefined,
-    });
+  async loadTrip(routeID: string, tripID?: string) {
+    if (!routeID) { return; }
+    this.setState({ trip: null });
 
-    const route = await getRoute(this.props.routeDB)(routeID);
-    this.setState({
-      routeName: route.route_long_name || route.route_short_name,
-      route_text_color: route.route_text_color,
-      route_color: route.route_color,
-    });
-  }
+    let trip: Trip;
+    if (tripID) {
+      trip = await getTrip(this.props.tripDB)(tripID, routeID);
+    } else {
+      trip = await currentTrip(this.props.tripDB, this.props.stopTimeDB)(routeID, this.props.now);
+    }
 
-  async loadDays(routeID: string) {
-    this.setState({ route_days: undefined });
-    const days = await routeDays(this.props.tripDB, this.props.calendarDB)(routeID);
-    this.setState({ route_days: days });
-  }
-
-  async loadCurrentTrip(routeID: string) {
-    this.setState({ trip: undefined });
-    const trip = await currentTrip(this.props.tripDB, this.props.stopTimeDB)(routeID, this.props.now);
     this.setState({ trip });
   }
 
   render() {
+    if (!this.props.route_id) { return null; }
+
     return (
-      <BasicRoute
+      <RouteWithTrip
         now={this.props.now}
         disableMap={this.props.disableMap}
         route_id={this.props.route_id}
-        routeName={this.state.routeName}
-        route_text_color={this.state.route_text_color}
-        route_color={this.state.route_color}
-        route_days={this.state.route_days}
-        currentTrip={this.props.trip || this.state.trip}
+        trip={this.state.trip}
       />
     );
   }
 }
 
-export default useDatabase<RouteProps>('routes', 'trips', 'stop_times', 'calendar')(Route);
+const RouteWrapped: React.ComponentClass<Partial<RouteProps>> = connect(
+  (state: ReduxState) => ({
+    route_id: state.page.route_id,
+    trip_id: state.page.trip_id,
+    routeMeta: state.page.routeMeta,
+    disableMap: !state.map.working,
+  })
+)(useDatabase<RouteProps>('trips', 'stop_times')(Route));
+
+export default RouteWrapped;

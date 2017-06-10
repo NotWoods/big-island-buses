@@ -1,13 +1,22 @@
 .current-trip-title {
   background: #ddd;
-  font-weight: bold;
   color: #333;
 
+  margin: 0 -1em;
   padding: 0.3em 1.2em;
+  display: flex;
+  justify-content: space-between;
 }
 
-.schedule-list {
+.current-trip-name {
+  font-weight: bold;
+}
+
+.schedule-list-main {
   background: white;
 
+  margin: 0 1em;
+}
+.schedule-list {
   margin: 0;
 }

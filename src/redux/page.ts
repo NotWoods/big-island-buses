@@ -4,6 +4,11 @@ export interface PageState {
   route_id: string;
   trip_id?: string;
   stop_id?: string;
+  routeMeta?: {
+    name: string;
+    text_color?: string;
+    color?: string;
+  };
 }
 
 type ConnectionPayload = { route_id: string, stop_id?: string };
