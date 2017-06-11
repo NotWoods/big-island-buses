@@ -1,25 +1,15 @@
 import * as React from 'react';
 import { getURL, getStopURL } from '../../utils';
 
-interface PlaceSearchResultProps {
+export interface SearchResultProps {
   matched: string;
   text: string;
   iconClass: string;
   iconStyle?: React.CSSProperties;
-  onClick: React.MouseEventHandler<HTMLAnchorElement>;
-  type: 'place';
-}
-
-interface GTFSSearchResultProps {
-  matched: string;
-  text: string;
-  iconClass: string;
-  iconStyle?: React.CSSProperties;
+  type?: 'place' | 'route' | 'stop';
   id: string;
-  type: 'route' | 'stop';
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
-
-type SearchResultProps = PlaceSearchResultProps | GTFSSearchResultProps;
 
 /**
  * A single search result. Should be displayed in a list under
@@ -45,13 +35,13 @@ const SearchResult: React.SFC<SearchResultProps> = props => {
   while (fromIndex < props.text.length) {
     const index = lowercase.indexOf(match, fromIndex);
     text.push(props.text.slice(fromIndex, index));
-    text.push(<strong>props.text.slice(index, match.length)</strong>);
+    text.push(<strong>{props.text.slice(index, match.length)}</strong>);
   }
 
   return (
     <a
       className="search-result"
-      onClick={props.type === 'place' ? props.onClick : undefined}
+      onClick={props.onClick}
       href={href}
     >
       <i
