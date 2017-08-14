@@ -29,5 +29,5 @@ The schedule data is located in a [seperate repository](https://github.com/NotWo
 
 ## Licensing
 
-Copyright (c) 2015 Tiger Oakes
+Copyright (c) 2015 Tiger Oakes  
 All Rights Reserved
