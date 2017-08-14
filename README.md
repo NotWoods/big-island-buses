@@ -1,4 +1,12 @@
+![](./icon/128.png)
+
 # Big Island Buses
+> *Go Green. Go Hele-On. Go Online!*
+>
+> Stop fumbling with paper schedules and never miss the Hawaii bus again! 
+> Use Big Island Buses, an app created in partnership with Hele-On. 
+> Find bus stops near you, see live GPS locations of buses, 
+> and look for the schedules from the comfort of your phone or computer.
 
 A web app created for bus riders in the Big Island of Hawai'i. 
 The app was created to offer an alternative the the county's [paper-only bus schdules](http://www.heleonbus.org/schedules-and-maps).
@@ -18,3 +26,8 @@ The app implements the AppCache API to allow it to run offline,
 and uses the JavaScript geolocation API to locate nearby bus stops and routes for the user.
 
 The schedule data is located in a [seperate repository](https://github.com/NotWoods/hawaii-gtfs).
+
+## Licensing
+
+Copyright (c) 2015 Tiger Oakes
+All Rights Reserved
