@@ -1,0 +1,25 @@
+{
+    "include": ["./src/**/*"],
+    "compilerOptions": {
+        /* Basic Options */
+        "target": "es2017",
+        "module": "esnext",
+        "jsx": "react",
+        "jsxFactory": "h",
+        "declaration": true,
+        "sourceMap": true,
+        "outDir": "lib",
+        "importHelpers": true,
+        "pretty": true,
+
+        /* Strict Type-Checking Options */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+
+        /* Module Resolution Options */
+        "moduleResolution": "node",
+        "esModuleInterop": true
+    }
+}

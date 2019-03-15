@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+    - 'lts/*'
+sudo: false
+cache: npm
+script:
+    - npm test
+    - npm run lint:check
