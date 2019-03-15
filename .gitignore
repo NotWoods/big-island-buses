@@ -1,11 +1,32 @@
+# Ignore built files
+lib
+public
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Dependency directory
+node_modules
+
+# Optional cache directory
+.npm
+
+# dotenv environment variables file
+.env
+
+# OS metadata
+.DS_Store
 Thumbs.db
-snapshots/
-min/
-about.css
-about.html
-index.php
-redirect.htaccess
-robots.txt
-sitemap.xml
-assets/about-devices.png
-assets/about-stops.png
