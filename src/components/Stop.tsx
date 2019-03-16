@@ -1,7 +1,10 @@
 import { h } from 'preact';
+import { RouteProps, Route } from './Route';
 
 interface StopProps {
     address: string;
+    name: string;
+    routes: RouteProps[];
 }
 
 export const Stop = (props: StopProps) => (
@@ -9,7 +12,7 @@ export const Stop = (props: StopProps) => (
         <header class="stop__streetview" id="streetview-header">
             <div class="stop__streetview-canvas" id="streetview-canvas" />
             <h3 class="stop__name" id="stop_name">
-                Ainako/Kaumana
+                {props.name}
             </h3>
         </header>
         <div class="stop__details" id="stop_details">
@@ -22,7 +25,11 @@ export const Stop = (props: StopProps) => (
                 </address>
             </div>
             <h4 class="stop__connections-header">Connects to</h4>
-            <ul class="stop__connections" id="connections" />
+            <ul class="stop__connections connection__list" id="connections">
+                {props.routes.map(r => (
+                    <Route key={r.href} class="connection" {...r} />
+                ))}
+            </ul>
         </div>
     </section>
 );

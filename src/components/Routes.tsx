@@ -1,20 +1,7 @@
-import { h, ComponentChildren } from 'preact';
+import { h } from 'preact';
 import { Header } from './Header';
-
-interface RouteProps {
-    key?: string;
-    color: string;
-    href: string;
-    children: ComponentChildren;
-}
-
-const Route = (props: RouteProps) => (
-    <li class="side-item route" style={`border-color:${props.color}`}>
-        <a class="side-item__link route__link" href={props.href}>
-            {props.children}
-        </a>
-    </li>
-);
+import { Route, RouteProps } from './Route';
+import { Time, TimeData } from './Time';
 
 const InfoItem = (props: Pick<RouteProps, 'href' | 'children'>) => (
     <li class="side-item">
@@ -27,7 +14,7 @@ const InfoItem = (props: Pick<RouteProps, 'href' | 'children'>) => (
 interface RoutesProps {
     nearby: RouteProps[];
     other: RouteProps[];
-    lastUpdated: Date;
+    lastUpdated: TimeData;
 }
 
 export const Routes = (props: RoutesProps) => (
@@ -36,13 +23,13 @@ export const Routes = (props: RoutesProps) => (
         <h2 class="routes__heading">Nearby Routes</h2>
         <ul class="routes__list" id="nearby">
             {props.nearby.map(p => (
-                <Route key={p.href} {...p} />
+                <Route class="side-item" key={p.href} {...p} />
             ))}
         </ul>
         <h2 class="routes__heading">Other Routes</h2>
         <ul class="routes__list" id="other">
             {props.other.map(p => (
-                <Route key={p.href} {...p} />
+                <Route class="side-item" key={p.href} {...p} />
             ))}
         </ul>
         <h2 class="routes__heading">Information</h2>
@@ -64,9 +51,7 @@ export const Routes = (props: RoutesProps) => (
             </p>
             <p>
                 {'Last updated '}
-                <time dateTime={props.lastUpdated.toISOString()}>
-                    {props.lastUpdated.toLocaleDateString()}
-                </time>
+                <Time time={props.lastUpdated} />
             </p>
             <p>
                 Finding routes near your location requires the Location

@@ -1,17 +1,12 @@
 import { h } from 'preact';
+import { TimeData, Time } from './Time';
 
 interface ScheduleTimeProps {
     key?: string;
     href: string;
     color: string;
     name: string;
-    time: Date;
-}
-
-const TIME_REGEX = /\d+-\d\d-\d\dT(\d\d:\d\d:\d\d).*/;
-
-function timeIso(date: Date) {
-    return date.toISOString().match(TIME_REGEX)![1];
+    time: TimeData;
 }
 
 export const ScheduleTime = (props: ScheduleTimeProps) => (
@@ -21,12 +16,7 @@ export const ScheduleTime = (props: ScheduleTimeProps) => (
             <span class="line" style={`background-color:${props.color}`} />
         </div>
         <span class="schedule-time__name name">{props.name}</span>
-        <time dateTime={timeIso(props.time)}>
-            {props.time.toLocaleTimeString(undefined, {
-                hour: 'numeric',
-                minute: '2-digit',
-            })}
-        </time>
+        <Time time={props.time} />
     </a>
 );
 
