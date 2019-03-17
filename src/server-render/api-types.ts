@@ -38,3 +38,13 @@ export interface Stop {
     }[];
     route_ids: string[];
 }
+
+export interface Calendar {
+    service_id: string;
+    days: [boolean, boolean, boolean, boolean, boolean, boolean, boolean];
+    description: string;
+    exceptions: {
+        added: string[];
+        removed: string[];
+    };
+}

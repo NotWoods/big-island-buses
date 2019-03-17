@@ -1,10 +1,9 @@
 import { promises as fs } from 'fs';
 import { resolve, relative } from 'path';
 import { promise as alasql } from 'alasql';
-import { Omit, Route, Trip, StopTime, Stop } from './api-types';
+import { Omit, Route, Trip, StopTime, Stop, Calendar } from './api-types';
 const { writeFile } = fs;
 
-// TODO
 const GTFS_FOLDER = resolve(__dirname, '..', '..', 'static', 'google_transit');
 const API_FOLDER = resolve(__dirname, '..', '..', 'public', 'api');
 
@@ -17,6 +16,10 @@ function toObject<T>(iter: Iterable<T>, key: keyof T) {
     const map: Record<string, T> = {};
     for (const el of iter) map[el[key] as any] = el;
     return map;
+}
+
+function toIso({ date }: { date: string }) {
+    return `${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6)}`;
 }
 
 async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
@@ -109,7 +112,90 @@ async function makeStopsApi() {
     await writeFile(path, JSON.stringify(stopMap, undefined, 2), 'utf8');
 }
 
-async function makeCalendarApi() {}
+async function makeCalendarApi() {
+    interface CalendarData {
+        service_id: string;
+        sunday: number;
+        monday: number;
+        tuesday: number;
+        wednesday: number;
+        thursday: number;
+        friday: number;
+        saturday: number;
+    }
+
+    const calendarRes: CalendarData[] = await alasql(
+        `SELECT service_id, sunday, monday, tuesday, wednesday, thursday, friday, saturday
+        FROM CSV(${csv('calendar')})`,
+    );
+
+    const dayNames = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+    ];
+    const dayPropNames = dayNames.map(d => d.toLowerCase()) as (Exclude<
+        keyof CalendarData,
+        'service_id'
+    >)[];
+
+    const calendar: Calendar[] = await Promise.all(
+        calendarRes.map(async cal => {
+            const days = dayPropNames.map(n =>
+                Boolean(cal[n]),
+            ) as Calendar['days'];
+
+            let description: string;
+            if (days.every(Boolean)) description = 'Daily';
+            else if (!days[0] && days.slice(1).every(Boolean))
+                description = 'Monday - Saturday';
+            else if (!days[0] && !days[6] && days.slice(1, 6).every(Boolean))
+                description = 'Monday - Friday';
+            else if (days[0] && days[6] && days.slice(1, 6).every(b => !b))
+                description = 'Saturday - Sunday';
+            else {
+                const firstDay = days.indexOf(true);
+                const lastDay = days.lastIndexOf(true);
+                if (firstDay === lastDay) description = dayNames[firstDay];
+                else
+                    description = `${dayNames[firstDay]} - ${
+                        dayNames[lastDay]
+                    }`;
+            }
+
+            const exceptionsRes: {
+                date: string;
+                exception_type: number;
+            }[] = await alasql(
+                `SELECT date, exception_type
+                FROM CSV(${csv('calendar_dates')})
+                WHERE service_id='${cal.service_id}'`,
+            );
+
+            return {
+                service_id: cal.service_id,
+                days,
+                description,
+                exceptions: {
+                    added: exceptionsRes
+                        .filter(e => e.exception_type === 1)
+                        .map(toIso),
+                    removed: exceptionsRes
+                        .filter(e => e.exception_type === 2)
+                        .map(toIso),
+                },
+            };
+        }),
+    );
+
+    const calendarMap = toObject(calendar, 'service_id');
+    const path = resolve(API_FOLDER, 'calendar.json');
+    await writeFile(path, JSON.stringify(calendarMap, undefined, 2), 'utf8');
+}
 
 export async function main() {
     await Promise.all([makeRoutesApi(), makeStopsApi(), makeCalendarApi()]);
