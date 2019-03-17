@@ -3,7 +3,7 @@
     "compilerOptions": {
         /* Basic Options */
         "target": "es2017",
-        "module": "esnext",
+        "module": "commonjs",
         "jsx": "react",
         "jsxFactory": "h",
         "declaration": true,
