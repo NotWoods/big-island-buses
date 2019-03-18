@@ -29,13 +29,6 @@ export interface Stop {
     name: string;
     lat: number;
     lon: number;
-    trips: {
-        trip_id: string;
-        direction_id: number;
-        route_id: string;
-        sequence: number;
-        time: string;
-    }[];
     route_ids: string[];
 }
 

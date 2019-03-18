@@ -1,11 +1,12 @@
-import { promises as fs } from 'fs';
 import { resolve, relative } from 'path';
+import { outputJson, WriteOptions } from 'fs-extra';
 import { promise as alasql } from 'alasql';
 import { Omit, Route, Trip, StopTime, Stop, Calendar } from './api-types';
-const { writeFile } = fs;
 
-const GTFS_FOLDER = resolve(__dirname, '..', '..', 'static', 'google_transit');
-const API_FOLDER = resolve(__dirname, '..', '..', 'public', 'api');
+const GTFS_FOLDER = resolve(__dirname, '..', 'static', 'google_transit');
+const API_FOLDER = resolve(__dirname, '..', 'public', 'api');
+
+const jsonOpts: WriteOptions = { spaces: 2 };
 
 function csv(file: string) {
     const path = relative(process.cwd(), resolve(GTFS_FOLDER, `${file}.txt`));
@@ -46,11 +47,7 @@ async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
     const tripMap = toObject(trips, 'trip_id');
     const path = resolve(API_FOLDER, 'routes', `${route_id}.json`);
 
-    await writeFile(
-        path,
-        JSON.stringify({ ...route, trips: tripMap }, undefined, 2),
-        'utf8',
-    );
+    await outputJson(path, { ...route, trips: tripMap }, jsonOpts);
 
     return trips.map(trip => trip.trip_id);
 }
@@ -72,7 +69,7 @@ async function makeRoutesApi() {
 
     const routeMap = toObject(routes, 'route_id');
     const path = resolve(API_FOLDER, 'routes.json');
-    await writeFile(path, JSON.stringify(routeMap, undefined, 2), 'utf8');
+    await outputJson(path, routeMap, jsonOpts);
 }
 
 async function makeStopsApi() {
@@ -80,28 +77,24 @@ async function makeStopsApi() {
         alasql(
             `SELECT stop_id, stop_name AS name, stop_lat AS lat, stop_lon AS lon
             FROM ${csv('stops')}`,
-        ) as Promise<Omit<Stop, 'trips' | 'route_ids'>[]>,
+        ) as Promise<Omit<Stop, 'route_ids'>[]>,
         alasql(
-            `SELECT trip_id, route_id, direction_id
+            `SELECT trip_id, route_id
             FROM ${csv('trips')}`,
-        ) as Promise<Pick<Trip, 'trip_id' | 'route_id' | 'direction_id'>[]>,
+        ) as Promise<Pick<Trip, 'trip_id' | 'route_id'>[]>,
     ]);
     const stopsRes = res[0];
     const tripMap = toObject(res[1], 'trip_id');
 
     const stops = await Promise.all(
         stopsRes.map(async stop => {
-            const stopTimes: Stop['trips'] = await alasql(
-                `SELECT trip_id, stop_sequence AS sequence, arrival_time AS time
+            const tripIds: { trip_id: string }[] = await alasql(
+                `SELECT DISTINCT trip_id
                 FROM ${csv('stop_times')}
                 WHERE stop_id='${stop.stop_id}'`,
             );
-            const trips = stopTimes.map(st =>
-                Object.assign(st, tripMap[st.trip_id]),
-            );
-            (stop as Stop).trips = trips;
             (stop as Stop).route_ids = Array.from(
-                new Set(trips.map(t => t.route_id)),
+                new Set(tripIds.map(t => tripMap[t.trip_id].route_id)),
             );
             return stop as Stop;
         }),
@@ -109,7 +102,7 @@ async function makeStopsApi() {
 
     const stopMap = toObject(stops, 'stop_id');
     const path = resolve(API_FOLDER, 'stops.json');
-    await writeFile(path, JSON.stringify(stopMap, undefined, 2), 'utf8');
+    await outputJson(path, stopMap, jsonOpts);
 }
 
 async function makeCalendarApi() {
@@ -126,7 +119,7 @@ async function makeCalendarApi() {
 
     const calendarRes: CalendarData[] = await alasql(
         `SELECT service_id, sunday, monday, tuesday, wednesday, thursday, friday, saturday
-        FROM CSV(${csv('calendar')})`,
+        FROM ${csv('calendar')}`,
     );
 
     const dayNames = [
@@ -172,7 +165,7 @@ async function makeCalendarApi() {
                 exception_type: number;
             }[] = await alasql(
                 `SELECT date, exception_type
-                FROM CSV(${csv('calendar_dates')})
+                FROM ${csv('calendar_dates')}
                 WHERE service_id='${cal.service_id}'`,
             );
 
@@ -194,7 +187,7 @@ async function makeCalendarApi() {
 
     const calendarMap = toObject(calendar, 'service_id');
     const path = resolve(API_FOLDER, 'calendar.json');
-    await writeFile(path, JSON.stringify(calendarMap, undefined, 2), 'utf8');
+    await outputJson(path, calendarMap, jsonOpts);
 }
 
 export async function main() {
