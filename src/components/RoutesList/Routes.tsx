@@ -5,10 +5,9 @@ import { TimeData } from '../Time';
 import { Information } from './Information';
 
 export interface RouteData {
-    route_id: string;
     color: string;
-    href: string;
-    children: ComponentChildren;
+    route_id: string;
+    name: string;
 }
 
 const RouteList: FunctionalComponent<{

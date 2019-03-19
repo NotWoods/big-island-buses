@@ -1,34 +1,26 @@
 import { Component, h } from 'preact';
-import { RouteDetails, Stop } from '../server-render/api-types';
+import { Route, Stop } from '../server-render/api-types';
 import { RouteHeader } from './RouteHeader';
-import { ScheduleInfo } from './Schedule';
+import { RouteScheduleInfo } from './Schedule';
+import { StopInfo } from './Stop';
 import { TimeData } from './Time';
 
 interface Props {
     key: string;
     route_id: string;
     trip_id?: string | null;
-    stops: Record<string, Pick<Stop, 'stop_id' | 'name'>>;
+    stop_id?: string | null;
+    stops: Record<string, Stop>;
+    routes: Map<string, Route>;
     nowTime: TimeData;
     name: string;
     color: string;
     text_color: string;
 }
 
-interface State {
-    route: RouteDetails | null;
-}
-
-export class App extends Component<Props, State> {
-    async componentDidUpdate(prevProps: Props) {
-        if (prevProps.route_id !== this.props.route_id) {
-            const res = await fetch(`api/${this.props.route_id}.json`);
-            const details: RouteDetails = await res.json();
-            this.setState({ route: details });
-        }
-    }
-
-    render(props: Props, state: State) {
+export class RouteInfo extends Component<Props> {
+    render(props: Props) {
+        const stop = props.stop_id ? props.stops[props.stop_id] : null;
         return (
             <div id="content">
                 <RouteHeader
@@ -36,12 +28,19 @@ export class App extends Component<Props, State> {
                     color={props.color}
                     textColor={props.text_color}
                 />
-                {state.route != null ? (
-                    <ScheduleInfo
-                        {...state.route}
-                        trip_id={props.trip_id}
-                        stops={props.stops}
-                        nowTime={props.nowTime}
+                <RouteScheduleInfo
+                    key={props.route_id}
+                    route_id={props.route_id}
+                    trip_id={props.trip_id}
+                    stops={props.stops}
+                    nowTime={props.nowTime}
+                />
+                {stop != null ? (
+                    <StopInfo
+                        lat={stop.lat}
+                        lon={stop.lon}
+                        name={stop.name}
+                        routes={stop.route_ids.map(id => props.routes.get(id)!)}
                     />
                 ) : null}
                 <div class="float-clear" />

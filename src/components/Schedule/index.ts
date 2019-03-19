@@ -1,1 +1,1 @@
-export { ScheduleInfo } from './ScheduleInfo';
+export { RouteScheduleInfo } from './ScheduleInfo';

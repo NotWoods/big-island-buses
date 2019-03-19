@@ -6,12 +6,7 @@ export const InfoItem: FunctionalComponent<{
     spanId?: string;
     icon: ComponentChildren;
 }> = props => (
-    <div
-        class="schedule-info__item"
-        id={props.id}
-        title={props.title}
-        aria-label={props.title}
-    >
+    <div class="schedule-info__item" id={props.id} title={props.title}>
         <svg viewBox="0 0 24 24" alt={props.title}>
             {props.icon}
         </svg>
