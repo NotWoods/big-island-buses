@@ -1,9 +1,7 @@
-import { h } from 'preact';
-import { Header } from './Header';
-import { Route, RouteProps } from './Route';
-import { Time, TimeData } from './Time';
+import { FunctionalComponent, h } from 'preact';
+import { Time, TimeData } from '../Time';
 
-const InfoItem = (props: Pick<RouteProps, 'href' | 'children'>) => (
+const InfoItem: FunctionalComponent<{ href: string }> = props => (
     <li class="side-item">
         <a class="side-item__link" href={props.href}>
             {props.children}
@@ -11,27 +9,8 @@ const InfoItem = (props: Pick<RouteProps, 'href' | 'children'>) => (
     </li>
 );
 
-interface RoutesProps {
-    nearby: RouteProps[];
-    other: RouteProps[];
-    lastUpdated: TimeData;
-}
-
-export const Routes = (props: RoutesProps) => (
-    <aside id="routes" class="routes">
-        <Header />
-        <h2 class="routes__heading">Nearby Routes</h2>
-        <ul class="routes__list" id="nearby">
-            {props.nearby.map(p => (
-                <Route class="side-item" key={p.href} {...p} />
-            ))}
-        </ul>
-        <h2 class="routes__heading">Other Routes</h2>
-        <ul class="routes__list" id="other">
-            {props.other.map(p => (
-                <Route class="side-item" key={p.href} {...p} />
-            ))}
-        </ul>
+export const Information = (props: { lastUpdated: TimeData }) => (
+    <div>
         <h2 class="routes__heading">Information</h2>
         <ul class="routes__list" id="info">
             <InfoItem href="about.html">About this app</InfoItem>
@@ -58,5 +37,5 @@ export const Routes = (props: RoutesProps) => (
                 permission.
             </p>
         </div>
-    </aside>
+    </div>
 );

@@ -1,14 +1,13 @@
 import { h, FunctionalComponent } from 'preact';
+import { toIsoTime, toIsoDate } from '../server-render/parse-date';
 
 export interface TimeData {
     readonly iso: string;
     readonly formatted: string;
 }
 
-const TIME_REGEX = /\d+-\d\d-\d\dT(\d\d:\d\d:\d\d).*/;
-
 export const toTime = (t: Date): TimeData => ({
-    iso: t.toISOString().match(TIME_REGEX)![1],
+    iso: toIsoTime(t),
     formatted: t.toLocaleTimeString(undefined, {
         hour: 'numeric',
         minute: '2-digit',
@@ -16,7 +15,7 @@ export const toTime = (t: Date): TimeData => ({
 });
 
 export const toDate = (t: Date): TimeData => ({
-    iso: t.toISOString(),
+    iso: toIsoDate(t),
     formatted: t.toLocaleDateString(),
 });
 

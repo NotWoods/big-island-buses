@@ -20,7 +20,7 @@ const serverRenderConfig = {
         format: 'cjs',
         sourcemap: true,
     },
-    external: ['path', 'fs-extra', 'alasql'],
+    external: ['path', 'fs-extra', 'alasql', 'countries-and-timezones'],
     plugins: [typescript({ target: 'esnext' })],
 };
 

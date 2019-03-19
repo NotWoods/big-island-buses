@@ -1,10 +1,11 @@
 import { h } from 'preact';
-import { RouteProps, Route } from './Route';
+import { RouteItem } from './RoutesList/Route';
+import { RouteData } from './RoutesList/Routes';
 
 interface StopProps {
     address: string;
     name: string;
-    routes: RouteProps[];
+    routes: RouteData[];
 }
 
 export const Stop = (props: StopProps) => (
@@ -27,7 +28,7 @@ export const Stop = (props: StopProps) => (
             <h4 class="stop__connections-header">Connects to</h4>
             <ul class="stop__connections connection__list" id="connections">
                 {props.routes.map(r => (
-                    <Route key={r.href} class="connection" {...r} />
+                    <RouteItem key={r.href} class="connection" {...r} />
                 ))}
             </ul>
         </div>
