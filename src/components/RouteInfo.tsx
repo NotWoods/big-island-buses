@@ -6,16 +6,15 @@ import { StopInfo } from './Stop';
 import { TimeData } from './Time';
 
 interface Props {
-    key: string;
-    route_id: string;
+    route_id?: string;
     trip_id?: string | null;
     stop_id?: string | null;
     stops: Record<string, Stop>;
     routes: Map<string, Route>;
     nowTime: TimeData;
-    name: string;
-    color: string;
-    text_color: string;
+    name: string | null;
+    color: string | null;
+    text_color: string | null;
 }
 
 export class RouteInfo extends Component<Props> {
@@ -23,18 +22,22 @@ export class RouteInfo extends Component<Props> {
         const stop = props.stop_id ? props.stops[props.stop_id] : null;
         return (
             <div id="content">
-                <RouteHeader
-                    name={props.name}
-                    color={props.color}
-                    textColor={props.text_color}
-                />
-                <RouteScheduleInfo
-                    key={props.route_id}
-                    route_id={props.route_id}
-                    trip_id={props.trip_id}
-                    stops={props.stops}
-                    nowTime={props.nowTime}
-                />
+                {props.name && props.color && props.text_color ? (
+                    <RouteHeader
+                        name={props.name}
+                        color={props.color}
+                        textColor={props.text_color}
+                    />
+                ) : null}
+                {props.route_id ? (
+                    <RouteScheduleInfo
+                        key={props.route_id}
+                        route_id={props.route_id}
+                        trip_id={props.trip_id}
+                        stops={props.stops}
+                        nowTime={props.nowTime}
+                    />
+                ) : null}
                 {stop != null ? (
                     <StopInfo
                         lat={stop.lat}

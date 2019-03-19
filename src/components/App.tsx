@@ -11,9 +11,10 @@ interface Props {
     stops: Record<string, Stop>;
     lastUpdated: TimeData;
     maxDistance: number;
-    route_id: string;
+    route_id?: string;
     trip_id?: string;
     stop_id?: string;
+    onClick(e: Event): void;
 }
 
 interface State {
@@ -44,12 +45,12 @@ export class App extends Component<Props, State> {
     }
 
     render(props: Props, state: State) {
-        const route = props.routes.get(props.route_id)!;
+        const route = props.route_id ? props.routes.get(props.route_id) : null;
         const closestStop = state.userPosition
             ? this.locateUser(state.userPosition.coords)
             : null;
         return (
-            <div>
+            <div onClick={props.onClick}>
                 <Routes
                     nearby={new Set(closestStop ? closestStop.route_ids : [])}
                     routes={Array.from(props.routes.values())}
@@ -63,15 +64,14 @@ export class App extends Component<Props, State> {
                 <main id="main" class="open-stop open">
                     <Map />
                     <RouteInfo
-                        key={props.route_id}
                         route_id={props.route_id}
                         trip_id={props.trip_id}
                         stops={props.stops}
                         routes={props.routes}
                         nowTime={props.nowTime}
-                        name={route.name}
-                        color={route.color}
-                        text_color={route.text_color}
+                        name={route ? route.name : null}
+                        color={route ? route.color : null}
+                        text_color={route ? route.text_color : null}
                     />
                 </main>
             </div>
