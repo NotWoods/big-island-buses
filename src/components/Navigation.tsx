@@ -1,13 +1,13 @@
 import { Component, h } from 'preact';
 import { Route, Stop } from '../server-render/api-types';
-import { App } from './App';
+import { LocationApp } from './Location';
 import { TimeData, toTime } from './Time';
 
 interface Props {
     now?: Date;
-    routes: Map<string, Route>;
-    stops: Record<string, Stop>;
-    lastUpdated: TimeData;
+    routes?: Map<string, Route>;
+    stops?: Record<string, Stop>;
+    lastUpdated?: TimeData;
     maxDistance: number;
 }
 
@@ -45,7 +45,7 @@ export function urlToState(url: URL | Location) {
     }
 }
 
-export class Navigation extends Component<Props, State> {
+export class NavigationApp extends Component<Props, State> {
     componentDidMount() {
         window.addEventListener('popstate', this.onPopState);
         window.addEventListener('hashchange', this.onPopState);
@@ -72,7 +72,7 @@ export class Navigation extends Component<Props, State> {
 
     render(props: Props, state: State) {
         return (
-            <App
+            <LocationApp
                 {...props}
                 route_id={state.route_id || undefined}
                 trip_id={state.trip_id || undefined}

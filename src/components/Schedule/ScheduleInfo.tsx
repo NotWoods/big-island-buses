@@ -20,13 +20,13 @@ interface ScheduleInfoProps {
     name: string;
     color: string;
     text_color: string;
-    trips: Record<string, Pick<Trip, 'trip_id' | 'name' | 'stop_times'>>;
+    trips?: Record<string, Pick<Trip, 'trip_id' | 'name' | 'stop_times'>>;
     first_stop: string;
     last_stop: string;
     start_time: string;
     end_time: string;
     days: Weekdays;
-    stops: Record<string, Pick<Stop, 'stop_id' | 'name'>>;
+    stops?: Record<string, Pick<Stop, 'stop_id' | 'name'>>;
     nowTime: TimeData;
 }
 
@@ -46,14 +46,16 @@ function weekdaysToString(days: Weekdays) {
 }
 
 export const ScheduleInfo = (props: ScheduleInfoProps) => {
+    const trips = props.trips ? Object.values(props.trips) : [];
+
     const now = fromIsoTime(props.nowTime.iso);
     let closestTrip: string = '';
     let closestTripTime = Number.MAX_VALUE;
-    let closestTripStop: string;
+    let closestTripStop: string | null = null;
     let earliestTrip: string = '';
     let earliestTripTime = Number.MAX_VALUE;
-    let earliestTripStop: string;
-    for (const trip of Object.values(props.trips)) {
+    let earliestTripStop: string | null = null;
+    for (const trip of trips) {
         for (const stop of trip.stop_times) {
             const time = fromIsoTime(stop.time).getTime();
             const duration = time - now.getTime();
@@ -72,22 +74,20 @@ export const ScheduleInfo = (props: ScheduleInfoProps) => {
     if (!closestTrip) {
         closestTripTime = earliestTripTime - now.getTime();
         closestTrip = earliestTrip;
-        closestTripStop = earliestTripStop!;
+        closestTripStop = earliestTripStop;
     }
     const minute = Math.floor(closestTripTime / 60000);
     const nextStopDuration = toDuration({ minute });
 
     const currentTrip = props.trip_id || closestTrip;
+    const stops: Partial<ScheduleInfoProps['stops']> = props.stops || {};
     return (
         <div id="schedule-column">
             <section id="information">
-                <SelectTrip
-                    trips={Object.values(props.trips)}
-                    trip_id={currentTrip}
-                />
+                <SelectTrip trips={trips} trip_id={currentTrip} />
                 <RouteLocation
-                    firstStop={props.stops[props.first_stop]}
-                    lastStop={props.stops[props.last_stop]}
+                    firstStop={stops[props.first_stop]}
+                    lastStop={stops[props.last_stop]}
                 />
                 <RouteTime
                     startTime={toTime(fromIsoTime(props.start_time))}
@@ -95,12 +95,16 @@ export const ScheduleInfo = (props: ScheduleInfoProps) => {
                 />
                 <RouteWeekdays weekdays={weekdaysToString(props.days)} />
                 <NextStop
-                    nextStop={props.stops[closestTripStop!]}
+                    nextStop={
+                        closestTripStop ? stops[closestTripStop] : undefined
+                    }
                     timeToArrival={nextStopDuration}
                 />
             </section>
             <ScheduleTimes
-                stopTimes={props.trips[currentTrip].stop_times}
+                stopTimes={
+                    props.trips ? props.trips[currentTrip].stop_times : []
+                }
                 color={props.color}
                 stops={props.stops}
             />

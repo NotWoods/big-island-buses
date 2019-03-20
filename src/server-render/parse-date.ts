@@ -17,7 +17,8 @@ export const WEEKDAY_NAMES = [
  * Parse a GTFS date (YYYYMMDD) into a Javascript Date object.
  * Hour, minute, and second will be set to 0 on the date object.
  */
-export function parseGtfsDate(dateStr: string) {
+export function parseGtfsDate(dateStr: string | number) {
+    if (typeof dateStr === 'number') dateStr = dateStr.toString();
     const match = dateStr.match(DATE_REGEX);
     if (match == null) throw new TypeError();
     const [, year, month, date] = match.map(s => parseInt(s, 10));

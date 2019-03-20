@@ -7,9 +7,9 @@ import { TimeData } from './Time';
 
 interface Props {
     nowTime: TimeData;
-    routes: Map<string, Route>;
-    stops: Record<string, Stop>;
-    lastUpdated: TimeData;
+    routes?: Map<string, Route>;
+    stops?: Record<string, Stop>;
+    lastUpdated?: TimeData;
     maxDistance: number;
     route_id?: string;
     trip_id?: string;
@@ -22,7 +22,7 @@ interface State {
     userPosition: Position | null;
 }
 
-export class App extends Component<Props, State> {
+export class LocationApp extends Component<Props, State> {
     trackLocation = () =>
         navigator.geolocation.watchPosition(userPosition =>
             this.setState({ userPosition }),
@@ -30,8 +30,9 @@ export class App extends Component<Props, State> {
 
     locateUser(userPosition: Coordinates) {
         let closestDistance = Number.MAX_VALUE;
-        let closestStop: Stop;
-        for (const stop of Object.values(this.props.stops)) {
+        let closestStop: Stop | null = null;
+        const stops = this.props.stops ? Object.values(this.props.stops) : [];
+        for (const stop of stops) {
             const distance = Math.sqrt(
                 (userPosition.latitude - stop.lat) ** 2 +
                     (userPosition.longitude - stop.lon) ** 2,
@@ -41,11 +42,14 @@ export class App extends Component<Props, State> {
                 closestDistance = distance;
             }
         }
-        return closestDistance < this.props.maxDistance ? closestStop! : null;
+        return closestDistance < this.props.maxDistance ? closestStop : null;
     }
 
     render(props: Props, state: State) {
-        const route = props.route_id ? props.routes.get(props.route_id) : null;
+        const route =
+            props.routes && props.route_id
+                ? props.routes.get(props.route_id)
+                : null;
         const closestStop = state.userPosition
             ? this.locateUser(state.userPosition.coords)
             : null;
@@ -53,7 +57,9 @@ export class App extends Component<Props, State> {
             <div onClick={props.onClick}>
                 <Routes
                     nearby={new Set(closestStop ? closestStop.route_ids : [])}
-                    routes={Array.from(props.routes.values())}
+                    routes={
+                        props.routes ? Array.from(props.routes.values()) : []
+                    }
                     lastUpdated={props.lastUpdated}
                     afterNearby={
                         state.geolocationOn ? null : (

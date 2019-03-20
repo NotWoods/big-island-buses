@@ -24,7 +24,7 @@ export const ScheduleTime: FunctionalComponent<ScheduleTimeProps> = props => (
 interface ScheduleTimesProps {
     stopTimes: StopTime[];
     color: string;
-    stops: Record<string, Pick<Stop, 'name'>>;
+    stops?: Record<string, Pick<Stop, 'name'>>;
 }
 
 export const ScheduleTimes = (props: ScheduleTimesProps) => (
@@ -34,7 +34,7 @@ export const ScheduleTimes = (props: ScheduleTimesProps) => (
                 key={s.stop_id}
                 stop_id={s.stop_id}
                 color={props.color}
-                name={props.stops[s.stop_id].name}
+                name={props.stops ? props.stops[s.stop_id].name : ''}
                 time={toTime(fromIsoTime(s.time))}
             />
         ))}

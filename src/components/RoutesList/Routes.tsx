@@ -28,7 +28,7 @@ const RouteList: FunctionalComponent<{
 interface RoutesProps {
     nearby: Set<string>;
     routes: RouteData[];
-    lastUpdated: TimeData;
+    lastUpdated?: TimeData;
     afterNearby: ComponentChildren;
 }
 

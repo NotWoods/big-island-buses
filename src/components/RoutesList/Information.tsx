@@ -9,7 +9,7 @@ const InfoItem: FunctionalComponent<{ href: string }> = props => (
     </li>
 );
 
-export const Information = (props: { lastUpdated: TimeData }) => (
+export const Information = (props: { lastUpdated?: TimeData }) => (
     <div>
         <h2 class="routes__heading">Information</h2>
         <ul class="routes__list" id="info">
@@ -30,7 +30,7 @@ export const Information = (props: { lastUpdated: TimeData }) => (
             </p>
             <p>
                 {'Last updated '}
-                <Time time={props.lastUpdated} />
+                {props.lastUpdated ? <Time time={props.lastUpdated} /> : '...'}
             </p>
             <p>
                 Finding routes near your location requires the Location

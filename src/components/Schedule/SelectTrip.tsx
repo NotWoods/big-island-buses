@@ -18,6 +18,7 @@ export const SelectTrip = (props: SelectTripProps) => (
             id="trip-select"
             aria-label="Select different trip"
             value={props.trip_id}
+            disabled={props.trips.length === 0}
         >
             {props.trips.map(t => (
                 <option key={t.trip_id} value={t.trip_id}>
