@@ -26,7 +26,7 @@ const GORIDE_LINK_URL_REGEX = /\/s\/([^\/]+)(?:\/([^\/]+))?\/?$/;
  * - /s/{route_id}/{trip_id}/?stop={stop_id}
  * - #!route={route_id}&trip={trip_id}&stop={stop_id}
  */
-function urlToState(url: URL | Location) {
+export function urlToState(url: URL | Location) {
     if (url.hash.startsWith('#!')) {
         const params = new URLSearchParams(url.hash.slice(2));
         return {

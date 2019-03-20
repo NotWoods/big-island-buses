@@ -40,7 +40,7 @@ export function parseGtfsTime(timeStr: string) {
  * The time zone is not included.
  */
 export function toIsoTime(time: Date) {
-    return time.toISOString().match(TIME_ISO_REGEX)![1];
+    return time.toISOString().match(TIME_ISO_REGEX)![1] + 'Z';
 }
 
 /**

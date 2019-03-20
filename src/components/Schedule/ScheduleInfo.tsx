@@ -6,7 +6,7 @@ import {
     RouteDetails,
 } from '../../server-render/api-types';
 import { fromIsoTime, WEEKDAY_NAMES } from '../../server-render/parse-date';
-import { TimeData, toTime } from '../Time';
+import { TimeData, toTime, toDuration } from '../Time';
 import { NextStop } from './NextStop';
 import { RouteLocation } from './RouteLocation';
 import { RouteTime } from './RouteTime';
@@ -74,15 +74,8 @@ export const ScheduleInfo = (props: ScheduleInfoProps) => {
         closestTrip = earliestTrip;
         closestTripStop = earliestTripStop!;
     }
-    const minutes = Math.floor(closestTripTime / 60000);
-    const nextStopDuration: TimeData = {
-        iso: `PT${minutes}M`,
-        formatted: Intl.RelativeTimeFormat
-            ? new Intl.RelativeTimeFormat().format(minutes, 'minute')
-            : minutes === 1
-            ? '1 minute'
-            : `${minutes} minutes`,
-    };
+    const minute = Math.floor(closestTripTime / 60000);
+    const nextStopDuration = toDuration({ minute });
 
     const currentTrip = props.trip_id || closestTrip;
     return (
