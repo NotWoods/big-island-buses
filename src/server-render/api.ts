@@ -19,6 +19,7 @@ import {
     toIsoTime,
     WEEKDAY_NAMES,
 } from './parse-date';
+import { isAfter, isBefore } from 'date-fns';
 
 const GTFS_FOLDER = resolve(__dirname, '..', 'static', 'google_transit');
 const API_FOLDER = resolve(__dirname, '..', 'public', 'api');
@@ -64,6 +65,13 @@ function toWeekdays(cal: CalendarData) {
     return WEEKDAY_PROP_NAMES.map(n => Boolean(cal[n])) as Weekdays;
 }
 
+function toColor(col: string | number) {
+    if (typeof col === 'number') {
+        col = col.toString().padStart(6, '0');
+    }
+    return '#' + col;
+}
+
 async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
     const { route_id } = route;
     const tripsRes: Omit<Trip, 'stop_times'>[] = await alasql(
@@ -90,8 +98,8 @@ async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
     let first_stop_sequence = Infinity;
     let last_stop: string = '';
     let last_stop_sequence = 0;
-    let start_time = parseGtfsTime('23:59:59');
-    let end_time = parseGtfsTime('00:00:00');
+    let start_time = parseGtfsTime('23:59:59', timezone);
+    let end_time = parseGtfsTime('00:00:00', timezone);
     const trips = await Promise.all(
         tripsRes.map(async trip => {
             const stop_times: Array<
@@ -103,7 +111,7 @@ async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
                 ORDER BY stop_sequence ASC`,
             );
             (trip as Trip).stop_times = stop_times.map(stopTime => {
-                const time = parseGtfsTime(stopTime.time);
+                const time = parseGtfsTime(stopTime.time, timezone);
                 if (trip.direction_id === 0) {
                     if (stopTime.stop_sequence < first_stop_sequence) {
                         first_stop = stopTime.stop_id;
@@ -114,14 +122,14 @@ async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
                         last_stop_sequence = stopTime.stop_sequence;
                     }
                 }
-                if (time > end_time) {
+                if (isAfter(time, end_time)) {
                     end_time = time;
                 }
-                if (time < start_time) {
+                if (isBefore(time, end_time)) {
                     start_time = time;
                 }
 
-                stopTime.time = toIsoTime(time) + timezone.offsetStr;
+                stopTime.time = toIsoTime(time);
                 delete stopTime.stop_sequence;
                 return stopTime as StopTime;
             });
@@ -137,12 +145,14 @@ async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
     const path = resolve(API_FOLDER, 'routes', `${route_id}.json`);
     const details: RouteDetails = {
         ...route,
+        color: toColor(route.color),
+        text_color: toColor(route.text_color),
         trips: tripMap,
         days: weekdays,
         first_stop,
         last_stop,
-        start_time: toIsoTime(start_time) + timezone.offsetStr,
-        end_time: toIsoTime(end_time) + timezone.offsetStr,
+        start_time: toIsoTime(start_time),
+        end_time: toIsoTime(end_time),
     };
 
     await outputJson(path, details, jsonOpts);
@@ -165,13 +175,6 @@ async function makeRoutesApi() {
         ) as Promise<Array<{ agency_id: string; agency_timezone: string }>>,
     ]);
     const agencies = toObject(agencyRes, 'agency_id');
-
-    function toColor(col: string | number) {
-        if (typeof col === 'number') {
-            col = col.toString().padStart(6, '0');
-        }
-        return '#' + col;
-    }
 
     const routes = await Promise.all(
         routesRes.map(async rawRoute => {

@@ -41,6 +41,11 @@ export const toDuration = ({ minute }: { minute: number }) => {
     };
 };
 
-export const Time: FunctionalComponent<{ time: TimeData }> = props => (
-    <time dateTime={props.time.iso}>{props.time.formatted}</time>
+export const Time: FunctionalComponent<{
+    time: TimeData;
+    class?: string;
+}> = props => (
+    <time class={props.class} dateTime={props.time.iso}>
+        {props.time.formatted}
+    </time>
 );

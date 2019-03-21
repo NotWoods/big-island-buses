@@ -1,15 +1,16 @@
 // @ts-check
+import resolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript';
 
 /** @type {import('rollup').RollupOptions} */
 const pageConfig = {
-    input: 'src/page/index.ts',
+    input: 'src/components/index.tsx',
     output: {
         dir: 'public/js/',
         format: 'esm',
         sourcemap: true,
     },
-    plugins: [typescript()],
+    plugins: [resolve({ browser: true }), typescript()],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -21,7 +22,7 @@ const serverRenderConfig = {
         sourcemap: true,
     },
     external: ['path', 'fs-extra', 'alasql', 'countries-and-timezones'],
-    plugins: [typescript({ target: 'esnext' })],
+    plugins: [resolve(), typescript({ target: 'esnext' })],
 };
 
-export default [serverRenderConfig];
+export default [pageConfig, serverRenderConfig];

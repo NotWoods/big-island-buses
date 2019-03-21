@@ -13,6 +13,7 @@ import { RouteTime } from './RouteTime';
 import { RouteWeekdays } from './RouteWeekdays';
 import { ScheduleTimes } from './ScheduleTimes';
 import { SelectTrip } from './SelectTrip';
+import { BASE_URL } from '../../config';
 
 interface ScheduleInfoProps {
     route_id: string;
@@ -83,7 +84,7 @@ export const ScheduleInfo = (props: ScheduleInfoProps) => {
     const stops: Partial<ScheduleInfoProps['stops']> = props.stops || {};
     return (
         <div id="schedule-column">
-            <section id="information">
+            <section class="schedule-info" id="information">
                 <SelectTrip trips={trips} trip_id={currentTrip} />
                 <RouteLocation
                     firstStop={stops[props.first_stop]}
@@ -122,12 +123,19 @@ interface State {
 }
 
 export class RouteScheduleInfo extends Component<Props, State> {
-    async componentDidUpdate(prevProps: Props) {
-        if (prevProps.route_id !== this.props.route_id) {
-            const res = await fetch(`api/${this.props.route_id}.json`);
-            const details: RouteDetails = await res.json();
-            this.setState({ route: details });
-        }
+    async fetchRouteData() {
+        const res = await fetch(
+            `${BASE_URL}api/routes/${this.props.route_id}.json`,
+        );
+        const details: RouteDetails = await res.json();
+        this.setState({ route: details });
+    }
+
+    componentDidMount() {
+        this.fetchRouteData();
+    }
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.route_id !== this.props.route_id) this.fetchRouteData();
     }
 
     render(props: Props, state: State) {

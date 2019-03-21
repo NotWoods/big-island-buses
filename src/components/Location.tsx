@@ -67,6 +67,7 @@ export class LocationApp extends Component<Props, State> {
                         )
                     }
                 />
+                <div id="screen-cover" />
                 <main id="main" class="open-stop open">
                     <Map />
                     <RouteInfo

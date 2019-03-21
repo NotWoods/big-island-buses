@@ -11,11 +11,10 @@ export const StopLink = ({ stop, ...props }: Props) => {
 
     return (
         <a
+            children={stop.name}
             {...props}
             class={clsx(props.class, 'goride-link')}
             href={`?stop=${stop.stop_id}`}
-        >
-            {stop.name}
-        </a>
+        />
     );
 };

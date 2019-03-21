@@ -1,3 +1,6 @@
+import { Timezone } from 'countries-and-timezones';
+import { addHours, addMinutes } from 'date-fns';
+
 const DATE_REGEX = /(\d{4,})(\d\d)(\d\d)/;
 const TIME_REGEX = /(\d\d?):(\d\d):(\d\d)/;
 const DATE_ISO_REGEX = /(\d{4,}-\d\d-\d\d)/;
@@ -22,18 +25,22 @@ export function parseGtfsDate(dateStr: string | number) {
     const match = dateStr.match(DATE_REGEX);
     if (match == null) throw new TypeError();
     const [, year, month, date] = match.map(s => parseInt(s, 10));
-    return new Date(year, month - 1, date);
+    return new Date(Date.UTC(year, month - 1, date));
 }
 
 /**
  * Parse a GTFS time (HH:MM:SS) into a Javascript Date object.
  * Year, month, and date will be set to epoch time equivalents.
  */
-export function parseGtfsTime(timeStr: string) {
+export function parseGtfsTime(timeStr: string, timezone: Timezone) {
     const match = timeStr.match(TIME_REGEX);
     if (match == null) throw new TypeError(timeStr);
-    const [, hour, minute, second] = match.map(s => parseInt(s, 10));
-    return new Date(1970, 0, 1, hour, minute, second);
+    let [, hour, minute, second] = match.map(s => parseInt(s, 10));
+
+    let date = new Date(Date.UTC(1970, 0, 1, 0, 0, second));
+    date = addHours(date, hour); // Add hours separately, as they may be >= 24.
+    date = addMinutes(date, minute + timezone.utcOffset); // Add timezone offset
+    return date;
 }
 
 /**
@@ -52,7 +59,11 @@ export function toIsoDate(date: Date) {
 }
 
 export function fromIsoTime(time: string) {
-    const tzIndex = Math.max(time.indexOf('+'), time.indexOf('-'));
+    const tzIndex = Math.max(
+        time.indexOf('+'),
+        time.indexOf('-'),
+        time.indexOf('Z'),
+    );
     let timezone = '';
     if (tzIndex > -1) {
         timezone = time.substring(tzIndex);

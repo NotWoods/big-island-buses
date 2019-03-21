@@ -2,6 +2,7 @@ import { Component, h } from 'preact';
 import { Route, Stop } from '../server-render/api-types';
 import { NavigationApp } from './Navigation';
 import { TimeData, toDate } from './Time';
+import { BASE_URL } from '../config';
 
 interface Props {
     now?: Date;
@@ -18,9 +19,9 @@ export class ApiApp extends Component<Props, State> {
     async componentDidMount() {
         const json = (res: Response) => res.json();
         const [routesRes, stops, version] = await Promise.all([
-            fetch('api/routes.json').then(json),
-            fetch('api/stops.json').then(json),
-            fetch('api/version.json').then(json),
+            fetch(`${BASE_URL}api/routes.json`).then(json),
+            fetch(`${BASE_URL}api/stops.json`).then(json),
+            fetch(`${BASE_URL}api/version.json`).then(json),
         ]);
 
         const routes = new Map<string, Route>(

@@ -66,7 +66,15 @@ export class NavigationApp extends Component<Props, State> {
             if (newState.route_id == null) delete newState.route_id;
             if (newState.trip_id == null) delete newState.trip_id;
             if (newState.stop_id == null) delete newState.stop_id;
-            this.setState(newState as State);
+            this.setState(newState as State, () => {
+                let title = 'Big Island Buses';
+                if (newState.route_id && this.props.routes) {
+                    const route = this.props.routes.get(newState.route_id);
+                    title = `${route ? route.name : '404'} | ${title}`;
+                }
+                document.title = title;
+                history.pushState(null, title, clickedLink.href);
+            });
         }
     };
 
