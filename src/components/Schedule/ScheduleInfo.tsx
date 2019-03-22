@@ -16,7 +16,7 @@ import { SelectTrip } from './SelectTrip';
 import { BASE_URL } from '../../config';
 
 interface ScheduleInfoProps {
-    route_id: string;
+    route_id?: string | null;
     trip_id?: string | null;
     name: string;
     color: string;
@@ -124,11 +124,15 @@ interface State {
 
 export class RouteScheduleInfo extends Component<Props, State> {
     async fetchRouteData() {
-        const res = await fetch(
-            `${BASE_URL}api/routes/${this.props.route_id}.json`,
-        );
-        const details: RouteDetails = await res.json();
-        this.setState({ route: details });
+        if (this.props.route_id == null) {
+            // this.setState({ route: null });
+        } else {
+            const res = await fetch(
+                `${BASE_URL}api/routes/${this.props.route_id}.json`,
+            );
+            const details: RouteDetails = await res.json();
+            this.setState({ route: details });
+        }
     }
 
     componentDidMount() {

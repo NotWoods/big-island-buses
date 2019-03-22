@@ -2,13 +2,11 @@ import { h, Component } from 'preact';
 import { RouteItem } from './RoutesList/Route';
 import { RouteData } from './RoutesList/Routes';
 import { InfoItem } from './Schedule/InfoItem';
-import { Stop } from '../server-render/api-types';
+import { Stop, Route } from '../server-render/api-types';
 
 interface StopProps {
-    lat: number;
-    lon: number;
-    name: string;
-    routes: RouteData[];
+    routes?: Map<string, Route>;
+    stop: Pick<Stop, 'lat' | 'lon' | 'name' | 'route_ids'>;
 }
 
 class Address extends Component<
@@ -25,7 +23,7 @@ export const StopInfo = (props: StopProps) => (
         <header class="stop__streetview" id="streetview-header">
             <div class="stop__streetview-canvas" id="streetview-canvas" />
             <h3 class="stop__name" id="stop_name">
-                {props.name}
+                {props.stop.name}
             </h3>
         </header>
         <div class="stop__details" id="stop_details">
@@ -38,17 +36,27 @@ export const StopInfo = (props: StopProps) => (
                 }
             >
                 <Address
-                    key={`${props.lat}_${props.lon}`}
-                    lat={props.lat}
-                    lon={props.lon}
+                    key={`${props.stop.lat}_${props.stop.lon}`}
+                    lat={props.stop.lat}
+                    lon={props.stop.lon}
                 />
             </InfoItem>
             <h4 class="stop__connections-header">Connects to</h4>
-            <ul class="stop__connections connection__list" id="connections">
-                {props.routes.map(r => (
-                    <RouteItem key={r.route_id} class="connection" {...r} />
-                ))}
-            </ul>
+            {props.routes ? (
+                <ul class="stop__connections connection__list" id="connections">
+                    {props.stop.route_ids.map(route_id => {
+                        const route = props.routes!.get(route_id);
+                        if (!route) return null;
+                        return (
+                            <RouteItem
+                                key={route_id}
+                                class="connection"
+                                {...route}
+                            />
+                        );
+                    })}
+                </ul>
+            ) : null}
         </div>
     </section>
 );

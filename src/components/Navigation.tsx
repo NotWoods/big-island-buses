@@ -35,7 +35,7 @@ export function urlToState(url: URL | Location) {
             stop_id: params.get('stop'),
         };
     } else {
-        const stop_id = new URLSearchParams(url.search).get('stop');
+        const stop_id = new URLSearchParams(url.search.slice(1)).get('stop');
         const match = url.pathname.match(GORIDE_LINK_URL_REGEX);
         return {
             route_id: match ? match[1] : null,

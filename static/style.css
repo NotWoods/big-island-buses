@@ -69,7 +69,6 @@ main,
 .route,
 .side-item {
     display: block;
-    color: #f5f5f5;
     font-size: 16px;
     transition: background-color 0.3s ease;
     text-decoration: none;
@@ -294,7 +293,7 @@ main {
     padding-left: 72px;
 }
 
-.schedule-info {
+.schedule-info__item-value {
     color: #757575;
     font-size: 13px;
 }
@@ -345,11 +344,15 @@ main {
     -webkit-animation: phase-white 0.5s infinite alternate;
 }
 
-#stop {
-    display: none;
-    width: 50%;
+.stop {
+    width: calc(50% - 16px);
     float: left;
     padding-bottom: 8px;
+    margin: 8px;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.19), 0 6px 3px rgba(0, 0, 0, 0.23);
+    background-color: white;
 }
 #stop-container {
     margin: 8px;
@@ -575,81 +578,64 @@ th {
     -webkit-animation: phase-white 0.5s infinite alternate;
 }
 
-#streetview-header {
+.stop__streetview {
     position: relative;
     width: 100%;
     padding-bottom: 66.6%;
 }
-#streetview-canvas {
+.stop__streetview-canvas {
     position: absolute;
     width: 100%;
     height: 100%;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
+    background: gray;
 }
-#streetview-canvas svg {
-    height: auto;
-    width: auto;
-}
-#stop_name {
+.stop__name {
     font-weight: 400;
     font-size: 24px;
     margin: 0;
     position: absolute;
     bottom: 0;
     left: 0;
+    right: 0;
     padding: 16px;
     color: #f5f5f5;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.175));
-    width: calc(100% - 88px);
     padding-left: 72px;
 }
 
-#address {
-    color: #757575;
-    font-size: 13px;
-}
-#address-container svg {
+.schedule-info__icon {
     margin: 8px 16px;
     margin-right: 32px;
-    vertical-align: middle;
-    fill: #757575;
 }
 
-#stop h2 {
+.stop__connections-header {
     font-weight: 500;
     font-size: 20px;
     margin: 8px 16px;
 }
 
-#connections {
+.stop__connections {
     margin: 8px 0;
     padding: 0 16px;
 }
-#connections li {
+.connection {
     display: block;
     margin: 4px 0;
     transition: background-color 0.3s ease;
 }
-#connections li:hover {
+.connection:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
-#connections li:active {
+.connection:active {
     background-color: rgba(0, 0, 0, 0.2);
     transition: none;
 }
-#connections li a {
-    color: inherit;
-    padding: 4px 16px;
-    text-decoration: none;
-    border-left-width: 4px;
-    border-left-style: solid;
-    display: block;
-}
-#connections .active-route {
+.connection--active-route {
     background-color: rgba(0, 0, 0, 0.15) !important;
 }
-#connections .active-route a {
+.connection--active-route .connection__link {
     cursor: default;
 }
 
@@ -748,11 +734,6 @@ th {
 
 .no-map #map {
     display: none;
-}
-
-aside #asideAd {
-    margin: 0 auto;
-    width: 200px;
 }
 
 .routes__meta {
