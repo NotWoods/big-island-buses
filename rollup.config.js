@@ -15,13 +15,19 @@ const pageConfig = {
 
 /** @type {import('rollup').RollupOptions} */
 const serverRenderConfig = {
-    input: 'src/server-render/api.ts',
+    input: 'src/server-render/index.ts',
     output: {
         file: 'lib/server-render.js',
         format: 'cjs',
         sourcemap: true,
     },
-    external: ['path', 'fs-extra', 'alasql', 'countries-and-timezones'],
+    external: [
+        'path',
+        'fs-extra',
+        'alasql',
+        'countries-and-timezones',
+        'preact-render-to-string',
+    ],
     plugins: [resolve(), typescript({ target: 'esnext' })],
 };
 

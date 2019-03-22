@@ -7,7 +7,7 @@ import { LocationDisclaimer, Routes } from './RoutesList/Routes';
 import { TimeData } from './Time';
 
 interface Props {
-    nowTime: TimeData;
+    nowTime?: TimeData;
     routes?: Map<string, Route>;
     stops?: Record<string, Stop>;
     lastUpdated?: TimeData;
@@ -15,7 +15,7 @@ interface Props {
     route_id?: string;
     trip_id?: string;
     stop_id?: string;
-    onClick(e: Event): void;
+    onClick?(e: Event): void;
 }
 
 interface State {
@@ -58,7 +58,7 @@ export class LocationApp extends Component<Props, State> {
             if (!stop_id && closestStop) stop_id = closestStop.stop_id;
         }
         return (
-            <div onClick={props.onClick}>
+            <div id="root" onClick={props.onClick}>
                 <Routes
                     nearby={new Set(closestStop ? closestStop.route_ids : [])}
                     routes={

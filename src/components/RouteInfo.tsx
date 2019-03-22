@@ -1,10 +1,9 @@
-import { Component, h } from 'preact';
+import { h } from 'preact';
 import { Route, Stop } from '../server-render/api-types';
 import { RouteHeader } from './RouteHeader';
 import { RouteScheduleInfo } from './Schedule';
 import { StopInfo } from './Stop';
 import { TimeData } from './Time';
-import { RouteData } from './RoutesList/Routes';
 
 interface Props {
     route_id?: string;
@@ -12,7 +11,7 @@ interface Props {
     stop_id?: string | null;
     stops?: Record<string, Stop>;
     routes?: Map<string, Route>;
-    nowTime: TimeData;
+    nowTime?: TimeData;
     name: string | null;
     color: string | null;
     text_color: string | null;

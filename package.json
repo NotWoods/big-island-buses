@@ -5,7 +5,8 @@
     "dependencies": {
         "alasql": "^0.4.11",
         "countries-and-timezones": "^1.0.1",
-        "fs-extra": "^7.0.1"
+        "fs-extra": "^7.0.1",
+        "preact-render-to-string": "^4.1.0"
     },
     "devDependencies": {
         "@types/countries-and-timezones": "^1.0.0",

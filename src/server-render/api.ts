@@ -1,5 +1,6 @@
 import { promise as alasql } from 'alasql';
 import { getAllTimezones, Timezone } from 'countries-and-timezones';
+import { isAfter, isBefore } from 'date-fns';
 import { outputJson, WriteOptions } from 'fs-extra';
 import { relative, resolve } from 'path';
 import {
@@ -19,7 +20,6 @@ import {
     toIsoTime,
     WEEKDAY_NAMES,
 } from './parse-date';
-import { isAfter, isBefore } from 'date-fns';
 
 const GTFS_FOLDER = resolve(__dirname, '..', 'static', 'google_transit');
 const API_FOLDER = resolve(__dirname, '..', 'public', 'api');
@@ -311,7 +311,7 @@ async function makeLastUpdatedApi() {
     await outputJson(path, data, jsonOpts);
 }
 
-export async function main() {
+export default async function main() {
     await alasql(
         `CREATE TABLE agency(agency_id STRING, agency_timezone STRING);
         CREATE TABLE stops(stop_id STRING, stop_name STRING, stop_lat FLOAT, stop_lon FLOAT);
@@ -336,8 +336,4 @@ export async function main() {
         makeCalendarApi(),
         makeLastUpdatedApi(),
     ]);
-}
-
-if (require.main === module) {
-    main().catch(console.error);
 }

@@ -28,7 +28,7 @@ interface ScheduleInfoProps {
     end_time: string;
     days: Weekdays;
     stops?: Record<string, Pick<Stop, 'stop_id' | 'name'>>;
-    nowTime: TimeData;
+    nowTime?: TimeData;
 }
 
 function weekdaysToString(days: Weekdays) {
@@ -49,7 +49,7 @@ function weekdaysToString(days: Weekdays) {
 export const ScheduleInfo = (props: ScheduleInfoProps) => {
     const trips = props.trips ? Object.values(props.trips) : [];
 
-    const now = fromIsoTime(props.nowTime.iso);
+    const now = props.nowTime ? fromIsoTime(props.nowTime.iso) : null;
     let closestTrip: string = '';
     let closestTripTime = Number.MAX_VALUE;
     let closestTripStop: string | null = null;
@@ -59,11 +59,13 @@ export const ScheduleInfo = (props: ScheduleInfoProps) => {
     for (const trip of trips) {
         for (const stop of trip.stop_times) {
             const time = fromIsoTime(stop.time).getTime();
-            const duration = time - now.getTime();
-            if (duration < closestTripTime && duration > 0) {
-                closestTripTime = duration;
-                closestTrip = trip.trip_id;
-                closestTripStop = stop.stop_id;
+            if (now) {
+                const duration = time - now.getTime();
+                if (duration < closestTripTime && duration > 0) {
+                    closestTripTime = duration;
+                    closestTrip = trip.trip_id;
+                    closestTripStop = stop.stop_id;
+                }
             }
             if (time < earliestTripTime) {
                 earliestTripTime = time;
@@ -73,14 +75,17 @@ export const ScheduleInfo = (props: ScheduleInfoProps) => {
         }
     }
     if (!closestTrip) {
-        closestTripTime = earliestTripTime - now.getTime();
+        closestTripTime = now ? earliestTripTime - now.getTime() : Infinity;
         closestTrip = earliestTrip;
         closestTripStop = earliestTripStop;
     }
     const minute = Math.floor(closestTripTime / 60000);
     const nextStopDuration = toDuration({ minute });
 
-    const currentTrip = props.trip_id || closestTrip;
+    const currentTrip =
+        props.trips && props.trips[props.trip_id!]
+            ? props.trip_id!
+            : closestTrip;
     const stops: Partial<ScheduleInfoProps['stops']> = props.stops || {};
     return (
         <div id="schedule-column">
@@ -128,7 +133,7 @@ export class RouteScheduleInfo extends Component<Props, State> {
             // this.setState({ route: null });
         } else {
             const res = await fetch(
-                `${BASE_URL}api/routes/${this.props.route_id}.json`,
+                `${BASE_URL}/api/routes/${this.props.route_id}.json`,
             );
             const details: RouteDetails = await res.json();
             this.setState({ route: details });
