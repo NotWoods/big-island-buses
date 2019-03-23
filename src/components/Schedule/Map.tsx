@@ -1,6 +1,6 @@
 import { h } from 'preact';
-import { Route, Stop } from '../server-render/api-types';
-import { MenuButton } from './ToolbarButton';
+import { Stop, Trip } from '../../server-render/api-types';
+import { MenuButton } from '../ToolbarButton';
 
 const StaticMap = (props: {
     height: number;
@@ -26,20 +26,31 @@ const StaticMap = (props: {
     );
 };
 
-export const Map = ({
-    stops,
-}: {
+export const Map = (props: {
     stops?: Record<string, Stop>;
-    routes?: Map<string, Route>;
+    trips?: Record<string, Pick<Trip, 'stop_times'>>;
 }) => {
+    let stops: Stop[] | undefined;
+    if (props.stops) {
+        if (props.trips) {
+            const stopSet = new Set<string>();
+            for (const trip of Object.values(props.trips)) {
+                for (const stopTime of trip.stop_times) {
+                    stopSet.add(stopTime.stop_id);
+                }
+            }
+            stops = Array.from(stopSet, stop_id => props.stops![stop_id]);
+        } else {
+            stops = Object.values(props.stops);
+        }
+    }
+
     return (
         <section class="map" id="map">
             <div id="map-canvas" class="map__canvas">
-                <StaticMap
-                    height={640}
-                    width={640}
-                    stops={stops ? Object.values(stops) : []}
-                />
+                {stops ? (
+                    <StaticMap height={640} width={640} stops={stops} />
+                ) : null}
             </div>
             <header class="map__header toolbar" id="map-header">
                 <MenuButton id="menu" />

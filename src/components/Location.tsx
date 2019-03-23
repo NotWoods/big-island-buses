@@ -1,8 +1,6 @@
-import clsx from 'clsx';
 import { Component, h } from 'preact';
 import { Route, Stop } from '../server-render/api-types';
-import { Map } from './Map';
-import { RouteInfo } from './RouteInfo';
+import { RouteInfo } from './Schedule';
 import { LocationDisclaimer, Routes } from './RoutesList/Routes';
 import { TimeData } from './Time';
 
@@ -73,26 +71,17 @@ export class LocationApp extends Component<Props, State> {
                     }
                 />
                 <div id="screen-cover" />
-                <main
-                    id="main"
-                    class={clsx({
-                        open: Boolean(props.route_id),
-                        'open-stop': Boolean(stop_id),
-                    })}
-                >
-                    <Map stops={props.stops} />
-                    <RouteInfo
-                        route_id={props.route_id}
-                        trip_id={props.trip_id}
-                        stop_id={stop_id}
-                        stops={props.stops}
-                        routes={props.routes}
-                        nowTime={props.nowTime}
-                        name={route ? route.name : null}
-                        color={route ? route.color : null}
-                        text_color={route ? route.text_color : null}
-                    />
-                </main>
+                <RouteInfo
+                    route_id={props.route_id}
+                    trip_id={props.trip_id}
+                    stop_id={stop_id}
+                    stops={props.stops}
+                    routes={props.routes}
+                    nowTime={props.nowTime}
+                    name={route ? route.name : null}
+                    color={route ? route.color : null}
+                    text_color={route ? route.text_color : null}
+                />
             </div>
         );
     }

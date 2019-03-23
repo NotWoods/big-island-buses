@@ -2,7 +2,7 @@ import { h, FunctionalComponent } from 'preact';
 import { TimeData, Time, toTime } from '../Time';
 import { StopTime, Stop } from '../../server-render/api-types';
 import { fromIsoTime } from '../../server-render/parse-date';
-import { StopLink } from '../Link';
+import { StopLink } from '../links';
 
 interface ScheduleTimeProps {
     stop_id: string;

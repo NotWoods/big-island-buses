@@ -1,8 +1,7 @@
 import { ComponentChildren, h, FunctionalComponent } from 'preact';
-import { Header } from './Header';
 import { RouteItem } from './Route';
 import { TimeData } from '../Time';
-import { Information } from './Information';
+import { Information, Header } from './Information';
 
 export interface RouteData {
     color: string;

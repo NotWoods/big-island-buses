@@ -38,6 +38,10 @@ body,
     display: inline;
     margin: 0;
 }
+.header__link {
+    text-decoration: inherit;
+    color: inherit;
+}
 
 .routes {
     background: #2d3039;
@@ -228,7 +232,14 @@ main {
     left: 0;
 }
 .map__canvas {
-    margin: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.map__canvas-static {
+    max-height: 100%;
+    width: auto;
 }
 
 .toolbar__search {

@@ -1,5 +1,22 @@
 import { FunctionalComponent, h } from 'preact';
 import { Time, TimeData } from '../Time';
+import { BASE_URL } from '../../config';
+
+export const Header = () => (
+    <header class="header">
+        <img
+            class="header__logo"
+            src={`${BASE_URL}/assets/logo.svg`}
+            width="42"
+            height="48"
+        />
+        <h1 class="header__text">
+            <a class="header__link goride-link" href={`${BASE_URL}/`}>
+                Big Island Buses
+            </a>
+        </h1>
+    </header>
+);
 
 const InfoItem: FunctionalComponent<{ href: string }> = props => (
     <li class="side-item">

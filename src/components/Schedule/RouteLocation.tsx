@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { InfoItem } from './InfoItem';
 import { Stop } from '../../server-render/api-types';
-import { StopLink } from '../Link';
+import { StopLink } from '../links';
 
 interface RouteLocationProps {
     firstStop?: Pick<Stop, 'stop_id' | 'name'>;

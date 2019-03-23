@@ -12,6 +12,8 @@ class Address extends Component<
     Pick<Stop, 'lat' | 'lon'>,
     { address: string }
 > {
+    // TODO reverse geocode address
+
     render() {
         return <address>{this.state.address}</address>;
     }

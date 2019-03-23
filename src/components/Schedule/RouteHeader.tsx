@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { MenuButton, ToolbarButton } from './ToolbarButton';
+import { MenuButton, ToolbarButton } from '../ToolbarButton';
 
 interface RouteHeaderProps {
     name: string;

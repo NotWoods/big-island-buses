@@ -1,5 +1,5 @@
 import { FunctionalComponent, h } from 'preact';
-import { RouteLink } from '../Link';
+import { RouteLink } from '../links';
 
 interface RouteProps {
     color: string;

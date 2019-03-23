@@ -23,6 +23,7 @@ const GORIDE_LINK_URL_REGEX = /\/s\/([^\/]+)(?:\/([^\/]+))?\/?$/;
  * Converts from a URL to state.
  *
  * Supported formats:
+ * - /
  * - /s/{route_id}/{trip_id}?stop={stop_id}
  * - /s/{route_id}/{trip_id}/?stop={stop_id}
  * - #!route={route_id}&trip={trip_id}&stop={stop_id}
@@ -63,7 +64,7 @@ export class NavigationApp extends Component<Props, State> {
     }
 
     onPopState = () => {
-        this.setState(urlToState(document.location));
+        this.setState(urlToState(location));
     };
 
     onLinkClick = (evt: Event) => {
@@ -72,14 +73,18 @@ export class NavigationApp extends Component<Props, State> {
         ) as HTMLAnchorElement | null;
         if (clickedLink != null) {
             evt.preventDefault();
-            const newState = urlToState(new URL(clickedLink.href));
-            if (newState.route_id == null) delete newState.route_id;
-            if (newState.trip_id == null) delete newState.trip_id;
-            if (newState.stop_id == null) delete newState.stop_id;
+            const newState = urlToState(
+                new URL(clickedLink.href, location.href),
+            );
+            const isHistoryChange =
+                newState.route_id !== this.state.route_id ||
+                newState.trip_id !== this.state.trip_id;
             this.setState(newState as State, () => {
-                const title = this.title(newState.route_id);
-                document.title = title;
-                history.pushState(null, title, clickedLink.href);
+                if (isHistoryChange) {
+                    const title = this.title(newState.route_id);
+                    document.title = title;
+                    history.pushState(null, title, clickedLink.href);
+                }
             });
         }
     };
