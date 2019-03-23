@@ -2,6 +2,7 @@ import { Component, h } from 'preact';
 import { Route, Stop } from '../server-render/api-types';
 import { LocationApp } from './Location';
 import { TimeData, toTime } from './Time';
+import { BASE_URL } from '../config';
 
 interface Props {
     now?: Date;
@@ -52,6 +53,15 @@ export class NavigationApp extends Component<Props, State> {
         this.onPopState();
     }
 
+    title(route_id: string | null | undefined) {
+        let title = 'Big Island Buses';
+        if (route_id && this.props.routes) {
+            const route = this.props.routes.get(route_id);
+            title = `${route ? route.name : '404'} | ${title}`;
+        }
+        return title;
+    }
+
     onPopState = () => {
         this.setState(urlToState(document.location));
     };
@@ -67,13 +77,25 @@ export class NavigationApp extends Component<Props, State> {
             if (newState.trip_id == null) delete newState.trip_id;
             if (newState.stop_id == null) delete newState.stop_id;
             this.setState(newState as State, () => {
-                let title = 'Big Island Buses';
-                if (newState.route_id && this.props.routes) {
-                    const route = this.props.routes.get(newState.route_id);
-                    title = `${route ? route.name : '404'} | ${title}`;
-                }
+                const title = this.title(newState.route_id);
                 document.title = title;
                 history.pushState(null, title, clickedLink.href);
+            });
+        }
+    };
+
+    onTripSelectChange = (evt: Event) => {
+        const select = evt.target as HTMLSelectElement;
+        if (select.matches('.schedule-info__select')) {
+            const trip_id = select.value;
+            this.setState({ trip_id }, () => {
+                const title = this.title(this.state.route_id);
+                document.title = title;
+                history.pushState(
+                    null,
+                    title,
+                    `${BASE_URL}/s/${this.state.route_id}/${trip_id}`,
+                );
             });
         }
     };
@@ -87,6 +109,7 @@ export class NavigationApp extends Component<Props, State> {
                 stop_id={state.stop_id || undefined}
                 nowTime={toTime(props.now || new Date())}
                 onClick={this.onLinkClick}
+                onChange={this.onTripSelectChange}
             />
         );
     }

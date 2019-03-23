@@ -16,6 +16,7 @@ interface Props {
     trip_id?: string;
     stop_id?: string;
     onClick?(e: Event): void;
+    onChange?(e: Event): void;
 }
 
 interface State {
@@ -58,7 +59,7 @@ export class LocationApp extends Component<Props, State> {
             if (!stop_id && closestStop) stop_id = closestStop.stop_id;
         }
         return (
-            <div id="root" onClick={props.onClick}>
+            <div id="root" onClick={props.onClick} onChange={props.onChange}>
                 <Routes
                     nearby={new Set(closestStop ? closestStop.route_ids : [])}
                     routes={
@@ -79,7 +80,7 @@ export class LocationApp extends Component<Props, State> {
                         'open-stop': Boolean(stop_id),
                     })}
                 >
-                    <Map />
+                    <Map stops={props.stops} />
                     <RouteInfo
                         route_id={props.route_id}
                         trip_id={props.trip_id}

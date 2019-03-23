@@ -1,8 +1,7 @@
-import { h, Component } from 'preact';
+import { Component, h } from 'preact';
+import { Route, Stop } from '../server-render/api-types';
 import { RouteItem } from './RoutesList/Route';
-import { RouteData } from './RoutesList/Routes';
 import { InfoItem } from './Schedule/InfoItem';
-import { Stop, Route } from '../server-render/api-types';
 
 interface StopProps {
     routes?: Map<string, Route>;
@@ -18,10 +17,40 @@ class Address extends Component<
     }
 }
 
+const StaticStreetView = (props: {
+    height: number;
+    width: number;
+    lat: number;
+    lon: number;
+}) => {
+    const args = new URLSearchParams({
+        key: 'AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI',
+        location: `${props.lat},${props.lon}`,
+        size: `${props.width}x${props.height}`,
+    });
+    const src = `https://maps.googleapis.com/maps/api/streetview?${args.toString()}`;
+    return (
+        <img
+            class="stop__streetview-canvas-static"
+            height={props.height}
+            width={props.width}
+            src={src}
+            alt="Street view of bus stop"
+        />
+    );
+};
+
 export const StopInfo = (props: StopProps) => (
     <section class="stop" id="stop">
         <header class="stop__streetview" id="streetview-header">
-            <div class="stop__streetview-canvas" id="streetview-canvas" />
+            <div class="stop__streetview-canvas" id="streetview-canvas">
+                <StaticStreetView
+                    height={283}
+                    width={426}
+                    lat={props.stop.lat}
+                    lon={props.stop.lon}
+                />
+            </div>
             <h3 class="stop__name" id="stop_name">
                 {props.stop.name}
             </h3>

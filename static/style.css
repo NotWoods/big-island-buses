@@ -9,9 +9,7 @@ body {
 }
 html,
 body,
-main,
-#map,
-#map-canvas {
+.map__canvas {
     height: 100%;
 }
 
@@ -45,7 +43,7 @@ main,
     background: #2d3039;
     color: #f5f5f5;
     width: 256px;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100%;
@@ -214,21 +212,26 @@ main,
 
 main {
     margin-left: 256px;
-    display: block;
-    overflow-y: auto;
+    min-height: 100vh;
 }
 
-#map {
+.map {
     position: relative;
     transition: height 0.3s ease;
+    display: flex;
+    background: #aadaff;
+    height: 100vh;
 }
-#map-header {
+.map__header {
     position: absolute;
     top: 0;
     left: 0;
 }
+.map__canvas {
+    margin: auto;
+}
 
-#search {
+.toolbar__search {
     border: 0;
     border-radius: 2px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
@@ -240,35 +243,9 @@ main {
     font-family: inherit;
     font-size: 14px;
 }
-#search:focus {
+.toolbar__search:focus {
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.19), 0 6px 3px rgba(0, 0, 0, 0.23);
     outline: none;
-}
-
-#adDiv {
-    position: absolute;
-    bottom: 8px;
-    transition: opacity 0.3s ease;
-    width: 100%;
-    height: 0;
-}
-#adDiv > div {
-    display: block !important;
-    background: white;
-    border-radius: 2px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
-    width: 468px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -64px;
-}
-#map-canvas:hover + #adDiv {
-    opacity: 0.25;
-}
-@media (max-width: 500px) {
-    #adDiv {
-        display: none;
-    }
 }
 
 #content {
@@ -276,9 +253,9 @@ main {
     box-shadow: 0 -1px 1.5px rgba(0, 0, 0, 0.19), 0 -1px 1px rgba(0, 0, 0, 0.23);
     position: relative;
 }
-.open #map,
-.open-stop #map {
-    height: 75%;
+.open .map,
+.open-stop .map {
+    height: 60vh;
 }
 .open #content,
 .open-stop #content {
@@ -591,6 +568,11 @@ th {
     border-top-right-radius: 2px;
     background: gray;
 }
+.stop__streetview-canvas-static {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
 .stop__name {
     font-weight: 400;
     font-size: 24px;
@@ -697,7 +679,6 @@ th {
 
     main {
         margin: 0;
-        height: auto;
     }
 
     #map {
