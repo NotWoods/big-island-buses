@@ -9,6 +9,9 @@ const pageConfig = {
         dir: 'public/js/',
         format: 'esm',
         sourcemap: true,
+        paths: {
+            googlemaps: `https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI`,
+        },
     },
     plugins: [resolve({ browser: true }), typescript()],
 };

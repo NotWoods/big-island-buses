@@ -1,5 +1,6 @@
 import memoizeOne from 'memoize-one';
 import { Component, h } from 'preact';
+import { computeDistanceBetween } from 'spherical-geometry-js';
 import { Route, Stop } from '../server-render/api-types';
 import { LocationDisclaimer, Routes } from './RoutesList/Routes';
 import { RouteInfo } from './Schedule';
@@ -34,10 +35,7 @@ export class LocationApp extends Component<Props, State> {
         let closestStop: Stop | null = null;
         const stops = this.props.stops ? Object.values(this.props.stops) : [];
         for (const stop of stops) {
-            const distance = Math.sqrt(
-                (userPosition.latitude - stop.lat) ** 2 +
-                    (userPosition.longitude - stop.lon) ** 2,
-            );
+            const distance = computeDistanceBetween(userPosition, stop);
             if (distance < closestDistance) {
                 closestStop = stop;
                 closestDistance = distance;

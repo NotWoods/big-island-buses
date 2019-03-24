@@ -61,19 +61,28 @@ async function makeTripPage(options: {
     );
 }
 
+async function makeHomePage(options: {
+    routes?: Map<string, Route>;
+    stops?: Record<string, Stop>;
+    lastUpdated?: TimeData;
+    maxDistance: number;
+}) {
+    const html = render(<LocationApp {...options} />);
+    const text = await template('page.html', { CONTENT: html, BASE_URL });
+    outputFile(resolve(PAGES_FOLDER, 'index.html'), text, 'utf8');
+}
+
 export default async function main() {
     const data = await loadData();
-    await Promise.all(
-        Array.from(data.routes.values(), ({ route_id, trip_ids }) =>
-            Promise.all(
-                trip_ids.map(trip_id =>
-                    makeTripPage({
-                        ...data,
-                        route_id,
-                        trip_id,
-                    }),
-                ),
+    const trips = Array.from(data.routes.values()).flatMap(
+        ({ route_id, trip_ids }) =>
+            trip_ids.map(trip_id =>
+                makeTripPage({
+                    ...data,
+                    route_id,
+                    trip_id,
+                }),
             ),
-        ),
     );
+    await Promise.all([makeHomePage({ ...data }), ...trips]);
 }
