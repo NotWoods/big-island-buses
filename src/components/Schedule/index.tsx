@@ -5,7 +5,7 @@ import { Route, RouteDetails, Stop } from '../../server-render/api-types';
 import { RouteHeader } from './RouteHeader';
 import { StopInfo } from '../Stop';
 import { TimeData } from '../Time';
-import { Map } from './Map';
+import { MapRenderer } from './Map';
 import { ScheduleInfo } from './ScheduleInfo';
 
 interface Props {
@@ -57,7 +57,7 @@ export class RouteInfo extends Component<Props, State> {
                     'open-stop': Boolean(props.stop_id),
                 })}
             >
-                <Map
+                <MapRenderer
                     trips={state.route ? state.route.trips : undefined}
                     stops={props.stops}
                 />

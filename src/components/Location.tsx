@@ -1,7 +1,8 @@
+import memoizeOne from 'memoize-one';
 import { Component, h } from 'preact';
 import { Route, Stop } from '../server-render/api-types';
-import { RouteInfo } from './Schedule';
 import { LocationDisclaimer, Routes } from './RoutesList/Routes';
+import { RouteInfo } from './Schedule';
 import { TimeData } from './Time';
 
 interface Props {
@@ -28,7 +29,7 @@ export class LocationApp extends Component<Props, State> {
             this.setState({ userPosition, geolocationOn: true }),
         );
 
-    locateUser(userPosition: Coordinates) {
+    locateUser = memoizeOne((userPosition: Coordinates) => {
         let closestDistance = Number.MAX_VALUE;
         let closestStop: Stop | null = null;
         const stops = this.props.stops ? Object.values(this.props.stops) : [];
@@ -43,7 +44,7 @@ export class LocationApp extends Component<Props, State> {
             }
         }
         return closestDistance < this.props.maxDistance ? closestStop : null;
-    }
+    });
 
     render(props: Props, state: State) {
         let route: Route | null | undefined = null;

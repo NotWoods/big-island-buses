@@ -1,6 +1,19 @@
 import { h } from 'preact';
+import memoizeOne from 'memoize-one';
 import { Stop, Trip } from '../../server-render/api-types';
 import { MenuButton } from '../ToolbarButton';
+
+const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
+    const map = new Map<string, Stop[]>();
+    for (const stop of Object.values(stops)) {
+        for (const route_id of stop.route_ids) {
+            const stopList = map.get(route_id) || [];
+            stopList.push(stop);
+            map.set(route_id, stopList);
+        }
+    }
+    return map;
+});
 
 const StaticMap = (props: {
     height: number;
@@ -26,20 +39,16 @@ const StaticMap = (props: {
     );
 };
 
-export const Map = (props: {
+export const MapRenderer = (props: {
+    route_id?: string;
     stops?: Record<string, Stop>;
     trips?: Record<string, Pick<Trip, 'stop_times'>>;
 }) => {
     let stops: Stop[] | undefined;
     if (props.stops) {
-        if (props.trips) {
-            const stopSet = new Set<string>();
-            for (const trip of Object.values(props.trips)) {
-                for (const stopTime of trip.stop_times) {
-                    stopSet.add(stopTime.stop_id);
-                }
-            }
-            stops = Array.from(stopSet, stop_id => props.stops![stop_id]);
+        if (props.route_id) {
+            const map = routeToStopsMap(props.stops);
+            stops = map.get(props.route_id) || [];
         } else {
             stops = Object.values(props.stops);
         }

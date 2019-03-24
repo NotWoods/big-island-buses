@@ -30,6 +30,11 @@ describe('urlToState', () => {
     });
 
     test('parses paths', () => {
+        expect(urlToState(new URL('/', base))).toEqual({
+            route_id: null,
+            trip_id: null,
+            stop_id: null,
+        });
         expect(urlToState(new URL('/s/hilo-hono', base))).toEqual({
             route_id: 'hilo-hono',
             trip_id: undefined,
