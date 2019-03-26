@@ -69,7 +69,7 @@ async function makeHomePage(options: {
 }) {
     const html = render(<LocationApp {...options} />);
     const text = await template('page.html', { CONTENT: html, BASE_URL });
-    outputFile(resolve(PAGES_FOLDER, 'index.html'), text, 'utf8');
+    outputFile(resolve(PAGES_FOLDER, '..', 'index.html'), text, 'utf8');
 }
 
 export default async function main() {

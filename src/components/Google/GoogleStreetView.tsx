@@ -1,5 +1,8 @@
 import { Component, ComponentChild, h } from 'preact';
 import { convertLatLng } from 'spherical-geometry-js';
+import { API_KEY } from './GoogleMap';
+import { loadGoogleMaps } from './load';
+import { AfterTimeout } from './AfterTimeout';
 
 const StaticStreetView = (props: {
     height: number;
@@ -8,7 +11,7 @@ const StaticStreetView = (props: {
     lon: number;
 }) => {
     const args = new URLSearchParams({
-        key: 'AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI',
+        key: API_KEY,
         location: `${props.lat},${props.lon}`,
         size: `${props.width}x${props.height}`,
     });
@@ -38,15 +41,19 @@ export class GoogleStreetView extends Component<Props, State> {
     streetViewEl?: HTMLDivElement;
 
     async componentDidMount() {
-        await import('googlemaps' as string);
+        await loadGoogleMaps({ key: API_KEY, libraries: 'places' });
+        const controlOptions = {
+            position: google.maps.ControlPosition.RIGHT_CENTER,
+        };
         this.streetView = new google.maps.StreetViewPanorama(
             this.streetViewEl!,
             {
-                position: convertLatLng(this.props),
+                position: convertLatLng(this.props).toJSON(),
                 visible: true,
-                pov: { heading: 34, pitch: 0 },
                 scrollwheel: false,
                 addressControl: false,
+                fullscreenControl: false,
+                motionTracking: false,
             },
         );
 
@@ -61,7 +68,7 @@ export class GoogleStreetView extends Component<Props, State> {
             this.props.lat !== prevProps.lat ||
             this.props.lon !== prevProps.lon
         ) {
-            this.streetView!.setPosition(convertLatLng(this.props));
+            this.streetView!.setPosition(convertLatLng(this.props).toJSON());
         }
     }
 
@@ -69,19 +76,21 @@ export class GoogleStreetView extends Component<Props, State> {
         let staticImg: ComponentChild = null;
         if (!loaded) {
             staticImg = (
-                <StaticStreetView
-                    height={283}
-                    width={426}
-                    lat={lat}
-                    lon={lon}
-                />
+                <AfterTimeout ms={1000}>
+                    <StaticStreetView
+                        height={283}
+                        width={426}
+                        lat={lat}
+                        lon={lon}
+                    />
+                </AfterTimeout>
             );
         }
 
         return (
             <div id="map-canvas" class="map__canvas">
                 {staticImg}
-                <div ref={el => (this.streetViewEl = el)} />
+                <div class="canvas" ref={el => (this.streetViewEl = el)} />
             </div>
         );
     }

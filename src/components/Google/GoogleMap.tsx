@@ -1,6 +1,10 @@
 import { h, Component, ComponentChild } from 'preact';
 import { Stop } from '../../server-render/api-types';
 import { convertLatLng, LatLngLike } from 'spherical-geometry-js';
+import { loadGoogleMaps } from './load';
+import { AfterTimeout } from './AfterTimeout';
+
+export const API_KEY = 'AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI';
 
 const Icon = {
     STOP: {
@@ -63,7 +67,7 @@ const StaticMap = (props: {
         markers = Array.from(props.stops, stop => `${stop.lat},${stop.lon}`);
     }
     const args = new URLSearchParams({
-        key: 'AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI',
+        key: API_KEY,
         markers: markers.join('|'),
         size: `${props.width}x${props.height}`,
     });
@@ -120,7 +124,7 @@ export class GoogleMap extends Component<Props, State> {
     }
 
     async componentDidMount() {
-        await import('googlemaps' as string);
+        await loadGoogleMaps({ key: API_KEY, libraries: 'places' });
         this.map = new google.maps.Map(this.mapEl, {
             center: { lat: 19.6, lng: -155.56 },
             zoom: 10,
@@ -164,7 +168,7 @@ export class GoogleMap extends Component<Props, State> {
             let marker = this.markers.get(stop.stop_id);
             if (!marker) {
                 marker = new google.maps.Marker({
-                    position: convertLatLng(stop),
+                    position: convertLatLng(stop).toJSON(),
                     title: stop.name,
                     icon: Icon.STOP,
                     map: this.map,
@@ -195,7 +199,9 @@ export class GoogleMap extends Component<Props, State> {
 
     createUserLocationMarker() {
         if (this.props.userPosition) {
-            const position = convertLatLng(this.props.userPosition.coords);
+            const position = convertLatLng(
+                this.props.userPosition.coords,
+            ).toJSON();
             if (!this.userPositionMarker) {
                 this.userPositionMarker = new google.maps.Marker({
                     position,
@@ -223,7 +229,7 @@ export class GoogleMap extends Component<Props, State> {
         let i = 0;
         for (const place of places) {
             const marker = this.places[i];
-            const position = convertLatLng(place);
+            const position = convertLatLng(place).toJSON();
             if (!marker) {
                 this.places[i] = new google.maps.Marker({
                     position,
@@ -249,19 +255,21 @@ export class GoogleMap extends Component<Props, State> {
         let staticMap: ComponentChild = null;
         if (stops && !mapLoaded) {
             staticMap = (
-                <StaticMap
-                    height={640}
-                    width={640}
-                    stops={stops}
-                    highlighted={highlighted}
-                />
+                <AfterTimeout ms={1000}>
+                    <StaticMap
+                        height={640}
+                        width={640}
+                        stops={stops}
+                        highlighted={highlighted}
+                    />
+                </AfterTimeout>
             );
         }
 
         return (
             <div id="map-canvas" class="map__canvas">
                 {staticMap}
-                <div ref={el => (this.mapEl = el)} />
+                <div class="canvas" ref={el => (this.mapEl = el)} />
             </div>
         );
     }

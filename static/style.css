@@ -241,6 +241,10 @@ main {
     max-height: 100%;
     width: auto;
 }
+.canvas {
+    height: 100%;
+    width: 100%;
+}
 
 .toolbar__search {
     border: 0;
@@ -373,11 +377,6 @@ main {
     width: 100%;
     background-color: white;
     float: none;
-}
-.open-stop:not(.open) #stop_name {
-    bottom: auto;
-    top: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.175), transparent);
 }
 .open-stop:not(.open) #route-header,
 .open-stop:not(.open) .schedule-info,
@@ -589,12 +588,12 @@ th {
     font-size: 24px;
     margin: 0;
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
     padding: 16px;
     color: #f5f5f5;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.175));
+    background: linear-gradient(rgba(0, 0, 0, 0.175), transparent);
     padding-left: 72px;
 }
 
@@ -646,7 +645,7 @@ th {
         display: inline-block;
         vertical-align: middle;
     }
-    #stop_name {
+    .stop__name {
         padding-left: 64px;
     }
 }
@@ -696,7 +695,7 @@ th {
         height: 4in !important;
     }
 
-    #stop_name,
+    .stop__name,
     #route_long_name,
     .line {
         -webkit-print-color-adjust: exact;
@@ -715,7 +714,7 @@ th {
 .no-streetview #address-container {
     display: none;
 }
-.no-streetview #stop_name {
+.no-streetview .stop__name {
     position: static;
     background: none !important;
     color: #212121;
