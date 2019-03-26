@@ -54,12 +54,14 @@ export class NavigationApp extends Component<Props, State> {
         this.onPopState();
     }
 
-    title(route_id: string | null | undefined) {
+    title() {
+        const { route_id } = this.state;
         let title = 'Big Island Buses';
         if (route_id && this.props.routes) {
             const route = this.props.routes.get(route_id);
             title = `${route ? route.name : '404'} | ${title}`;
         }
+        document.title = title;
         return title;
     }
 
@@ -81,8 +83,7 @@ export class NavigationApp extends Component<Props, State> {
                 newState.trip_id !== this.state.trip_id;
             this.setState(newState as State, () => {
                 if (isHistoryChange) {
-                    const title = this.title(newState.route_id);
-                    document.title = title;
+                    const title = this.title();
                     history.pushState(null, title, clickedLink.href);
                 }
             });
@@ -94,8 +95,7 @@ export class NavigationApp extends Component<Props, State> {
         if (select.matches('.schedule-info__select')) {
             const trip_id = select.value;
             this.setState({ trip_id }, () => {
-                const title = this.title(this.state.route_id);
-                document.title = title;
+                const title = this.title();
                 history.pushState(
                     null,
                     title,
@@ -103,6 +103,13 @@ export class NavigationApp extends Component<Props, State> {
                 );
             });
         }
+    };
+
+    onOpenStop = (stop_id: string) => {
+        this.setState({ stop_id }, () => {
+            const title = this.title();
+            history.pushState(null, title, `?stop=${stop_id}`);
+        });
     };
 
     render(props: Props, state: State) {
@@ -115,6 +122,7 @@ export class NavigationApp extends Component<Props, State> {
                 nowTime={toTime(props.now || new Date())}
                 onClick={this.onLinkClick}
                 onChange={this.onTripSelectChange}
+                onOpenStop={this.onOpenStop}
             />
         );
     }

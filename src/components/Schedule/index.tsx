@@ -18,6 +18,7 @@ interface Props {
     name: string | null;
     color: string | null;
     text_color: string | null;
+    onOpenStop?(stop_id: string): void;
 }
 
 interface State {
@@ -60,6 +61,7 @@ export class RouteInfo extends Component<Props, State> {
                 <MapRenderer
                     trips={state.route ? state.route.trips : undefined}
                     stops={props.stops}
+                    onOpenStop={props.onOpenStop}
                 />
                 <div id="content">
                     {props.name && props.color && props.text_color ? (

@@ -17,6 +17,7 @@ interface Props {
     stop_id?: string;
     onClick?(e: Event): void;
     onChange?(e: Event): void;
+    onOpenStop?(stop_id: string): void;
 }
 
 interface State {
@@ -80,6 +81,7 @@ export class LocationApp extends Component<Props, State> {
                     name={route ? route.name : null}
                     color={route ? route.color : null}
                     text_color={route ? route.text_color : null}
+                    onOpenStop={props.onOpenStop}
                 />
             </div>
         );
