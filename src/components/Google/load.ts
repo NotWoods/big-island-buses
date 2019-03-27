@@ -1,3 +1,5 @@
+import { API_KEY } from './GoogleMap';
+
 const CALLBACK_NAME = '__googleMapsApiOnLoadCallback';
 
 declare global {
@@ -8,12 +10,7 @@ declare global {
 
 let promise: Promise<typeof google.maps>;
 
-interface GoogleMapsLoadOptions {
-    key: string;
-    libraries: string;
-}
-
-export function loadGoogleMaps(options: GoogleMapsLoadOptions) {
+export function loadGoogleMaps() {
     if (!promise) {
         promise = new Promise((resolve, reject) => {
             // Hook up the on load callback
@@ -23,7 +20,8 @@ export function loadGoogleMaps(options: GoogleMapsLoadOptions) {
             };
 
             const params = new URLSearchParams({
-                ...options,
+                key: API_KEY,
+                libraries: 'places',
                 callback: CALLBACK_NAME,
             });
 

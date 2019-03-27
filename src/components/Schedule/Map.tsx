@@ -17,15 +17,14 @@ const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
 });
 
 export const MapRenderer = (props: {
-    route_id?: string;
+    route_id?: string | null;
+    stop_id?: string | null;
     stops?: Record<string, Stop>;
     trips?: Record<string, Pick<Trip, 'stop_times'>>;
     onOpenStop?(stop_id: string): void;
 }) => {
     let highlighted: Set<string> | undefined;
-    let stops: Stop[] | undefined;
     if (props.stops) {
-        stops = Object.values(props.stops);
         if (props.route_id) {
             const map = routeToStopsMap(props.stops);
             highlighted = map.get(props.route_id);
@@ -35,7 +34,8 @@ export const MapRenderer = (props: {
     return (
         <section class="map" id="map">
             <GoogleMap
-                stops={stops}
+                stop_id={props.stop_id}
+                stops={props.stops}
                 highlighted={highlighted}
                 onOpenStop={props.onOpenStop}
             />

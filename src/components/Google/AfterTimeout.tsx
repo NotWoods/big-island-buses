@@ -18,6 +18,7 @@ export class AfterTimeout extends Component<Props, State> {
     }
 
     render({ children = null }: Props, { timeoutPassed }: State) {
-        return timeoutPassed ? children : null;
+        const isServer = typeof window === 'undefined';
+        return isServer || timeoutPassed ? children : null;
     }
 }

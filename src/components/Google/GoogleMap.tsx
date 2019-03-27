@@ -55,16 +55,18 @@ const ZIndex = {
 const StaticMap = (props: {
     height: number;
     width: number;
-    stops: Iterable<Pick<Stop, 'stop_id' | 'lat' | 'lon'>>;
+    stops: Record<string, Stop>;
     highlighted?: Set<string>;
 }) => {
     let markers: string[];
     if (props.highlighted && props.highlighted.size > 0) {
-        markers = Array.from(props.stops)
+        markers = Object.values(props.stops)
             .filter(stop => props.highlighted!.has(stop.stop_id))
             .map(stop => `${stop.lat},${stop.lon}`);
     } else {
-        markers = Array.from(props.stops, stop => `${stop.lat},${stop.lon}`);
+        markers = Object.values(props.stops).map(
+            stop => `${stop.lat},${stop.lon}`,
+        );
     }
     const args = new URLSearchParams({
         key: API_KEY,
@@ -85,7 +87,8 @@ const StaticMap = (props: {
 };
 
 interface Props {
-    stops?: Iterable<Stop>;
+    stop_id?: string | null;
+    stops?: Record<string, Stop>;
     highlighted?: Set<string>;
     userPosition?: {
         coords: LatLngLike;
@@ -124,10 +127,18 @@ export class GoogleMap extends Component<Props, State> {
     }
 
     async componentDidMount() {
-        await loadGoogleMaps({ key: API_KEY, libraries: 'places' });
-        this.map = new google.maps.Map(this.mapEl, {
+        const { Map, ControlPosition } = await loadGoogleMaps();
+        this.map = new Map(this.mapEl, {
             center: { lat: 19.6, lng: -155.56 },
             zoom: 10,
+            backgroundColor: '#aadaff',
+            mapTypeControlOptions: {
+                position: ControlPosition.BOTTOM_RIGHT,
+            },
+            fullscreenControlOptions: {
+                position: ControlPosition.RIGHT_BOTTOM,
+            },
+            streetViewControl: false,
         });
 
         const bounds = this.createStopMarkers();
@@ -135,10 +146,8 @@ export class GoogleMap extends Component<Props, State> {
 
         this.createUserLocationMarker();
         this.createPlaceMarkers();
+        this.updateSelectedMarker(null);
         this.setState({ mapLoaded: true });
-        window.addEventListener('resize', () => {
-            google.maps.event.trigger(this.map, 'resize');
-        });
     }
 
     componentDidUpdate(prevProps: Props) {
@@ -156,6 +165,9 @@ export class GoogleMap extends Component<Props, State> {
         if (this.props.places !== prevProps.places) {
             this.createPlaceMarkers();
         }
+        if (this.props.stop_id !== prevProps.stop_id) {
+            this.updateSelectedMarker(prevProps.stop_id);
+        }
     }
 
     createStopMarkers() {
@@ -164,7 +176,7 @@ export class GoogleMap extends Component<Props, State> {
         const highlightedBounds = new google.maps.LatLngBounds();
         const { highlighted = new Set() } = this.props;
 
-        for (const stop of this.props.stops) {
+        for (const stop of Object.values(this.props.stops)) {
             let marker = this.markers.get(stop.stop_id);
             if (!marker) {
                 marker = new google.maps.Marker({
@@ -184,7 +196,7 @@ export class GoogleMap extends Component<Props, State> {
             }
             markerBounds.extend(marker.getPosition());
 
-            if (highlighted.has(stop.stop_id)) {
+            if (highlighted.has(stop.stop_id) || highlighted.size === 0) {
                 marker.setIcon(Icon.STOP);
                 marker.setZIndex(ZIndex.STOP);
                 highlightedBounds.extend(marker.getPosition());
@@ -248,6 +260,23 @@ export class GoogleMap extends Component<Props, State> {
         // Hide excess place markers
         for (; i < this.places.length; i++) {
             this.places[i].setMap(null);
+        }
+    }
+
+    updateSelectedMarker(prevId: string | null | undefined) {
+        const marker = this.markers.get(this.props.stop_id!);
+        const prevMarker = this.markers.get(prevId!);
+        if (prevMarker) {
+            const icon =
+                !this.props.highlighted || this.props.highlighted.has(prevId!)
+                    ? 'STOP'
+                    : 'STOP_OUTSIDE_ROUTE';
+            prevMarker.setIcon(Icon[icon]);
+            prevMarker.setZIndex(ZIndex[icon]);
+        }
+        if (marker) {
+            marker.setIcon(Icon.SELECTED_STOP);
+            marker.setZIndex(ZIndex.SELECTED_STOP);
         }
     }
 

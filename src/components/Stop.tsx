@@ -3,6 +3,9 @@ import { Route, Stop } from '../server-render/api-types';
 import { GoogleStreetView } from './Google/GoogleStreetView';
 import { RouteItem } from './RoutesList/Route';
 import { InfoItem } from './Schedule/InfoItem';
+import { loadGoogleMaps } from './Google/load';
+import { API_KEY } from './Google/GoogleMap';
+import { LatLngLike, convertLatLng } from 'spherical-geometry-js';
 
 interface StopProps {
     routes?: Map<string, Route>;
@@ -13,7 +16,44 @@ class Address extends Component<
     Pick<Stop, 'lat' | 'lon'>,
     { address: string }
 > {
-    // TODO reverse geocode address
+    geocoder?: google.maps.Geocoder;
+
+    async componentDidMount() {
+        const { Geocoder } = await loadGoogleMaps();
+        this.geocoder = new Geocoder();
+        const results = await this.geocode(this.props);
+        if (results.length > 0) {
+            this.setState({ address: results[0].formatted_address });
+        }
+    }
+
+    async componentDidUpdate(prevProps: Pick<Stop, 'lat' | 'lon'>) {
+        if (!this.geocoder) return;
+        if (
+            this.props.lat !== prevProps.lat ||
+            this.props.lon !== prevProps.lon
+        ) {
+            const results = await this.geocode(this.props);
+            if (results.length > 0) {
+                this.setState({ address: results[0].formatted_address });
+            }
+        }
+    }
+
+    async geocode(location: LatLngLike): Promise<google.maps.GeocoderResult[]> {
+        return new Promise((resolve, reject) => {
+            this.geocoder!.geocode(
+                { location: convertLatLng(location).toJSON() },
+                (results, status) => {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        resolve(results);
+                    } else {
+                        reject(new Error(String(status)));
+                    }
+                },
+            );
+        });
+    }
 
     render() {
         return <address>{this.state.address}</address>;

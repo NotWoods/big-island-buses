@@ -41,26 +41,17 @@ export class GoogleStreetView extends Component<Props, State> {
     streetViewEl?: HTMLDivElement;
 
     async componentDidMount() {
-        await loadGoogleMaps({ key: API_KEY, libraries: 'places' });
-        const controlOptions = {
-            position: google.maps.ControlPosition.RIGHT_CENTER,
-        };
-        this.streetView = new google.maps.StreetViewPanorama(
-            this.streetViewEl!,
-            {
-                position: convertLatLng(this.props).toJSON(),
-                visible: true,
-                scrollwheel: false,
-                addressControl: false,
-                fullscreenControl: false,
-                motionTracking: false,
-            },
-        );
+        const { StreetViewPanorama } = await loadGoogleMaps();
+        this.streetView = new StreetViewPanorama(this.streetViewEl!, {
+            position: convertLatLng(this.props).toJSON(),
+            visible: true,
+            scrollwheel: false,
+            addressControl: false,
+            fullscreenControl: false,
+            motionTracking: false,
+        });
 
         this.setState({ loaded: true });
-        window.addEventListener('resize', () => {
-            google.maps.event.trigger(this.streetView, 'resize');
-        });
     }
 
     componentDidUpdate(prevProps: Props) {

@@ -32,11 +32,15 @@ export class LocationApp extends Component<Props, State> {
         );
 
     locateUser = memoizeOne((userPosition: Coordinates) => {
+        const userPos = {
+            lat: userPosition.latitude,
+            lon: userPosition.longitude,
+        };
         let closestDistance = Number.MAX_VALUE;
         let closestStop: Stop | null = null;
         const stops = this.props.stops ? Object.values(this.props.stops) : [];
         for (const stop of stops) {
-            const distance = computeDistanceBetween(userPosition, stop);
+            const distance = computeDistanceBetween(userPos, stop);
             if (distance < closestDistance) {
                 closestStop = stop;
                 closestDistance = distance;

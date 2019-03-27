@@ -75,16 +75,18 @@ export class NavigationApp extends Component<Props, State> {
         ) as HTMLAnchorElement | null;
         if (clickedLink != null) {
             evt.preventDefault();
-            const newState = urlToState(
-                new URL(clickedLink.href, location.href),
-            );
+            const newUrl = new URL(clickedLink.href, location.href);
+            if (!newUrl.search) newUrl.search = location.search;
+            const newState = urlToState(newUrl);
             const isHistoryChange =
                 newState.route_id !== this.state.route_id ||
                 newState.trip_id !== this.state.trip_id;
             this.setState(newState as State, () => {
+                const title = this.title();
                 if (isHistoryChange) {
-                    const title = this.title();
                     history.pushState(null, title, clickedLink.href);
+                } else {
+                    history.replaceState(null, title, clickedLink.href);
                 }
             });
         }
@@ -108,7 +110,7 @@ export class NavigationApp extends Component<Props, State> {
     onOpenStop = (stop_id: string) => {
         this.setState({ stop_id }, () => {
             const title = this.title();
-            history.pushState(null, title, `?stop=${stop_id}`);
+            history.replaceState(null, title, `?stop=${stop_id}`);
         });
     };
 

@@ -166,6 +166,7 @@ body,
     width: 40px;
     height: 40px;
     transition: background 0.3s ease;
+    flex-shrink: 0;
 }
 .toolbar__button:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -218,6 +219,10 @@ main {
     margin-left: 256px;
     min-height: 100vh;
 }
+address {
+    font-style: normal;
+    display: inline;
+}
 
 .map {
     position: relative;
@@ -227,9 +232,13 @@ main {
     height: 100vh;
 }
 .map__header {
+    display: flex;
     position: absolute;
     top: 0;
     left: 0;
+    margin: 10px;
+    width: 300px;
+    max-width: calc(100% - 20px);
 }
 .map__canvas {
     width: 100%;
@@ -250,17 +259,16 @@ main {
     border: 0;
     border-radius: 2px;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23);
-    padding: 8px;
-    margin: 8px;
-    vertical-align: middle;
+    padding: 8px 17px;
     transition: box-shadow 0.3s ease;
-    width: 256px;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 0;
+    flex: 1;
 }
 .toolbar__search:focus {
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.19), 0 6px 3px rgba(0, 0, 0, 0.23);
-    outline: none;
 }
 
 #content {
@@ -650,9 +658,6 @@ th {
     }
 }
 @media (max-width: 360px) {
-    #search {
-        width: 192px !important;
-    }
     #trip-select {
         width: calc(100% - 76px) !important;
     }

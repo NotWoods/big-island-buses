@@ -59,6 +59,8 @@ export class RouteInfo extends Component<Props, State> {
                 })}
             >
                 <MapRenderer
+                    route_id={props.route_id}
+                    stop_id={props.stop_id}
                     trips={state.route ? state.route.trips : undefined}
                     stops={props.stops}
                     onOpenStop={props.onOpenStop}
