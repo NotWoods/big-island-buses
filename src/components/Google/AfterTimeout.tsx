@@ -1,4 +1,4 @@
-import { Component, h, ComponentChildren } from 'preact';
+import { Component, ComponentChildren } from 'preact';
 
 interface Props {
     ms: number;

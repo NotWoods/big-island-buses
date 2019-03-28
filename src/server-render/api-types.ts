@@ -1,3 +1,5 @@
+import { LatLngBoundsLiteral } from 'spherical-geometry-js';
+
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export type Weekdays = [
@@ -28,6 +30,7 @@ export interface RouteDetails extends Omit<Route, 'trip_ids'> {
     start_time: string;
     end_time: string;
     days: Weekdays;
+    bounds: LatLngBoundsLiteral;
 }
 
 export interface Trip {

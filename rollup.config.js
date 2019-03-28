@@ -17,6 +17,17 @@ const pageConfig = {
 };
 
 /** @type {import('rollup').RollupOptions} */
+const workerConfig = {
+    input: 'src/search-worker/index.ts',
+    output: {
+        file: 'public/js/search-worker.js',
+        format: 'esm',
+        sourcemap: true,
+    },
+    plugins: [resolve({ browser: true }), typescript()],
+};
+
+/** @type {import('rollup').RollupOptions} */
 const serverRenderConfig = {
     input: 'src/server-render/index.ts',
     output: {
@@ -30,8 +41,9 @@ const serverRenderConfig = {
         'alasql',
         'countries-and-timezones',
         'preact-render-to-string',
+        '@google/maps',
     ],
     plugins: [resolve(), typescript({ target: 'esnext' })],
 };
 
-export default [pageConfig, serverRenderConfig];
+export default [pageConfig, workerConfig, serverRenderConfig];

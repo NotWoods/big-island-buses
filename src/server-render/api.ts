@@ -4,6 +4,7 @@ import { getAllTimezones, Timezone } from 'countries-and-timezones';
 import { isAfter, isBefore } from 'date-fns';
 import { outputJson, WriteOptions } from 'fs-extra';
 import { relative, resolve } from 'path';
+import { LatLngBounds } from 'spherical-geometry-js';
 import {
     Calendar,
     Omit,
@@ -74,7 +75,10 @@ function toColor(col: string | number) {
     return '#' + col;
 }
 
-async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
+async function makeTripApi(
+    route: Omit<Route, 'trip_ids'>,
+    stopMap: Record<string, Stop>,
+) {
     const { route_id } = route;
     const tripsRes: Omit<Trip, 'stop_times'>[] = await alasql(
         `SELECT route_id, service_id, trip_id, trip_headsign AS headsign, trip_short_name AS name, direction_id
@@ -102,6 +106,7 @@ async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
     let last_stop_sequence = 0;
     let start_time = parseGtfsTime('23:59:59', timezone);
     let end_time = parseGtfsTime('00:00:00', timezone);
+    let routeBounds: LatLngBounds | undefined;
     const trips = await Promise.all(
         tripsRes.map(async trip => {
             const stop_times: Array<
@@ -131,6 +136,13 @@ async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
                     start_time = time;
                 }
 
+                const stop = stopMap[stopTime.stop_id];
+                if (!routeBounds) {
+                    routeBounds = new LatLngBounds(stop);
+                } else {
+                    routeBounds = routeBounds.extend(stop);
+                }
+
                 stopTime.time = toIsoTime(time);
                 delete stopTime.stop_sequence;
                 return stopTime as StopTime;
@@ -155,6 +167,7 @@ async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
         last_stop,
         start_time: toIsoTime(start_time),
         end_time: toIsoTime(end_time),
+        bounds: routeBounds!.toJSON(),
     };
 
     await outputJson(path, details, jsonOpts);
@@ -162,7 +175,7 @@ async function makeTripApi(route: Omit<Route, 'trip_ids'>) {
     return trips.map(trip => trip.trip_id);
 }
 
-async function makeRoutesApi() {
+async function makeRoutesApi(stopMap: Record<string, Stop>) {
     const [routesRes, agencyRes] = await Promise.all([
         alasql(
             `SELECT route_id, route_long_name AS name, route_url AS source_url, route_color AS color, route_text_color AS text_color, route_sort_order AS sort_order, agency_id
@@ -185,7 +198,7 @@ async function makeRoutesApi() {
             const route = rawRoute as Omit<Route, 'trip_ids'>;
             route.timezone = agency.agency_timezone;
 
-            const trip_ids = await makeTripApi(route);
+            const trip_ids = await makeTripApi(route, stopMap);
             (route as Route).trip_ids = trip_ids;
             route.color = toColor(route.color);
             route.text_color = toColor(route.text_color);
@@ -193,12 +206,23 @@ async function makeRoutesApi() {
         }),
     );
 
+    const stops = Object.values(stopMap);
     const path = resolve(API_FOLDER, 'routes.json');
-    await outputJson(path, routes, jsonOpts);
+    const data = {
+        routes,
+        bounds: stops
+            .slice(1)
+            .reduce(
+                (bounds, stop) => bounds.extend(stop),
+                new LatLngBounds(stops[0]),
+            ),
+    };
+
+    await outputJson(path, data, jsonOpts);
 }
 
 async function makeStopsApi() {
-    const client = createClient({ key: API_KEY });
+    const client = createClient({ key: API_KEY, Promise });
 
     const res = await Promise.all([
         alasql(
@@ -222,7 +246,7 @@ async function makeStopsApi() {
                     WHERE stop_id='${stop.stop_id}'`,
                 ) as Promise<{ trip_id: string }[]>,
                 client
-                    .reverseGeocode({ latlng: [stop.lon, stop.lat] })
+                    .reverseGeocode({ latlng: `${stop.lat},${stop.lon}` })
                     .asPromise(),
             ]);
             (stop as Stop).route_ids = Array.from(
@@ -237,6 +261,7 @@ async function makeStopsApi() {
     const stopMap = toObject(stops, 'stop_id');
     const path = resolve(API_FOLDER, 'stops.json');
     await outputJson(path, stopMap, jsonOpts);
+    return stopMap;
 }
 
 async function makeCalendarApi() {
@@ -341,9 +366,9 @@ export default async function main() {
         SELECT * INTO calendar_dates FROM ${csv('calendar_dates')};
         SELECT * INTO feed_info FROM ${csv('feed_info')};`,
     );
+    const stopMap = await makeStopsApi();
     await Promise.all([
-        makeRoutesApi(),
-        makeStopsApi(),
+        makeRoutesApi(stopMap),
         makeCalendarApi(),
         makeLastUpdatedApi(),
     ]);

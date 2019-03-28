@@ -26,7 +26,7 @@ async function template(file: string, data: Record<string, string>) {
 }
 
 async function loadData() {
-    const [routesRes, stops, version] = await Promise.all([
+    const [{ routes: routesRes }, stops, version] = await Promise.all([
         readJson(resolve(API_FOLDER, 'routes.json')),
         readJson(resolve(API_FOLDER, 'stops.json')),
         readJson(resolve(API_FOLDER, 'version.json')),

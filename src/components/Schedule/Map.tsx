@@ -1,8 +1,9 @@
-import { h } from 'preact';
 import memoizeOne from 'memoize-one';
+import { h } from 'preact';
+import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 import { Stop, Trip } from '../../server-render/api-types';
-import { MenuButton } from '../ToolbarButton';
 import { GoogleMap } from '../Google/GoogleMap';
+import { MenuButton } from '../ToolbarButton';
 
 const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
     const map = new Map<string, Set<string>>();
@@ -17,6 +18,7 @@ const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
 });
 
 export const MapRenderer = (props: {
+    bounds: LatLngBoundsLiteral;
     route_id?: string | null;
     stop_id?: string | null;
     stops?: Record<string, Stop>;
@@ -34,6 +36,7 @@ export const MapRenderer = (props: {
     return (
         <section class="map" id="map">
             <GoogleMap
+                bounds={props.bounds}
                 stop_id={props.stop_id}
                 stops={props.stops}
                 highlighted={highlighted}

@@ -13,7 +13,8 @@
         "outDir": "lib",
         "importHelpers": true,
         "pretty": true,
-        "lib": ["esnext", "webworker"],
+        "lib": ["dom", "esnext", "webworker"],
+        "skipLibCheck": true,
 
         /* Strict Type-Checking Options */
         "strict": true,

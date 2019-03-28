@@ -4,7 +4,7 @@ export interface ApiResult<T> {
 
 export interface Client {
     reverseGeocode(options: {
-        latlng?: [number, number];
+        latlng?: string | [number, number];
         place_id?: string;
         language?: string;
         result_type?: string[];

@@ -1,6 +1,10 @@
 import { h, Component, ComponentChild } from 'preact';
 import { Stop } from '../../server-render/api-types';
-import { convertLatLng, LatLngLike } from 'spherical-geometry-js';
+import {
+    convertLatLng,
+    LatLngLike,
+    LatLngBoundsLiteral,
+} from 'spherical-geometry-js';
 import { loadGoogleMaps } from './load';
 import { AfterTimeout } from './AfterTimeout';
 import { API_KEY } from '../../config';
@@ -86,6 +90,7 @@ const StaticMap = (props: {
 };
 
 interface Props {
+    bounds: LatLngBoundsLiteral;
     stop_id?: string | null;
     stops?: Record<string, Stop>;
     highlighted?: Set<string>;
@@ -140,9 +145,8 @@ export class GoogleMap extends Component<Props, State> {
             streetViewControl: false,
         });
 
-        const bounds = this.createStopMarkers();
-        if (bounds) this.map.fitBounds(bounds);
-
+        this.map.fitBounds(this.props.bounds);
+        this.createStopMarkers();
         this.createUserLocationMarker();
         this.createPlaceMarkers();
         this.updateSelectedMarker(null);
@@ -151,12 +155,14 @@ export class GoogleMap extends Component<Props, State> {
 
     componentDidUpdate(prevProps: Props) {
         if (!this.state.mapLoaded) return;
+        if (this.props.bounds !== prevProps.bounds) {
+            this.map!.fitBounds(this.props.bounds);
+        }
         if (
             this.props.stops !== prevProps.stops ||
             this.props.highlighted !== prevProps.highlighted
         ) {
-            const bounds = this.createStopMarkers();
-            if (bounds) this.map!.fitBounds(bounds);
+            this.createStopMarkers();
         }
         if (this.props.userPosition !== prevProps.userPosition) {
             this.createUserLocationMarker();
@@ -170,9 +176,7 @@ export class GoogleMap extends Component<Props, State> {
     }
 
     createStopMarkers() {
-        if (!this.props.stops) return null;
-        const markerBounds = new google.maps.LatLngBounds();
-        const highlightedBounds = new google.maps.LatLngBounds();
+        if (!this.props.stops) return;
         const { highlighted = new Set() } = this.props;
 
         for (const stop of Object.values(this.props.stops)) {
@@ -193,19 +197,15 @@ export class GoogleMap extends Component<Props, State> {
                 );
                 this.markers.set(stop.stop_id, marker);
             }
-            markerBounds.extend(marker.getPosition());
 
             if (highlighted.has(stop.stop_id) || highlighted.size === 0) {
                 marker.setIcon(Icon.STOP);
                 marker.setZIndex(ZIndex.STOP);
-                highlightedBounds.extend(marker.getPosition());
             } else {
                 marker.setIcon(Icon.STOP_OUTSIDE_ROUTE);
                 marker.setZIndex(0);
             }
         }
-
-        return highlighted.size > 0 ? highlightedBounds : markerBounds;
     }
 
     createUserLocationMarker() {

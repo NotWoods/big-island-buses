@@ -1,11 +1,13 @@
 import clsx from 'clsx';
+import memoizeOne from 'memoize-one';
 import { Component, h } from 'preact';
+import { LatLngBounds } from 'spherical-geometry-js';
 import { BASE_URL } from '../../config';
 import { Route, RouteDetails, Stop } from '../../server-render/api-types';
-import { RouteHeader } from './RouteHeader';
 import { StopInfo } from '../Stop';
 import { TimeData } from '../Time';
 import { MapRenderer } from './Map';
+import { RouteHeader } from './RouteHeader';
 import { ScheduleInfo } from './ScheduleInfo';
 
 interface Props {
@@ -24,6 +26,17 @@ interface Props {
 interface State {
     route: RouteDetails | null;
 }
+
+const bounds = memoizeOne((stops: Record<string, Stop> = {}) => {
+    const stopsList = Object.values(stops);
+    return stopsList
+        .slice(1)
+        .reduce(
+            (bounds, stop) => bounds.extend(stop),
+            new LatLngBounds(stopsList[0]),
+        )
+        .toJSON();
+});
 
 export class RouteInfo extends Component<Props, State> {
     async fetchRouteData() {
@@ -62,6 +75,9 @@ export class RouteInfo extends Component<Props, State> {
                     route_id={props.route_id}
                     stop_id={props.stop_id}
                     trips={state.route ? state.route.trips : undefined}
+                    bounds={
+                        state.route ? state.route.bounds : bounds(props.stops)
+                    }
                     stops={props.stops}
                     onOpenStop={props.onOpenStop}
                 />

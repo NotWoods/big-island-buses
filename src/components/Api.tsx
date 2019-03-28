@@ -18,7 +18,7 @@ interface State {
 export class ApiApp extends Component<Props, State> {
     async componentDidMount() {
         const json = (res: Response) => res.json();
-        const [routesRes, stops, version] = await Promise.all([
+        const [{ routes: routesRes }, stops, version] = await Promise.all([
             fetch(`${BASE_URL}/api/routes.json`).then(json),
             fetch(`${BASE_URL}/api/stops.json`).then(json),
             fetch(`${BASE_URL}/api/version.json`).then(json),
