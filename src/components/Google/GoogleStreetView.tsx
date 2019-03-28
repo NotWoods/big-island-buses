@@ -1,8 +1,8 @@
 import { Component, ComponentChild, h } from 'preact';
 import { convertLatLng } from 'spherical-geometry-js';
-import { API_KEY } from './GoogleMap';
 import { loadGoogleMaps } from './load';
 import { AfterTimeout } from './AfterTimeout';
+import { API_KEY } from '../../config';
 
 const StaticStreetView = (props: {
     height: number;

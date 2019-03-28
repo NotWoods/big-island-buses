@@ -3,8 +3,7 @@ import { Stop } from '../../server-render/api-types';
 import { convertLatLng, LatLngLike } from 'spherical-geometry-js';
 import { loadGoogleMaps } from './load';
 import { AfterTimeout } from './AfterTimeout';
-
-export const API_KEY = 'AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI';
+import { API_KEY } from '../../config';
 
 const Icon = {
     STOP: {

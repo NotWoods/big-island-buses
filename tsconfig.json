@@ -1,8 +1,10 @@
 {
     "include": ["./src/**/*"],
     "compilerOptions": {
+        "baseUrl": ".",
+        "paths": { "*": ["types/*"] },
         /* Basic Options */
-        "target": "esnext",
+        "target": "es2018",
         "module": "commonjs",
         "jsx": "react",
         "jsxFactory": "h",
@@ -11,6 +13,7 @@
         "outDir": "lib",
         "importHelpers": true,
         "pretty": true,
+        "lib": ["esnext", "webworker"],
 
         /* Strict Type-Checking Options */
         "strict": true,

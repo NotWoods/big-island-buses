@@ -1,4 +1,4 @@
-import { API_KEY } from './GoogleMap';
+import { API_KEY } from '../../config';
 
 const CALLBACK_NAME = '__googleMapsApiOnLoadCallback';
 

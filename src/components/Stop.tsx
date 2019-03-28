@@ -4,8 +4,8 @@ import { GoogleStreetView } from './Google/GoogleStreetView';
 import { RouteItem } from './RoutesList/Route';
 import { InfoItem } from './Schedule/InfoItem';
 import { loadGoogleMaps } from './Google/load';
-import { API_KEY } from './Google/GoogleMap';
-import { LatLngLike, convertLatLng } from 'spherical-geometry-js';
+import { convertLatLng } from 'spherical-geometry-js';
+import { geocode } from './Google/async';
 
 interface StopProps {
     routes?: Map<string, Route>;
@@ -21,7 +21,9 @@ class Address extends Component<
     async componentDidMount() {
         const { Geocoder } = await loadGoogleMaps();
         this.geocoder = new Geocoder();
-        const results = await this.geocode(this.props);
+        const results = await geocode(this.geocoder, {
+            location: convertLatLng(this.props).toJSON(),
+        });
         if (results.length > 0) {
             this.setState({ address: results[0].formatted_address });
         }
@@ -33,26 +35,13 @@ class Address extends Component<
             this.props.lat !== prevProps.lat ||
             this.props.lon !== prevProps.lon
         ) {
-            const results = await this.geocode(this.props);
+            const results = await geocode(this.geocoder, {
+                location: convertLatLng(this.props).toJSON(),
+            });
             if (results.length > 0) {
                 this.setState({ address: results[0].formatted_address });
             }
         }
-    }
-
-    async geocode(location: LatLngLike): Promise<google.maps.GeocoderResult[]> {
-        return new Promise((resolve, reject) => {
-            this.geocoder!.geocode(
-                { location: convertLatLng(location).toJSON() },
-                (results, status) => {
-                    if (status === google.maps.GeocoderStatus.OK) {
-                        resolve(results);
-                    } else {
-                        reject(new Error(String(status)));
-                    }
-                },
-            );
-        });
     }
 
     render() {

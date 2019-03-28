@@ -1,3 +1,4 @@
+import { createClient } from '@google/maps';
 import { promise as alasql } from 'alasql';
 import { getAllTimezones, Timezone } from 'countries-and-timezones';
 import { isAfter, isBefore } from 'date-fns';
@@ -20,6 +21,7 @@ import {
     toIsoTime,
     WEEKDAY_NAMES,
 } from './parse-date';
+import { API_KEY } from '../config';
 
 const GTFS_FOLDER = resolve(__dirname, '..', 'static', 'google_transit');
 const API_FOLDER = resolve(__dirname, '..', 'public', 'api');
@@ -196,11 +198,13 @@ async function makeRoutesApi() {
 }
 
 async function makeStopsApi() {
+    const client = createClient({ key: API_KEY });
+
     const res = await Promise.all([
         alasql(
             `SELECT stop_id, stop_name AS name, stop_lat AS lat, stop_lon AS lon
             FROM stops`,
-        ) as Promise<Omit<Stop, 'route_ids'>[]>,
+        ) as Promise<Omit<Stop, 'route_ids' | 'address'>[]>,
         alasql(
             `SELECT trip_id, route_id
             FROM trips`,
@@ -211,14 +215,21 @@ async function makeStopsApi() {
 
     const stops = await Promise.all(
         stopsRes.map(async stop => {
-            const tripIds: { trip_id: string }[] = await alasql(
-                `SELECT DISTINCT trip_id
-                FROM stop_times
-                WHERE stop_id='${stop.stop_id}'`,
-            );
+            const [tripIds, reverseGeocodeResponse] = await Promise.all([
+                alasql(
+                    `SELECT DISTINCT trip_id
+                    FROM stop_times
+                    WHERE stop_id='${stop.stop_id}'`,
+                ) as Promise<{ trip_id: string }[]>,
+                client
+                    .reverseGeocode({ latlng: [stop.lon, stop.lat] })
+                    .asPromise(),
+            ]);
             (stop as Stop).route_ids = Array.from(
                 new Set(tripIds.map(t => tripMap[t.trip_id].route_id)),
             );
+            (stop as Stop).address =
+                reverseGeocodeResponse.json.results[0].formatted_address;
             return stop as Stop;
         }),
     );

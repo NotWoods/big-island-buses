@@ -50,6 +50,7 @@ export interface Stop {
     name: string;
     lat: number;
     lon: number;
+    address: string;
     route_ids: string[];
 }
 
