@@ -90,7 +90,7 @@ const StaticMap = (props: {
 };
 
 interface Props {
-    bounds: LatLngBoundsLiteral;
+    bounds?: LatLngBoundsLiteral;
     stop_id?: string | null;
     stops?: Record<string, Stop>;
     highlighted?: Set<string>;
@@ -145,7 +145,7 @@ export class GoogleMap extends Component<Props, State> {
             streetViewControl: false,
         });
 
-        this.map.fitBounds(this.props.bounds);
+        this.fitBounds();
         this.createStopMarkers();
         this.createUserLocationMarker();
         this.createPlaceMarkers();
@@ -156,7 +156,7 @@ export class GoogleMap extends Component<Props, State> {
     componentDidUpdate(prevProps: Props) {
         if (!this.state.mapLoaded) return;
         if (this.props.bounds !== prevProps.bounds) {
-            this.map!.fitBounds(this.props.bounds);
+            this.fitBounds();
         }
         if (
             this.props.stops !== prevProps.stops ||
@@ -173,6 +173,10 @@ export class GoogleMap extends Component<Props, State> {
         if (this.props.stop_id !== prevProps.stop_id) {
             this.updateSelectedMarker(prevProps.stop_id);
         }
+    }
+
+    fitBounds() {
+        if (this.props.bounds) this.map!.fitBounds(this.props.bounds);
     }
 
     createStopMarkers() {

@@ -3,6 +3,7 @@ import { Route, Stop } from '../server-render/api-types';
 import { NavigationApp } from './Navigation';
 import { TimeData, toDate } from './Time';
 import { BASE_URL } from '../config';
+import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 
 interface Props {
     now?: Date;
@@ -13,12 +14,17 @@ interface State {
     routes?: Map<string, Route>;
     stops?: Record<string, Stop>;
     lastUpdated?: TimeData;
+    bounds?: LatLngBoundsLiteral;
 }
 
 export class ApiApp extends Component<Props, State> {
     async componentDidMount() {
         const json = (res: Response) => res.json();
-        const [{ routes: routesRes }, stops, version] = await Promise.all([
+        const [
+            { routes: routesRes, bounds },
+            stops,
+            version,
+        ] = await Promise.all([
             fetch(`${BASE_URL}/api/routes.json`).then(json),
             fetch(`${BASE_URL}/api/stops.json`).then(json),
             fetch(`${BASE_URL}/api/version.json`).then(json),
@@ -30,6 +36,7 @@ export class ApiApp extends Component<Props, State> {
         this.setState({
             routes,
             stops,
+            bounds,
             lastUpdated: toDate(new Date(version.last_updated)),
         });
     }

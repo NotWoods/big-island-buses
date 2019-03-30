@@ -1,6 +1,9 @@
 import memoizeOne from 'memoize-one';
 import { Component, h } from 'preact';
-import { computeDistanceBetween } from 'spherical-geometry-js';
+import {
+    computeDistanceBetween,
+    LatLngBoundsLiteral,
+} from 'spherical-geometry-js';
 import { Route, Stop } from '../server-render/api-types';
 import { LocationDisclaimer, Routes } from './RoutesList/Routes';
 import { RouteInfo } from './Schedule';
@@ -15,6 +18,7 @@ interface Props {
     route_id?: string;
     trip_id?: string;
     stop_id?: string;
+    bounds?: LatLngBoundsLiteral;
     onClick?(e: Event): void;
     onChange?(e: Event): void;
     onOpenStop?(stop_id: string): void;
@@ -82,6 +86,7 @@ export class LocationApp extends Component<Props, State> {
                     stops={props.stops}
                     routes={props.routes}
                     nowTime={props.nowTime}
+                    bounds={props.bounds}
                     name={route ? route.name : null}
                     color={route ? route.color : null}
                     text_color={route ? route.text_color : null}

@@ -3,11 +3,13 @@ import { Route, Stop } from '../server-render/api-types';
 import { LocationApp } from './Location';
 import { TimeData, toTime } from './Time';
 import { BASE_URL } from '../config';
+import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 
 interface Props {
     now?: Date;
     routes?: Map<string, Route>;
     stops?: Record<string, Stop>;
+    bounds?: LatLngBoundsLiteral;
     lastUpdated?: TimeData;
     maxDistance: number;
 }

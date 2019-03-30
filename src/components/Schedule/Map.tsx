@@ -18,7 +18,7 @@ const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
 });
 
 export const MapRenderer = (props: {
-    bounds: LatLngBoundsLiteral;
+    bounds?: LatLngBoundsLiteral;
     route_id?: string | null;
     stop_id?: string | null;
     stops?: Record<string, Stop>;

@@ -6,6 +6,7 @@ import { LocationApp } from '../components/Location';
 import { TimeData, toDate } from '../components/Time';
 import { BASE_URL } from '../config';
 import { Route, Stop } from './api-types';
+import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 
 const render = (_render as unknown) as (
     vnode: VNode,
@@ -26,7 +27,7 @@ async function template(file: string, data: Record<string, string>) {
 }
 
 async function loadData() {
-    const [{ routes: routesRes }, stops, version] = await Promise.all([
+    const [{ routes: routesRes, bounds }, stops, version] = await Promise.all([
         readJson(resolve(API_FOLDER, 'routes.json')),
         readJson(resolve(API_FOLDER, 'stops.json')),
         readJson(resolve(API_FOLDER, 'version.json')),
@@ -38,6 +39,7 @@ async function loadData() {
     return {
         routes,
         stops,
+        bounds,
         lastUpdated: toDate(new Date(version.last_updated)),
         maxDistance: 0,
     };
@@ -46,6 +48,7 @@ async function loadData() {
 async function makeTripPage(options: {
     routes?: Map<string, Route>;
     stops?: Record<string, Stop>;
+    bounds?: LatLngBoundsLiteral;
     lastUpdated?: TimeData;
     maxDistance: number;
     route_id: string;
