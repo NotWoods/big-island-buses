@@ -146,7 +146,7 @@ export class GoogleMap extends Component<Props, State> {
         });
 
         this.fitBounds();
-        this.createStopMarkers();
+        this.createStopMarkers(new Set());
         this.createUserLocationMarker();
         this.createPlaceMarkers();
         this.updateSelectedMarker(null);
@@ -155,33 +155,37 @@ export class GoogleMap extends Component<Props, State> {
 
     componentDidUpdate(prevProps: Props) {
         if (!this.state.mapLoaded) return;
-        if (this.props.bounds !== prevProps.bounds) {
-            this.fitBounds();
-        }
-        if (
-            this.props.stops !== prevProps.stops ||
-            this.props.highlighted !== prevProps.highlighted
-        ) {
-            this.createStopMarkers();
-        }
-        if (this.props.userPosition !== prevProps.userPosition) {
-            this.createUserLocationMarker();
-        }
-        if (this.props.places !== prevProps.places) {
-            this.createPlaceMarkers();
-        }
-        if (this.props.stop_id !== prevProps.stop_id) {
-            this.updateSelectedMarker(prevProps.stop_id);
-        }
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                if (this.props.bounds !== prevProps.bounds) {
+                    this.fitBounds();
+                }
+                if (
+                    this.props.stops !== prevProps.stops ||
+                    this.props.highlighted !== prevProps.highlighted
+                ) {
+                    this.createStopMarkers(prevProps.highlighted || new Set());
+                }
+                if (this.props.userPosition !== prevProps.userPosition) {
+                    this.createUserLocationMarker();
+                }
+                if (this.props.places !== prevProps.places) {
+                    this.createPlaceMarkers();
+                }
+                if (this.props.stop_id !== prevProps.stop_id) {
+                    this.updateSelectedMarker(prevProps.stop_id);
+                }
+            });
+        });
     }
 
     fitBounds() {
         if (this.props.bounds) this.map!.fitBounds(this.props.bounds);
     }
 
-    createStopMarkers() {
+    createStopMarkers(lastHighlighted: Set<string>) {
         if (!this.props.stops) return;
-        const { highlighted = new Set() } = this.props;
+        const { highlighted = new Set<string>() } = this.props;
 
         for (const stop of Object.values(this.props.stops)) {
             let marker = this.markers.get(stop.stop_id);
@@ -205,7 +209,10 @@ export class GoogleMap extends Component<Props, State> {
             if (highlighted.has(stop.stop_id) || highlighted.size === 0) {
                 marker.setIcon(Icon.STOP);
                 marker.setZIndex(ZIndex.STOP);
-            } else {
+            } else if (
+                lastHighlighted.has(stop.stop_id) ||
+                lastHighlighted.size === 0
+            ) {
                 marker.setIcon(Icon.STOP_OUTSIDE_ROUTE);
                 marker.setZIndex(0);
             }

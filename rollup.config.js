@@ -31,7 +31,8 @@ const workerConfig = {
 const serverRenderConfig = {
     input: 'src/server-render/index.ts',
     output: {
-        file: 'lib/server-render.js',
+        dir: 'lib',
+        entryFileNames: 'server-render.js',
         format: 'cjs',
         sourcemap: true,
     },

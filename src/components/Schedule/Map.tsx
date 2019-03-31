@@ -1,9 +1,8 @@
 import memoizeOne from 'memoize-one';
 import { h } from 'preact';
 import { LatLngBoundsLiteral } from 'spherical-geometry-js';
-import { Stop, Trip } from '../../server-render/api-types';
+import { Stop } from '../../server-render/api-types';
 import { GoogleMap } from '../Google/GoogleMap';
-import { MenuButton } from '../ToolbarButton';
 
 const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
     const map = new Map<string, Set<string>>();
@@ -17,14 +16,15 @@ const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
     return map;
 });
 
-export const MapRenderer = (props: {
+export interface MapRendererProps {
     bounds?: LatLngBoundsLiteral;
     route_id?: string | null;
     stop_id?: string | null;
     stops?: Record<string, Stop>;
-    trips?: Record<string, Pick<Trip, 'stop_times'>>;
     onOpenStop?(stop_id: string): void;
-}) => {
+}
+
+export const MapRenderer = (props: MapRendererProps) => {
     let highlighted: Set<string> | undefined;
     if (props.stops) {
         if (props.route_id) {
@@ -34,26 +34,12 @@ export const MapRenderer = (props: {
     }
 
     return (
-        <section class="map" id="map">
-            <GoogleMap
-                bounds={props.bounds}
-                stop_id={props.stop_id}
-                stops={props.stops}
-                highlighted={highlighted}
-                onOpenStop={props.onOpenStop}
-            />
-            <header class="map__header toolbar" id="map-header">
-                <MenuButton id="menu" />
-                <input
-                    type="search"
-                    name="Map Search"
-                    id="search"
-                    class="toolbar__search"
-                    aria-label="Enter a location"
-                    placeholder="Enter a location"
-                    autocomplete="off"
-                />
-            </header>
-        </section>
+        <GoogleMap
+            bounds={props.bounds}
+            stop_id={props.stop_id}
+            stops={props.stops}
+            highlighted={highlighted}
+            onOpenStop={props.onOpenStop}
+        />
     );
 };

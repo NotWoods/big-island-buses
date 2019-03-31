@@ -3,11 +3,9 @@ import { Component, h } from 'preact';
 import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 import { BASE_URL } from '../../config';
 import { Route, RouteDetails, Stop } from '../../server-render/api-types';
-import { StopInfo } from '../Stop';
 import { TimeData } from '../Time';
-import { MapRenderer } from './Map';
+import { MapContainer } from './MapContainer';
 import { RouteHeader } from './RouteHeader';
-import { ScheduleInfo } from './ScheduleInfo';
 
 interface Props {
     route_id?: string;
@@ -25,12 +23,14 @@ interface Props {
 
 interface State {
     route: RouteDetails | null;
+    StopInfo: typeof import('../Stop').StopInfo;
+    ScheduleInfo: typeof import('./ScheduleInfo').ScheduleInfo;
 }
 
 export class RouteInfo extends Component<Props, State> {
     async fetchRouteData() {
         if (this.props.route_id == null) {
-            // this.setState({ route: null });
+            this.setState({ route: null });
         } else {
             const res = await fetch(
                 `${BASE_URL}/api/routes/${this.props.route_id}.json`,
@@ -42,16 +42,16 @@ export class RouteInfo extends Component<Props, State> {
 
     componentDidMount() {
         this.fetchRouteData();
+        import('../Stop').then(({ StopInfo }) => this.setState({ StopInfo }));
+        import('./ScheduleInfo').then(({ ScheduleInfo }) =>
+            this.setState({ ScheduleInfo }),
+        );
     }
     componentDidUpdate(prevProps: Props) {
         if (prevProps.route_id !== this.props.route_id) this.fetchRouteData();
     }
 
-    render(props: Props, state: State) {
-        let stop: Stop | null = null;
-        if (props.stops && props.stop_id) {
-            stop = props.stops[props.stop_id];
-        }
+    render(props: Props, { route, StopInfo, ScheduleInfo }: State) {
         return (
             <main
                 id="main"
@@ -60,11 +60,10 @@ export class RouteInfo extends Component<Props, State> {
                     'open-stop': Boolean(props.stop_id),
                 })}
             >
-                <MapRenderer
+                <MapContainer
                     route_id={props.route_id}
                     stop_id={props.stop_id}
-                    trips={state.route ? state.route.trips : undefined}
-                    bounds={state.route ? state.route.bounds : props.bounds}
+                    bounds={route ? route.bounds : props.bounds}
                     stops={props.stops}
                     onOpenStop={props.onOpenStop}
                 />
@@ -76,17 +75,21 @@ export class RouteInfo extends Component<Props, State> {
                             textColor={props.text_color}
                         />
                     ) : null}
-                    {state.route ? (
+                    {route && ScheduleInfo ? (
                         <ScheduleInfo
-                            {...state.route}
+                            {...route}
                             route_id={props.route_id}
                             trip_id={props.trip_id}
                             stops={props.stops}
                             nowTime={props.nowTime}
                         />
                     ) : null}
-                    {stop != null ? (
-                        <StopInfo stop={stop} routes={props.routes} />
+                    {StopInfo ? (
+                        <StopInfo
+                            stop_id={props.stop_id}
+                            stops={props.stops}
+                            routes={props.routes}
+                        />
                     ) : null}
                     <div class="float-clear" />
                 </div>

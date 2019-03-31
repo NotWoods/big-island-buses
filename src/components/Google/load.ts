@@ -21,7 +21,6 @@ export function loadGoogleMaps() {
 
             const params = new URLSearchParams({
                 key: API_KEY,
-                libraries: 'places',
                 callback: CALLBACK_NAME,
             });
 

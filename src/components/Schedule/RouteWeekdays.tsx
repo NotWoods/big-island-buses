@@ -1,9 +1,7 @@
 import { h } from 'preact';
+import { Weekdays } from '../../server-render/api-types';
+import { WEEKDAY_NAMES } from '../../server-render/parse-date';
 import { InfoItem } from './InfoItem';
-
-interface RouteWeekdaysProps {
-    weekdays: string;
-}
 
 const icon = [
     <path
@@ -13,13 +11,28 @@ const icon = [
     <rect key="2" x="7" y="10" width="5" height="5" />,
 ];
 
-export const RouteWeekdays = (props: RouteWeekdaysProps) => (
+function weekdaysToString(days: Weekdays) {
+    if (days.every(Boolean)) return 'Daily';
+    if (days[0] && days[6] && days.slice(1, 6).every(b => !b)) {
+        return 'Saturday - Sunday';
+    }
+    const firstDay = days.indexOf(true);
+    const lastDay = days.lastIndexOf(true);
+    if (firstDay === lastDay) return WEEKDAY_NAMES[firstDay];
+    else if (days.slice(firstDay, lastDay + 1).every(Boolean)) {
+        return `${WEEKDAY_NAMES[firstDay]} - ${WEEKDAY_NAMES[lastDay]}`;
+    } else {
+        return WEEKDAY_NAMES.filter((_, i) => days[i]).join(', ');
+    }
+}
+
+export const RouteWeekdays = (props: { days: Weekdays }) => (
     <InfoItem
         id="week-days"
         spanId="week-days-value"
         title="Bus route weekdays"
         icon={icon}
     >
-        {props.weekdays}
+        {weekdaysToString(props.days)}
     </InfoItem>
 );

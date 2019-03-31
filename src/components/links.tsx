@@ -1,5 +1,5 @@
-import { h } from 'preact';
 import clsx from 'clsx';
+import { ComponentChild, h } from 'preact';
 import { BASE_URL } from '../config';
 import { Stop } from '../server-render/api-types';
 
@@ -38,13 +38,15 @@ export const TripLink = ({ route_id, trip_id, ...props }: TripLinkProps) => (
  */
 export const StopLink = ({ stop, ...props }: StopLinkProps) => {
     if (!stop) return null;
+    const children = props.children as ComponentChild[];
 
     return (
         <a
-            children={stop.name}
             {...props}
             class={clsx(props.class, 'goride-link')}
             href={`?stop=${stop.stop_id}`}
-        />
+        >
+            {children.length > 0 ? children : stop.name}
+        </a>
     );
 };
