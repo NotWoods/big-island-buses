@@ -3,19 +3,19 @@ import { placePredictions, AutocompletionRequest } from './places';
 
 export declare var self: WorkerGlobalScope;
 
-interface SearchResult {
+export interface SearchResult {
     type: 'stop' | 'place';
     id: string;
     name: string;
 }
 
-const controllers = new Map<number, AbortController>();
+let lastController: AbortController | undefined;
 
-async function getPredictions(id: number, request: AutocompletionRequest) {
+async function getPredictions(request: AutocompletionRequest) {
     let signal: AbortSignal | undefined;
     if (typeof AbortController !== 'undefined') {
         const controller = new AbortController();
-        controllers.set(id, controller);
+        lastController = controller;
         signal = controller.signal;
     }
     const [stops, places] = await Promise.all([
@@ -37,8 +37,8 @@ async function getPredictions(id: number, request: AutocompletionRequest) {
 }
 
 onmessage = async evt => {
-    const { id, request } = evt.data;
-    controllers.forEach(controller => controller.abort());
-    const result = await getPredictions(id, request);
+    const request = evt.data;
+    if (lastController) lastController.abort();
+    const result = await getPredictions(request);
     postMessage(result);
 };

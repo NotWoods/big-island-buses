@@ -18,27 +18,31 @@ interface State {
 }
 
 export class ApiApp extends Component<Props, State> {
-    async componentDidMount() {
+    componentDidMount() {
         const json = (res: Response) => res.json();
-        const [
-            { routes: routesRes, bounds },
-            stops,
-            version,
-        ] = await Promise.all([
-            fetch(`${BASE_URL}/api/routes.json`).then(json),
-            fetch(`${BASE_URL}/api/stops.json`).then(json),
-            fetch(`${BASE_URL}/api/version.json`).then(json),
-        ]);
 
-        const routes = new Map<string, Route>(
-            routesRes.map((route: Route) => [route.route_id, route]),
-        );
-        this.setState({
-            routes,
-            stops,
-            bounds,
-            lastUpdated: toDate(new Date(version.last_updated)),
-        });
+        fetch(`${BASE_URL}/api/routes.json`)
+            .then(json)
+            .then(({ routes, bounds }) => {
+                this.setState({
+                    routes: new Map<string, Route>(
+                        routes.map((route: Route) => [route.route_id, route]),
+                    ),
+                    bounds: bounds,
+                });
+            });
+
+        fetch(`${BASE_URL}/api/stops.json`)
+            .then(json)
+            .then(stops => this.setState({ stops }));
+
+        fetch(`${BASE_URL}/api/version.json`)
+            .then(json)
+            .then(version =>
+                this.setState({
+                    lastUpdated: toDate(new Date(version.last_updated)),
+                }),
+            );
     }
 
     render(props: Props, state: State) {
