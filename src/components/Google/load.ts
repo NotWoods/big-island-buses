@@ -10,7 +10,10 @@ declare global {
 
 let promise: Promise<typeof google.maps>;
 
-export function loadGoogleMaps() {
+/**
+ * Dynamically import the Google Maps API.
+ */
+export function loadGoogleMaps(): Promise<typeof google.maps> {
     if (!promise) {
         promise = new Promise((resolve, reject) => {
             // Hook up the on load callback

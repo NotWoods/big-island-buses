@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ComponentChild, h } from 'preact';
+import { h, JSX, toChildArray } from 'preact';
 import { BASE_URL } from '../config';
 import { Stop } from '../server-render/api-types';
 
@@ -38,7 +38,7 @@ export const TripLink = ({ route_id, trip_id, ...props }: TripLinkProps) => (
  */
 export const StopLink = ({ stop, ...props }: StopLinkProps) => {
     if (!stop) return null;
-    const children = props.children as ComponentChild[];
+    const children = toChildArray(props.children);
 
     return (
         <a

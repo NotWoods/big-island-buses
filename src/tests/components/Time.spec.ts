@@ -1,4 +1,4 @@
-import { toTime, toDate, toDuration } from '../Time';
+import { toTime, toDate, toDuration } from '../../components/Time';
 
 describe('TimeData', () => {
     test('toTime', () => {

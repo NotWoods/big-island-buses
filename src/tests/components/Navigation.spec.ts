@@ -1,4 +1,4 @@
-import { urlToState } from '../Navigation';
+import { urlToState } from '../../components/Navigation';
 
 describe('urlToState', () => {
     const base = 'https://notwoods.github.io';

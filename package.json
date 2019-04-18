@@ -7,7 +7,7 @@
         "alasql": "^0.4.11",
         "countries-and-timezones": "^1.0.1",
         "fs-extra": "^7.0.1",
-        "memoize-one": "^5.0.2",
+        "memoize-one": "^5.0.4",
         "preact-render-to-string": "^4.1.0"
     },
     "devDependencies": {
@@ -16,28 +16,29 @@
         "@types/googlemaps": "^3.30.19",
         "@types/jest": "^24.0.11",
         "@types/memoize-one": "^4.1.1",
-        "clsx": "^1.0.3",
+        "clsx": "^1.0.4",
         "date-fns": "^2.0.0-alpha.27",
         "http-server": "^0.11.1",
-        "idb": "^4.0.0",
-        "jest": "^24.5.0",
-        "preact": "^8.4.2",
-        "prettier": "^1.16.4",
-        "rollup": "^1.7.4",
-        "rollup-plugin-node-resolve": "^4.0.1",
+        "idb": "^4.0.3",
+        "jest": "^24.7.1",
+        "preact": "^10.0.0-beta.0",
+        "prettier": "^1.17.0",
+        "rollup": "^1.10.0",
+        "rollup-plugin-node-resolve": "^4.2.3",
         "rollup-plugin-typescript": "^1.0.1",
         "spherical-geometry-js": "^1.4.0",
-        "ts-jest": "^24.0.1",
+        "ts-jest": "^24.0.2",
         "tslib": "^1.9.3",
-        "typescript": "^3.4.1"
+        "typescript": "^3.4.3"
     },
     "scripts": {
         "build": "rollup -c",
         "dev": "npm run build -- --watch | http-server",
         "test": "jest",
-        "lint:ts": "prettier --parser typescript \"**/*.{ts,tsx}\"",
-        "lint": "tsc --noEmit && npm run lint:ts -- --write",
-        "lint:check": "tsc --noEmit && npm run lint:ts -- --check"
+        "lint:ts": "prettier \"**/*.{ts,tsx}\"",
+        "lint:css": "prettier \"public/**/*.css\"",
+        "lint": "tsc --noEmit && npm run lint:ts -- --write && npm run lint:css -- --write",
+        "lint:check": "tsc --noEmit && npm run lint:ts -- --check && npm run lint:css -- --check"
     },
     "jest": {
         "preset": "ts-jest/presets/js-with-ts"

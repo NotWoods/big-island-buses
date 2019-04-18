@@ -1,12 +1,12 @@
 import { Component, ComponentChildren } from 'preact';
 
 interface Props {
-    ms: number;
-    children?: ComponentChildren;
+    readonly ms: number;
+    readonly children?: ComponentChildren;
 }
 
 interface State {
-    timeoutPassed: boolean;
+    readonly timeoutPassed: boolean;
 }
 
 /**
