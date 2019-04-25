@@ -18,7 +18,7 @@ const pageConfig = {
 
 /** @type {import('rollup').RollupOptions} */
 const workerConfig = {
-    input: 'src/search-worker/index.ts',
+    input: 'src/search/worker.ts',
     output: {
         file: 'public/js/search-worker.js',
         format: 'esm',
