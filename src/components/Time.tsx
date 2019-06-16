@@ -13,6 +13,9 @@ export interface TimeData {
     readonly formatted: string;
 }
 
+/**
+ * Get the time (hour, minute) from a date object.
+ */
 export const toTime = (t: Date): TimeData => ({
     iso: toIsoTime(t),
     formatted: t.toLocaleTimeString(undefined, {
@@ -21,11 +24,17 @@ export const toTime = (t: Date): TimeData => ({
     }),
 });
 
+/**
+ * Get the date (year, month, day) from a date object.
+ */
 export const toDate = (t: Date): TimeData => ({
     iso: toIsoDate(t),
     formatted: t.toLocaleDateString(),
 });
 
+/**
+ * Convert minutes to a duration.
+ */
 export const toDuration = ({ minute }: { minute: number }) => {
     let formatted: string;
     if (Intl.RelativeTimeFormat) {
@@ -41,6 +50,9 @@ export const toDuration = ({ minute }: { minute: number }) => {
     };
 };
 
+/**
+ * Time element that displays contents of a `TimeData` object.
+ */
 export const Time: FunctionalComponent<{
     time: TimeData;
     class?: string;

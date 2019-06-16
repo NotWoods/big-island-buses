@@ -9,7 +9,7 @@ export type Weekdays = [
     boolean,
     boolean,
     boolean,
-    boolean
+    boolean,
 ];
 
 export interface Route {

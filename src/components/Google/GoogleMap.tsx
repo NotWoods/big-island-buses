@@ -91,7 +91,7 @@ const StaticMap = (props: {
 
 interface Props {
     bounds?: LatLngBoundsLiteral;
-    stop_id?: string | null;
+    stop_id?: string;
     stops?: Record<string, Stop>;
     highlighted?: Set<string>;
     userPosition?: {
@@ -108,7 +108,7 @@ interface State {
 
 export class GoogleMap extends Component<Props, State> {
     map?: google.maps.Map;
-    mapEl: HTMLDivElement | null = null;
+    mapEl?: HTMLDivElement;
 
     markers = new Map<string, google.maps.Marker>();
     userPositionMarker?: google.maps.Marker;
@@ -132,7 +132,7 @@ export class GoogleMap extends Component<Props, State> {
 
     async componentDidMount() {
         const { Map, ControlPosition } = await loadGoogleMaps();
-        this.map = new Map(this.mapEl, {
+        this.map = new Map(this.mapEl || null, {
             center: { lat: 19.6, lng: -155.56 },
             zoom: 10,
             backgroundColor: '#aadaff',
@@ -149,7 +149,7 @@ export class GoogleMap extends Component<Props, State> {
         this.createStopMarkers(new Set());
         this.createUserLocationMarker();
         this.createPlaceMarkers();
-        this.updateSelectedMarker(null);
+        this.updateSelectedMarker(undefined);
         this.setState({ mapLoaded: true });
     }
 

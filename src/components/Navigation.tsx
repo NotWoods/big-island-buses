@@ -2,8 +2,16 @@ import { Component, h } from 'preact';
 import { Route, Stop } from '../server-render/api-types';
 import { LocationApp } from './Location';
 import { TimeData, toTime } from './Time';
-import { BASE_URL } from '../config';
+import { APP_NAME } from '../config';
 import { LatLngBoundsLiteral } from 'spherical-geometry-js';
+import {
+    NavigationState,
+    urlToState,
+    shouldPushHistory,
+    tripToUrl,
+    stopToUrl,
+} from './navigation/url';
+import { findClickedNavLink } from './navigation/links';
 
 interface Props {
     now?: Date;
@@ -14,51 +22,19 @@ interface Props {
     maxDistance: number;
 }
 
-interface State {
-    route_id?: string | null;
-    trip_id?: string | null;
-    stop_id?: string | null;
-}
-
-const GORIDE_LINK_URL_REGEX = /\/s\/([^\/]+)(?:\/([^\/]+))?\/?$/;
-/**
- * Converts from a URL to state.
- *
- * Supported formats:
- * - /
- * - /s/{route_id}/{trip_id}?stop={stop_id}
- * - /s/{route_id}/{trip_id}/?stop={stop_id}
- * - #!route={route_id}&trip={trip_id}&stop={stop_id}
- */
-export function urlToState(url: URL | Location) {
-    if (url.hash.startsWith('#!')) {
-        const params = new URLSearchParams(url.hash.slice(2));
-        return {
-            route_id: params.get('route'),
-            trip_id: params.get('trip'),
-            stop_id: params.get('stop'),
-        };
-    } else {
-        const stop_id = new URLSearchParams(url.search.slice(1)).get('stop');
-        const match = url.pathname.match(GORIDE_LINK_URL_REGEX);
-        return {
-            route_id: match ? match[1] : null,
-            trip_id: match ? match[2] : null,
-            stop_id,
-        };
-    }
-}
-
-export class NavigationApp extends Component<Props, State> {
+export class NavigationApp extends Component<Props, NavigationState> {
     componentDidMount() {
         window.addEventListener('popstate', this.onPopState);
         window.addEventListener('hashchange', this.onPopState);
         this.onPopState();
     }
 
+    /**
+     * Generate a title for the page, and display it.
+     */
     title() {
         const { route_id } = this.state;
-        let title = 'Big Island Buses';
+        let title = APP_NAME;
         if (route_id && this.props.routes) {
             const route = this.props.routes.get(route_id);
             title = `${route ? route.name : '404'} | ${title}`;
@@ -72,23 +48,21 @@ export class NavigationApp extends Component<Props, State> {
     };
 
     onLinkClick = (evt: Event) => {
-        const clickedLink = (evt.target as Element).closest(
-            'a.goride-link',
-        ) as HTMLAnchorElement | null;
-        if (clickedLink != null) {
+        const clickedLink = findClickedNavLink(evt);
+        if (clickedLink != undefined) {
             evt.preventDefault();
+            // Copy base from the current location over, including search params
             const newUrl = new URL(clickedLink.href, location.href);
             if (!newUrl.search) newUrl.search = location.search;
+
+            const oldState = this.state;
             const newState = urlToState(newUrl);
-            const isHistoryChange =
-                newState.route_id !== this.state.route_id ||
-                newState.trip_id !== this.state.trip_id;
-            this.setState(newState as State, () => {
+            this.setState(newState, () => {
                 const title = this.title();
-                if (isHistoryChange) {
-                    history.pushState(null, title, clickedLink.href);
+                if (shouldPushHistory(oldState, newState)) {
+                    history.pushState(undefined, title, clickedLink.href);
                 } else {
-                    history.replaceState(null, title, clickedLink.href);
+                    history.replaceState(undefined, title, clickedLink.href);
                 }
             });
         }
@@ -99,11 +73,10 @@ export class NavigationApp extends Component<Props, State> {
         if (select.matches('.schedule-info__select')) {
             const trip_id = select.value;
             this.setState({ trip_id }, () => {
-                const title = this.title();
                 history.pushState(
-                    null,
-                    title,
-                    `${BASE_URL}/s/${this.state.route_id}/${trip_id}`,
+                    undefined,
+                    this.title(),
+                    tripToUrl({ trip_id, route_id: this.state.route_id! }),
                 );
             });
         }
@@ -111,18 +84,21 @@ export class NavigationApp extends Component<Props, State> {
 
     onOpenStop = (stop_id: string) => {
         this.setState({ stop_id }, () => {
-            const title = this.title();
-            history.replaceState(null, title, `?stop=${stop_id}`);
+            history.replaceState(
+                undefined,
+                this.title(),
+                stopToUrl({ stop_id }),
+            );
         });
     };
 
-    render(props: Props, state: State) {
+    render(props: Props, state: NavigationState) {
         return (
             <LocationApp
                 {...props}
-                route_id={state.route_id || undefined}
-                trip_id={state.trip_id || undefined}
-                stop_id={state.stop_id || undefined}
+                route_id={state.route_id}
+                trip_id={state.trip_id}
+                stop_id={state.stop_id}
                 nowTime={toTime(props.now || new Date())}
                 onClick={this.onLinkClick}
                 onChange={this.onTripSelectChange}

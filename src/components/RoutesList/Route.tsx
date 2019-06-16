@@ -1,22 +1,23 @@
 import { FunctionalComponent, h } from 'preact';
-import { RouteLink } from '../links';
+import { RouteLink } from '../navigation/links';
+import { Route } from '../../server-render/api-types';
 
 interface RouteProps {
-    color: string;
-    route_id: string;
-    name: string;
-    class?: string;
+    route?: Pick<Route, 'color' | 'route_id' | 'name'>;
+    class: string;
 }
 
-export const RouteItem: FunctionalComponent<
-    RouteProps & { class: string }
-> = props => (
-    <li class={`route ${props.class}`} style={`border-color:${props.color}`}>
-        <RouteLink
-            class={`route__link ${props.class}__link`}
-            route_id={props.route_id}
+export const RouteItem: FunctionalComponent<RouteProps> = props => {
+    if (!props.route) return null;
+    return (
+        <li
+            class={`route ${props.class}`}
+            style={{ 'border-color': props.route.color }}
         >
-            {props.name}
-        </RouteLink>
-    </li>
-);
+            <RouteLink
+                class={`route__link ${props.class}__link`}
+                route={props.route}
+            />
+        </li>
+    );
+};

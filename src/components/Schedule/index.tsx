@@ -9,28 +9,28 @@ import { RouteHeader } from './RouteHeader';
 
 interface Props {
     route_id?: string;
-    trip_id?: string | null;
-    stop_id?: string | null;
+    trip_id?: string;
+    stop_id?: string;
     stops?: Record<string, Stop>;
     routes?: Map<string, Route>;
     nowTime?: TimeData;
-    name: string | null;
-    color: string | null;
-    text_color: string | null;
+    name?: string;
+    color?: string;
+    text_color?: string;
     bounds?: LatLngBoundsLiteral;
     onOpenStop?(stop_id: string): void;
 }
 
 interface State {
-    route: RouteDetails | null;
+    route?: RouteDetails | undefined;
     StopInfo: typeof import('../Stop').StopInfo;
     ScheduleInfo: typeof import('./ScheduleInfo').ScheduleInfo;
 }
 
 export class RouteInfo extends Component<Props, State> {
     async fetchRouteData() {
-        if (this.props.route_id == null) {
-            this.setState({ route: null });
+        if (this.props.route_id == undefined) {
+            this.setState({ route: undefined });
         } else {
             const res = await fetch(
                 `${BASE_URL}/api/routes/${this.props.route_id}.json`,

@@ -1,11 +1,11 @@
 import { h } from 'preact';
 import { Route, Stop } from '../server-render/api-types';
-import { GoogleStreetView } from './Google/GoogleStreetView';
+import { GoogleStreetView } from './google/GoogleStreetView';
 import { RouteItem } from './RoutesList/Route';
 import { InfoItem } from './Schedule/InfoItem';
 
 interface StopProps {
-    stop_id?: string | null;
+    stop_id?: string;
     routes?: Map<string, Route>;
     stops?: Record<string, Stop>;
 }
@@ -15,11 +15,11 @@ const addressIcon = (
 );
 
 export const StopInfo = (props: StopProps) => {
-    let stop: Stop | null = null;
+    let stop: Stop | undefined = undefined;
     if (props.stops && props.stop_id) {
         stop = props.stops[props.stop_id];
     }
-    if (stop == null) return null;
+    if (!stop) return null;
 
     return (
         <section class="stop" id="stop">
@@ -46,17 +46,13 @@ export const StopInfo = (props: StopProps) => {
                         class="stop__connections connection__list"
                         id="connections"
                     >
-                        {stop.route_ids.map(route_id => {
-                            const route = props.routes!.get(route_id);
-                            if (!route) return null;
-                            return (
-                                <RouteItem
-                                    key={route_id}
-                                    class="connection"
-                                    {...route}
-                                />
-                            );
-                        })}
+                        {stop.route_ids.map(route_id => (
+                            <RouteItem
+                                key={route_id}
+                                class="connection"
+                                route={props.routes!.get(route_id)}
+                            />
+                        ))}
                     </ul>
                 ) : null}
             </div>

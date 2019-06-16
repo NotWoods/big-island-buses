@@ -293,9 +293,7 @@ async function makeCalendarApi() {
                 const lastDay = days.lastIndexOf(true);
                 if (firstDay === lastDay) description = WEEKDAY_NAMES[firstDay];
                 else
-                    description = `${WEEKDAY_NAMES[firstDay]} - ${
-                        WEEKDAY_NAMES[lastDay]
-                    }`;
+                    description = `${WEEKDAY_NAMES[firstDay]} - ${WEEKDAY_NAMES[lastDay]}`;
             }
 
             const exceptionsRes: {

@@ -23,7 +23,7 @@ export const WEEKDAY_NAMES = [
 export function parseGtfsDate(dateStr: string | number) {
     if (typeof dateStr === 'number') dateStr = dateStr.toString();
     const match = dateStr.match(DATE_REGEX);
-    if (match == null) throw new TypeError();
+    if (!match) throw new TypeError();
     const [, year, month, date] = match.map(s => parseInt(s, 10));
     return new Date(Date.UTC(year, month - 1, date));
 }
@@ -34,7 +34,7 @@ export function parseGtfsDate(dateStr: string | number) {
  */
 export function parseGtfsTime(timeStr: string, timezone: Timezone) {
     const match = timeStr.match(TIME_REGEX);
-    if (match == null) throw new TypeError(timeStr);
+    if (!match) throw new TypeError(timeStr);
     let [, hour, minute, second] = match.map(s => parseInt(s, 10));
 
     let date = new Date(Date.UTC(1970, 0, 1, 0, 0, second));

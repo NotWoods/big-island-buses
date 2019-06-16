@@ -2,7 +2,7 @@ import memoizeOne from 'memoize-one';
 import { h } from 'preact';
 import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 import { Stop } from '../../server-render/api-types';
-import { GoogleMap } from '../Google/GoogleMap';
+import { GoogleMap } from '../google/GoogleMap';
 
 const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
     const map = new Map<string, Set<string>>();
@@ -18,8 +18,8 @@ const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
 
 export interface MapRendererProps {
     bounds?: LatLngBoundsLiteral;
-    route_id?: string | null;
-    stop_id?: string | null;
+    route_id?: string;
+    stop_id?: string;
     stops?: Record<string, Stop>;
     onOpenStop?(stop_id: string): void;
 }

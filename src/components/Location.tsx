@@ -25,7 +25,7 @@ interface Props {
 
 interface State {
     geolocationOn: boolean;
-    userPosition: Position | null;
+    userPosition?: Position;
     RouteInfo: typeof import('./Schedule').RouteInfo;
 }
 
@@ -47,7 +47,7 @@ export class LocationApp extends Component<Props, State> {
             lon: userPosition.longitude,
         };
         let closestDistance = Number.MAX_VALUE;
-        let closestStop: Stop | null = null;
+        let closestStop: Stop | undefined = undefined;
         const stops = this.props.stops ? Object.values(this.props.stops) : [];
         for (const stop of stops) {
             const distance = computeDistanceBetween(userPos, stop);
@@ -56,13 +56,15 @@ export class LocationApp extends Component<Props, State> {
                 closestDistance = distance;
             }
         }
-        return closestDistance < this.props.maxDistance ? closestStop : null;
+        return closestDistance < this.props.maxDistance
+            ? closestStop
+            : undefined;
     });
 
     render(props: Props, { userPosition, geolocationOn, RouteInfo }: State) {
-        let route: Route | null | undefined = null;
-        let stop_id: string | null | undefined = props.stop_id;
-        let closestStop: Stop | null = null;
+        let route: Route | undefined = undefined;
+        let stop_id: string | undefined = props.stop_id;
+        let closestStop: Stop | undefined = undefined;
         if (props.routes && props.route_id) {
             route = props.routes.get(props.route_id);
         }
@@ -94,9 +96,9 @@ export class LocationApp extends Component<Props, State> {
                         routes={props.routes}
                         nowTime={props.nowTime}
                         bounds={props.bounds}
-                        name={route ? route.name : null}
-                        color={route ? route.color : null}
-                        text_color={route ? route.text_color : null}
+                        name={route ? route.name : undefined}
+                        color={route ? route.color : undefined}
+                        text_color={route ? route.text_color : undefined}
                         onOpenStop={props.onOpenStop}
                     />
                 ) : null}

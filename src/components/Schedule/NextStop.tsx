@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { InfoItem } from './InfoItem';
 import { Time, TimeData } from '../Time';
-import { StopLink } from '../links';
+import { StopLink } from '../navigation/links';
 import { Stop } from '../../server-render/api-types';
 
 interface NextStopProps {

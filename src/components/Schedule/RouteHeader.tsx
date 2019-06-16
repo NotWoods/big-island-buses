@@ -13,7 +13,7 @@ export const RouteHeader = (props: RouteHeaderProps) => (
         <h2
             class="route-header__label"
             id="route_long_name"
-            style={`background-color:${props.color};color:${props.textColor}`}
+            style={{ 'background-color': props.color, color: props.textColor }}
         >
             {props.name}
         </h2>

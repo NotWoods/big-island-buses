@@ -2,7 +2,7 @@ import { h, FunctionalComponent } from 'preact';
 import { TimeData, Time, toTime } from '../Time';
 import { StopTime, Stop } from '../../server-render/api-types';
 import { fromIsoTime } from '../../server-render/parse-date';
-import { StopLink } from '../links';
+import { StopLink } from '../navigation/links';
 
 interface ScheduleTimeProps {
     stop_id: string;
@@ -16,11 +16,11 @@ export const ScheduleTime: FunctionalComponent<ScheduleTimeProps> = props => (
         <div class="scedule-time__lines lines">
             <span
                 class="line line--dash"
-                style={`background-color:${props.color}`}
+                style={{ 'background-color': props.color }}
             />
             <span
                 class="line line--dot"
-                style={`background-color:${props.color}`}
+                style={{ 'background-color': props.color }}
             />
         </div>
         <span class="schedule-time__name name">{props.name}</span>

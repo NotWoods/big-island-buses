@@ -16,8 +16,12 @@ const RouteList: FunctionalComponent<{
     <div>
         <h2 class="routes__heading">{props.title}</h2>
         <ul class="routes__list" id="other">
-            {props.routes.map(p => (
-                <RouteItem class="side-item" key={p.route_id} {...p} />
+            {props.routes.map(route => (
+                <RouteItem
+                    class="side-item"
+                    key={route.route_id}
+                    route={route}
+                />
             ))}
         </ul>
         {props.children}
