@@ -1,5 +1,5 @@
 import { stopsSearch } from './stops';
-import { placePredictions, AutocompletionRequest } from './places';
+import { placePredictions, AutocompletionRequest } from './google-places';
 
 export declare var self: WorkerGlobalScope;
 
@@ -24,12 +24,12 @@ async function getPredictions(request: AutocompletionRequest) {
     ]);
 
     const stopSearchResults: SearchResult[] = stops.map(stop => ({
-        type: 'stop' as 'stop',
+        type: 'stop' as const,
         name: stop.name,
         id: stop.stop_id,
     }));
     const placeSearchResults: SearchResult[] = places.map(place => ({
-        type: 'place' as 'place',
+        type: 'place' as const,
         name: place.description,
         id: place.place_id,
     }));

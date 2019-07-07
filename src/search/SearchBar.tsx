@@ -1,19 +1,26 @@
 import { Component, h } from 'preact';
+import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 import { MenuButton } from '../components/ToolbarButton';
 import { SearchResult } from './worker';
 
+interface Props {
+    /** Area to bias results towards */
+    bounds?: LatLngBoundsLiteral;
+}
+
 interface State {
+    /** Current value in the search bar */
     value: string;
     results: SearchResult[];
 }
 
-export class SearchBar extends Component<{}, State> {
+export class SearchBar extends Component<Props, State> {
     onChange = (event: Event) => {
         this.setState({ value: (event.target as HTMLInputElement).value });
         // TODO call worker
     };
 
-    render(_: {}, { value, results }: State) {
+    render(_: Props, { value, results }: State) {
         return (
             <header class="map__header toolbar" id="map-header">
                 <MenuButton id="menu" />

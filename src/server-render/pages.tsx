@@ -1,18 +1,12 @@
 import { outputFile, readFile, readJson } from 'fs-extra';
 import { resolve } from 'path';
-import { h, VNode } from 'preact';
-import _render, { Options } from 'preact-render-to-string';
+import { h } from 'preact';
+import { render } from 'preact-render-to-string';
+import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 import { LocationApp } from '../components/Location';
 import { TimeData, toDate } from '../components/Time';
 import { BASE_URL } from '../config';
 import { Route, Stop } from './api-types';
-import { LatLngBoundsLiteral } from 'spherical-geometry-js';
-
-const render = (_render as unknown) as (
-    vnode: VNode,
-    context?: any,
-    options?: Options,
-) => string;
 
 const TEMPLATE_FOLDER = resolve(__dirname, '..', 'templates');
 const API_FOLDER = resolve(__dirname, '..', 'public', 'api');
