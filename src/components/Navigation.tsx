@@ -1,17 +1,17 @@
 import { Component, h } from 'preact';
-import { Route, Stop } from '../server-render/api-types';
-import { LocationApp } from './Location';
-import { TimeData, toTime } from './Time';
-import { APP_NAME } from '../config';
 import { LatLngBoundsLiteral } from 'spherical-geometry-js';
+import { APP_NAME } from '../config';
+import { findClickedNavLink } from '../navigation/links';
 import {
     NavigationState,
-    urlToState,
     shouldPushHistory,
-    tripToUrl,
     stopToUrl,
-} from './navigation/url';
-import { findClickedNavLink } from './navigation/links';
+    tripToUrl,
+    urlToState,
+} from '../navigation/url';
+import { Route, Stop } from '../common/api-types';
+import { TimeData, toTime } from '../common/Time';
+import { LocationApp } from './Location';
 
 interface Props {
     now?: Date;

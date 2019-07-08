@@ -4,9 +4,9 @@ import {
     computeDistanceBetween,
     LatLngBoundsLiteral,
 } from 'spherical-geometry-js';
-import { Route, Stop } from '../server-render/api-types';
-import { LocationDisclaimer, Routes } from './RoutesList/Routes';
-import { TimeData } from './Time';
+import { Route, Stop } from '../common/api-types';
+import { LocationDisclaimer, Sidebar } from '../sidebar/Sidebar';
+import { TimeData } from '../common/Time';
 
 interface Props {
     nowTime?: TimeData;
@@ -26,13 +26,13 @@ interface Props {
 interface State {
     geolocationOn: boolean;
     userPosition?: Position;
-    RouteInfo: typeof import('./Schedule').RouteInfo;
+    ScheduleInfo: typeof import('../schedule-info/ScheduleInfo').ScheduleInfo;
 }
 
 export class LocationApp extends Component<Props, State> {
     componentDidMount() {
-        import('./Schedule').then(({ RouteInfo }) =>
-            this.setState({ RouteInfo }),
+        import('../schedule-info/ScheduleInfo').then(({ ScheduleInfo }) =>
+            this.setState({ ScheduleInfo }),
         );
     }
 
@@ -61,7 +61,7 @@ export class LocationApp extends Component<Props, State> {
             : undefined;
     });
 
-    render(props: Props, { userPosition, geolocationOn, RouteInfo }: State) {
+    render(props: Props, { userPosition, geolocationOn, ScheduleInfo }: State) {
         let route: Route | undefined = undefined;
         let stop_id: string | undefined = props.stop_id;
         let closestStop: Stop | undefined = undefined;
@@ -74,7 +74,7 @@ export class LocationApp extends Component<Props, State> {
         }
         return (
             <div id="root" onClick={props.onClick} onChange={props.onChange}>
-                <Routes
+                <Sidebar
                     nearby={new Set(closestStop ? closestStop.route_ids : [])}
                     routes={
                         props.routes ? Array.from(props.routes.values()) : []
@@ -87,8 +87,8 @@ export class LocationApp extends Component<Props, State> {
                     }
                 />
                 <div id="screen-cover" />
-                {RouteInfo ? (
-                    <RouteInfo
+                {ScheduleInfo ? (
+                    <ScheduleInfo
                         route_id={props.route_id}
                         trip_id={props.trip_id}
                         stop_id={stop_id}

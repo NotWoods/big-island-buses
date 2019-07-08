@@ -3,10 +3,10 @@ import { resolve } from 'path';
 import { h } from 'preact';
 import { render } from 'preact-render-to-string';
 import { LatLngBoundsLiteral } from 'spherical-geometry-js';
+import { Route, Stop } from '../common/api-types';
+import { TimeData, toDate } from '../common/Time';
 import { LocationApp } from '../components/Location';
-import { TimeData, toDate } from '../components/Time';
 import { BASE_URL } from '../config';
-import { Route, Stop } from './api-types';
 
 const TEMPLATE_FOLDER = resolve(__dirname, '..', 'templates');
 const API_FOLDER = resolve(__dirname, '..', 'public', 'api');

@@ -1,6 +1,6 @@
 import { Component, h } from 'preact';
 import { LatLngBoundsLiteral } from 'spherical-geometry-js';
-import { MenuButton } from '../components/ToolbarButton';
+import { MenuButton } from '../common/ToolbarButton';
 import { SearchResult } from './worker';
 
 interface Props {

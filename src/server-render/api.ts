@@ -14,14 +14,14 @@ import {
     StopTime,
     Trip,
     Weekdays,
-} from './api-types';
+} from '../common/api-types';
 import {
     parseGtfsDate,
     parseGtfsTime,
     toIsoDate,
     toIsoTime,
     WEEKDAY_NAMES,
-} from './parse-date';
+} from '../common/parse-date';
 import { API_KEY } from '../config';
 
 const GTFS_FOLDER = resolve(__dirname, '..', 'static', 'google_transit');

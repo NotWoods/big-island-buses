@@ -1,9 +1,9 @@
 import { Component, h } from 'preact';
-import { Route, Stop } from '../server-render/api-types';
-import { NavigationApp } from './Navigation';
-import { TimeData, toDate } from './Time';
-import { BASE_URL } from '../config';
 import { LatLngBoundsLiteral } from 'spherical-geometry-js';
+import { BASE_URL } from '../config';
+import { Route, Stop } from '../common/api-types';
+import { NavigationApp } from './Navigation';
+import { TimeData, toDate } from '../common/Time';
 
 interface Props {
     now?: Date;
