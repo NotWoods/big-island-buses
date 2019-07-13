@@ -1,0 +1,30 @@
+{
+    "name": "big-island-buses",
+    "version": "3.0.0",
+    "description": "A far easier to use unofficial schedule for the Hawaii Hele-On Bus.",
+    "private": true,
+    "dependencies": {},
+    "devDependencies": {
+        "prettier": "^1.18.2"
+    },
+    "repository": "github:NotWoods/big-island-buses",
+    "author": "Tiger Oakes",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/NotWoods/big-island-buses/issues"
+    },
+    "homepage": "https://github.com/NotWoods/big-island-buses#readme",
+    "scripts": {
+        "lint:files": "prettier \"*.{md,css}\" load.js main.js",
+        "lint": "npm run lint:files -- --write",
+        "lint:check": "npm run lint:files -- --check"
+    },
+    "jest": {
+        "preset": "ts-jest/presets/js-with-ts"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "trailingComma": "all",
+        "proseWrap": "always"
+    }
+}
