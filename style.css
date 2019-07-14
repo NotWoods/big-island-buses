@@ -638,6 +638,7 @@ th {
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.175));
     width: calc(100% - 88px);
     padding-left: 72px;
+    z-index: 1;
 }
 
 #address {

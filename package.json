@@ -5,7 +5,11 @@
     "private": true,
     "dependencies": {},
     "devDependencies": {
-        "prettier": "^1.18.2"
+        "jszip": "^3.2.2",
+        "prettier": "^1.18.2",
+        "rollup": "^1.16.7",
+        "rollup-plugin-commonjs": "^10.0.1",
+        "rollup-plugin-terser": "^5.1.1"
     },
     "repository": "github:NotWoods/big-island-buses",
     "author": "Tiger Oakes",
@@ -15,6 +19,7 @@
     },
     "homepage": "https://github.com/NotWoods/big-island-buses#readme",
     "scripts": {
+        "build": "rollup -c",
         "lint:files": "prettier \"*.{md,css}\" load.js main.js",
         "lint": "npm run lint:files -- --write",
         "lint:check": "npm run lint:files -- --check"
