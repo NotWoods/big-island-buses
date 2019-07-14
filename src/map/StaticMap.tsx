@@ -8,7 +8,7 @@ interface Props {
     /** Width of the map image */
     width: number;
     /** Stops to display on the map. */
-    stops: Record<string, Stop>;
+    stops: Map<Stop['stop_id'], Stop>;
     /** If provided, only stops with matching IDs will be shown on the map. */
     highlighted?: Set<Stop['stop_id']>;
 }
@@ -19,11 +19,11 @@ const stopToMarker = (stop: Pick<Stop, 'lat' | 'lon'>) =>
 export const StaticMap: FunctionalComponent<Props> = props => {
     let markers: string[];
     if (props.highlighted && props.highlighted.size > 0) {
-        markers = Object.values(props.stops)
+        markers = Array.from(props.stops.values())
             .filter(stop => props.highlighted!.has(stop.stop_id))
             .map(stopToMarker);
     } else {
-        markers = Object.values(props.stops).map(stopToMarker);
+        markers = Array.from(props.stops.values(), stopToMarker);
     }
     const args = new URLSearchParams({
         key: API_KEY,

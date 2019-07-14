@@ -10,8 +10,8 @@ import { TimeData } from '../common/Time';
 
 interface Props {
     nowTime?: TimeData;
-    routes?: Map<string, Route>;
-    stops?: Record<string, Stop>;
+    routes?: Map<Route['route_id'], Route>;
+    stops?: Map<Stop['stop_id'], Stop>;
     lastUpdated?: TimeData;
     maxDistance: number;
     route_id?: string;

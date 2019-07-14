@@ -15,8 +15,8 @@ import { LocationApp } from './Location';
 
 interface Props {
     now?: Date;
-    routes?: Map<string, Route>;
-    stops?: Record<string, Stop>;
+    routes?: Map<Route['route_id'], Route>;
+    stops?: Map<Stop['stop_id'], Stop>;
     bounds?: LatLngBoundsLiteral;
     lastUpdated?: TimeData;
     maxDistance: number;

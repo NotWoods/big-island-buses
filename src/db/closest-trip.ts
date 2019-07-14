@@ -2,11 +2,18 @@ import { IDBPDatabase } from 'idb';
 import { TimeData, toDuration } from '../common/Time';
 import { fromIsoTime } from '../common/parse-date';
 import { BusesSchema } from './schema';
+import { Route, RouteDetails } from '../common/api-types';
 
 export interface ClosestTripInfo {
     readonly trip_id: string;
     readonly stop_id?: string;
     readonly duration: TimeData;
+}
+
+function isDetails(
+    route: Route | RouteDetails | undefined,
+): route is RouteDetails {
+    return Boolean(route && 'trips' in route);
 }
 
 /**
@@ -29,7 +36,8 @@ export async function closestTrip(
     let earliestTripStop: string | undefined;
 
     const route = await db.get('routes', route_id);
-    if (!route) throw new TypeError(`Invalid route_id ${route_id}`);
+    if (!isDetails(route)) throw new TypeError(`Invalid route_id ${route_id}`);
+
     for (const trip of Object.values(route.trips)) {
         for (const stop of trip.stop_times) {
             const time = fromIsoTime(stop.time).getTime();

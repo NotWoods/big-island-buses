@@ -1,24 +1,23 @@
-import { h } from 'preact';
+import { h, FunctionalComponent } from 'preact';
 import { MenuButton, ToolbarButton } from '../../common/ToolbarButton';
+import { Route } from '../../common/api-types';
 
-interface RouteHeaderProps {
-    name: string;
-    color: string;
-    textColor: string;
+interface Props {
+    readonly route: Pick<Route, 'name' | 'color' | 'text_color'>;
 }
 
 /**
  * Header that displays the route name in a large font.
  */
-export const RouteHeader = (props: RouteHeaderProps) => (
+export const RouteHeader: FunctionalComponent<Props> = ({ route }) => (
     <header class="route-header" id="route-header">
         <MenuButton id="alt-menu" fill="#fff" />
         <h2
             class="route-header__label"
             id="route_long_name"
-            style={{ 'background-color': props.color, color: props.textColor }}
+            style={{ 'background-color': route.color, color: route.text_color }}
         >
-            {props.name}
+            {route.name}
         </h2>
 
         <ToolbarButton id="map-toggle" title="Enlarge Street View">

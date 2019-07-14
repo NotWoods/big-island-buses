@@ -11,8 +11,8 @@ interface Props {
 }
 
 interface State {
-    routes?: Map<string, Route>;
-    stops?: Record<string, Stop>;
+    routes?: Map<Route['route_id'], Route>;
+    stops?: Map<Stop['stop_id'], Stop>;
     lastUpdated?: TimeData;
     bounds?: LatLngBoundsLiteral;
 }

@@ -1,5 +1,6 @@
 import { DBSchema } from 'idb';
-import { Stop, RouteDetails } from '../common/api-types';
+import { Stop, RouteDetails, Route } from '../common/api-types';
+import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 
 export interface BusesSchema extends DBSchema {
     stops: {
@@ -8,7 +9,11 @@ export interface BusesSchema extends DBSchema {
         indexes: { lat: number; lon: number };
     };
     routes: {
-        key: RouteDetails['route_id'];
-        value: RouteDetails;
+        key: Route['route_id'];
+        value: Route | RouteDetails;
+    };
+    meta: {
+        key: 'version' | 'bounds';
+        value: string | LatLngBoundsLiteral;
     };
 }

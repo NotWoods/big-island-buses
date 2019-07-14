@@ -7,7 +7,6 @@ import { relative, resolve } from 'path';
 import { LatLngBounds } from 'spherical-geometry-js';
 import {
     Calendar,
-    Omit,
     Route,
     RouteDetails,
     Stop,

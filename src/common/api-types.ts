@@ -1,7 +1,5 @@
 import { LatLngBoundsLiteral } from 'spherical-geometry-js';
 
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
 export type Weekdays = [
     boolean,
     boolean,

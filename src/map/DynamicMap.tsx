@@ -11,8 +11,8 @@ import { Icon, ZIndex } from './marker-icon';
 interface Props {
     bounds?: LatLngBoundsLiteral;
     stop_id?: string;
-    stops?: Record<string, Stop>;
-    highlighted?: Set<string>;
+    stops?: Map<Stop['stop_id'], Stop>;
+    highlighted?: Set<Stop['stop_id']>;
     userPosition?: {
         coords: LatLngLike;
         stop_id: string;
@@ -102,11 +102,11 @@ export class GoogleMap extends Component<Props, State> {
         if (this.props.bounds) this.map!.fitBounds(this.props.bounds);
     }
 
-    createStopMarkers(lastHighlighted: Set<string>) {
+    createStopMarkers(lastHighlighted: Set<Stop['stop_id']>) {
         if (!this.props.stops) return;
-        const { highlighted = new Set<string>() } = this.props;
+        const { highlighted = new Set<Stop['stop_id']>() } = this.props;
 
-        for (const stop of Object.values(this.props.stops)) {
+        for (const stop of this.props.stops.values()) {
             let marker = this.markers.get(stop.stop_id);
             if (!marker) {
                 marker = new google.maps.Marker({

@@ -54,7 +54,7 @@ interface Props {
     readonly routeId?: RouteDetails['route_id'];
     readonly selectedTripId?: Trip['trip_id'];
 
-    readonly stops: Record<string, Pick<Stop, 'stop_id' | 'name'>>;
+    readonly stops?: Map<Stop['stop_id'], Stop>;
     readonly nowTime?: TimeData;
 }
 
@@ -86,23 +86,22 @@ export class RouteInfo extends Component<Props, State> {
         if (route == null) return null;
 
         const closest = closestTrip(route.trips, props.nowTime);
-        const selectedTrip =
+        const selectedTripId =
             route.trips && route.trips[props.selectedTripId!]
                 ? props.selectedTripId!
                 : closest.trip_id;
+        const selectedTrip = route.trips[selectedTripId];
 
         return (
             <div id="schedule-column">
                 <RouteInfoItems
                     route={route}
-                    selectedTripId={selectedTrip}
+                    selectedTripId={selectedTripId}
                     closestTrip={closest}
                     stops={props.stops}
                 />
                 <ScheduleTimes
-                    stopTimes={
-                        route.trips ? route.trips[selectedTrip].stop_times : []
-                    }
+                    stopTimes={selectedTrip ? selectedTrip.stop_times : []}
                     color={route.color}
                     stops={props.stops}
                 />

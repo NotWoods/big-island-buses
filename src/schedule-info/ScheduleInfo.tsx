@@ -8,11 +8,12 @@ import { RouteHeader } from '../schedule-info/route-info/RouteHeader';
 import { MapContainer } from './MapContainer';
 
 interface Props {
+    readonly route?: Pick<Route, 'name' | 'color' | 'text_color'>;
     route_id?: string;
     trip_id?: string;
     stop_id?: string;
-    stops?: Record<string, Stop>;
-    routes?: Map<string, Route>;
+    stops?: Map<Stop['stop_id'], Stop>;
+    routes?: Map<Route['route_id'], Route>;
     nowTime?: TimeData;
     name?: string;
     color?: string;
@@ -22,7 +23,7 @@ interface Props {
 }
 
 interface State {
-    route?: RouteDetails | undefined;
+    route?: RouteDetails;
     StopInfo: typeof import('./stop-info/StopInfo').StopInfo;
     RouteInfo: typeof import('./route-info/RouteInfo').RouteInfo;
 }
@@ -54,6 +55,7 @@ export class ScheduleInfo extends Component<Props, State> {
     }
 
     render(props: Props, { route, StopInfo, RouteInfo }: State) {
+        const stops = props.stops || new Map<Stop['stop_id'], Stop>();
         return (
             <main
                 id="main"
@@ -70,25 +72,18 @@ export class ScheduleInfo extends Component<Props, State> {
                     onOpenStop={props.onOpenStop}
                 />
                 <div id="content">
-                    {props.name && props.color && props.text_color ? (
-                        <RouteHeader
-                            name={props.name}
-                            color={props.color}
-                            textColor={props.text_color}
-                        />
-                    ) : null}
+                    {props.route ? <RouteHeader route={props.route} /> : null}
                     {RouteInfo ? (
                         <RouteInfo
                             routeId={props.route_id}
                             selectedTripId={props.trip_id}
-                            stops={props.stops || {}}
+                            stops={stops}
                             nowTime={props.nowTime}
                         />
                     ) : null}
                     {StopInfo ? (
                         <StopInfo
-                            stop_id={props.stop_id}
-                            stops={props.stops}
+                            stop={stops.get(props.stop_id!)}
                             routes={props.routes}
                         />
                     ) : null}

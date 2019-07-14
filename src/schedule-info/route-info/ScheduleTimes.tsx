@@ -28,19 +28,27 @@ export const ScheduleTime: FunctionalComponent<ScheduleTimeProps> = props => {
 interface ScheduleTimesProps {
     stopTimes: StopTime[];
     color: string;
-    stops?: Record<string, Pick<Stop, 'name'>>;
+
+    stops?: Map<Stop['stop_id'], Stop>;
 }
 
-export const ScheduleTimes = (props: ScheduleTimesProps) => (
+export const ScheduleTimes: FunctionalComponent<ScheduleTimesProps> = ({
+    stopTimes,
+    color,
+    stops = new Map<Stop['stop_id'], Stop>(),
+}) => (
     <section class="schedule-time__container">
-        {props.stopTimes.map(s => (
-            <ScheduleTime
-                key={s.stop_id}
-                stop_id={s.stop_id}
-                color={props.color}
-                name={props.stops ? props.stops[s.stop_id].name : ''}
-                time={toTime(fromIsoTime(s.time))}
-            />
-        ))}
+        {stopTimes.map(({ stop_id, time }) => {
+            const stop = stops.get(stop_id);
+            return (
+                <ScheduleTime
+                    key={stop_id}
+                    stop_id={stop_id}
+                    color={color}
+                    name={stop ? stop.name : ''}
+                    time={toTime(fromIsoTime(time))}
+                />
+            );
+        })}
     </section>
 );

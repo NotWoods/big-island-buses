@@ -4,17 +4,12 @@ import { GoogleStreetView } from './GoogleStreetView';
 import { RouteItem } from './Route';
 import { AddressInfoItem } from './AddressInfoItem';
 
-interface StopProps {
-    stop_id?: string;
-    routes?: Map<string, Route>;
-    stops?: Record<string, Stop>;
+interface Props {
+    readonly stop?: Stop;
+    routes?: Map<Route['route_id'], Route>;
 }
 
-export const StopInfo = (props: StopProps) => {
-    let stop: Stop | undefined = undefined;
-    if (props.stops && props.stop_id) {
-        stop = props.stops[props.stop_id];
-    }
+export const StopInfo = ({ stop, routes }: Props) => {
     if (!stop) return null;
 
     return (
@@ -30,7 +25,7 @@ export const StopInfo = (props: StopProps) => {
             <div class="stop__details" id="stop_details">
                 <AddressInfoItem stop={stop} />
                 <h4 class="stop__connections-header">Connects to</h4>
-                {props.routes ? (
+                {routes ? (
                     <ul
                         class="stop__connections connection__list"
                         id="connections"
@@ -38,7 +33,7 @@ export const StopInfo = (props: StopProps) => {
                         {stop.route_ids.map(route_id => (
                             <RouteItem
                                 key={route_id}
-                                route={props.routes!.get(route_id)}
+                                route={routes.get(route_id)}
                             />
                         ))}
                     </ul>

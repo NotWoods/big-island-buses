@@ -8,16 +8,17 @@ export interface Props {
     bounds?: LatLngBoundsLiteral;
     route_id?: string;
     stop_id?: string;
-    stops?: Record<string, Stop>;
+
+    stops?: Map<Stop['stop_id'], Stop>;
     onOpenStop?(stop_id: string): void;
 }
 
 /**
  * Get map of route IDs to stop IDs of stops that the route passes through.
  */
-const routeToStopsMap = memoizeOne((stops: Record<string, Stop>) => {
+const routeToStopsMap = memoizeOne((stops: Map<Stop['stop_id'], Stop>) => {
     const map = new Map<string, Set<Stop['stop_id']>>();
-    for (const stop of Object.values(stops)) {
+    for (const stop of stops.values()) {
         for (const route_id of stop.route_ids) {
             const stopList = map.get(route_id) || new Set();
             stopList.add(stop.stop_id);

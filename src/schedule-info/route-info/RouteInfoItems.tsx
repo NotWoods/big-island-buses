@@ -14,34 +14,37 @@ interface Props {
     readonly selectedTripId?: Trip['trip_id'];
     readonly closestTrip?: ClosestTripInfo;
 
-    readonly stops: Record<string, Pick<Stop, 'stop_id' | 'name'>>;
+    readonly stops?: Map<Stop['stop_id'], Stop>;
 }
 
-export const RouteInfoItems: FunctionalComponent<Props> = props => {
+export const RouteInfoItems: FunctionalComponent<Props> = ({
+    route,
+    selectedTripId,
+    closestTrip,
+    stops = new Map<Stop['stop_id'], Stop>(),
+}) => {
     return (
         <section class="schedule-info" id="information">
             <SelectTrip
-                trips={Object.values(props.route.trips)}
-                trip_id={props.selectedTripId}
+                trips={Object.values(route.trips)}
+                trip_id={selectedTripId}
             />
             <RouteLocationInfoItem
-                firstStop={props.stops[props.route.first_stop]}
-                lastStop={props.stops[props.route.last_stop]}
+                firstStop={stops.get(route.first_stop)}
+                lastStop={stops.get(route.last_stop)}
             />
             <RouteTimeInfoItem
-                startTime={toTime(fromIsoTime(props.route.start_time))}
-                endTime={toTime(fromIsoTime(props.route.end_time))}
+                startTime={toTime(fromIsoTime(route.start_time))}
+                endTime={toTime(fromIsoTime(route.end_time))}
             />
-            <RouteWeekdaysInfoItem days={props.route.days} />
+            <RouteWeekdaysInfoItem days={route.days} />
             <NextStopInfoItem
                 nextStop={
-                    props.closestTrip && props.closestTrip.stop_id
-                        ? props.stops[props.closestTrip.stop_id]
+                    closestTrip && closestTrip.stop_id
+                        ? stops.get(closestTrip.stop_id)
                         : undefined
                 }
-                timeToArrival={
-                    props.closestTrip ? props.closestTrip.duration : undefined
-                }
+                timeToArrival={closestTrip ? closestTrip.duration : undefined}
             />
         </section>
     );
