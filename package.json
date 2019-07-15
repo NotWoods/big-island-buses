@@ -5,11 +5,16 @@
     "private": true,
     "dependencies": {},
     "devDependencies": {
+        "@types/googlemaps": "^3.37.0",
+        "@types/jszip": "^3.1.6",
         "jszip": "^3.2.2",
         "prettier": "^1.18.2",
         "rollup": "^1.16.7",
         "rollup-plugin-commonjs": "^10.0.1",
-        "rollup-plugin-terser": "^5.1.1"
+        "rollup-plugin-terser": "^5.1.1",
+        "rollup-plugin-typescript": "^1.0.1",
+        "tslib": "^1.10.0",
+        "typescript": "^3.5.3"
     },
     "repository": "github:NotWoods/big-island-buses",
     "author": "Tiger Oakes",

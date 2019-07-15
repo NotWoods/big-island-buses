@@ -27,24 +27,25 @@ import {
     getQueryVariable,
     nowDateTime,
     sequence,
+    GTFSData,
 } from './load.js';
 
-var map,
-    streetview,
-    autocomplete,
-    boundsAllStops,
-    markers,
-    userMapMarker,
-    stopMarker;
+var map: google.maps.Map | undefined,
+    streetview: google.maps.StreetViewPanorama | undefined,
+    autocomplete: google.maps.places.Autocomplete | undefined,
+    boundsAllStops: google.maps.LatLngBounds | undefined,
+    markers: google.maps.Marker[] = [],
+    userMapMarker: google.maps.Marker | undefined,
+    stopMarker: google.maps.Marker | undefined;
 
-var buses = {};
+let buses: GTFSData | undefined;
 var documentPromise = documentLoad();
-var schedulePromise = getScheduleData('gtfs', 'buses');
+var schedulePromise = getScheduleData('gtfs');
 schedulePromise.then(function(r) {
     buses = r;
 });
-var locatePromise = locateUser(schedulePromise),
-    placeMapMarker;
+var locatePromise = locateUser(schedulePromise);
+var placeMapMarker;
 var mapLoaded = loadMap();
 if (mapLoaded === false) {
     locatePromise.then(function(position) {
@@ -69,12 +70,12 @@ function loadMap() {
     var loadedMarkers = false,
         loadedMap = false;
 
-    function markersAndLatLng(schedule) {
-        return new Promise(function(markersDone, markerErr) {
+    function markersAndLatLng(schedule: GTFSData) {
+        return Promise.resolve().then(() => {
             for (var k in schedule.stops) {
                 var myLatLng = new google.maps.LatLng(
-                    schedule.stops[k].stop_lat,
-                    schedule.stops[k].stop_lon,
+                    parseFloat(schedule.stops[k].stop_lat),
+                    parseFloat(schedule.stops[k].stop_lon),
                 );
                 var marker = new google.maps.Marker({
                     position: myLatLng,
@@ -85,15 +86,18 @@ function loadMap() {
                 marker.Value = schedule.stops[k].stop_id;
                 marker.stop_id = schedule.stops[k].stop_id;
                 google.maps.event.addListener(marker, 'click', clickEvent);
-                boundsAllStops.extend(marker.position);
+                boundsAllStops.extend(marker.getPosition());
                 markers.push(marker);
             }
-            markersDone({ markers: markers, bounds: boundsAllStops });
+            return {
+                markers: markers,
+                bounds: boundsAllStops,
+            };
         });
     }
 
     function mapLoad() {
-        return new Promise(function(mapDone, mapErr) {
+        return Promise.resolve().then(() => {
             var mapElement =
                     Active.View.STOP == View.MAP_PRIMARY
                         ? document.getElementById('map-canvas')
@@ -138,7 +142,7 @@ function loadMap() {
             map.setStreetView(streetview);
 
             autocomplete = new google.maps.places.Autocomplete(
-                document.getElementById('search'),
+                document.getElementById('search') as HTMLInputElement,
             );
             autocomplete.bindTo('bounds', map);
             google.maps.event.addListener(
@@ -177,7 +181,7 @@ function loadMap() {
                     });
                 },
             );
-            mapDone(map);
+            return map;
         });
     }
 
@@ -219,7 +223,7 @@ function loadMap() {
             google.maps.event.addListener(userMapMarker, 'click', clickEvent);
             if (!Active.STOP) openStop(position.stop);
             window.addEventListener('locationupdate', evt => {
-                const { custom, location } = evt.detail;
+                const { custom, location } = (evt as CustomEvent).detail;
                 userMapMarker.setIcon(custom ? placeShape : userShape);
                 userMapMarker.setPosition(
                     new google.maps.LatLng(
@@ -353,7 +357,7 @@ function uiEvents() {
     document
         .getElementById('map-toggle')
         .addEventListener('click', switchMapStreetview);
-    var select = document.getElementById('trip-select');
+    var select = document.getElementById('trip-select') as HTMLSelectElement;
     select.Type = Type.TRIP;
     select.addEventListener('change', function(e) {
         select.Value = select.options[select.selectedIndex].value;
@@ -483,7 +487,7 @@ function openRoute(route_id) {
                     parseInt(stop, 10) > largest &&
                     parseInt(thisRoute.trips[trip].direction_id, 10) === 0
                 ) {
-                    largest = stop;
+                    largest = parseInt(stop, 10);
                     lastStop = thisRoute.trips[trip].stop_times[stop].stop_id;
                 }
             }
@@ -510,10 +514,10 @@ function openRoute(route_id) {
             }
 
             if (
-                timeDate - nowTime < closestTripTime &&
-                timeDate - nowTime > 0
+                timeDate.getTime() - nowTime.getTime() < closestTripTime &&
+                timeDate.getTime() - nowTime.getTime() > 0
             ) {
-                closestTripTime = timeDate - nowTime;
+                closestTripTime = timeDate.getTime() - nowTime.getTime();
                 closestTrip = thisRoute.trips[trip].trip_id;
                 closestTripStop =
                     thisRoute.trips[trip].stop_times[stop].stop_id;
@@ -530,7 +534,7 @@ function openRoute(route_id) {
                     earliest.getMinutes(),
                     earliest.getSeconds(),
                     0,
-                ) - nowTime;
+                ).getTime() - nowTime.getTime();
             closestTrip = earliestTrip;
             closestTripStop = earliestTripStop;
         }
@@ -566,7 +570,7 @@ function openRoute(route_id) {
                 markers[k].setIcon(normal);
                 markers[k].setZIndex(200);
                 markers[k].activeInRoute = true;
-                routeBounds.extend(markers[k].position);
+                routeBounds.extend(markers[k].getPosition());
             } else {
                 markers[k].setIcon(unimportant);
                 markers[k].setZIndex(null);
@@ -607,8 +611,8 @@ function openStop(stop_id) {
     if (streetview) {
         streetview.setPosition(
             new google.maps.LatLng(
-                buses.stops[stop_id].stop_lat,
-                buses.stops[stop_id].stop_lon,
+                parseFloat(buses.stops[stop_id].stop_lat),
+                parseFloat(buses.stops[stop_id].stop_lon),
             ),
         );
     }
@@ -631,8 +635,9 @@ function openStop(stop_id) {
         streetview.setPosition(stopMarker.getPosition());
         google.maps.event.trigger(streetview, 'resize');
         google.maps.event.addListener(streetview, 'pano_changed', function() {
-            document.getElementById('address').textContent =
-                streetview.location.description;
+            document.getElementById(
+                'address',
+            ).textContent = streetview.getLocation().description;
             streetview.setPov(streetview.getPhotographerPov());
         });
     }
@@ -689,7 +694,7 @@ function openTrip(trip_id) {
     var trip = buses.routes[Active.Route.ID].trips[trip_id];
     var stopSequence = sequence(trip.stop_times);
 
-    var select = document.getElementById('trip-select');
+    var select = document.getElementById('trip-select') as HTMLSelectElement;
     for (var option = 0; option < select.options.length; option++) {
         if (select.options[option].value == trip_id) {
             select.selectedIndex = option;

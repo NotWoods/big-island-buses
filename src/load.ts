@@ -4,13 +4,14 @@
  * @copyright    2014 Tiger Oakes
  */
 
-import JSZip from '../node_modules/jszip/dist/jszip.min.js';
+import JSZip from 'jszip/dist/jszip.min.js';
+import { Route, Trip, Stop, Calendar, StopTime } from './gtfs-types';
 
-export const Type = {
-    ROUTE: 0,
-    STOP: 1,
-    TRIP: 2,
-};
+export const enum Type {
+    ROUTE,
+    STOP,
+    TRIP,
+}
 export const View = {
     LIST: 0,
     TIMETABLE: 1,
@@ -35,7 +36,7 @@ export const updateEvent = new CustomEvent('pageupdate');
 /**
  * @type {Record<Type, Function>}
  */
-export const openCallbacks = {};
+export const openCallbacks: Record<Type, Function> = {} as any;
 
 export const normal = {
         url: 'assets/pins.png',
@@ -43,42 +44,42 @@ export const normal = {
         scaledSize: { height: 26, width: 120 },
         origin: { x: 0, y: 0 },
         anchor: { x: 12, y: 12 },
-    },
+    } as google.maps.Icon,
     unimportant = {
         url: 'assets/pins.png',
         size: { height: 26, width: 24 },
         scaledSize: { height: 26, width: 120 },
         origin: { x: 96, y: 0 },
         anchor: { x: 12, y: 12 },
-    },
+    } as google.maps.Icon,
     userShape = {
         url: 'assets/pins.png',
         size: { height: 26, width: 24 },
         scaledSize: { height: 26, width: 120 },
         origin: { x: 48, y: 0 },
         anchor: { x: 12, y: 12 },
-    },
+    } as google.maps.Icon,
     placeShape = {
         url: 'assets/pins.png',
         size: { height: 26, width: 24 },
         scaledSize: { height: 26, width: 120 },
         origin: { x: 72, y: 0 },
         anchor: { x: 12, y: 23 },
-    },
+    } as google.maps.Icon,
     stopShape = {
         url: 'assets/pins.png',
         size: { height: 26, width: 24 },
         scaledSize: { height: 26, width: 120 },
         origin: { x: 24, y: 0 },
         anchor: { x: 12, y: 20 },
-    };
+    } as google.maps.Icon;
 
 export function setActiveState(newState) {
     Active = newState;
 }
 
-function xhr(url, responseType) {
-    return new Promise((resolve, reject) => {
+function xhr(url: string, responseType?: XMLHttpRequestResponseType) {
+    return new Promise<unknown>((resolve, reject) => {
         const rq = new XMLHttpRequest();
         rq.open('GET', url);
         if (responseType) rq.responseType = responseType;
@@ -96,6 +97,12 @@ function xhr(url, responseType) {
     });
 }
 
+export interface GTFSData {
+    routes: { [route_id: string]: Route };
+    stops: { [stop_id: string]: Stop };
+    calendar: { [service_id: string]: Calendar };
+}
+
 /**
  * Grabs google_transit.zip and parses the data into a
  * GTFSData object for the rest of the program.
@@ -103,19 +110,17 @@ function xhr(url, responseType) {
  * google_transit folder or zip file depending on input
  * @return {Promise<GTFSData>} Promise returns parsed GTFS data file for the rest of the program
  */
-export function getScheduleData(mode) {
+export function getScheduleData(mode: 'gtfs' | 'folder') {
     if (mode != 'gtfs' && mode != 'folder') {
         console.error("Invalid mode was set: %s. Use 'gtfs' or 'folder'", mode);
         return;
     }
 
-    function GTFSData() {
-        this.routes = {};
-        this.stops = {};
-        this.calendar = {};
-    }
-
-    var variable = new GTFSData();
+    const variable: GTFSData = {
+        routes: {},
+        stops: {},
+        calendar: {},
+    };
 
     const fileList = [
         'agency.txt',
@@ -128,16 +133,21 @@ export function getScheduleData(mode) {
         'trips.txt',
     ];
 
-    let rqDone;
+    interface CsvFile {
+        name: string;
+        body: string;
+    }
+
+    let rqDone: Promise<CsvFile[]>;
     if (mode === 'gtfs') {
         rqDone = xhr('google_transit.zip', 'arraybuffer')
-            .then(response => JSZip.loadAsync(response))
+            .then(response => JSZip.loadAsync(response as ArrayBuffer))
             .then(zip =>
                 Promise.all(
                     fileList.map(fileName =>
                         zip
                             .file(fileName)
-                            .async('string')
+                            .async('text')
                             .then(body => ({
                                 name: fileName.substring(
                                     0,
@@ -153,143 +163,163 @@ export function getScheduleData(mode) {
             fileList.map(function folderRequest(fileName) {
                 return xhr(`google_transit/${fileName}`).then(response => ({
                     name: fileName.substring(0, fileName.length - 4),
-                    body: response,
+                    body: response as string,
                 }));
             }),
         );
     }
 
-    return rqDone.then(function(textResult) {
-        var json = {};
-        for (var h = 0; h < textResult.length; h++) {
-            json[textResult[h].name] = [];
-            var csv = textResult[h].body.split('\n');
-            for (var i = 0; i < csv.length; i++) {
-                csv[i] = csv[i].replace(/(\r\n|\n|\r)/gm, '').split(',');
+    function csvFilesToObject(csvFiles: CsvFile[]) {
+        const json: { [name: string]: unknown[] } = {};
+
+        for (const { name, body } of csvFiles) {
+            json[name] = [];
+            const rawRows = body.split('\n');
+            const csv: string[][] = [];
+            for (let i = 0; i < rawRows.length; i++) {
+                csv[i] = rawRows[i].replace(/(\r\n|\n|\r)/gm, '').split(',');
 
                 if (i > 0) {
+                    const headerRow = csv[0];
                     var jsonFromCsv = {};
-                    for (var j = 0; j < csv[0].length; j++)
-                        jsonFromCsv[csv[0][j]] = csv[i][j];
-                    json[textResult[h].name].push(jsonFromCsv);
+                    for (var j = 0; j < headerRow.length; j++)
+                        jsonFromCsv[headerRow[j]] = csv[i][j];
+                    json[name].push(jsonFromCsv);
                 }
             }
         }
 
-        for (var r = 0; r < json.routes.length; r++) {
-            var tr = json.routes[r],
-                vr = variable.routes;
-            vr[tr.route_id] = tr;
-            vr[tr.route_id].trips = {};
-        }
-        for (var t = 0; t < json.trips.length; t++) {
-            var tt = json.trips[t],
-                vt = variable.routes[tt.route_id].trips;
-            vt[tt.trip_id] = tt;
-            vt[tt.trip_id].stop_times = {};
-        }
-        for (var s = 0; s < json.stops.length; s++) {
-            var ts = json.stops[s],
-                vs = variable.stops;
-            vs[ts.stop_id] = ts;
-            vs[ts.stop_id].trips = [];
-            vs[ts.stop_id].routes = [];
-        }
-        for (var c = 0; c < json.calendar.length; c++) {
-            var tc = json.calendar[c],
-                vc = variable.calendar;
-            vc[tc.service_id] = tc;
-            vc[tc.service_id].days = [
-                iB(tc.sunday),
-                iB(tc.monday),
-                iB(tc.tuesday),
-                iB(tc.wednesday),
-                iB(tc.thursday),
-                iB(tc.friday),
-                iB(tc.saturday),
-            ];
-            switch (vc[tc.service_id].days.join(', ')) {
-                case 'true, true, true, true, true, true, true':
-                    vc[tc.service_id].text_name = 'Daily';
-                    break;
-                case 'false, true, true, true, true, true, true':
-                    vc[tc.service_id].text_name = 'Monday - Saturday';
-                    break;
-                case 'false, true, true, true, true, true, false':
-                    vc[tc.service_id].text_name = 'Monday - Friday';
-                    break;
-                case 'true, false, false, false, false, false, true':
-                    vc[tc.service_id].text_name = 'Saturday - Sunday';
-                    break;
-                case 'false, false, false, false, false, false, true':
-                    vc[tc.service_id].text_name = 'Saturday';
-                    break;
-                default:
-                    var firstDay;
-                    var lastDay;
-                    for (
-                        var sItr = 0;
-                        sItr < vc[tc.service_id].days.length;
-                        sItr++
-                    ) {
-                        if (vc[tc.service_id].days[sItr]) {
-                            firstDay = sItr;
-                            break;
-                        }
-                    }
-                    for (
-                        var sItr2 = vc[tc.service_id].days.length - 1;
-                        sItr2 >= 0;
-                        sItr2--
-                    ) {
-                        if (vc[tc.service_id].days[sItr2]) {
-                            lastDay = sItr2;
-                            break;
-                        }
-                    }
-                    var reference = [
-                        'Sunday',
-                        'Monday',
-                        'Tuesday',
-                        'Wednesday',
-                        'Thursday',
-                        'Friday',
-                        'Saturday',
-                    ];
-                    if (firstDay == lastDay) {
-                        vc[tc.service_id].text_name = reference[firstDay];
-                    } else {
-                        vc[tc.service_id].text_name =
-                            reference[firstDay] + ' - ' + reference[lastDay];
-                    }
-                    break;
+        return json;
+    }
+
+    return rqDone
+        .then(function(textResult) {
+            const json = csvFilesToObject(textResult);
+
+            for (var r = 0; r < json.routes.length; r++) {
+                var tr = json.routes[r] as Route,
+                    vr = variable.routes;
+                vr[tr.route_id] = tr;
+                vr[tr.route_id].trips = {};
             }
-        }
-        for (var st = 0; st < json.stop_times.length; st++) {
-            for (var sr = 0; sr < json.routes.length; sr++) {
-                var tst = json.stop_times[st],
-                    tsr = json.routes[sr].route_id,
-                    vst = variable.stops[tst.stop_id];
-                if (variable.routes[tsr].trips[tst.trip_id]) {
-                    variable.routes[tsr].trips[tst.trip_id].stop_times[
-                        tst.stop_sequence
-                    ] = tst;
-                    if (vst.trips.indexOf(tst.trip_id) == -1)
-                        vst.trips.push({
-                            trip: tst.trip_id,
-                            dir:
-                                variable.routes[tsr].trips[tst.trip_id]
-                                    .direction_id,
-                            route: tsr,
-                            sequence: tst.stop_sequence,
-                            time: tst.arrival_time,
-                        });
-                    if (vst.routes.indexOf(tsr) == -1) vst.routes.push(tsr);
+            for (var t = 0; t < json.trips.length; t++) {
+                var tt = json.trips[t] as Trip,
+                    vt = variable.routes[tt.route_id].trips;
+                vt[tt.trip_id] = tt;
+                vt[tt.trip_id].stop_times = {};
+            }
+            for (var s = 0; s < json.stops.length; s++) {
+                var ts = json.stops[s] as Stop,
+                    vs = variable.stops;
+                vs[ts.stop_id] = ts;
+                vs[ts.stop_id].trips = [];
+                vs[ts.stop_id].routes = [];
+            }
+            for (var c = 0; c < json.calendar.length; c++) {
+                var tc = json.calendar[c] as Calendar,
+                    vc = variable.calendar;
+                vc[tc.service_id] = tc;
+                vc[tc.service_id].days = [
+                    iB(tc.sunday),
+                    iB(tc.monday),
+                    iB(tc.tuesday),
+                    iB(tc.wednesday),
+                    iB(tc.thursday),
+                    iB(tc.friday),
+                    iB(tc.saturday),
+                ];
+                switch (vc[tc.service_id].days.join(', ')) {
+                    case 'true, true, true, true, true, true, true':
+                        vc[tc.service_id].text_name = 'Daily';
+                        break;
+                    case 'false, true, true, true, true, true, true':
+                        vc[tc.service_id].text_name = 'Monday - Saturday';
+                        break;
+                    case 'false, true, true, true, true, true, false':
+                        vc[tc.service_id].text_name = 'Monday - Friday';
+                        break;
+                    case 'true, false, false, false, false, false, true':
+                        vc[tc.service_id].text_name = 'Saturday - Sunday';
+                        break;
+                    case 'false, false, false, false, false, false, true':
+                        vc[tc.service_id].text_name = 'Saturday';
+                        break;
+                    default:
+                        var firstDay;
+                        var lastDay;
+                        for (
+                            var sItr = 0;
+                            sItr < vc[tc.service_id].days.length;
+                            sItr++
+                        ) {
+                            if (vc[tc.service_id].days[sItr]) {
+                                firstDay = sItr;
+                                break;
+                            }
+                        }
+                        for (
+                            var sItr2 = vc[tc.service_id].days.length - 1;
+                            sItr2 >= 0;
+                            sItr2--
+                        ) {
+                            if (vc[tc.service_id].days[sItr2]) {
+                                lastDay = sItr2;
+                                break;
+                            }
+                        }
+                        var reference = [
+                            'Sunday',
+                            'Monday',
+                            'Tuesday',
+                            'Wednesday',
+                            'Thursday',
+                            'Friday',
+                            'Saturday',
+                        ];
+                        if (firstDay == lastDay) {
+                            vc[tc.service_id].text_name = reference[firstDay];
+                        } else {
+                            vc[tc.service_id].text_name =
+                                reference[firstDay] +
+                                ' - ' +
+                                reference[lastDay];
+                        }
+                        break;
                 }
             }
-        }
+            for (var st = 0; st < json.stop_times.length; st++) {
+                for (var sr = 0; sr < json.routes.length; sr++) {
+                    var tst = json.stop_times[st] as StopTime,
+                        tsr = (json.routes[sr] as Route).route_id,
+                        vst = variable.stops[tst.stop_id];
+                    if (variable.routes[tsr].trips[tst.trip_id]) {
+                        variable.routes[tsr].trips[tst.trip_id].stop_times[
+                            tst.stop_sequence
+                        ] = tst;
+                        if (
+                            !vst.trips.find(({ trip }) => trip === tst.trip_id)
+                        ) {
+                            vst.trips.push({
+                                trip: tst.trip_id,
+                                dir:
+                                    variable.routes[tsr].trips[tst.trip_id]
+                                        .direction_id,
+                                route: tsr,
+                                sequence: tst.stop_sequence,
+                                time: tst.arrival_time,
+                            });
+                        }
+                        if (vst.routes.indexOf(tsr) == -1) vst.routes.push(tsr);
+                    }
+                }
+            }
+        })
+        .then(() => variable);
+}
 
-        return variable;
+function getCurrentPosition() {
+    return new Promise<Position>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
     });
 }
 
@@ -300,54 +330,58 @@ export function getScheduleData(mode) {
  * @return {Promise<{stop:any,location:any,custom:boolean}>}
  */
 var runOnce = false;
-export function locateUser(busPromise, customLocation) {
-    return new Promise(function(resolve, reject) {
-        function locate(e) {
-            var closestDistance = Number.MAX_VALUE,
-                closestStop;
-            var userPos = e.coords;
-            busPromise.then(function(schedule) {
-                for (var i in schedule.stops) {
-                    var stop = schedule.stops[i],
-                        distance = Math.sqrt(
-                            Math.pow(
-                                userPos.latitude - parseFloat(stop.stop_lat),
-                                2,
-                            ) +
-                                Math.pow(
-                                    userPos.longitude -
-                                        parseFloat(stop.stop_lon),
-                                    2,
-                                ),
-                        );
-                    if (distance < closestDistance) {
-                        closestStop = i;
-                        closestDistance = distance;
-                    }
-                }
-                if (closestStop) {
-                    var results = {
-                        stop: closestStop,
-                        location: userPos,
-                        custom: e.customLocationFlag ? true : false,
-                    };
-                    if (runOnce) {
-                        window.dispatchEvent(
-                            new CustomEvent('locationupdate', {
-                                detail: results,
-                            }),
-                        );
-                    }
-                    resolve(results);
-                } else {
-                    reject(Error(userPos));
-                }
-            });
+export function locateUser(
+    busPromise: Promise<GTFSData>,
+    customLocation?: Pick<Coordinates, 'latitude' | 'longitude'>,
+) {
+    let locatePromise: Promise<{
+        coords: Pick<Coordinates, 'latitude' | 'longitude'>;
+        customLocationFlag?: boolean;
+    }>;
+    if (customLocation) {
+        locatePromise = Promise.resolve({
+            coords: customLocation,
+            customLocationFlag: true,
+        });
+    } else {
+        locatePromise = getCurrentPosition();
+    }
+
+    var closestDistance = Number.MAX_VALUE;
+    var closestStop: Stop['stop_id'];
+
+    return Promise.all([locatePromise, busPromise]).then(([e, schedule]) => {
+        var userPos = e.coords;
+        for (var i in schedule.stops) {
+            var stop = schedule.stops[i],
+                distance = Math.sqrt(
+                    Math.pow(userPos.latitude - parseFloat(stop.stop_lat), 2) +
+                        Math.pow(
+                            userPos.longitude - parseFloat(stop.stop_lon),
+                            2,
+                        ),
+                );
+            if (distance < closestDistance) {
+                closestStop = i;
+                closestDistance = distance;
+            }
         }
-        if (customLocation) {
-            locate({ coords: customLocation, customLocationFlag: true });
+        if (closestStop) {
+            var results = {
+                stop: closestStop,
+                location: userPos,
+                custom: e.customLocationFlag ? true : false,
+            };
+            if (runOnce) {
+                window.dispatchEvent(
+                    new CustomEvent('locationupdate', {
+                        detail: results,
+                    }),
+                );
+            }
+            return results;
         } else {
-            navigator.geolocation.getCurrentPosition(locate);
+            throw Error(JSON.stringify(userPos));
         }
     });
 }
@@ -378,41 +412,8 @@ export function documentLoad() {
  * @param  {int} i   0 returns false, 1 returns true
  * @return {boolean}
  */
-function iB(i) {
-    return parseInt(i, 10) !== 0 ? true : false;
-}
-
-/**
- * Turns a service id into a string
- * @param  {string} service_id [description]
- * @param  {object} calendar [description]
- * @return {string}            [description]
- */
-function serviceToString(service_id, calendar) {
-    if (!calendar[service_id]) {
-        console.error('Invalid service_id %s', service_id);
-        return;
-    }
-    var days = calendar[service_id].days;
-    var strings = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'];
-
-    if (days.indexOf(false) == -1) {
-        return 'Daily';
-    } else if (
-        days[0] &&
-        !days[1] &&
-        !days[2] &&
-        !days[3] &&
-        !days[4] &&
-        !days[5] &&
-        days[6]
-    ) {
-        return 'Sa-Su';
-    } else {
-        return (
-            strings[days.indexOf(true)] + '-' + strings[days.lastIndexOf(true)]
-        );
-    }
+function iB(i: number | string): boolean {
+    return parseInt(i as string, 10) !== 0 ? true : false;
 }
 
 /**
@@ -421,7 +422,7 @@ function serviceToString(service_id, calendar) {
  * @param {string} value 	ID to change
  * @return {string} URL to use for href, based on active object.
  */
-function pageLink(type, value) {
+function pageLink(type: Type, value: string) {
     var link = '';
     switch (type) {
         case Type.ROUTE:
@@ -459,6 +460,11 @@ function pageLink(type, value) {
     return link;
 }
 
+interface DynamicLinkNode extends HTMLAnchorElement {
+    Type: Type;
+    Value: string;
+}
+
 /**
  * Creates an A element with custom click events for links.  Can update itself.
  * @param  {Type} type      What value to change in link
@@ -466,8 +472,8 @@ function pageLink(type, value) {
  * @param  {boolean} update Wheter or not to listen for "pageupdate" event and update href
  * @return {Node}           A element with custom properties
  */
-export function dynamicLinkNode(type, value, update) {
-    var node = document.createElement('a');
+export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
+    var node = document.createElement('a') as DynamicLinkNode;
     node.Type = type;
     node.Value = value;
     node.href = pageLink(type, value);
@@ -481,11 +487,15 @@ export function dynamicLinkNode(type, value, update) {
     return node;
 }
 
+declare global {
+    function ga(arg0: string, arg1: string, data: unknown);
+}
+
 /**
  * Used for the click event of a dynamicLinkNode
  * @param  {Event} e
  */
-export function clickEvent(e) {
+export function clickEvent(e: Event) {
     if (e.preventDefault) {
         e.preventDefault();
     }
@@ -504,7 +514,7 @@ export function clickEvent(e) {
             state.STOP = val;
             break;
         case Type.TRIP:
-            state.TRIP = val;
+            state.Route.TRIP = val;
             break;
     }
     callback(val);
@@ -519,16 +529,25 @@ export function clickEvent(e) {
  * @param  {string} date 24hr string in format 12:00:00 to convert to string in 12hr format
  * @return {string}    	String representation of time
  */
-export function stringTime(date) {
+export function stringTime(date: Date | string): string {
     if (typeof date == 'string') {
         if (
             date.indexOf(':') > -1 &&
             date.lastIndexOf(':') > date.indexOf(':')
         ) {
-            var split = date.split(':');
-            date = new Date(0, 0, 0, split[0], split[1], split[2], 0);
+            const split = date.split(':');
+            date = new Date(
+                0,
+                0,
+                0,
+                parseInt(split[0]),
+                parseInt(split[1]),
+                parseInt(split[2]),
+                0,
+            );
         }
-    } else if (typeof date != 'object') {
+    }
+    if (typeof date != 'object') {
         //throw typeof date;
         return;
     }
@@ -545,8 +564,8 @@ export function stringTime(date) {
         displayHour = '12';
         m = 'pm';
     } else if (hr > 12) {
-        var mathhr = hr - 12;
-        displayHour = mathhr.toString();
+        var mathHr = hr - 12;
+        displayHour = mathHr.toString();
         m = 'pm';
     } else {
         displayHour = hr.toString();
@@ -568,7 +587,7 @@ export function stringTime(date) {
  * @param  {string} string in format 13:00:00, from gtfs data
  * @return {Date}
  */
-export function gtfsArrivalToDate(string) {
+export function gtfsArrivalToDate(string: string): Date {
     var timeArr = string.split(':');
     var extraDays = 0,
         extraHours = 0;
@@ -581,8 +600,8 @@ export function gtfsArrivalToDate(string) {
         0,
         0 + extraDays,
         parseInt(timeArr[0]) + extraHours,
-        timeArr[1],
-        timeArr[2],
+        parseInt(timeArr[1]),
+        parseInt(timeArr[2]),
         0,
     );
 }
@@ -592,7 +611,7 @@ export function gtfsArrivalToDate(string) {
  * @param  {string} string in format 13:00:00, from gtfs data
  * @return {string}        String representation of time
  */
-export function gtfsArrivalToString(string) {
+export function gtfsArrivalToString(string: string) {
     return stringTime(gtfsArrivalToDate(string));
 }
 
@@ -601,9 +620,9 @@ export function gtfsArrivalToString(string) {
  * @param  {string} variable - The name of the query variable to find
  * @return {string}
  */
-export function getQueryVariable(variable) {
-    var query = '',
-        vars;
+export function getQueryVariable(variable: string): string {
+    let query = '';
+    let vars: string[];
     if (window.location.hash.indexOf('#!') > -1) {
         query = window.location.hash.substring(
             window.location.hash.indexOf('#!') + 2,
@@ -631,7 +650,7 @@ export function getQueryVariable(variable) {
  * Returns the current time, with date stripped out
  * @return {Date} Current time in hour, min, seconds; other params set to 0
  */
-export function nowDateTime() {
+export function nowDateTime(): Date {
     var now = new Date();
     return new Date(
         0,
