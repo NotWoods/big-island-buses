@@ -28,29 +28,37 @@ import {
     nowDateTime,
     sequence,
     GTFSData,
+    Linkable,
 } from './load.js';
+import { Route, Stop, Trip } from './gtfs-types.js';
 
 var map: google.maps.Map | undefined,
     streetview: google.maps.StreetViewPanorama | undefined,
     autocomplete: google.maps.places.Autocomplete | undefined,
     boundsAllStops: google.maps.LatLngBounds | undefined,
-    markers: google.maps.Marker[] = [],
-    userMapMarker: google.maps.Marker | undefined,
+    markers: StopMarker[] = [],
+    userMapMarker: LinkableMarker | undefined,
     stopMarker: google.maps.Marker | undefined;
 
 let buses: GTFSData | undefined;
-var documentPromise = documentLoad();
-var schedulePromise = getScheduleData('gtfs');
-schedulePromise.then(function(r) {
+const documentPromise = documentLoad();
+const schedulePromise = getScheduleData('gtfs');
+schedulePromise.then(r => {
     buses = r;
 });
-var locatePromise = locateUser(schedulePromise);
-var placeMapMarker;
-var mapLoaded = loadMap();
+const locatePromise = locateUser(schedulePromise);
+var placeMapMarker: LinkableMarker | undefined;
+const mapLoaded = loadMap();
 if (mapLoaded === false) {
     locatePromise.then(function(position) {
         if (!Active.STOP) openStop(position.stop);
     });
+}
+
+type LinkableMarker = google.maps.Marker & Linkable;
+interface StopMarker extends LinkableMarker {
+    stop_id: string;
+    activeInRoute?: boolean;
 }
 
 function loadMap() {
@@ -67,8 +75,6 @@ function loadMap() {
     }
     boundsAllStops = new google.maps.LatLngBounds();
     markers = [];
-    var loadedMarkers = false,
-        loadedMap = false;
 
     function markersAndLatLng(schedule: GTFSData) {
         return Promise.resolve().then(() => {
@@ -81,17 +87,17 @@ function loadMap() {
                     position: myLatLng,
                     title: schedule.stops[k].stop_name,
                     icon: normal,
-                });
+                }) as StopMarker;
                 marker.Type = Type.STOP;
                 marker.Value = schedule.stops[k].stop_id;
                 marker.stop_id = schedule.stops[k].stop_id;
                 google.maps.event.addListener(marker, 'click', clickEvent);
-                boundsAllStops.extend(marker.getPosition());
+                boundsAllStops!.extend(marker.getPosition()!);
                 markers.push(marker);
             }
             return {
                 markers: markers,
-                bounds: boundsAllStops,
+                bounds: boundsAllStops!,
             };
         });
     }
@@ -99,14 +105,13 @@ function loadMap() {
     function mapLoad() {
         return Promise.resolve().then(() => {
             var mapElement =
-                    Active.View.STOP == View.MAP_PRIMARY
-                        ? document.getElementById('map-canvas')
-                        : document.getElementById('streetview-canvas'),
-                panoElement =
-                    Active.View.STOP == View.STREET_PRIMARY
-                        ? document.getElementById('map-canvas')
-                        : document.getElementById('streetview-canvas'),
-                hawaiiCenter = new google.maps.LatLng(19.6, -155.56);
+                Active.View.STOP == View.MAP_PRIMARY
+                    ? document.getElementById('map-canvas')!
+                    : document.getElementById('streetview-canvas')!;
+            var panoElement =
+                Active.View.STOP == View.STREET_PRIMARY
+                    ? document.getElementById('map-canvas')!
+                    : document.getElementById('streetview-canvas')!;
 
             map = new google.maps.Map(mapElement, {
                 center: new google.maps.LatLng(19.6, -155.56),
@@ -139,7 +144,7 @@ function loadMap() {
                 },
                 addressControl: false,
             });
-            map.setStreetView(streetview);
+            map.setStreetView(streetview!);
 
             autocomplete = new google.maps.places.Autocomplete(
                 document.getElementById('search') as HTMLInputElement,
@@ -149,7 +154,7 @@ function loadMap() {
                 autocomplete,
                 'place_changed',
                 function() {
-                    const place = autocomplete.getPlace();
+                    const place = autocomplete!.getPlace();
                     if (!place.geometry) return;
                     var loc = place.geometry.location;
                     console.log('Lat %s, Lon %s', loc.lat(), loc.lng());
@@ -168,7 +173,7 @@ function loadMap() {
                                 map: map,
                                 animation: google.maps.Animation.DROP,
                                 zIndex: 1000,
-                            });
+                            }) as LinkableMarker;
                             placeMapMarker.Type = Type.STOP;
                             google.maps.event.addListener(
                                 placeMapMarker,
@@ -188,20 +193,17 @@ function loadMap() {
     Promise.all([
         documentPromise.then(mapLoad),
         schedulePromise.then(markersAndLatLng),
-    ]).then(function(results) {
-        var map = results[0],
-            markers = results[1].markers,
-            boundsAllStops = results[1].bounds;
+    ]).then(function([map, markersAndBounds]) {
+        const { markers, bounds: boundsAllStops } = markersAndBounds;
         map.setCenter(boundsAllStops.getCenter());
         map.fitBounds(boundsAllStops);
         google.maps.event.addListener(map, 'bounds_changed', function() {
-            var mapBounds = map.getBounds();
-            for (var h = 0; h < markers.length; h++) {
-                var m = markers[h];
-                if (mapBounds.contains(m.getPosition())) {
-                    if (m.getMap() != map) m.setMap(map);
+            var mapBounds = map.getBounds()!;
+            for (const marker of markers) {
+                if (mapBounds.contains(marker.getPosition()!)) {
+                    if (marker.getMap() !== map) marker.setMap(map);
                 } else {
-                    m.setMap(null);
+                    marker.setMap(null);
                 }
             }
         });
@@ -217,15 +219,15 @@ function loadMap() {
                 map: map,
                 animation: google.maps.Animation.DROP,
                 zIndex: 1000,
-            });
+            }) as LinkableMarker;
             userMapMarker.Type = Type.STOP;
             userMapMarker.Value = position.stop;
             google.maps.event.addListener(userMapMarker, 'click', clickEvent);
             if (!Active.STOP) openStop(position.stop);
             window.addEventListener('locationupdate', evt => {
                 const { custom, location } = (evt as CustomEvent).detail;
-                userMapMarker.setIcon(custom ? placeShape : userShape);
-                userMapMarker.setPosition(
+                userMapMarker!.setIcon(custom ? placeShape : userShape);
+                userMapMarker!.setPosition(
                     new google.maps.LatLng(
                         location.latitude,
                         location.longitude,
@@ -239,19 +241,27 @@ function loadMap() {
         google.maps.event.trigger(map, 'resize');
         google.maps.event.trigger(streetview, 'resize');
         if (!Active.Route.ID) {
-            map.setCenter(boundsAllStops.getCenter());
-            map.fitBounds(boundsAllStops);
+            map!.setCenter(boundsAllStops!.getCenter());
+            map!.fitBounds(boundsAllStops!);
         }
     });
 }
 
 schedulePromise.then(updateAside);
-function updateAside(schedule) {
-    var aside,
-        routeListItems = [];
+function updateAside(schedule: GTFSData) {
+    interface Aside extends HTMLElement {
+        routeListItems: RouteListItem[];
+    }
+
+    interface RouteListItem extends HTMLLIElement {
+        route_id: string;
+    }
+
+    var aside: Aside | null = null;
+    var routeListItems: RouteListItem[] = [];
     function generateListItems() {
         for (var item in schedule.routes) {
-            var listItem = document.createElement('li');
+            var listItem = document.createElement('li') as RouteListItem;
             listItem.style.borderColor =
                 '#' + schedule.routes[item].route_color;
             listItem.route_id = schedule.routes[item].route_id;
@@ -268,30 +278,27 @@ function updateAside(schedule) {
 
     documentPromise.then(function() {
         if (aside !== null && typeof aside != 'undefined') {
-            insertListItems();
+            insertListItems(aside);
         } else {
             generateListItems();
-            aside = document.getElementById('aside');
+            aside = document.getElementById('aside') as Aside;
             aside.routeListItems = routeListItems;
-            insertListItems();
+            insertListItems(aside);
         }
     });
 
-    function insertListItems() {
-        var nearbyList = document.getElementById('nearby'),
-            otherList = document.getElementById('other');
-        for (var j = 0; j < aside.routeListItems.length; j++)
-            otherList.appendChild(aside.routeListItems[j]);
+    function insertListItems(aside: Aside) {
+        var nearbyList = document.getElementById('nearby')!;
+        var otherList = document.getElementById('other')!;
+        otherList.append(...aside.routeListItems);
         locatePromise.then(function(result) {
-            for (var i = 0; i < aside.routeListItems.length; i++) {
+            for (const item of aside.routeListItems) {
                 if (
-                    schedule.stops[result.stop].routes.indexOf(
-                        aside.routeListItems[i].route_id,
-                    ) > -1
+                    schedule.stops[result.stop].routes.includes(item.route_id)
                 ) {
-                    nearbyList.appendChild(aside.routeListItems[i]);
+                    nearbyList.appendChild(item);
                 } else {
-                    otherList.appendChild(aside.routeListItems[i]);
+                    otherList.appendChild(item);
                 }
             }
         });
@@ -302,7 +309,7 @@ documentPromise.then(function() {
     uiEvents();
 });
 
-Promise.all([documentPromise, schedulePromise]).then(function(results) {
+Promise.all([documentPromise, schedulePromise]).then(function() {
     if (!window.history.state && window.location.search.indexOf('#!') > -1) {
         Active.Route.ID = getQueryVariable('route')
             ? getQueryVariable('route')
@@ -314,19 +321,19 @@ Promise.all([documentPromise, schedulePromise]).then(function(results) {
             ? getQueryVariable('stop')
             : Active.STOP;
 
-        var bestTrip = openRoute(Active.Route.ID);
+        var bestTrip = openRoute(Active.Route.ID!)!;
         console.log(Active);
-        openStop(Active.STOP);
+        openStop(Active.STOP!);
         openTrip(Active.Route.TRIP ? Active.Route.TRIP : bestTrip);
     } else if (window.history.state) {
         setActiveState(window.history.state);
-        var bestTripAlt = openRoute(Active.Route.ID);
-        openStop(Active.STOP);
+        var bestTripAlt = openRoute(Active.Route.ID!)!;
+        openStop(Active.STOP!);
         openTrip(Active.Route.TRIP ? Active.Route.TRIP : bestTripAlt);
     }
 });
 
-window.onhashchange = function(e) {
+window.onhashchange = function() {
     Active.Route.ID = getQueryVariable('route')
         ? getQueryVariable('route')
         : Active.Route.ID;
@@ -336,14 +343,14 @@ window.onhashchange = function(e) {
     Active.STOP = getQueryVariable('stop')
         ? getQueryVariable('stop')
         : Active.STOP;
-    var bestTrip = openRoute(Active.Route.ID);
-    openStop(Active.STOP);
+    var bestTrip = openRoute(Active.Route.ID!)!;
+    openStop(Active.STOP!);
     openTrip(Active.Route.TRIP ? Active.Route.TRIP : bestTrip);
 };
 window.onpopstate = function(e) {
     setActiveState(e.state);
-    var bestTrip = openRoute(Active.Route.ID);
-    openStop(Active.STOP);
+    var bestTrip = openRoute(Active.Route.ID!)!;
+    openStop(Active.STOP!);
     openTrip(Active.Route.TRIP ? Active.Route.TRIP : bestTrip);
 };
 
@@ -352,62 +359,66 @@ window.onpopstate = function(e) {
  */
 function uiEvents() {
     if (!navigator.onLine) {
-        document.getElementById('main').classList.add('offline');
+        document.getElementById('main')!.classList.add('offline');
     }
     document
-        .getElementById('map-toggle')
+        .getElementById('map-toggle')!
         .addEventListener('click', switchMapStreetview);
-    var select = document.getElementById('trip-select') as HTMLSelectElement;
+    var select = document.getElementById('trip-select') as HTMLSelectElement &
+        Linkable;
     select.Type = Type.TRIP;
     select.addEventListener('change', function(e) {
         select.Value = select.options[select.selectedIndex].value;
         clickEvent.call(select, e);
     });
+
+    function toggleSidebar() {
+        document.getElementById('aside')!.classList.toggle('open');
+    }
     document
-        .getElementById('screen-cover')
-        .addEventListener('click', function() {
-            document.getElementById('aside').classList.remove('open');
-        });
-    document.getElementById('menu').addEventListener('click', function() {
-        document.getElementById('aside').classList.toggle('open');
-    });
-    document.getElementById('alt-menu').addEventListener('click', function() {
-        document.getElementById('aside').classList.toggle('open');
-    });
+        .getElementById('screen-cover')!
+        .addEventListener('click', toggleSidebar);
+    document.getElementById('menu')!.addEventListener('click', toggleSidebar);
+    document
+        .getElementById('alt-menu')!
+        .addEventListener('click', toggleSidebar);
+}
+
+function removeChildren(parent: HTMLElement) {
+    while (parent.firstChild) parent.removeChild(parent.firstChild);
 }
 
 /**
  * Swaps map and streetview divs
  * @return {[type]} [description]
  */
-function switchMapStreetview() {
+function switchMapStreetview(this: HTMLElement) {
     if (!map || !streetview) {
         console.error('Map and StreetViewPanorama have not loaded');
-        //throw false;
-        return;
+        throw new TypeError();
     }
 
-    var mapParent = document.getElementById('map');
-    var panoParent = document.getElementById('streetview-header');
+    var mapParent = document.getElementById('map')!;
+    var panoParent = document.getElementById('streetview-header')!;
 
     if (Active.View.STOP == View.MAP_PRIMARY) {
         mapParent.insertBefore(
-            document.getElementById('streetview-canvas'),
+            document.getElementById('streetview-canvas')!,
             mapParent.firstChild,
         );
         panoParent.insertBefore(
-            document.getElementById('map-canvas'),
+            document.getElementById('map-canvas')!,
             mapParent.firstChild,
         );
         this.classList.add('on');
         Active.View.STOP = View.STREET_PRIMARY;
     } else if (Active.View.STOP == View.STREET_PRIMARY) {
         mapParent.insertBefore(
-            document.getElementById('map-canvas'),
+            document.getElementById('map-canvas')!,
             mapParent.firstChild,
         );
         panoParent.insertBefore(
-            document.getElementById('streetview-canvas'),
+            document.getElementById('streetview-canvas')!,
             mapParent.firstChild,
         );
         this.classList.remove('on');
@@ -416,7 +427,7 @@ function switchMapStreetview() {
     dispatchEvent(updateEvent);
 }
 
-function switchTripView() {
+function switchTripView(this: HTMLElement) {
     if (Active.View.ROUTE == View.LIST) {
         Active.View.ROUTE = View.TIMETABLE;
         this.classList.add('timetable');
@@ -426,7 +437,7 @@ function switchTripView() {
         this.classList.remove('timetable');
         this.title = 'View as timetable';
     }
-    openTrip(Active.Route.TRIP);
+    openTrip(Active.Route.TRIP!);
 }
 
 /**
@@ -435,29 +446,28 @@ function switchTripView() {
  * @return {string}          trip_id that can be used in openTrip. Best matches time and open stop, if any.
  * @throws {string} If the ID does not exist
  */
-function openRoute(route_id) {
-    if (!buses.routes[route_id] || !buses.routes[route_id].route_id) {
+function openRoute(route_id: Route['route_id']) {
+    if (!buses!.routes[route_id] || !buses!.routes[route_id].route_id) {
         console.error('Invalid Route %s', route_id);
         //throw route_id;
         return;
     }
 
-    var thisRoute = buses.routes[route_id];
+    var thisRoute = buses!.routes[route_id];
     Active.Route.ID = route_id;
     Active.Route.TRIP = null;
 
     document.title = thisRoute.route_long_name;
 
-    var content = document.getElementById('content');
-    var name = document.getElementById('route_long_name');
+    var name = document.getElementById('route_long_name')!;
     name.textContent = thisRoute.route_long_name;
     name.style.backgroundColor = '#' + thisRoute.route_color;
     name.style.color = '#' + thisRoute.route_text_color;
-    document.getElementById('alt-menu').style.fill =
+    document.getElementById('alt-menu')!.style.fill =
         '#' + thisRoute.route_text_color;
 
-    var firstStop,
-        lastStop,
+    var firstStop: Stop['stop_id'] | undefined,
+        lastStop: Stop['stop_id'] | undefined,
         largest = 0;
     var earliest = new Date(0, 0, 0, 23, 59, 59, 0),
         latest = new Date(0, 0, 0, 0, 0, 0, 0),
@@ -465,13 +475,11 @@ function openRoute(route_id) {
         earliestTripStop;
 
     var nowTime = nowDateTime();
-    var closestTrip,
+    var closestTrip: Trip['trip_id'] | undefined,
         closestTripTime = Number.MAX_VALUE,
-        closestTripStop;
-    var select = document.getElementById('trip-select');
-    while (select.hasChildNodes()) {
-        select.removeChild(select.lastChild);
-    }
+        closestTripStop: Stop['stop_id'] | undefined;
+    var select = document.getElementById('trip-select')!;
+    removeChildren(select);
 
     var routeStops = [];
 
@@ -548,20 +556,20 @@ function openRoute(route_id) {
         Math.floor(closestTripTime / 60000) != 1
             ? Math.floor(closestTripTime / 60000) + ' minutes'
             : '1 minute';
-    document.getElementById('place-value').textContent =
+    document.getElementById('place-value')!.textContent =
         'Between ' +
-        buses.stops[firstStop].stop_name +
+        buses!.stops[firstStop!].stop_name +
         ' - ' +
-        buses.stops[lastStop].stop_name;
-    document.getElementById('time-value').textContent =
+        buses!.stops[lastStop!].stop_name;
+    document.getElementById('time-value')!.textContent =
         stringTime(earliest) + ' - ' + stringTime(latest);
-    document.getElementById('next-stop-value').textContent =
+    document.getElementById('next-stop-value')!.textContent =
         'Reaches ' +
-        buses.stops[closestTripStop].stop_name +
+        buses!.stops[closestTripStop!].stop_name +
         ' in ' +
         minString;
 
-    document.getElementById('main').classList.add('open');
+    document.getElementById('main')!.classList.add('open');
 
     if (typeof google == 'object' && typeof google.maps == 'object') {
         var routeBounds = new google.maps.LatLngBounds();
@@ -570,7 +578,7 @@ function openRoute(route_id) {
                 markers[k].setIcon(normal);
                 markers[k].setZIndex(200);
                 markers[k].activeInRoute = true;
-                routeBounds.extend(markers[k].getPosition());
+                routeBounds.extend(markers[k].getPosition()!);
             } else {
                 markers[k].setIcon(unimportant);
                 markers[k].setZIndex(null);
@@ -583,13 +591,13 @@ function openRoute(route_id) {
         }
 
         google.maps.event.trigger(map, 'resize');
-        map.setCenter(routeBounds.getCenter());
-        map.fitBounds(routeBounds);
+        map!.setCenter(routeBounds.getCenter());
+        map!.fitBounds(routeBounds);
         google.maps.event.trigger(streetview, 'resize');
     }
 
     window.dispatchEvent(updateEvent);
-    openTrip(closestTrip);
+    openTrip(closestTrip!);
     return closestTrip;
 }
 
@@ -598,8 +606,8 @@ function openRoute(route_id) {
  * @param  {[type]} stop_id Id of the stop to use
  * @return {void}           Creates an element
  */
-function openStop(stop_id) {
-    if (!buses.stops[stop_id] || !buses.stops[stop_id].stop_id) {
+function openStop(stop_id: Stop['stop_id']) {
+    if (!buses!.stops[stop_id] || !buses!.stops[stop_id].stop_id) {
         console.error('Invalid Stop %s', stop_id);
         //throw stop_id;
         return;
@@ -607,12 +615,11 @@ function openStop(stop_id) {
 
     Active.STOP = stop_id;
 
-    var stopDiv = document.getElementById('stop');
     if (streetview) {
         streetview.setPosition(
             new google.maps.LatLng(
-                parseFloat(buses.stops[stop_id].stop_lat),
-                parseFloat(buses.stops[stop_id].stop_lon),
+                parseFloat(buses!.stops[stop_id].stop_lat),
+                parseFloat(buses!.stops[stop_id].stop_lon),
             ),
         );
     }
@@ -624,60 +631,59 @@ function openStop(stop_id) {
             } else if (Active.Route.ID !== null) {
                 markers[mkr].setIcon(unimportant);
             }
-            if (markers[mkr].stop_id == buses.stops[stop_id].stop_id) {
+            if (markers[mkr].stop_id == buses!.stops[stop_id].stop_id) {
                 stopMarker = markers[mkr];
             }
         }
 
-        stopMarker.setIcon(stopShape);
-        stopMarker.setZIndex(300);
+        stopMarker!.setIcon(stopShape);
+        stopMarker!.setZIndex(300);
 
-        streetview.setPosition(stopMarker.getPosition());
+        streetview!.setPosition(stopMarker!.getPosition()!);
         google.maps.event.trigger(streetview, 'resize');
-        google.maps.event.addListener(streetview, 'pano_changed', function() {
+        google.maps.event.addListener(streetview!, 'pano_changed', function() {
             document.getElementById(
                 'address',
-            ).textContent = streetview.getLocation().description;
-            streetview.setPov(streetview.getPhotographerPov());
+            )!.textContent = streetview!.getLocation().description!;
+            streetview!.setPov(streetview!.getPhotographerPov());
         });
     }
     if (!streetview) {
-        document.getElementById('stop').classList.add('no-streetview');
+        document.getElementById('stop')!.classList.add('no-streetview');
     }
 
-    document.getElementById('stop_name').textContent =
-        buses.stops[stop_id].stop_name;
+    document.getElementById('stop_name')!.textContent = buses!.stops[
+        stop_id
+    ].stop_name;
 
-    var list = document.getElementById('connections');
-    while (list.hasChildNodes()) {
-        list.removeChild(list.lastChild);
-    }
-    for (var i = 0; i < buses.stops[stop_id].routes.length; i++) {
-        var route = buses.routes[buses.stops[stop_id].routes[i]];
+    var list = document.getElementById('connections')!;
+    removeChildren(list);
+    for (var i = 0; i < buses!.stops[stop_id].routes.length; i++) {
+        var route = buses!.routes[buses!.stops[stop_id].routes[i]];
         var listItem = document.createElement('li');
         var linkItem = dynamicLinkNode(
             Type.ROUTE,
-            buses.stops[stop_id].routes[i],
+            buses!.stops[stop_id].routes[i],
             false,
         );
         linkItem.style.borderColor = '#' + route.route_color;
         linkItem.textContent = route.route_long_name;
 
         listItem.appendChild(linkItem);
-        if (Active.Route.ID == buses.stops[stop_id].routes[i]) {
+        if (Active.Route.ID == buses!.stops[stop_id].routes[i]) {
             listItem.className = 'active-route';
         }
         list.appendChild(listItem);
     }
 
-    document.getElementById('main').classList.add('open-stop');
+    document.getElementById('main')!.classList.add('open-stop');
     window.dispatchEvent(updateEvent);
 }
 
-function openTrip(trip_id) {
+function openTrip(trip_id: Trip['trip_id']) {
     if (
-        !buses.routes[Active.Route.ID].trips[trip_id] ||
-        !buses.routes[Active.Route.ID].trips[trip_id].trip_id
+        !buses!.routes[Active.Route.ID!].trips[trip_id] ||
+        !buses!.routes[Active.Route.ID!].trips[trip_id].trip_id
     ) {
         console.error('Invalid trip %s in route %s', trip_id, Active.Route.ID);
         //throw trip_id;
@@ -686,12 +692,10 @@ function openTrip(trip_id) {
 
     Active.Route.TRIP = trip_id;
 
-    var schedule = document.getElementById('schedule');
-    while (schedule.hasChildNodes()) {
-        schedule.removeChild(schedule.lastChild);
-    }
+    var schedule = document.getElementById('schedule')!;
+    removeChildren(schedule);
 
-    var trip = buses.routes[Active.Route.ID].trips[trip_id];
+    var trip = buses!.routes[Active.Route.ID!].trips[trip_id];
     var stopSequence = sequence(trip.stop_times);
 
     var select = document.getElementById('trip-select') as HTMLSelectElement;
@@ -703,8 +707,9 @@ function openTrip(trip_id) {
         }
     }
 
-    document.getElementById('week-days-value').textContent =
-        buses.calendar[trip.service_id].text_name;
+    document.getElementById('week-days-value')!.textContent = buses!.calendar[
+        trip.service_id
+    ].text_name;
 
     for (var i = 0; i < stopSequence.length; i++) {
         var tripStop = trip.stop_times[stopSequence[i]];
@@ -716,14 +721,14 @@ function openTrip(trip_id) {
             var line = document.createElement('span');
             line.className = 'line';
             line.style.backgroundColor =
-                '#' + buses.routes[Active.Route.ID].route_color;
+                '#' + buses!.routes[Active.Route.ID!].route_color;
             lines.appendChild(line);
         }
         routeListItem.appendChild(lines);
 
         var name = document.createElement('span');
         name.className = 'name';
-        name.textContent = buses.stops[tripStop.stop_id].stop_name;
+        name.textContent = buses!.stops[tripStop.stop_id].stop_name;
         routeListItem.appendChild(name);
 
         var time = document.createElement('time');
@@ -732,16 +737,18 @@ function openTrip(trip_id) {
 
         var connection = document.createElement('div');
         connection.className = 'connections';
-        for (var k = 0; k < buses.stops[tripStop.stop_id].routes.length; k++) {
-            var connectRoute = buses.stops[tripStop.stop_id].routes[k];
+        for (var k = 0; k < buses!.stops[tripStop.stop_id].routes.length; k++) {
+            var connectRoute = buses!.stops[tripStop.stop_id].routes[k];
             if (connectRoute == Active.Route.ID) {
                 continue;
             }
 
             var item = document.createElement('span');
             item.className = 'route-dash';
-            item.title = buses.routes[connectRoute].route_long_name;
-            item.style.backgroundColor = buses.routes[connectRoute].route_color;
+            item.title = buses!.routes[connectRoute].route_long_name;
+            item.style.backgroundColor = buses!.routes[
+                connectRoute
+            ].route_color;
 
             connection.appendChild(item);
         }

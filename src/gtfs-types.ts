@@ -1,6 +1,4 @@
-import { sequence } from './load';
-
-export interface Calendar {
+export interface CsvCalendar {
     service_id: string;
     monday: '0' | '1';
     tuesday: '0' | '1';
@@ -11,20 +9,22 @@ export interface Calendar {
     sunday: '0' | '1';
     start_date: string;
     end_date: string;
-
-    days?: readonly [
-        boolean,
-        boolean,
-        boolean,
-        boolean,
-        boolean,
-        boolean,
-        boolean,
-    ];
-    text_name?: string;
 }
 
-export interface Route {
+export interface Calendar extends CsvCalendar {
+    days: readonly [
+        boolean,
+        boolean,
+        boolean,
+        boolean,
+        boolean,
+        boolean,
+        boolean
+    ];
+    text_name: string;
+}
+
+export interface CsvRoute {
     route_id: string;
     route_short_name: string;
     route_long_name: string;
@@ -33,11 +33,13 @@ export interface Route {
     route_text_color: string;
     agency_id: string;
     route_url: string;
-
-    trips?: { [trip_id: string]: Trip };
 }
 
-export interface Trip {
+export interface Route extends CsvRoute {
+    trips: { [trip_id: string]: Trip };
+}
+
+export interface CsvTrip {
     route_id: string;
     service_id: string;
     trip_id: string;
@@ -45,24 +47,28 @@ export interface Trip {
     trip_short_name: string;
     trip_headsign: string;
     shape_id: string;
-
-    stop_times?: {};
 }
 
-export interface Stop {
+export interface Trip extends CsvTrip {
+    stop_times: { [stop_sequence: string]: StopTime };
+}
+
+export interface CsvStop {
     stop_id: string;
     stop_name: string;
     stop_lat: string;
     stop_lon: string;
+}
 
-    trips?: {
+export interface Stop extends CsvStop {
+    trips: {
         trip: Trip['trip_id'];
         dir: string;
         route: Route['route_id'];
         sequence: string;
         time: string;
     }[];
-    routes?: Route['route_id'][];
+    routes: Route['route_id'][];
 }
 
 export interface StopTime {

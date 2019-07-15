@@ -10,8 +10,8 @@
         "lib": ["dom", "esnext"],
         "skipLibCheck": true,
         /* Strict Type-Checking Options */
-        // "strict": true,
-        // "noUnusedLocals": true,
+        "strict": true,
+        "noUnusedLocals": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         /* Module Resolution Options */

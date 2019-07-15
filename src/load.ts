@@ -5,21 +5,44 @@
  */
 
 import JSZip from 'jszip/dist/jszip.min.js';
-import { Route, Trip, Stop, Calendar, StopTime } from './gtfs-types';
+import {
+    Route,
+    Trip,
+    Stop,
+    Calendar,
+    StopTime,
+    CsvRoute,
+    CsvTrip,
+    CsvStop,
+    CsvCalendar,
+} from './gtfs-types';
 
 export const enum Type {
     ROUTE,
     STOP,
     TRIP,
 }
-export const View = {
-    LIST: 0,
-    TIMETABLE: 1,
+export const enum View {
+    LIST,
+    TIMETABLE,
 
-    MAP_PRIMARY: 2,
-    STREET_PRIMARY: 3,
-};
-export var Active = {
+    MAP_PRIMARY,
+    STREET_PRIMARY,
+}
+
+interface ActiveState {
+    Route: {
+        ID: string | null;
+        TRIP: string | null;
+    };
+    STOP: string | null;
+    View: {
+        ROUTE: View;
+        STOP: View;
+    };
+}
+
+export let Active: ActiveState = {
     Route: {
         ID: null,
         TRIP: null,
@@ -74,7 +97,7 @@ export const normal = {
         anchor: { x: 12, y: 20 },
     } as google.maps.Icon;
 
-export function setActiveState(newState) {
+export function setActiveState(newState: ActiveState) {
     Active = newState;
 }
 
@@ -97,6 +120,39 @@ function xhr(url: string, responseType?: XMLHttpRequestResponseType) {
     });
 }
 
+function makeCalendarTextName(days: Calendar['days']) {
+    switch (days.join(', ')) {
+        case 'true, true, true, true, true, true, true':
+            return 'Daily';
+        case 'false, true, true, true, true, true, true':
+            return 'Monday - Saturday';
+        case 'false, true, true, true, true, true, false':
+            return 'Monday - Friday';
+        case 'true, false, false, false, false, false, true':
+            return 'Saturday - Sunday';
+        case 'false, false, false, false, false, false, true':
+            return 'Saturday';
+        default:
+            const firstDay = days.indexOf(true);
+            const lastDay = days.lastIndexOf(true);
+
+            var reference = [
+                'Sunday',
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday',
+            ];
+            if (firstDay == lastDay) {
+                return reference[firstDay];
+            } else {
+                return reference[firstDay] + ' - ' + reference[lastDay];
+            }
+    }
+}
+
 export interface GTFSData {
     routes: { [route_id: string]: Route };
     stops: { [stop_id: string]: Stop };
@@ -112,8 +168,9 @@ export interface GTFSData {
  */
 export function getScheduleData(mode: 'gtfs' | 'folder') {
     if (mode != 'gtfs' && mode != 'folder') {
-        console.error("Invalid mode was set: %s. Use 'gtfs' or 'folder'", mode);
-        return;
+        throw new TypeError(
+            `Invalid mode was set: ${mode}. Use 'gtfs' or 'folder'`,
+        );
     }
 
     const variable: GTFSData = {
@@ -181,9 +238,10 @@ export function getScheduleData(mode: 'gtfs' | 'folder') {
 
                 if (i > 0) {
                     const headerRow = csv[0];
-                    var jsonFromCsv = {};
-                    for (var j = 0; j < headerRow.length; j++)
+                    const jsonFromCsv: { [header: string]: string } = {};
+                    for (let j = 0; j < headerRow.length; j++) {
                         jsonFromCsv[headerRow[j]] = csv[i][j];
+                    }
                     json[name].push(jsonFromCsv);
                 }
             }
@@ -194,122 +252,64 @@ export function getScheduleData(mode: 'gtfs' | 'folder') {
 
     return rqDone
         .then(function(textResult) {
-            const json = csvFilesToObject(textResult);
+            const json = csvFilesToObject(textResult) as {
+                routes: CsvRoute[];
+                trips: CsvTrip[];
+                stops: CsvStop[];
+                calendar: CsvCalendar[];
+                stop_times: StopTime[];
+            };
 
-            for (var r = 0; r < json.routes.length; r++) {
-                var tr = json.routes[r] as Route,
-                    vr = variable.routes;
-                vr[tr.route_id] = tr;
-                vr[tr.route_id].trips = {};
+            for (const csvRoute of json.routes) {
+                const route = csvRoute as Route;
+                route.trips = {};
+                variable.routes[route.route_id] = route;
             }
-            for (var t = 0; t < json.trips.length; t++) {
-                var tt = json.trips[t] as Trip,
-                    vt = variable.routes[tt.route_id].trips;
-                vt[tt.trip_id] = tt;
-                vt[tt.trip_id].stop_times = {};
+            for (const csvTrip of json.trips) {
+                const trip = csvTrip as Trip;
+                trip.stop_times = {};
+                variable.routes[trip.route_id].trips[trip.trip_id] = trip;
             }
-            for (var s = 0; s < json.stops.length; s++) {
-                var ts = json.stops[s] as Stop,
-                    vs = variable.stops;
-                vs[ts.stop_id] = ts;
-                vs[ts.stop_id].trips = [];
-                vs[ts.stop_id].routes = [];
+            for (const csvStop of json.stops) {
+                const stop = csvStop as Stop;
+                stop.trips = [];
+                stop.routes = [];
+                variable.stops[stop.stop_id] = stop;
             }
-            for (var c = 0; c < json.calendar.length; c++) {
-                var tc = json.calendar[c] as Calendar,
-                    vc = variable.calendar;
-                vc[tc.service_id] = tc;
-                vc[tc.service_id].days = [
-                    iB(tc.sunday),
-                    iB(tc.monday),
-                    iB(tc.tuesday),
-                    iB(tc.wednesday),
-                    iB(tc.thursday),
-                    iB(tc.friday),
-                    iB(tc.saturday),
+            for (const csvCalendar of json.calendar) {
+                const calendar = csvCalendar as Calendar;
+                calendar.days = [
+                    iB(calendar.sunday),
+                    iB(calendar.monday),
+                    iB(calendar.tuesday),
+                    iB(calendar.wednesday),
+                    iB(calendar.thursday),
+                    iB(calendar.friday),
+                    iB(calendar.saturday),
                 ];
-                switch (vc[tc.service_id].days.join(', ')) {
-                    case 'true, true, true, true, true, true, true':
-                        vc[tc.service_id].text_name = 'Daily';
-                        break;
-                    case 'false, true, true, true, true, true, true':
-                        vc[tc.service_id].text_name = 'Monday - Saturday';
-                        break;
-                    case 'false, true, true, true, true, true, false':
-                        vc[tc.service_id].text_name = 'Monday - Friday';
-                        break;
-                    case 'true, false, false, false, false, false, true':
-                        vc[tc.service_id].text_name = 'Saturday - Sunday';
-                        break;
-                    case 'false, false, false, false, false, false, true':
-                        vc[tc.service_id].text_name = 'Saturday';
-                        break;
-                    default:
-                        var firstDay;
-                        var lastDay;
-                        for (
-                            var sItr = 0;
-                            sItr < vc[tc.service_id].days.length;
-                            sItr++
-                        ) {
-                            if (vc[tc.service_id].days[sItr]) {
-                                firstDay = sItr;
-                                break;
-                            }
-                        }
-                        for (
-                            var sItr2 = vc[tc.service_id].days.length - 1;
-                            sItr2 >= 0;
-                            sItr2--
-                        ) {
-                            if (vc[tc.service_id].days[sItr2]) {
-                                lastDay = sItr2;
-                                break;
-                            }
-                        }
-                        var reference = [
-                            'Sunday',
-                            'Monday',
-                            'Tuesday',
-                            'Wednesday',
-                            'Thursday',
-                            'Friday',
-                            'Saturday',
-                        ];
-                        if (firstDay == lastDay) {
-                            vc[tc.service_id].text_name = reference[firstDay];
-                        } else {
-                            vc[tc.service_id].text_name =
-                                reference[firstDay] +
-                                ' - ' +
-                                reference[lastDay];
-                        }
-                        break;
-                }
+                calendar.text_name = makeCalendarTextName(calendar.days);
+                variable.calendar[calendar.service_id] = calendar;
             }
-            for (var st = 0; st < json.stop_times.length; st++) {
-                for (var sr = 0; sr < json.routes.length; sr++) {
-                    var tst = json.stop_times[st] as StopTime,
-                        tsr = (json.routes[sr] as Route).route_id,
-                        vst = variable.stops[tst.stop_id];
-                    if (variable.routes[tsr].trips[tst.trip_id]) {
-                        variable.routes[tsr].trips[tst.trip_id].stop_times[
-                            tst.stop_sequence
-                        ] = tst;
-                        if (
-                            !vst.trips.find(({ trip }) => trip === tst.trip_id)
-                        ) {
-                            vst.trips.push({
-                                trip: tst.trip_id,
-                                dir:
-                                    variable.routes[tsr].trips[tst.trip_id]
-                                        .direction_id,
-                                route: tsr,
-                                sequence: tst.stop_sequence,
-                                time: tst.arrival_time,
+            for (const stopTime of json.stop_times) {
+                const stop = variable.stops[stopTime.stop_id];
+                for (const { route_id } of json.routes) {
+                    const trip =
+                        variable.routes[route_id].trips[stopTime.trip_id];
+                    if (trip) {
+                        trip.stop_times[stopTime.stop_sequence] = stopTime;
+
+                        const tripAdded = stop.trips.find(
+                            ({ trip }) => trip === stopTime.trip_id,
+                        );
+                        if (!tripAdded) {
+                            stop.trips.push({
+                                trip: stopTime.trip_id,
+                                dir: trip.direction_id,
+                                route: route_id,
+                                sequence: stopTime.stop_sequence,
+                                time: stopTime.arrival_time,
                             });
                         }
-                        if (vst.routes.indexOf(tsr) == -1) vst.routes.push(tsr);
                     }
                 }
             }
@@ -329,7 +329,7 @@ function getCurrentPosition() {
  * @param {Coordinates} customLocation Location to use instead of GPS
  * @return {Promise<{stop:any,location:any,custom:boolean}>}
  */
-var runOnce = false;
+let runOnce = false;
 export function locateUser(
     busPromise: Promise<GTFSData>,
     customLocation?: Pick<Coordinates, 'latitude' | 'longitude'>,
@@ -347,27 +347,24 @@ export function locateUser(
         locatePromise = getCurrentPosition();
     }
 
-    var closestDistance = Number.MAX_VALUE;
-    var closestStop: Stop['stop_id'];
+    let closestDistance = Number.MAX_VALUE;
+    let closestStop: Stop['stop_id'];
 
     return Promise.all([locatePromise, busPromise]).then(([e, schedule]) => {
-        var userPos = e.coords;
+        const userPos = e.coords;
         for (var i in schedule.stops) {
-            var stop = schedule.stops[i],
-                distance = Math.sqrt(
-                    Math.pow(userPos.latitude - parseFloat(stop.stop_lat), 2) +
-                        Math.pow(
-                            userPos.longitude - parseFloat(stop.stop_lon),
-                            2,
-                        ),
-                );
+            const stop = schedule.stops[i];
+            const distance = Math.sqrt(
+                Math.pow(userPos.latitude - parseFloat(stop.stop_lat), 2) +
+                    Math.pow(userPos.longitude - parseFloat(stop.stop_lon), 2),
+            );
             if (distance < closestDistance) {
                 closestStop = i;
                 closestDistance = distance;
             }
         }
         if (closestStop) {
-            var results = {
+            const results = {
                 stop: closestStop,
                 location: userPos,
                 custom: e.customLocationFlag ? true : false,
@@ -460,10 +457,12 @@ function pageLink(type: Type, value: string) {
     return link;
 }
 
-interface DynamicLinkNode extends HTMLAnchorElement {
+export interface Linkable {
     Type: Type;
     Value: string;
 }
+
+type DynamicLinkNode = HTMLAnchorElement & Linkable;
 
 /**
  * Creates an A element with custom click events for links.  Can update itself.
@@ -487,15 +486,11 @@ export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
     return node;
 }
 
-declare global {
-    function ga(arg0: string, arg1: string, data: unknown);
-}
-
 /**
  * Used for the click event of a dynamicLinkNode
  * @param  {Event} e
  */
-export function clickEvent(e: Event) {
+export function clickEvent(this: Linkable, e: Event) {
     if (e.preventDefault) {
         e.preventDefault();
     }
@@ -518,7 +513,7 @@ export function clickEvent(e: Event) {
             break;
     }
     callback(val);
-    history.pushState(state, null, newLink);
+    history.pushState(state, null as any, newLink);
     if (ga) ga('send', 'pageview', { page: newLink, title: document.title });
     return false;
 }
@@ -540,16 +535,15 @@ export function stringTime(date: Date | string): string {
                 0,
                 0,
                 0,
-                parseInt(split[0]),
-                parseInt(split[1]),
-                parseInt(split[2]),
+                parseInt(split[0], 10),
+                parseInt(split[1], 10),
+                parseInt(split[2], 10),
                 0,
             );
         }
     }
     if (typeof date != 'object') {
-        //throw typeof date;
-        return;
+        throw new TypeError(`date must be Date or string, not ${typeof date}`);
     }
 
     var m = 'am',
@@ -599,9 +593,9 @@ export function gtfsArrivalToDate(string: string): Date {
         0,
         0,
         0 + extraDays,
-        parseInt(timeArr[0]) + extraHours,
-        parseInt(timeArr[1]),
-        parseInt(timeArr[2]),
+        parseInt(timeArr[0], 10) + extraHours,
+        parseInt(timeArr[1], 10),
+        parseInt(timeArr[2], 10),
         0,
     );
 }
@@ -620,7 +614,7 @@ export function gtfsArrivalToString(string: string) {
  * @param  {string} variable - The name of the query variable to find
  * @return {string}
  */
-export function getQueryVariable(variable: string): string {
+export function getQueryVariable(variable: string): string | null {
     let query = '';
     let vars: string[];
     if (window.location.hash.indexOf('#!') > -1) {
@@ -636,8 +630,8 @@ export function getQueryVariable(variable: string): string {
     }
 
     if (query !== '') {
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split('=');
+        for (var i = 0; i < vars!.length; i++) {
+            var pair = vars![i].split('=');
             if (pair[0] == variable) {
                 return pair[1];
             }
@@ -666,14 +660,12 @@ export function nowDateTime(): Date {
 /**
  * Sorts stop time keys
  * @param  {GTFSData stop_times} stopTimes
- * @return {Array} ordered list
+ * @return {string[]} ordered list
  */
-export function sequence(stopTimes) {
+export function sequence(stopTimes: Trip['stop_times']) {
     var stopSequence = [];
     for (var key in stopTimes) {
         stopSequence.push(key);
     }
-    return stopSequence.sort(function(a, b) {
-        return parseInt(a) - parseInt(b);
-    });
+    return stopSequence.sort((a, b) => parseInt(a) - parseInt(b));
 }
