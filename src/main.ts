@@ -29,25 +29,22 @@ import {
     sequence,
     GTFSData,
     Linkable,
+    ActiveState,
 } from './load.js';
 import { Route, Stop, Trip } from './gtfs-types.js';
 
-var map: google.maps.Map | undefined,
-    streetview: google.maps.StreetViewPanorama | undefined,
-    autocomplete: google.maps.places.Autocomplete | undefined,
-    boundsAllStops: google.maps.LatLngBounds | undefined,
-    markers: StopMarker[] = [],
-    userMapMarker: LinkableMarker | undefined,
-    stopMarker: google.maps.Marker | undefined;
+let map: google.maps.Map | undefined;
+let streetview: google.maps.StreetViewPanorama | undefined;
+let autocomplete: google.maps.places.Autocomplete | undefined;
+let boundsAllStops: google.maps.LatLngBounds | undefined;
+let markers: StopMarker[] = [];
+let userMapMarker: LinkableMarker | undefined;
+let stopMarker: google.maps.Marker | undefined;
 
-let buses: GTFSData | undefined;
 const documentPromise = documentLoad();
 const schedulePromise = getScheduleData('gtfs');
-schedulePromise.then(r => {
-    buses = r;
-});
 const locatePromise = locateUser(schedulePromise);
-var placeMapMarker: LinkableMarker | undefined;
+let placeMapMarker: LinkableMarker | undefined;
 const mapLoaded = loadMap();
 if (mapLoaded === false) {
     locatePromise.then(function(position) {
@@ -59,6 +56,13 @@ type LinkableMarker = google.maps.Marker & Linkable;
 interface StopMarker extends LinkableMarker {
     stop_id: string;
     activeInRoute?: boolean;
+}
+
+function stopToPos(stop: Stop) {
+    return new google.maps.LatLng(
+        parseFloat(stop.stop_lat),
+        parseFloat(stop.stop_lon),
+    );
 }
 
 function loadMap() {
@@ -78,19 +82,15 @@ function loadMap() {
 
     function markersAndLatLng(schedule: GTFSData) {
         return Promise.resolve().then(() => {
-            for (var k in schedule.stops) {
-                var myLatLng = new google.maps.LatLng(
-                    parseFloat(schedule.stops[k].stop_lat),
-                    parseFloat(schedule.stops[k].stop_lon),
-                );
-                var marker = new google.maps.Marker({
-                    position: myLatLng,
-                    title: schedule.stops[k].stop_name,
+            for (const stop of Object.values(schedule.stops)) {
+                const marker = new google.maps.Marker({
+                    position: stopToPos(stop),
+                    title: stop.stop_name,
                     icon: normal,
                 }) as StopMarker;
                 marker.Type = Type.STOP;
-                marker.Value = schedule.stops[k].stop_id;
-                marker.stop_id = schedule.stops[k].stop_id;
+                marker.Value = stop.stop_id;
+                marker.stop_id = stop.stop_id;
                 google.maps.event.addListener(marker, 'click', clickEvent);
                 boundsAllStops!.extend(marker.getPosition()!);
                 markers.push(marker);
@@ -104,11 +104,11 @@ function loadMap() {
 
     function mapLoad() {
         return Promise.resolve().then(() => {
-            var mapElement =
+            const mapElement =
                 Active.View.STOP == View.MAP_PRIMARY
                     ? document.getElementById('map-canvas')!
                     : document.getElementById('streetview-canvas')!;
-            var panoElement =
+            const panoElement =
                 Active.View.STOP == View.STREET_PRIMARY
                     ? document.getElementById('map-canvas')!
                     : document.getElementById('streetview-canvas')!;
@@ -156,12 +156,12 @@ function loadMap() {
                 function() {
                     const place = autocomplete!.getPlace();
                     if (!place.geometry) return;
-                    var loc = place.geometry.location;
+                    const loc = place.geometry.location;
                     console.log('Lat %s, Lon %s', loc.lat(), loc.lng());
                     locateUser(schedulePromise, {
                         latitude: loc.lat(),
                         longitude: loc.lng(),
-                    }).then(function(position) {
+                    }).then(position => {
                         if (!placeMapMarker) {
                             placeMapMarker = new google.maps.Marker({
                                 position: new google.maps.LatLng(
@@ -193,12 +193,11 @@ function loadMap() {
     Promise.all([
         documentPromise.then(mapLoad),
         schedulePromise.then(markersAndLatLng),
-    ]).then(function([map, markersAndBounds]) {
-        const { markers, bounds: boundsAllStops } = markersAndBounds;
-        map.setCenter(boundsAllStops.getCenter());
-        map.fitBounds(boundsAllStops);
+    ]).then(function([map, { markers, bounds }]) {
+        map.setCenter(bounds.getCenter());
+        map.fitBounds(bounds);
         google.maps.event.addListener(map, 'bounds_changed', function() {
-            var mapBounds = map.getBounds()!;
+            const mapBounds = map.getBounds()!;
             for (const marker of markers) {
                 if (mapBounds.contains(marker.getPosition()!)) {
                     if (marker.getMap() !== map) marker.setMap(map);
@@ -207,7 +206,7 @@ function loadMap() {
                 }
             }
         });
-        for (var i = 0; i < markers.length; i++) markers[i].setMap(map);
+        markers.forEach(marker => marker.setMap(map));
         locatePromise.then(function(position) {
             userMapMarker = new google.maps.Marker({
                 position: new google.maps.LatLng(
@@ -257,21 +256,16 @@ function updateAside(schedule: GTFSData) {
         route_id: string;
     }
 
-    var aside: Aside | null = null;
-    var routeListItems: RouteListItem[] = [];
+    let aside: Aside | null = null;
+    const routeListItems: RouteListItem[] = [];
     function generateListItems() {
-        for (var item in schedule.routes) {
-            var listItem = document.createElement('li') as RouteListItem;
-            listItem.style.borderColor =
-                '#' + schedule.routes[item].route_color;
-            listItem.route_id = schedule.routes[item].route_id;
-            var link = dynamicLinkNode(
-                Type.ROUTE,
-                schedule.routes[item].route_id,
-                true,
-            );
-            link.textContent = schedule.routes[item].route_long_name;
-            listItem.appendChild(link);
+        for (const route of Object.values(schedule.routes)) {
+            const listItem = document.createElement('li') as RouteListItem;
+            listItem.style.borderColor = `#${route.route_color}`;
+            listItem.route_id = route.route_id;
+            const link = dynamicLinkNode(Type.ROUTE, route.route_id, true);
+            link.textContent = route.route_long_name;
+            listItem.append(link);
             routeListItems.push(listItem);
         }
     }
@@ -288,8 +282,8 @@ function updateAside(schedule: GTFSData) {
     });
 
     function insertListItems(aside: Aside) {
-        var nearbyList = document.getElementById('nearby')!;
-        var otherList = document.getElementById('other')!;
+        const nearbyList = document.getElementById('nearby')!;
+        const otherList = document.getElementById('other')!;
         otherList.append(...aside.routeListItems);
         locatePromise.then(function(result) {
             for (const item of aside.routeListItems) {
@@ -309,6 +303,16 @@ documentPromise.then(function() {
     uiEvents();
 });
 
+function openActive(state: ActiveState) {
+    console.log(state);
+    return Promise.all([
+        openRoute(state.Route.ID!).then(bestTrip =>
+            openTrip(state.Route.TRIP ? state.Route.TRIP : bestTrip!),
+        ),
+        openStop(state.STOP!),
+    ]).then(() => {});
+}
+
 Promise.all([documentPromise, schedulePromise]).then(function() {
     if (!window.history.state && window.location.search.indexOf('#!') > -1) {
         Active.Route.ID = getQueryVariable('route')
@@ -321,15 +325,10 @@ Promise.all([documentPromise, schedulePromise]).then(function() {
             ? getQueryVariable('stop')
             : Active.STOP;
 
-        var bestTrip = openRoute(Active.Route.ID!)!;
-        console.log(Active);
-        openStop(Active.STOP!);
-        openTrip(Active.Route.TRIP ? Active.Route.TRIP : bestTrip);
+        openActive(Active);
     } else if (window.history.state) {
         setActiveState(window.history.state);
-        var bestTripAlt = openRoute(Active.Route.ID!)!;
-        openStop(Active.STOP!);
-        openTrip(Active.Route.TRIP ? Active.Route.TRIP : bestTripAlt);
+        openActive(Active);
     }
 });
 
@@ -343,15 +342,11 @@ window.onhashchange = function() {
     Active.STOP = getQueryVariable('stop')
         ? getQueryVariable('stop')
         : Active.STOP;
-    var bestTrip = openRoute(Active.Route.ID!)!;
-    openStop(Active.STOP!);
-    openTrip(Active.Route.TRIP ? Active.Route.TRIP : bestTrip);
+    openActive(Active);
 };
 window.onpopstate = function(e) {
     setActiveState(e.state);
-    var bestTrip = openRoute(Active.Route.ID!)!;
-    openStop(Active.STOP!);
-    openTrip(Active.Route.TRIP ? Active.Route.TRIP : bestTrip);
+    openActive(Active);
 };
 
 /**
@@ -364,7 +359,7 @@ function uiEvents() {
     document
         .getElementById('map-toggle')!
         .addEventListener('click', switchMapStreetview);
-    var select = document.getElementById('trip-select') as HTMLSelectElement &
+    const select = document.getElementById('trip-select') as HTMLSelectElement &
         Linkable;
     select.Type = Type.TRIP;
     select.addEventListener('change', function(e) {
@@ -398,8 +393,8 @@ function switchMapStreetview(this: HTMLElement) {
         throw new TypeError();
     }
 
-    var mapParent = document.getElementById('map')!;
-    var panoParent = document.getElementById('streetview-header')!;
+    const mapParent = document.getElementById('map')!;
+    const panoParent = document.getElementById('streetview-header')!;
 
     if (Active.View.STOP == View.MAP_PRIMARY) {
         mapParent.insertBefore(
@@ -443,162 +438,155 @@ function switchTripView(this: HTMLElement) {
 /**
  * Creates a route UI and opens the section if the map is currently in fullscreen mode.
  * @param  {string} route_id ID of the route
- * @return {string}          trip_id that can be used in openTrip. Best matches time and open stop, if any.
+ * @return {Promise<string>} trip_id that can be used in openTrip. Best matches time and open stop, if any.
  * @throws {string} If the ID does not exist
  */
 function openRoute(route_id: Route['route_id']) {
-    if (!buses!.routes[route_id] || !buses!.routes[route_id].route_id) {
-        console.error('Invalid Route %s', route_id);
-        //throw route_id;
-        return;
-    }
+    return schedulePromise.then(buses => {
+        const thisRoute = buses.routes[route_id];
+        if (!thisRoute || !thisRoute.route_id) {
+            console.error('Invalid Route %s', route_id);
+            //throw route_id;
+            return;
+        }
 
-    var thisRoute = buses!.routes[route_id];
-    Active.Route.ID = route_id;
-    Active.Route.TRIP = null;
+        Active.Route.ID = route_id;
+        Active.Route.TRIP = null;
 
-    document.title = thisRoute.route_long_name;
+        document.title = thisRoute.route_long_name;
 
-    var name = document.getElementById('route_long_name')!;
-    name.textContent = thisRoute.route_long_name;
-    name.style.backgroundColor = '#' + thisRoute.route_color;
-    name.style.color = '#' + thisRoute.route_text_color;
-    document.getElementById('alt-menu')!.style.fill =
-        '#' + thisRoute.route_text_color;
+        const name = document.getElementById('route_long_name')!;
+        name.textContent = thisRoute.route_long_name;
+        name.style.backgroundColor = `#${thisRoute.route_color}`;
+        name.style.color = `#${thisRoute.route_text_color}`;
+        document.getElementById('alt-menu')!.style.fill = `#${
+            thisRoute.route_text_color
+        }`;
 
-    var firstStop: Stop['stop_id'] | undefined,
-        lastStop: Stop['stop_id'] | undefined,
-        largest = 0;
-    var earliest = new Date(0, 0, 0, 23, 59, 59, 0),
-        latest = new Date(0, 0, 0, 0, 0, 0, 0),
-        earliestTrip,
-        earliestTripStop;
+        let firstStop: Stop['stop_id'] | undefined;
+        let lastStop: Stop['stop_id'] | undefined;
+        let largest = 0;
+        let earliest = new Date(0, 0, 0, 23, 59, 59, 0);
+        let latest = new Date(0, 0, 0, 0, 0, 0, 0);
+        let earliestTrip: Trip['trip_id'] | undefined;
+        let earliestTripStop: Stop['stop_id'] | undefined;
 
-    var nowTime = nowDateTime();
-    var closestTrip: Trip['trip_id'] | undefined,
-        closestTripTime = Number.MAX_VALUE,
-        closestTripStop: Stop['stop_id'] | undefined;
-    var select = document.getElementById('trip-select')!;
-    removeChildren(select);
+        const nowTime = nowDateTime();
+        let closestTrip: Trip['trip_id'] | undefined;
+        let closestTripTime = Number.MAX_VALUE;
+        let closestTripStop: Stop['stop_id'] | undefined;
+        const select = document.getElementById('trip-select')!;
+        removeChildren(select);
 
-    var routeStops = [];
+        const routeStops = new Set<Stop['stop_id']>();
 
-    for (var trip in thisRoute.trips) {
-        for (var stop in thisRoute.trips[trip].stop_times) {
-            if (
-                stop == '1' &&
-                parseInt(thisRoute.trips[trip].direction_id, 10) === 0
-            ) {
-                firstStop = thisRoute.trips[trip].stop_times[stop].stop_id;
-            } else {
+        for (const trip_id of Object.keys(thisRoute.trips)) {
+            const trip = thisRoute.trips[trip_id];
+            for (const stop in trip.stop_times) {
+                if (stop == '1' && parseInt(trip.direction_id, 10) === 0) {
+                    firstStop = trip.stop_times[stop].stop_id;
+                } else {
+                    if (
+                        parseInt(stop, 10) > largest &&
+                        parseInt(trip.direction_id, 10) === 0
+                    ) {
+                        largest = parseInt(stop, 10);
+                        lastStop = trip.stop_times[stop].stop_id;
+                    }
+                }
+
+                routeStops.add(trip.stop_times[stop].stop_id);
+
+                const timeDate = gtfsArrivalToDate(
+                    trip.stop_times[stop].arrival_time,
+                );
+                if (timeDate > latest) {
+                    latest = timeDate;
+                }
+                if (timeDate < earliest) {
+                    earliest = timeDate;
+                    earliestTrip = trip.trip_id;
+                    earliestTripStop = trip.stop_times[stop].stop_id;
+                }
+
                 if (
-                    parseInt(stop, 10) > largest &&
-                    parseInt(thisRoute.trips[trip].direction_id, 10) === 0
+                    timeDate.getTime() - nowTime.getTime() < closestTripTime &&
+                    timeDate.getTime() - nowTime.getTime() > 0
                 ) {
-                    largest = parseInt(stop, 10);
-                    lastStop = thisRoute.trips[trip].stop_times[stop].stop_id;
+                    closestTripTime = timeDate.getTime() - nowTime.getTime();
+                    closestTrip = trip.trip_id;
+                    closestTripStop = trip.stop_times[stop].stop_id;
                 }
             }
-
-            if (
-                routeStops.indexOf(
-                    thisRoute.trips[trip].stop_times[stop].stop_id,
-                ) == -1
-            ) {
-                routeStops.push(thisRoute.trips[trip].stop_times[stop].stop_id);
+            if (!closestTrip) {
+                //Too late for all bus routes
+                closestTripTime =
+                    new Date(
+                        0,
+                        0,
+                        1,
+                        earliest.getHours(),
+                        earliest.getMinutes(),
+                        earliest.getSeconds(),
+                        0,
+                    ).getTime() - nowTime.getTime();
+                closestTrip = earliestTrip;
+                closestTripStop = earliestTripStop;
             }
-
-            var timeDate = gtfsArrivalToDate(
-                thisRoute.trips[trip].stop_times[stop].arrival_time,
-            );
-            if (timeDate > latest) {
-                latest = timeDate;
-            }
-            if (timeDate < earliest) {
-                earliest = timeDate;
-                earliestTrip = thisRoute.trips[trip].trip_id;
-                earliestTripStop =
-                    thisRoute.trips[trip].stop_times[stop].stop_id;
-            }
-
-            if (
-                timeDate.getTime() - nowTime.getTime() < closestTripTime &&
-                timeDate.getTime() - nowTime.getTime() > 0
-            ) {
-                closestTripTime = timeDate.getTime() - nowTime.getTime();
-                closestTrip = thisRoute.trips[trip].trip_id;
-                closestTripStop =
-                    thisRoute.trips[trip].stop_times[stop].stop_id;
-            }
-        }
-        if (!closestTrip) {
-            //Too late for all bus routes
-            closestTripTime =
-                new Date(
-                    0,
-                    0,
-                    1,
-                    earliest.getHours(),
-                    earliest.getMinutes(),
-                    earliest.getSeconds(),
-                    0,
-                ).getTime() - nowTime.getTime();
-            closestTrip = earliestTrip;
-            closestTripStop = earliestTripStop;
-        }
-        var option = document.createElement('option');
-        option.value = thisRoute.trips[trip].trip_id;
-        option.textContent = thisRoute.trips[trip].trip_short_name;
-        select.appendChild(option);
-    }
-
-    var minString =
-        Math.floor(closestTripTime / 60000) != 1
-            ? Math.floor(closestTripTime / 60000) + ' minutes'
-            : '1 minute';
-    document.getElementById('place-value')!.textContent =
-        'Between ' +
-        buses!.stops[firstStop!].stop_name +
-        ' - ' +
-        buses!.stops[lastStop!].stop_name;
-    document.getElementById('time-value')!.textContent =
-        stringTime(earliest) + ' - ' + stringTime(latest);
-    document.getElementById('next-stop-value')!.textContent =
-        'Reaches ' +
-        buses!.stops[closestTripStop!].stop_name +
-        ' in ' +
-        minString;
-
-    document.getElementById('main')!.classList.add('open');
-
-    if (typeof google == 'object' && typeof google.maps == 'object') {
-        var routeBounds = new google.maps.LatLngBounds();
-        for (var k = 0; k < markers.length; k++) {
-            if (routeStops.indexOf(markers[k].stop_id) > -1) {
-                markers[k].setIcon(normal);
-                markers[k].setZIndex(200);
-                markers[k].activeInRoute = true;
-                routeBounds.extend(markers[k].getPosition()!);
-            } else {
-                markers[k].setIcon(unimportant);
-                markers[k].setZIndex(null);
-                markers[k].activeInRoute = false;
-            }
-        }
-        if (stopMarker) {
-            stopMarker.setIcon(stopShape);
-            stopMarker.setZIndex(300);
+            const option = document.createElement('option');
+            option.value = trip.trip_id;
+            option.textContent = trip.trip_short_name;
+            select.appendChild(option);
         }
 
-        google.maps.event.trigger(map, 'resize');
-        map!.setCenter(routeBounds.getCenter());
-        map!.fitBounds(routeBounds);
-        google.maps.event.trigger(streetview, 'resize');
-    }
+        const minString =
+            Math.floor(closestTripTime / 60000) != 1
+                ? Math.floor(closestTripTime / 60000) + ' minutes'
+                : '1 minute';
+        document.getElementById('place-value')!.textContent =
+            'Between ' +
+            buses!.stops[firstStop!].stop_name +
+            ' - ' +
+            buses!.stops[lastStop!].stop_name;
+        document.getElementById('time-value')!.textContent =
+            stringTime(earliest) + ' - ' + stringTime(latest);
+        document.getElementById('next-stop-value')!.textContent =
+            'Reaches ' +
+            buses!.stops[closestTripStop!].stop_name +
+            ' in ' +
+            minString;
 
-    window.dispatchEvent(updateEvent);
-    openTrip(closestTrip!);
-    return closestTrip;
+        document.getElementById('main')!.classList.add('open');
+
+        if (typeof google == 'object' && typeof google.maps == 'object') {
+            const routeBounds = new google.maps.LatLngBounds();
+            for (const marker of markers) {
+                if (routeStops.has(marker.stop_id)) {
+                    marker.setIcon(normal);
+                    marker.setZIndex(200);
+                    marker.activeInRoute = true;
+                    routeBounds.extend(marker.getPosition()!);
+                } else {
+                    marker.setIcon(unimportant);
+                    marker.setZIndex(null);
+                    marker.activeInRoute = false;
+                }
+            }
+            if (stopMarker) {
+                stopMarker.setIcon(stopShape);
+                stopMarker.setZIndex(300);
+            }
+
+            google.maps.event.trigger(map, 'resize');
+            map!.setCenter(routeBounds.getCenter());
+            map!.fitBounds(routeBounds);
+            google.maps.event.trigger(streetview, 'resize');
+        }
+
+        window.dispatchEvent(updateEvent);
+        openTrip(closestTrip!);
+        return closestTrip;
+    });
 }
 
 /**
@@ -607,156 +595,153 @@ function openRoute(route_id: Route['route_id']) {
  * @return {void}           Creates an element
  */
 function openStop(stop_id: Stop['stop_id']) {
-    if (!buses!.stops[stop_id] || !buses!.stops[stop_id].stop_id) {
-        console.error('Invalid Stop %s', stop_id);
-        //throw stop_id;
-        return;
-    }
-
-    Active.STOP = stop_id;
-
-    if (streetview) {
-        streetview.setPosition(
-            new google.maps.LatLng(
-                parseFloat(buses!.stops[stop_id].stop_lat),
-                parseFloat(buses!.stops[stop_id].stop_lon),
-            ),
-        );
-    }
-    if (map) {
-        for (var mkr = 0; mkr < markers.length; mkr++) {
-            //markers[mkr].setAnimation(null);
-            if (markers[mkr].activeInRoute || Active.Route.ID === null) {
-                markers[mkr].setIcon(normal);
-            } else if (Active.Route.ID !== null) {
-                markers[mkr].setIcon(unimportant);
-            }
-            if (markers[mkr].stop_id == buses!.stops[stop_id].stop_id) {
-                stopMarker = markers[mkr];
-            }
+    return schedulePromise.then(buses => {
+        const thisStop = buses.stops[stop_id];
+        if (!thisStop || !thisStop.stop_id) {
+            console.error('Invalid Stop %s', stop_id);
+            //throw stop_id;
+            return;
         }
 
-        stopMarker!.setIcon(stopShape);
-        stopMarker!.setZIndex(300);
+        Active.STOP = stop_id;
 
-        streetview!.setPosition(stopMarker!.getPosition()!);
-        google.maps.event.trigger(streetview, 'resize');
-        google.maps.event.addListener(streetview!, 'pano_changed', function() {
-            document.getElementById(
-                'address',
-            )!.textContent = streetview!.getLocation().description!;
-            streetview!.setPov(streetview!.getPhotographerPov());
-        });
-    }
-    if (!streetview) {
-        document.getElementById('stop')!.classList.add('no-streetview');
-    }
-
-    document.getElementById('stop_name')!.textContent = buses!.stops[
-        stop_id
-    ].stop_name;
-
-    var list = document.getElementById('connections')!;
-    removeChildren(list);
-    for (var i = 0; i < buses!.stops[stop_id].routes.length; i++) {
-        var route = buses!.routes[buses!.stops[stop_id].routes[i]];
-        var listItem = document.createElement('li');
-        var linkItem = dynamicLinkNode(
-            Type.ROUTE,
-            buses!.stops[stop_id].routes[i],
-            false,
-        );
-        linkItem.style.borderColor = '#' + route.route_color;
-        linkItem.textContent = route.route_long_name;
-
-        listItem.appendChild(linkItem);
-        if (Active.Route.ID == buses!.stops[stop_id].routes[i]) {
-            listItem.className = 'active-route';
+        if (streetview) {
+            streetview.setPosition(stopToPos(thisStop));
         }
-        list.appendChild(listItem);
-    }
+        if (map) {
+            for (const marker of markers) {
+                if (marker.activeInRoute || Active.Route.ID == null) {
+                    marker.setIcon(normal);
+                } else {
+                    marker.setIcon(unimportant);
+                }
+                if (marker.stop_id === thisStop.stop_id) {
+                    stopMarker = marker;
+                }
+            }
 
-    document.getElementById('main')!.classList.add('open-stop');
-    window.dispatchEvent(updateEvent);
+            stopMarker!.setIcon(stopShape);
+            stopMarker!.setZIndex(300);
+
+            streetview!.setPosition(stopMarker!.getPosition()!);
+            google.maps.event.trigger(streetview, 'resize');
+            google.maps.event.addListener(
+                streetview!,
+                'pano_changed',
+                function() {
+                    document.getElementById(
+                        'address',
+                    )!.textContent = streetview!.getLocation().description!;
+                    streetview!.setPov(streetview!.getPhotographerPov());
+                },
+            );
+        }
+        if (!streetview) {
+            document.getElementById('stop')!.classList.add('no-streetview');
+        }
+
+        document.getElementById('stop_name')!.textContent = thisStop.stop_name;
+
+        const list = document.getElementById('connections')!;
+        removeChildren(list);
+        for (const route_id of thisStop.routes) {
+            const route = buses.routes[route_id];
+            const linkItem = dynamicLinkNode(Type.ROUTE, route_id, false);
+            linkItem.style.borderColor = `#${route.route_color}`;
+            linkItem.textContent = route.route_long_name;
+
+            const listItem = document.createElement('li');
+            listItem.append(linkItem);
+            if (Active.Route.ID === route_id) {
+                listItem.className = 'active-route';
+            }
+            list.append(listItem);
+        }
+
+        document.getElementById('main')!.classList.add('open-stop');
+        window.dispatchEvent(updateEvent);
+    });
 }
 
 function openTrip(trip_id: Trip['trip_id']) {
-    if (
-        !buses!.routes[Active.Route.ID!].trips[trip_id] ||
-        !buses!.routes[Active.Route.ID!].trips[trip_id].trip_id
-    ) {
-        console.error('Invalid trip %s in route %s', trip_id, Active.Route.ID);
-        //throw trip_id;
-        return;
-    }
-
-    Active.Route.TRIP = trip_id;
-
-    var schedule = document.getElementById('schedule')!;
-    removeChildren(schedule);
-
-    var trip = buses!.routes[Active.Route.ID!].trips[trip_id];
-    var stopSequence = sequence(trip.stop_times);
-
-    var select = document.getElementById('trip-select') as HTMLSelectElement;
-    for (var option = 0; option < select.options.length; option++) {
-        if (select.options[option].value == trip_id) {
-            select.selectedIndex = option;
-            select.options[option].selected = true;
-            break;
+    return schedulePromise.then(buses => {
+        const route = buses.routes[Active.Route.ID!];
+        const trip = route.trips[trip_id];
+        if (!trip || !trip.trip_id) {
+            console.error(
+                'Invalid trip %s in route %s',
+                trip_id,
+                Active.Route.ID,
+            );
+            //throw trip_id;
+            return;
         }
-    }
 
-    document.getElementById('week-days-value')!.textContent = buses!.calendar[
-        trip.service_id
-    ].text_name;
+        Active.Route.TRIP = trip_id;
 
-    for (var i = 0; i < stopSequence.length; i++) {
-        var tripStop = trip.stop_times[stopSequence[i]];
-        var routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id);
+        const schedule = document.getElementById('schedule')!;
+        removeChildren(schedule);
 
-        var lines = document.createElement('div');
-        lines.className = 'lines';
-        for (var j = 0; j < 2; j++) {
-            var line = document.createElement('span');
-            line.className = 'line';
-            line.style.backgroundColor =
-                '#' + buses!.routes[Active.Route.ID!].route_color;
-            lines.appendChild(line);
-        }
-        routeListItem.appendChild(lines);
+        const stopSequence = sequence(trip.stop_times);
 
-        var name = document.createElement('span');
-        name.className = 'name';
-        name.textContent = buses!.stops[tripStop.stop_id].stop_name;
-        routeListItem.appendChild(name);
-
-        var time = document.createElement('time');
-        time.textContent = gtfsArrivalToString(tripStop.arrival_time);
-        routeListItem.appendChild(time);
-
-        var connection = document.createElement('div');
-        connection.className = 'connections';
-        for (var k = 0; k < buses!.stops[tripStop.stop_id].routes.length; k++) {
-            var connectRoute = buses!.stops[tripStop.stop_id].routes[k];
-            if (connectRoute == Active.Route.ID) {
-                continue;
+        const select = document.getElementById(
+            'trip-select',
+        ) as HTMLSelectElement;
+        for (let option = 0; option < select.options.length; option++) {
+            if (select.options[option].value === trip_id) {
+                select.selectedIndex = option;
+                select.options[option].selected = true;
+                break;
             }
-
-            var item = document.createElement('span');
-            item.className = 'route-dash';
-            item.title = buses!.routes[connectRoute].route_long_name;
-            item.style.backgroundColor = buses!.routes[
-                connectRoute
-            ].route_color;
-
-            connection.appendChild(item);
         }
-        routeListItem.appendChild(connection);
-        schedule.appendChild(routeListItem);
-    }
 
-    window.dispatchEvent(updateEvent);
+        document.getElementById('week-days-value')!.textContent =
+            buses.calendar[trip.service_id].text_name;
+
+        for (const sequence of stopSequence) {
+            const tripStop = trip.stop_times[sequence];
+            const routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id);
+
+            const lines = document.createElement('div');
+            lines.className = 'lines';
+            for (let j = 0; j < 2; j++) {
+                const line = document.createElement('span');
+                line.className = 'line';
+                line.style.backgroundColor = `#${route.route_color}`;
+                lines.appendChild(line);
+            }
+            routeListItem.appendChild(lines);
+
+            const name = document.createElement('span');
+            name.className = 'name';
+            name.textContent = buses.stops[tripStop.stop_id].stop_name;
+            routeListItem.appendChild(name);
+
+            const time = document.createElement('time');
+            time.textContent = gtfsArrivalToString(tripStop.arrival_time);
+            routeListItem.appendChild(time);
+
+            const connection = document.createElement('div');
+            connection.className = 'connections';
+            for (const connectRoute of buses.stops[tripStop.stop_id].routes) {
+                if (connectRoute == Active.Route.ID) {
+                    continue;
+                }
+
+                const item = document.createElement('span');
+                item.className = 'route-dash';
+                item.title = buses.routes[connectRoute].route_long_name;
+                item.style.backgroundColor =
+                    buses.routes[connectRoute].route_color;
+
+                connection.appendChild(item);
+            }
+            routeListItem.appendChild(connection);
+            schedule.appendChild(routeListItem);
+        }
+
+        window.dispatchEvent(updateEvent);
+    });
 }
 
 openCallbacks[Type.ROUTE] = openRoute;

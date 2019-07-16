@@ -30,7 +30,7 @@ export const enum View {
     STREET_PRIMARY,
 }
 
-interface ActiveState {
+export interface ActiveState {
     Route: {
         ID: string | null;
         TRIP: string | null;
@@ -136,7 +136,7 @@ function makeCalendarTextName(days: Calendar['days']) {
             const firstDay = days.indexOf(true);
             const lastDay = days.lastIndexOf(true);
 
-            var reference = [
+            const reference = [
                 'Sunday',
                 'Monday',
                 'Tuesday',
@@ -352,14 +352,14 @@ export function locateUser(
 
     return Promise.all([locatePromise, busPromise]).then(([e, schedule]) => {
         const userPos = e.coords;
-        for (var i in schedule.stops) {
-            const stop = schedule.stops[i];
+        for (const stop_id of Object.keys(schedule.stops)) {
+            const stop = schedule.stops[stop_id];
             const distance = Math.sqrt(
                 Math.pow(userPos.latitude - parseFloat(stop.stop_lat), 2) +
                     Math.pow(userPos.longitude - parseFloat(stop.stop_lon), 2),
             );
             if (distance < closestDistance) {
-                closestStop = i;
+                closestStop = stop_id;
                 closestDistance = distance;
             }
         }
@@ -420,7 +420,7 @@ function iB(i: number | string): boolean {
  * @return {string} URL to use for href, based on active object.
  */
 function pageLink(type: Type, value: string) {
-    var link = '';
+    let link = '';
     switch (type) {
         case Type.ROUTE:
             link += '#!route=' + value;
@@ -472,7 +472,7 @@ type DynamicLinkNode = HTMLAnchorElement & Linkable;
  * @return {Node}           A element with custom properties
  */
 export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
-    var node = document.createElement('a') as DynamicLinkNode;
+    const node = document.createElement('a') as DynamicLinkNode;
     node.Type = type;
     node.Value = value;
     node.href = pageLink(type, value);
@@ -497,9 +497,9 @@ export function clickEvent(this: Linkable, e: Event) {
     if (e.stopPropagation) {
         e.stopPropagation();
     }
-    var state = Active,
-        val = this.Value,
-        newLink = pageLink(this.Type, val);
+    const state = Active;
+    const val = this.Value;
+    const newLink = pageLink(this.Type, val);
     const callback = openCallbacks[this.Type];
     switch (this.Type) {
         case Type.ROUTE:
@@ -546,11 +546,11 @@ export function stringTime(date: Date | string): string {
         throw new TypeError(`date must be Date or string, not ${typeof date}`);
     }
 
-    var m = 'am',
-        displayHour = '',
-        displayMinute = '';
-    var hr = date.getHours(),
-        min = date.getMinutes();
+    let m = 'am';
+    let displayHour = '';
+    let displayMinute = '';
+    const hr = date.getHours();
+    const min = date.getMinutes();
 
     if (hr === 0) {
         displayHour = '12';
@@ -558,7 +558,7 @@ export function stringTime(date: Date | string): string {
         displayHour = '12';
         m = 'pm';
     } else if (hr > 12) {
-        var mathHr = hr - 12;
+        const mathHr = hr - 12;
         displayHour = mathHr.toString();
         m = 'pm';
     } else {
@@ -582,22 +582,14 @@ export function stringTime(date: Date | string): string {
  * @return {Date}
  */
 export function gtfsArrivalToDate(string: string): Date {
-    var timeArr = string.split(':');
-    var extraDays = 0,
-        extraHours = 0;
-    if (parseInt(timeArr[0]) > 23) {
-        extraDays = Math.floor(parseInt(timeArr[0]) / 24);
-        extraHours = parseInt(timeArr[0]) % 24;
+    const [hour, min, second] = string.split(':').map(s => parseInt(s, 10));
+    let extraDays = 0;
+    let extraHours = 0;
+    if (hour > 23) {
+        extraDays = Math.floor(hour / 24);
+        extraHours = hour % 24;
     }
-    return new Date(
-        0,
-        0,
-        0 + extraDays,
-        parseInt(timeArr[0], 10) + extraHours,
-        parseInt(timeArr[1], 10),
-        parseInt(timeArr[2], 10),
-        0,
-    );
+    return new Date(0, 0, 0 + extraDays, hour + extraHours, min, second, 0);
 }
 
 /**
@@ -630,11 +622,9 @@ export function getQueryVariable(variable: string): string | null {
     }
 
     if (query !== '') {
-        for (var i = 0; i < vars!.length; i++) {
-            var pair = vars![i].split('=');
-            if (pair[0] == variable) {
-                return pair[1];
-            }
+        for (const parts of vars!) {
+            const [key, value] = parts.split('=');
+            if (key === variable) return value;
         }
     }
     return null;
@@ -645,7 +635,7 @@ export function getQueryVariable(variable: string): string | null {
  * @return {Date} Current time in hour, min, seconds; other params set to 0
  */
 export function nowDateTime(): Date {
-    var now = new Date();
+    const now = new Date();
     return new Date(
         0,
         0,
@@ -663,9 +653,9 @@ export function nowDateTime(): Date {
  * @return {string[]} ordered list
  */
 export function sequence(stopTimes: Trip['stop_times']) {
-    var stopSequence = [];
-    for (var key in stopTimes) {
+    const stopSequence = [];
+    for (const key in stopTimes) {
         stopSequence.push(key);
     }
-    return stopSequence.sort((a, b) => parseInt(a) - parseInt(b));
+    return stopSequence.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
 }
