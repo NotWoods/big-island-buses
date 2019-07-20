@@ -6,8 +6,10 @@
 		<title>Big Island Buses</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI&libraries=places"></script>
-		<script src="main.js"></script>
-		<meta name="mobile-web-app-capable" content="yes">
+		<script async src="main.js"></script>
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="manifest" href="manifest.json">
+        <meta name="theme-color" content="#4d74ab">
 		<link rel="icon" sizes="196x196" href="icon/196.png">
 		<link rel="icon" sizes="128x128" href="icon/128.png">
 		<link rel="apple-touch-icon" sizes="120x120" href="icon/120.png">
@@ -57,7 +59,7 @@
 
 		<aside id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
 			<header>
-				<img src="assets/logo.svg" itemprop="image" height="48" width="42">
+				<img src="assets/logo.svg" alt="" itemprop="image" height="48" width="42">
 				<span itemprop="name">Big Island Buses</span>
 			</header>
 			<meta itemprop="softwareVersion" content="2.0.1">
@@ -94,7 +96,7 @@
 			<meta itemprop="browserRequirements"
 				content="Nearby routes requires Geolocation support. Offline functionality requires appcache support">
 
-			<img src="assets/lines.svg" class="footer-lines" width="239" height="68">
+			<img src="assets/lines.svg" alt="" class="footer-lines" width="239" height="68">
 		</aside>
 
 		<div id="screen-cover"></div>
@@ -103,10 +105,10 @@
 			<section id="map">
 				<div id="map-canvas"></div>
 				<header id="map-header">
-					<button id="menu" title="Menu">
+					<button id="menu" title="Menu" aria-label="Menu">
 						<svg viewBox="0 0 24 24"><path d="M3,18h18v-2H3V18z M3,13h18v-2H3V13z M3,6v2h18V6H3z"></path></svg>
 					</button>
-					<input type="search" name="Map Search" id="search">
+					<input type="search" name="Map Search" id="search" aria-label="Map Search">
 				</header>
 			</section>
 

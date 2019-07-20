@@ -1,0 +1,50 @@
+{
+    "short_name": "Big Island Buses",
+    "name": "Big Island Buses",
+    "icons": [
+        {
+            "src": "/icon/128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "/icon/196.png",
+            "type": "image/png",
+            "sizes": "196x196"
+        },
+        {
+            "src": "/icon/xxxhdpi.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/icon/xxhdpi.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "/icon/xhdpi.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "/icon/hdpi.png",
+            "type": "image/png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "/icon/mhdpi.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "/icon/favicon.icon",
+            "type": "image/x-icon",
+            "sizes": "16x16 32x32 48x48"
+        }
+    ],
+    "start_url": ".",
+    "background_color": "#2d3039",
+    "display": "standalone",
+    "theme_color": "#4d74ab"
+}
