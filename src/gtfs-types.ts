@@ -19,7 +19,7 @@ export interface Calendar extends CsvCalendar {
         boolean,
         boolean,
         boolean,
-        boolean
+        boolean,
     ];
     text_name: string;
 }

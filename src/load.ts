@@ -56,6 +56,10 @@ export let Active: ActiveState = {
 
 export const updateEvent = new CustomEvent('pageupdate');
 
+if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('service-worker.js');
+}
+
 /**
  * @type {Record<Type, Function>}
  */
@@ -145,7 +149,7 @@ function makeCalendarTextName(days: Calendar['days']) {
                 'Friday',
                 'Saturday',
             ];
-            if (firstDay == lastDay) {
+            if (firstDay === lastDay) {
                 return reference[firstDay];
             } else {
                 return reference[firstDay] + ' - ' + reference[lastDay];
@@ -310,6 +314,9 @@ export function getScheduleData(mode: 'gtfs' | 'folder') {
                                 time: stopTime.arrival_time,
                             });
                         }
+                        if (!stop.routes.includes(route_id)) {
+                            stop.routes.push(route_id);
+                        }
                     }
                 }
             }
@@ -323,17 +330,22 @@ function getCurrentPosition() {
     });
 }
 
+export interface LocationUpdate {
+    stop: Stop['stop_id'];
+    location: Pick<Coordinates, 'latitude' | 'longitude'>;
+    custom: boolean;
+}
+
 /**
  * Locates the nearest bus stop to the user or custom location
  * @param {Promise} schedulePromise Schedule promise to wait for
  * @param {Coordinates} customLocation Location to use instead of GPS
- * @return {Promise<{stop:any,location:any,custom:boolean}>}
  */
 let runOnce = false;
 export function locateUser(
     busPromise: Promise<GTFSData>,
     customLocation?: Pick<Coordinates, 'latitude' | 'longitude'>,
-) {
+): Promise<LocationUpdate> {
     let locatePromise: Promise<{
         coords: Pick<Coordinates, 'latitude' | 'longitude'>;
         customLocationFlag?: boolean;
@@ -389,15 +401,15 @@ export function locateUser(
  */
 export function documentLoad() {
     if (
-        document.readyState == 'interactive' ||
-        document.readyState == 'complete'
+        document.readyState === 'interactive' ||
+        document.readyState === 'complete'
     ) {
         return Promise.resolve(document.readyState);
     }
 
     return new Promise(resolve => {
         document.addEventListener('readystatechange', () => {
-            if (document.readyState == 'interactive') {
+            if (document.readyState === 'interactive') {
                 resolve(document.readyState);
             }
         });
@@ -525,7 +537,7 @@ export function clickEvent(this: Linkable, e: Event) {
  * @return {string}    	String representation of time
  */
 export function stringTime(date: Date | string): string {
-    if (typeof date == 'string') {
+    if (typeof date === 'string') {
         if (
             date.indexOf(':') > -1 &&
             date.lastIndexOf(':') > date.indexOf(':')

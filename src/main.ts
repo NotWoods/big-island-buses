@@ -30,6 +30,7 @@ import {
     GTFSData,
     Linkable,
     ActiveState,
+    LocationUpdate,
 } from './load.js';
 import { Route, Stop, Trip } from './gtfs-types.js';
 
@@ -105,11 +106,11 @@ function loadMap() {
     function mapLoad() {
         return Promise.resolve().then(() => {
             const mapElement =
-                Active.View.STOP == View.MAP_PRIMARY
+                Active.View.STOP === View.MAP_PRIMARY
                     ? document.getElementById('map-canvas')!
                     : document.getElementById('streetview-canvas')!;
             const panoElement =
-                Active.View.STOP == View.STREET_PRIMARY
+                Active.View.STOP === View.STREET_PRIMARY
                     ? document.getElementById('map-canvas')!
                     : document.getElementById('streetview-canvas')!;
 
@@ -223,8 +224,10 @@ function loadMap() {
             userMapMarker.Value = position.stop;
             google.maps.event.addListener(userMapMarker, 'click', clickEvent);
             if (!Active.STOP) openStop(position.stop);
-            window.addEventListener('locationupdate', evt => {
-                const { custom, location } = (evt as CustomEvent).detail;
+            window.addEventListener('locationupdate', (evt: Event) => {
+                const { custom, location } = (evt as CustomEvent<
+                    LocationUpdate
+                >).detail;
                 userMapMarker!.setIcon(custom ? placeShape : userShape);
                 userMapMarker!.setPosition(
                     new google.maps.LatLng(
@@ -459,9 +462,9 @@ function openRoute(route_id: Route['route_id']) {
         name.textContent = thisRoute.route_long_name;
         name.style.backgroundColor = `#${thisRoute.route_color}`;
         name.style.color = `#${thisRoute.route_text_color}`;
-        document.getElementById('alt-menu')!.style.fill = `#${
-            thisRoute.route_text_color
-        }`;
+        document.getElementById(
+            'alt-menu',
+        )!.style.fill = `#${thisRoute.route_text_color}`;
 
         let firstStop: Stop['stop_id'] | undefined;
         let lastStop: Stop['stop_id'] | undefined;
@@ -558,7 +561,11 @@ function openRoute(route_id: Route['route_id']) {
 
         document.getElementById('main')!.classList.add('open');
 
-        if (typeof google == 'object' && typeof google.maps == 'object') {
+        if (
+            navigator.onLine &&
+            typeof google === 'object' &&
+            typeof google.maps === 'object'
+        ) {
             const routeBounds = new google.maps.LatLngBounds();
             for (const marker of markers) {
                 if (routeStops.has(marker.stop_id)) {
@@ -724,7 +731,7 @@ function openTrip(trip_id: Trip['trip_id']) {
             const connection = document.createElement('div');
             connection.className = 'connections';
             for (const connectRoute of buses.stops[tripStop.stop_id].routes) {
-                if (connectRoute == Active.Route.ID) {
+                if (connectRoute === Active.Route.ID) {
                     continue;
                 }
 

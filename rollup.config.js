@@ -13,4 +13,15 @@ const config = {
     plugins: [commonjs(), typescript(), terser()],
 };
 
-export default config;
+/** @type {import('rollup').RollupOptions} */
+const serviceWorker = {
+    input: 'src/service-worker.ts',
+    output: {
+        file: 'service-worker.js',
+        format: 'esm',
+        sourcemap: true,
+    },
+    plugins: [typescript(), terser()],
+};
+
+export default [config, serviceWorker];
