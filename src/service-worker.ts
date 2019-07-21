@@ -21,7 +21,7 @@ function precache() {
                 'index.html',
                 'style.css',
                 'main.js',
-                'google_transit.zip',
+                'api.json',
                 'assets/logo.svg',
                 'assets/lines.svg',
                 'roboto/Roboto-Regular.ttf',

@@ -4,35 +4,34 @@
  * @copyright    2014 Tiger Oakes
  */
 
+import { GTFSData, Route, Stop, Trip } from './gtfs-types.js';
 import {
-    Type,
-    View,
     Active,
-    setActiveState,
-    updateEvent,
-    openCallbacks,
-    normal,
-    unimportant,
-    userShape,
-    placeShape,
-    stopShape,
-    getScheduleData,
-    locateUser,
+    ActiveState,
+    clickEvent,
     documentLoad,
     dynamicLinkNode,
-    clickEvent,
-    stringTime,
+    getQueryVariable,
+    getScheduleData,
     gtfsArrivalToDate,
     gtfsArrivalToString,
-    getQueryVariable,
-    nowDateTime,
-    sequence,
-    GTFSData,
     Linkable,
-    ActiveState,
+    locateUser,
     LocationUpdate,
+    normal,
+    nowDateTime,
+    openCallbacks,
+    placeShape,
+    sequence,
+    setActiveState,
+    stopShape,
+    stringTime,
+    Type,
+    unimportant,
+    updateEvent,
+    userShape,
+    View,
 } from './load.js';
-import { Route, Stop, Trip } from './gtfs-types.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -43,7 +42,7 @@ let userMapMarker: LinkableMarker | undefined;
 let stopMarker: google.maps.Marker | undefined;
 
 const documentPromise = documentLoad();
-const schedulePromise = getScheduleData('gtfs');
+const schedulePromise = getScheduleData();
 const locatePromise = locateUser(schedulePromise);
 let placeMapMarker: LinkableMarker | undefined;
 const mapLoaded = loadMap();

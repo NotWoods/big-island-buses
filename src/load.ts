@@ -4,18 +4,7 @@
  * @copyright    2014 Tiger Oakes
  */
 
-import JSZip from 'jszip/dist/jszip.min.js';
-import {
-    Route,
-    Trip,
-    Stop,
-    Calendar,
-    StopTime,
-    CsvRoute,
-    CsvTrip,
-    CsvStop,
-    CsvCalendar,
-} from './gtfs-types';
+import { Calendar, GTFSData, Stop, Trip } from './gtfs-types';
 
 export const enum Type {
     ROUTE,
@@ -124,204 +113,11 @@ function xhr(url: string, responseType?: XMLHttpRequestResponseType) {
     });
 }
 
-function makeCalendarTextName(days: Calendar['days']) {
-    switch (days.join(', ')) {
-        case 'true, true, true, true, true, true, true':
-            return 'Daily';
-        case 'false, true, true, true, true, true, true':
-            return 'Monday - Saturday';
-        case 'false, true, true, true, true, true, false':
-            return 'Monday - Friday';
-        case 'true, false, false, false, false, false, true':
-            return 'Saturday - Sunday';
-        case 'false, false, false, false, false, false, true':
-            return 'Saturday';
-        default:
-            const firstDay = days.indexOf(true);
-            const lastDay = days.lastIndexOf(true);
-
-            const reference = [
-                'Sunday',
-                'Monday',
-                'Tuesday',
-                'Wednesday',
-                'Thursday',
-                'Friday',
-                'Saturday',
-            ];
-            if (firstDay === lastDay) {
-                return reference[firstDay];
-            } else {
-                return reference[firstDay] + ' - ' + reference[lastDay];
-            }
-    }
-}
-
-export interface GTFSData {
-    routes: { [route_id: string]: Route };
-    stops: { [stop_id: string]: Stop };
-    calendar: { [service_id: string]: Calendar };
-}
-
 /**
- * Grabs google_transit.zip and parses the data into a
- * GTFSData object for the rest of the program.
- * @param  {string} mode "folder" or "gtfs". Will grab the
- * google_transit folder or zip file depending on input
- * @return {Promise<GTFSData>} Promise returns parsed GTFS data file for the rest of the program
+ * Grabs the API data and parses it into a GTFSData object for the rest of the program.
  */
-export function getScheduleData(mode: 'gtfs' | 'folder') {
-    if (mode != 'gtfs' && mode != 'folder') {
-        throw new TypeError(
-            `Invalid mode was set: ${mode}. Use 'gtfs' or 'folder'`,
-        );
-    }
-
-    const variable: GTFSData = {
-        routes: {},
-        stops: {},
-        calendar: {},
-    };
-
-    const fileList = [
-        'agency.txt',
-        'calendar.txt',
-        'fare_attributes.txt',
-        'feed_info.txt',
-        'routes.txt',
-        'stop_times.txt',
-        'stops.txt',
-        'trips.txt',
-    ];
-
-    interface CsvFile {
-        name: string;
-        body: string;
-    }
-
-    let rqDone: Promise<CsvFile[]>;
-    if (mode === 'gtfs') {
-        rqDone = xhr('google_transit.zip', 'arraybuffer')
-            .then(response => JSZip.loadAsync(response as ArrayBuffer))
-            .then(zip =>
-                Promise.all(
-                    fileList.map(fileName =>
-                        zip
-                            .file(fileName)
-                            .async('text')
-                            .then(body => ({
-                                name: fileName.substring(
-                                    0,
-                                    fileName.length - 4,
-                                ),
-                                body,
-                            })),
-                    ),
-                ),
-            );
-    } else {
-        rqDone = Promise.all(
-            fileList.map(function folderRequest(fileName) {
-                return xhr(`google_transit/${fileName}`).then(response => ({
-                    name: fileName.substring(0, fileName.length - 4),
-                    body: response as string,
-                }));
-            }),
-        );
-    }
-
-    function csvFilesToObject(csvFiles: CsvFile[]) {
-        const json: { [name: string]: unknown[] } = {};
-
-        for (const { name, body } of csvFiles) {
-            json[name] = [];
-            const rawRows = body.split('\n');
-            const csv: string[][] = [];
-            for (let i = 0; i < rawRows.length; i++) {
-                csv[i] = rawRows[i].replace(/(\r\n|\n|\r)/gm, '').split(',');
-
-                if (i > 0) {
-                    const headerRow = csv[0];
-                    const jsonFromCsv: { [header: string]: string } = {};
-                    for (let j = 0; j < headerRow.length; j++) {
-                        jsonFromCsv[headerRow[j]] = csv[i][j];
-                    }
-                    json[name].push(jsonFromCsv);
-                }
-            }
-        }
-
-        return json;
-    }
-
-    return rqDone
-        .then(function(textResult) {
-            const json = csvFilesToObject(textResult) as {
-                routes: CsvRoute[];
-                trips: CsvTrip[];
-                stops: CsvStop[];
-                calendar: CsvCalendar[];
-                stop_times: StopTime[];
-            };
-
-            for (const csvRoute of json.routes) {
-                const route = csvRoute as Route;
-                route.trips = {};
-                variable.routes[route.route_id] = route;
-            }
-            for (const csvTrip of json.trips) {
-                const trip = csvTrip as Trip;
-                trip.stop_times = {};
-                variable.routes[trip.route_id].trips[trip.trip_id] = trip;
-            }
-            for (const csvStop of json.stops) {
-                const stop = csvStop as Stop;
-                stop.trips = [];
-                stop.routes = [];
-                variable.stops[stop.stop_id] = stop;
-            }
-            for (const csvCalendar of json.calendar) {
-                const calendar = csvCalendar as Calendar;
-                calendar.days = [
-                    iB(calendar.sunday),
-                    iB(calendar.monday),
-                    iB(calendar.tuesday),
-                    iB(calendar.wednesday),
-                    iB(calendar.thursday),
-                    iB(calendar.friday),
-                    iB(calendar.saturday),
-                ];
-                calendar.text_name = makeCalendarTextName(calendar.days);
-                variable.calendar[calendar.service_id] = calendar;
-            }
-            for (const stopTime of json.stop_times) {
-                const stop = variable.stops[stopTime.stop_id];
-                for (const { route_id } of json.routes) {
-                    const trip =
-                        variable.routes[route_id].trips[stopTime.trip_id];
-                    if (trip) {
-                        trip.stop_times[stopTime.stop_sequence] = stopTime;
-
-                        const tripAdded = stop.trips.find(
-                            ({ trip }) => trip === stopTime.trip_id,
-                        );
-                        if (!tripAdded) {
-                            stop.trips.push({
-                                trip: stopTime.trip_id,
-                                dir: trip.direction_id,
-                                route: route_id,
-                                sequence: stopTime.stop_sequence,
-                                time: stopTime.arrival_time,
-                            });
-                        }
-                        if (!stop.routes.includes(route_id)) {
-                            stop.routes.push(route_id);
-                        }
-                    }
-                }
-            }
-        })
-        .then(() => variable);
+export function getScheduleData(): Promise<GTFSData> {
+    return xhr('api.json', 'json').then(json => json as GTFSData);
 }
 
 function getCurrentPosition() {
@@ -414,15 +210,6 @@ export function documentLoad() {
             }
         });
     });
-}
-
-/**
- * Turns a number into a boolean.
- * @param  {int} i   0 returns false, 1 returns true
- * @return {boolean}
- */
-function iB(i: number | string): boolean {
-    return parseInt(i as string, 10) !== 0 ? true : false;
 }
 
 /**

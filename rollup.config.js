@@ -24,4 +24,16 @@ const serviceWorker = {
     plugins: [typescript(), terser()],
 };
 
-export default [config, serviceWorker];
+/** @type {import('rollup').RollupOptions} */
+const apiGenerator = {
+    input: 'src/api.ts',
+    output: {
+        file: 'lib/api.js',
+        format: 'cjs',
+        sourcemap: true,
+    },
+    external: ['fs', 'path', 'util', 'jszip'],
+    plugins: [typescript()],
+};
+
+export default [config, serviceWorker, apiGenerator];

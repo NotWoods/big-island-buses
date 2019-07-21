@@ -1,3 +1,9 @@
+export interface GTFSData {
+    routes: { [route_id: string]: Route };
+    stops: { [stop_id: string]: Stop };
+    calendar: { [service_id: string]: Calendar };
+}
+
 export interface CsvCalendar {
     service_id: string;
     monday: '0' | '1';
