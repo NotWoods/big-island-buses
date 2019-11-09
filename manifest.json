@@ -3,39 +3,16 @@
     "name": "Big Island Buses",
     "icons": [
         {
-            "src": "icon/128.png",
+            "src": "icon/transparent.png",
             "type": "image/png",
-            "sizes": "128x128"
+            "sizes": "512x512",
+            "purpose": "any"
         },
         {
-            "src": "icon/196.png",
+            "src": "icon/maskable.png",
             "type": "image/png",
-            "sizes": "196x196"
-        },
-        {
-            "src": "icon/xxxhdpi.png",
-            "type": "image/png",
-            "sizes": "192x192"
-        },
-        {
-            "src": "icon/xxhdpi.png",
-            "type": "image/png",
-            "sizes": "144x144"
-        },
-        {
-            "src": "icon/xhdpi.png",
-            "type": "image/png",
-            "sizes": "96x96"
-        },
-        {
-            "src": "icon/hdpi.png",
-            "type": "image/png",
-            "sizes": "72x72"
-        },
-        {
-            "src": "icon/mhdpi.png",
-            "type": "image/png",
-            "sizes": "48x48"
+            "sizes": "512x512",
+            "purpose": "maskable"
         },
         {
             "src": "icon/favicon.icon",

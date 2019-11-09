@@ -1,4 +1,4 @@
-![](./icon/128.png)
+<img src="./icon/transparent.png" alt="" width="128" height="128">
 
 # Big Island Buses
 
@@ -11,7 +11,7 @@
 
 A web app created for bus riders in the Big Island of Hawai'i. The app was
 created to offer an alternative the the county's
-[paper-only bus schdules](http://www.heleonbus.org/schedules-and-maps). I built
+[paper-only bus schedules](http://www.heleonbus.org/schedules-and-maps). I built
 the
 [initial version](https://github.com/NotWoods/big-island-buses/tree/app-challenge)
 during my 11th grade in high school, where it won
@@ -31,13 +31,14 @@ The program went on to be featured in
 and [Hawaii](https://www.youtube.com/watch?v=MHPlJsosHDc)
 [TechWorks](https://www.youtube.com/watch?v=yl_3d7PSKMY).
 
-The app implements the AppCache API to allow it to run offline, and uses the
-JavaScript geolocation API to locate nearby bus stops and routes for the user.
+The app originally implemented the AppCache API to allow it to run offline. It
+has since been moved to Service Workers, which became widely available some time
+after the app was launched. It also uses the JavaScript geolocation API to
+locate nearby bus stops and routes for the user.
 
 The schedule data is located in a
-[seperate repository](https://github.com/NotWoods/hawaii-gtfs).
+[separate repository](https://github.com/NotWoods/hawaii-gtfs).
 
 ## Licensing
 
-Copyright (c) 2015 Tiger Oakes  
-All Rights Reserved
+Copyright (c) 2015 Tiger Oakes All Rights Reserved
