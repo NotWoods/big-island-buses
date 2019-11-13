@@ -788,6 +788,11 @@ th {
     display: none;
 }
 
+.created {
+    display: block;
+    margin-top: 0.1em;
+}
+
 aside #asideAd {
     margin: 0 auto;
     width: 200px;
