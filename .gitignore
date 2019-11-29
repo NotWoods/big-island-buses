@@ -12,3 +12,4 @@ assets/about-stops.png
 node_modules
 lib
 !icon
+build
