@@ -45,8 +45,10 @@ const documentPromise = documentLoad();
 const schedulePromise = getScheduleData();
 const locatePromise = locateUser(schedulePromise);
 let placeMapMarker: LinkableMarker | undefined;
-const mapLoaded = loadMap();
-if (mapLoaded === false) {
+try {
+    loadMap();
+} catch (err) {
+    console.error(err);
     locatePromise.then(function(position) {
         if (!Active.STOP) openStop(position.stop);
     });
@@ -71,11 +73,10 @@ function loadMap() {
         typeof google !== 'object' ||
         typeof google.maps !== 'object'
     ) {
-        console.error('Google Maps API has not loaded');
         documentPromise.then(function() {
             document.body.classList.add('no-map');
         });
-        return false;
+        throw new Error('Google Maps API has not loaded');
     }
     boundsAllStops = new google.maps.LatLngBounds();
     markers = [];
@@ -346,7 +347,7 @@ window.onhashchange = function() {
         : Active.STOP;
     openActive(Active);
 };
-window.onpopstate = function(e) {
+window.onpopstate = function(e: PopStateEvent) {
     setActiveState(e.state);
     openActive(Active);
 };
@@ -422,19 +423,6 @@ function switchMapStreetview(this: HTMLElement) {
         Active.View.STOP = View.MAP_PRIMARY;
     }
     dispatchEvent(updateEvent);
-}
-
-function switchTripView(this: HTMLElement) {
-    if (Active.View.ROUTE == View.LIST) {
-        Active.View.ROUTE = View.TIMETABLE;
-        this.classList.add('timetable');
-        this.title = 'View as list';
-    } else if (Active.View.ROUTE == View.TIMETABLE) {
-        Active.View.ROUTE = View.LIST;
-        this.classList.remove('timetable');
-        this.title = 'View as timetable';
-    }
-    openTrip(Active.Route.TRIP!);
 }
 
 /**

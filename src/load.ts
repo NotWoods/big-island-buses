@@ -4,7 +4,7 @@
  * @copyright    2014 Tiger Oakes
  */
 
-import { Calendar, GTFSData, Stop, Trip } from './gtfs-types';
+import { GTFSData, Stop, Trip } from './gtfs-types';
 
 export const enum Type {
     ROUTE,
