@@ -11,7 +11,7 @@ import {
     clickEvent,
     documentLoad,
     dynamicLinkNode,
-    getQueryVariable,
+    getQueryVariables,
     getScheduleData,
     gtfsArrivalToDate,
     gtfsArrivalToString,
@@ -318,15 +318,10 @@ function openActive(state: ActiveState) {
 
 Promise.all([documentPromise, schedulePromise]).then(function() {
     if (!window.history.state && window.location.search.indexOf('#!') > -1) {
-        Active.Route.ID = getQueryVariable('route')
-            ? getQueryVariable('route')
-            : Active.Route.ID;
-        Active.Route.TRIP = getQueryVariable('trip')
-            ? getQueryVariable('trip')
-            : Active.Route.TRIP;
-        Active.STOP = getQueryVariable('stop')
-            ? getQueryVariable('stop')
-            : Active.STOP;
+        const vars = getQueryVariables();
+        Active.Route.ID = vars['route'] || Active.Route.ID;
+        Active.Route.TRIP = vars['trip'] || Active.Route.TRIP;
+        Active.STOP = vars['stop'] || Active.STOP;
 
         openActive(Active);
     } else if (window.history.state) {
@@ -336,15 +331,10 @@ Promise.all([documentPromise, schedulePromise]).then(function() {
 });
 
 window.onhashchange = function() {
-    Active.Route.ID = getQueryVariable('route')
-        ? getQueryVariable('route')
-        : Active.Route.ID;
-    Active.Route.TRIP = getQueryVariable('trip')
-        ? getQueryVariable('trip')
-        : Active.Route.TRIP;
-    Active.STOP = getQueryVariable('stop')
-        ? getQueryVariable('stop')
-        : Active.STOP;
+    const vars = getQueryVariables();
+    Active.Route.ID = vars['route'] || Active.Route.ID;
+    Active.Route.TRIP = vars['trip'] || Active.Route.TRIP;
+    Active.STOP = vars['stop'] || Active.STOP;
     openActive(Active);
 };
 window.onpopstate = function(e: PopStateEvent) {
@@ -445,13 +435,17 @@ function openRoute(route_id: Route['route_id']) {
 
         document.title = thisRoute.route_long_name;
 
+        document.body.style.setProperty(
+            '--route-color',
+            `#${thisRoute.route_color}`,
+        );
+        document.body.style.setProperty(
+            '--route-text-color',
+            `#${thisRoute.route_text_color}`,
+        );
+
         const name = document.getElementById('route_long_name')!;
         name.textContent = thisRoute.route_long_name;
-        name.style.backgroundColor = `#${thisRoute.route_color}`;
-        name.style.color = `#${thisRoute.route_text_color}`;
-        document.getElementById(
-            'alt-menu',
-        )!.style.fill = `#${thisRoute.route_text_color}`;
 
         let firstStop: Stop['stop_id'] | undefined;
         let lastStop: Stop['stop_id'] | undefined;
@@ -701,7 +695,6 @@ function openTrip(trip_id: Trip['trip_id']) {
             for (let j = 0; j < 2; j++) {
                 const line = document.createElement('span');
                 line.className = 'line';
-                line.style.backgroundColor = `#${route.route_color}`;
                 lines.appendChild(line);
             }
             routeListItem.appendChild(lines);

@@ -401,11 +401,9 @@ export function gtfsArrivalToString(string: string) {
 }
 
 /**
- * Returns a URL variable, or null if it does not exist
- * @param  {string} variable - The name of the query variable to find
- * @return {string}
+ * Returns an object with URL variables.
  */
-export function getQueryVariable(variable: string): string | null {
+export function getQueryVariables(): Partial<Record<string, string>> {
     let query = '';
     let vars: string[];
     if (window.location.hash.indexOf('#!') > -1) {
@@ -420,13 +418,14 @@ export function getQueryVariable(variable: string): string | null {
         vars = query.split('%26');
     }
 
+    const result: Partial<Record<string, string>> = {};
     if (query !== '') {
         for (const parts of vars!) {
             const [key, value] = parts.split('=');
-            if (key === variable) return value;
+            result[key] = value;
         }
     }
-    return null;
+    return result;
 }
 
 /**

@@ -163,6 +163,7 @@ aside .footer-lines {
 #alt-menu {
     position: absolute;
     margin: 16px 8px;
+    fill: var(--route-text-color);
 }
 
 @media (max-width: 900px) {
@@ -329,6 +330,8 @@ main {
     margin: 0;
     padding: 16px;
     padding-left: 72px;
+    background-color: var(--route-color);
+    color: var(--route-text-color);
 }
 
 #information {
@@ -512,6 +515,9 @@ th {
     position: relative;
     min-height: 40px;
     vertical-align: middle;
+}
+#schedule .line {
+    background-color: var(--route-color);
 }
 #schedule .lines .line:first-child {
     height: 100%;
