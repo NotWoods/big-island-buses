@@ -5,6 +5,7 @@ sudo: false
 cache: npm
 script:
     - npm run lint:check
+    - source checkout.sh
     - mkdir -p heleon
     - git --work-tree=./heleon checkout app-challenge -- .
 deploy:
