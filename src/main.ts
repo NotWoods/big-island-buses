@@ -13,25 +13,29 @@ import {
     dynamicLinkNode,
     getQueryVariables,
     getScheduleData,
-    gtfsArrivalToDate,
-    gtfsArrivalToString,
     Linkable,
     locateUser,
     LocationUpdate,
     normal,
-    nowDateTime,
     openCallbacks,
     placeShape,
     sequence,
     setActiveState,
     stopShape,
-    stringTime,
     Type,
     unimportant,
     updateEvent,
     userShape,
     View,
+    createElement,
 } from './load.js';
+import {
+    gtfsArrivalToDate,
+    gtfsArrivalToString,
+    nowDateTime,
+    stringTime,
+} from './page/date.js';
+import { toInt } from './page/num.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -274,7 +278,7 @@ function updateAside(schedule: GTFSData) {
     }
 
     documentPromise.then(function() {
-        if (aside !== null && typeof aside != 'undefined') {
+        if (aside != undefined) {
             insertListItems(aside);
         } else {
             generateListItems();
@@ -317,7 +321,7 @@ function openActive(state: ActiveState) {
 }
 
 Promise.all([documentPromise, schedulePromise]).then(function() {
-    if (!window.history.state && window.location.search.indexOf('#!') > -1) {
+    if (!window.history.state && window.location.search.includes('#!')) {
         const vars = getQueryVariables();
         Active.Route.ID = vars['route'] || Active.Route.ID;
         Active.Route.TRIP = vars['trip'] || Active.Route.TRIP;
@@ -389,7 +393,7 @@ function switchMapStreetview(this: HTMLElement) {
     const mapParent = document.getElementById('map')!;
     const panoParent = document.getElementById('streetview-header')!;
 
-    if (Active.View.STOP == View.MAP_PRIMARY) {
+    if (Active.View.STOP === View.MAP_PRIMARY) {
         mapParent.insertBefore(
             document.getElementById('streetview-canvas')!,
             mapParent.firstChild,
@@ -400,7 +404,7 @@ function switchMapStreetview(this: HTMLElement) {
         );
         this.classList.add('on');
         Active.View.STOP = View.STREET_PRIMARY;
-    } else if (Active.View.STOP == View.STREET_PRIMARY) {
+    } else if (Active.View.STOP === View.STREET_PRIMARY) {
         mapParent.insertBefore(
             document.getElementById('map-canvas')!,
             mapParent.firstChild,
@@ -467,14 +471,14 @@ function openRoute(route_id: Route['route_id']) {
         for (const trip_id of Object.keys(thisRoute.trips)) {
             const trip = thisRoute.trips[trip_id];
             for (const stop in trip.stop_times) {
-                if (stop == '1' && parseInt(trip.direction_id, 10) === 0) {
+                if (stop == '1' && toInt(trip.direction_id) === 0) {
                     firstStop = trip.stop_times[stop].stop_id;
                 } else {
                     if (
-                        parseInt(stop, 10) > largest &&
-                        parseInt(trip.direction_id, 10) === 0
+                        toInt(stop) > largest &&
+                        toInt(trip.direction_id) === 0
                     ) {
-                        largest = parseInt(stop, 10);
+                        largest = toInt(stop);
                         lastStop = trip.stop_times[stop].stop_id;
                     }
                 }
@@ -517,9 +521,10 @@ function openRoute(route_id: Route['route_id']) {
                 closestTrip = earliestTrip;
                 closestTripStop = earliestTripStop;
             }
-            const option = document.createElement('option');
-            option.value = trip.trip_id;
-            option.textContent = trip.trip_short_name;
+            const option = createElement('option', {
+                value: trip.trip_id,
+                textContent: trip.trip_short_name,
+            });
             select.appendChild(option);
         }
 
@@ -690,34 +695,36 @@ function openTrip(trip_id: Trip['trip_id']) {
             const tripStop = trip.stop_times[sequence];
             const routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id);
 
-            const lines = document.createElement('div');
-            lines.className = 'lines';
+            const lines = createElement('div', { className: 'lines' });
             for (let j = 0; j < 2; j++) {
-                const line = document.createElement('span');
-                line.className = 'line';
+                const line = createElement('span', { className: 'line' });
                 lines.appendChild(line);
             }
             routeListItem.appendChild(lines);
 
-            const name = document.createElement('span');
-            name.className = 'name';
-            name.textContent = buses.stops[tripStop.stop_id].stop_name;
+            const name = createElement('span', {
+                className: 'name',
+                textContent: buses.stops[tripStop.stop_id].stop_name,
+            });
             routeListItem.appendChild(name);
 
-            const time = document.createElement('time');
-            time.textContent = gtfsArrivalToString(tripStop.arrival_time);
+            const time = createElement('time', {
+                textContent: gtfsArrivalToString(tripStop.arrival_time),
+            });
             routeListItem.appendChild(time);
 
-            const connection = document.createElement('div');
-            connection.className = 'connections';
+            const connection = createElement('div', {
+                className: 'connections',
+            });
             for (const connectRoute of buses.stops[tripStop.stop_id].routes) {
                 if (connectRoute === Active.Route.ID) {
                     continue;
                 }
 
-                const item = document.createElement('span');
-                item.className = 'route-dash';
-                item.title = buses.routes[connectRoute].route_long_name;
+                const item = createElement('span', {
+                    className: 'route-dash',
+                    title: buses.routes[connectRoute].route_long_name,
+                });
                 item.style.backgroundColor =
                     buses.routes[connectRoute].route_color;
 

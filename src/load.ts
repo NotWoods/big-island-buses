@@ -5,6 +5,7 @@
  */
 
 import { GTFSData, Stop, Trip } from './gtfs-types';
+import { toInt } from './page/num';
 
 export const enum Type {
     ROUTE,
@@ -45,9 +46,7 @@ export let Active: ActiveState = {
 
 export const updateEvent = new CustomEvent('pageupdate');
 
-if (navigator.serviceWorker) {
-    navigator.serviceWorker.register('service-worker.js');
-}
+navigator.serviceWorker?.register('service-worker.js');
 
 /**
  * @type {Record<Type, Function>}
@@ -94,30 +93,23 @@ export function setActiveState(newState: ActiveState) {
     Active = newState;
 }
 
-function xhr(url: string, responseType?: XMLHttpRequestResponseType) {
-    return new Promise<unknown>((resolve, reject) => {
-        const rq = new XMLHttpRequest();
-        rq.open('GET', url);
-        if (responseType) rq.responseType = responseType;
-        rq.onload = function() {
-            if (this.status === 200) {
-                resolve(this.response);
-            } else {
-                reject(Error(this.statusText));
-            }
-        };
-        rq.onerror = function() {
-            reject(Error('Network Error'));
-        };
-        rq.send();
-    });
-}
-
 /**
  * Grabs the API data and parses it into a GTFSData object for the rest of the program.
  */
 export function getScheduleData(): Promise<GTFSData> {
-    return xhr('api.json', 'json').then(json => json as GTFSData);
+    return fetch('api.json')
+        .then(res => {
+            if (res.ok) return res.json();
+            throw new Error(res.statusText);
+        })
+        .then(json => json as GTFSData);
+}
+
+export function createElement<Tag extends keyof HTMLElementTagNameMap>(
+    type: Tag,
+    props: Partial<HTMLElementTagNameMap[Tag]>
+) {
+    return Object.assign(document.createElement(type), props);
 }
 
 function getCurrentPosition() {
@@ -219,41 +211,40 @@ export function documentLoad() {
  * @return {string} URL to use for href, based on active object.
  */
 function pageLink(type: Type, value: string) {
-    let link = '';
+    const params = new URLSearchParams();
     switch (type) {
         case Type.ROUTE:
-            link += '#!route=' + value;
+            params.set('route', value);
 
             if (Active.Route.TRIP !== null) {
-                link += '&trip=' + Active.Route.TRIP;
+                params.set('trip', Active.Route.TRIP);
             }
 
             if (Active.STOP !== null) {
-                link += '&stop=' + Active.STOP;
+                params.set('stop', Active.STOP);
             }
             break;
         case Type.STOP:
             if (Active.Route.ID !== null) {
-                link += '#!route=' + Active.Route.ID;
-            } else {
-                link += '#!';
+                params.set('route', Active.Route.ID);
             }
-            link += '&stop=' + value;
+            params.set('stop', value);
             if (Active.Route.TRIP !== null) {
-                link += '&trip=' + Active.Route.TRIP;
+                params.set('trip', Active.Route.TRIP);
             }
             break;
         case Type.TRIP:
-            link += '#!route= ' + Active.Route.ID + '&trip=' + value;
+            params.set('route', Active.Route.ID!);
+            params.set('trip', value);
             if (Active.STOP !== null) {
-                link += '&stop=' + Active.STOP;
+                params.set('stop', Active.STOP);
             }
             break;
         default:
             console.warn('Invalid type provided for link: %i', type);
             break;
     }
-    return link;
+    return `#!${params}`;
 }
 
 export interface Linkable {
@@ -290,12 +281,8 @@ export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
  * @param  {Event} e
  */
 export function clickEvent(this: Linkable, e: Event) {
-    if (e.preventDefault) {
-        e.preventDefault();
-    }
-    if (e.stopPropagation) {
-        e.stopPropagation();
-    }
+    e.preventDefault?.();
+    e.stopPropagation?.();
     const state = Active;
     const val = this.Value;
     const newLink = pageLink(this.Type, val);
@@ -313,91 +300,8 @@ export function clickEvent(this: Linkable, e: Event) {
     }
     callback(val);
     history.pushState(state, null as any, newLink);
-    if (ga) ga('send', 'pageview', { page: newLink, title: document.title });
+    ga?.('send', 'pageview', { page: newLink, title: document.title });
     return false;
-}
-
-/**
- * Turns a date into a string with hours, minutes.
- * @param  {Date} 	date Date to convert
- * @param  {string} date 24hr string in format 12:00:00 to convert to string in 12hr format
- * @return {string}    	String representation of time
- */
-export function stringTime(date: Date | string): string {
-    if (typeof date === 'string') {
-        if (
-            date.indexOf(':') > -1 &&
-            date.lastIndexOf(':') > date.indexOf(':')
-        ) {
-            const split = date.split(':');
-            date = new Date(
-                0,
-                0,
-                0,
-                parseInt(split[0], 10),
-                parseInt(split[1], 10),
-                parseInt(split[2], 10),
-                0,
-            );
-        }
-    }
-    if (typeof date != 'object') {
-        throw new TypeError(`date must be Date or string, not ${typeof date}`);
-    }
-
-    let m = 'am';
-    let displayHour = '';
-    let displayMinute = '';
-    const hr = date.getHours();
-    const min = date.getMinutes();
-
-    if (hr === 0) {
-        displayHour = '12';
-    } else if (hr === 12) {
-        displayHour = '12';
-        m = 'pm';
-    } else if (hr > 12) {
-        const mathHr = hr - 12;
-        displayHour = mathHr.toString();
-        m = 'pm';
-    } else {
-        displayHour = hr.toString();
-    }
-
-    if (min === 0) {
-        displayMinute = '';
-    } else if (min < 10) {
-        displayMinute = ':0' + min.toString();
-    } else {
-        displayMinute = ':' + min.toString();
-    }
-
-    return displayHour + displayMinute + m;
-}
-
-/**
- * Returns a date object based on the string given
- * @param  {string} string in format 13:00:00, from gtfs data
- * @return {Date}
- */
-export function gtfsArrivalToDate(string: string): Date {
-    const [hour, min, second] = string.split(':').map(s => parseInt(s, 10));
-    let extraDays = 0;
-    let extraHours = 0;
-    if (hour > 23) {
-        extraDays = Math.floor(hour / 24);
-        extraHours = hour % 24;
-    }
-    return new Date(0, 0, 0 + extraDays, hour + extraHours, min, second, 0);
-}
-
-/**
- * Combines stringTime() and gtfsArrivalToDate()
- * @param  {string} string in format 13:00:00, from gtfs data
- * @return {string}        String representation of time
- */
-export function gtfsArrivalToString(string: string) {
-    return stringTime(gtfsArrivalToDate(string));
 }
 
 /**
@@ -429,31 +333,14 @@ export function getQueryVariables(): Partial<Record<string, string>> {
 }
 
 /**
- * Returns the current time, with date stripped out
- * @return {Date} Current time in hour, min, seconds; other params set to 0
- */
-export function nowDateTime(): Date {
-    const now = new Date();
-    return new Date(
-        0,
-        0,
-        0,
-        now.getHours(),
-        now.getMinutes(),
-        now.getSeconds(),
-        0,
-    );
-}
-
-/**
  * Sorts stop time keys
- * @param  {GTFSData stop_times} stopTimes
- * @return {string[]} ordered list
+ * @param {GTFSData stop_times} stopTimes
+ * @return ordered list
  */
-export function sequence(stopTimes: Trip['stop_times']) {
+export function sequence(stopTimes: Trip['stop_times']): string[] {
     const stopSequence = [];
     for (const key in stopTimes) {
         stopSequence.push(key);
     }
-    return stopSequence.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+    return stopSequence.sort((a, b) => toInt(a) - toInt(b));
 }
