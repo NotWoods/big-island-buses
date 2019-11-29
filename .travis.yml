@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+    - 'lts/*'
+sudo: false
+cache: npm
+script:
+    - npm run lint:check
+    - mkdir -p heleon
+    - git --work-tree=./heleon checkout app-challenge -- .
+deploy:
+    provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN # Set in the settings page of your repository
+    keep-history: true
+    on:
+        branch: master
+    local-dir: public
