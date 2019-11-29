@@ -12,4 +12,9 @@ assets/about-stops.png
 node_modules
 lib
 !icon
-build
+heleon
+*.map
+
+/main.js
+/api.json
+/service-worker.js

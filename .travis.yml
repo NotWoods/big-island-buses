@@ -4,7 +4,10 @@ node_js:
 sudo: false
 cache: npm
 script:
+    # Lint and build JS
     - npm run lint:check
+    - npm run build
+    # Copy app-challenge branch into ./heleon
     - source checkout.sh
     - create_all_branches
     - mkdir -p heleon
