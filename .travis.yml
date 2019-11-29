@@ -6,6 +6,7 @@ cache: npm
 script:
     - npm run lint:check
     - source checkout.sh
+    - create_all_branches
     - mkdir -p heleon
     - git --work-tree=./heleon checkout app-challenge -- .
 deploy:
