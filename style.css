@@ -175,17 +175,17 @@ aside .footer-lines {
     main {
         margin-left: 0 !important;
     }
-    aside {
+    .sidebar {
         transform: translateX(-100%) !important;
         -webkit-transform: translateX(-100%) !important;
         transition: transform 0.3s ease !important;
         transition: -webkit-transform 0.3s ease !important;
     }
-    aside.open {
+    .sidebar.open {
         transform: none !important;
         -webkit-transform: none !important;
     }
-    aside.open + #screen-cover {
+    .sidebar.open + #screen-cover {
         display: block;
         opacity: 0.5;
         z-index: 2;
@@ -208,11 +208,10 @@ button:hover {
 }
 button:active {
     background-color: rgba(0, 0, 0, 0.2) !important;
-    transiton: none;
+    transition: none;
 }
 button:focus {
     animation: phase 0.5s infinite alternate;
-    -webkit-animation: phase 0.5s infinite alternate;
     outline: none;
 }
 
@@ -224,24 +223,8 @@ button:focus {
         background-color: transparent;
     }
 }
-@-webkit-keyframes phase {
-    to {
-        background-color: rgba(0, 0, 0, 0.15);
-    }
-    from {
-        background-color: transparent;
-    }
-}
 
 @keyframes phase-white {
-    to {
-        background-color: rgba(255, 255, 255, 0.15);
-    }
-    from {
-        background-color: transparent;
-    }
-}
-@-webkit-keyframes phase-white {
     to {
         background-color: rgba(255, 255, 255, 0.15);
     }
@@ -323,7 +306,7 @@ main {
     display: block;
 }
 
-#route_long_name {
+.route__name {
     font-size: 34px;
     font-weight: 400;
     margin: 0;
@@ -333,24 +316,28 @@ main {
     color: var(--route-text-color);
 }
 
-#information {
+.info {
     color: #757575;
     font-size: 13px;
+    box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.19), 0 1px 1px rgba(0, 0, 0, 0.23);
+    margin: 8px;
+    background-color: white;
+    border-radius: 2px;
 }
-#information svg {
+.info__icon {
     margin: 8px;
     margin-right: 32px;
     vertical-align: middle;
     fill: #757575;
 }
 
-#trip-select {
+.info__select {
     font-family: inherit;
     font-size: inherit;
     margin: 0;
 }
 
-#route-header {
+.route__header {
     position: relative;
 }
 #download {
@@ -363,7 +350,6 @@ main {
 }
 #download:focus {
     animation: none;
-    -webkit-animation: none;
     outline: none;
 }
 #download svg {
@@ -381,7 +367,6 @@ main {
 }
 #download:focus svg {
     animation: phase-white 0.5s infinite alternate;
-    -webkit-animation: phase-white 0.5s infinite alternate;
 }
 
 #stop {
@@ -404,12 +389,6 @@ main {
 
 .open-stop #stop {
     display: block;
-}
-#information {
-    box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.19), 0 1px 1px rgba(0, 0, 0, 0.23);
-    margin: 8px;
-    background-color: white;
-    border-radius: 2px;
 }
 
 .open-stop:not(.open) #stop-container {
@@ -589,7 +568,6 @@ th {
 }
 #map-toggle:focus {
     animation: none;
-    -webkit-animation: none;
     outline: none;
 }
 #map-toggle #fullscreen-exit,
@@ -614,7 +592,6 @@ th {
 #map-toggle:focus #fullscreen,
 #view.on:focus #fullscreen-exit {
     animation: phase-white 0.5s infinite alternate;
-    -webkit-animation: phase-white 0.5s infinite alternate;
 }
 
 #streetview-header {
