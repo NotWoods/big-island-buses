@@ -292,7 +292,7 @@
                     </button>
                 </header>
 
-                <div class="route__schedule" id="schedule-column">
+                <div id="schedule-column">
                     <section class="info" id="information">
                         <div id="trip-select-container" title="Select different trip">
                             <label for="trip-select">
@@ -342,28 +342,28 @@
                         </div>
                     </section>
 
-                    <section id="schedule"></section>
+                    <section class="schedule" id="schedule"></section>
                 </div>
 
                 <section id="stop">
                     <div id="stop-container">
-                        <header id="streetview-header">
-                            <div id="streetview-canvas"></div>
-                            <h1 id="stop_name"></h1>
+                        <header class="stop__header" id="streetview-header">
+                            <div class="stop__streetview-canvas" id="streetview-canvas"></div>
+                            <h1 class="stop__name" id="stop_name"></h1>
                         </header>
                         <!--
 				 	-->
                         <div id="stop_details">
-                            <div id="address-container" title="Bus stop address">
-                                <svg viewBox="0 0 24 24">
+                            <address id="address-container" title="Bus stop address">
+                                <svg class="stop__address-icon" viewBox="0 0 24 24">
                                     <path
                                         d="M12,2C8.1,2,5,5.1,5,9c0,5.2,7,13,7,13s7-7.8,7-13C19,5.1,15.9,2,12,2z M12,11.5c-1.4, 0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5c1.4,0,2.5,1.1,2.5 2.5S13.4,11.5,12,11.5z"
                                     ></path>
                                 </svg>
-                                <span id="address"></span>
-                            </div>
-                            <h2>Connects to</h2>
-                            <ul id="connections"></ul>
+                                <span class="stop__address" id="address"></span>
+                            </address>
+                            <h2 class="connections__heading">Connects to</h2>
+                            <ul class="connections__list" id="connections"></ul>
                         </div>
                     </div>
                 </section>

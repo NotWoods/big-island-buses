@@ -642,13 +642,15 @@ function openStop(stop_id: Stop['stop_id']) {
         for (const route_id of thisStop.routes) {
             const route = buses.routes[route_id];
             const linkItem = dynamicLinkNode(Type.ROUTE, route_id, false);
+            linkItem.className = 'connections__link'
             linkItem.style.borderColor = `#${route.route_color}`;
             linkItem.textContent = route.route_long_name;
 
             const listItem = document.createElement('li');
+            listItem.className = 'connections__item'
             listItem.append(linkItem);
             if (Active.Route.ID === route_id) {
-                listItem.className = 'active-route';
+                listItem.classList.add('connections__item--active-route');
             }
             list.append(listItem);
         }
@@ -696,6 +698,7 @@ function openTrip(trip_id: Trip['trip_id']) {
         for (const sequence of stopSequence) {
             const tripStop = trip.stop_times[sequence];
             const routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id);
+            routeListItem.className = 'schedule__stop'
 
             const lines = createElement('div', { className: 'lines' });
             for (let j = 0; j < 2; j++) {
@@ -705,12 +708,13 @@ function openTrip(trip_id: Trip['trip_id']) {
             routeListItem.appendChild(lines);
 
             const name = createElement('span', {
-                className: 'name',
+                className: 'schedule__stopname name',
                 textContent: buses.stops[tripStop.stop_id].stop_name,
             });
             routeListItem.appendChild(name);
 
             const time = createElement('time', {
+                className: 'schedule__time',
                 textContent: gtfsArrivalToString(tripStop.arrival_time),
             });
             routeListItem.appendChild(time);
