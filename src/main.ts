@@ -268,9 +268,11 @@ function updateAside(schedule: GTFSData) {
     function generateListItems() {
         for (const route of Object.values(schedule.routes)) {
             const listItem = document.createElement('li') as RouteListItem;
+            listItem.className = 'sidebar__item routes__item'
             listItem.style.borderColor = `#${route.route_color}`;
             listItem.route_id = route.route_id;
             const link = dynamicLinkNode(Type.ROUTE, route.route_id, true);
+            link.className = 'sidebar__link routes__link';
             link.textContent = route.route_long_name;
             listItem.append(link);
             routeListItems.push(listItem);
