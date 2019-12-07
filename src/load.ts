@@ -276,17 +276,14 @@ export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
 }
 
 /**
- * Used for the click event of a dynamicLinkNode
- * @param  {Event} e
+ * Navigate to the page described by the `Linkable`.
  */
-export function clickEvent(this: Linkable, e: Event) {
-    e.preventDefault?.();
-    e.stopPropagation?.();
+export function openLinkable(link: Linkable) {
     const state = Active;
-    const val = this.Value;
-    const newLink = pageLink(this.Type, val);
-    const callback = openCallbacks[this.Type];
-    switch (this.Type) {
+    const val = link.Value;
+    const newLink = pageLink(link.Type, val);
+    const callback = openCallbacks[link.Type];
+    switch (link.Type) {
         case Type.ROUTE:
             state.Route.ID = val;
             break;
@@ -300,6 +297,16 @@ export function clickEvent(this: Linkable, e: Event) {
     callback(val);
     history.pushState(state, null as any, newLink);
     ga?.('send', 'pageview', { page: newLink, title: document.title });
+}
+
+/**
+ * Used for the click event of a dynamicLinkNode
+ * @param  {Event} e
+ */
+export function clickEvent(this: Linkable, e: Event) {
+    e.preventDefault?.();
+    e.stopPropagation?.();
+    openLinkable(this);
     return false;
 }
 

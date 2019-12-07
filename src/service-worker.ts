@@ -24,8 +24,7 @@ function precache() {
                 'api.json',
                 'assets/logo.svg',
                 'assets/lines.svg',
-                'roboto/Roboto-Regular.ttf',
-                'roboto/Roboto-Medium.ttf',
+                'assets/tigeroakes.svg',
             ]),
         );
 }
