@@ -318,7 +318,7 @@ function openActive(state: ActiveState) {
         openRoute(state.Route.ID!).then(bestTrip =>
             openTrip(state.Route.TRIP ? state.Route.TRIP : bestTrip!),
         ),
-        openStop(state.STOP!),
+        state.STOP ? openStop(state.STOP) : undefined,
     ]).then(() => {});
 }
 

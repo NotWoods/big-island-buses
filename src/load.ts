@@ -14,7 +14,6 @@ export const enum Type {
 }
 export const enum View {
     LIST,
-    TIMETABLE,
 
     MAP_PRIMARY,
     STREET_PRIMARY,

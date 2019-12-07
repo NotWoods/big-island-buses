@@ -419,51 +419,6 @@ main {
     width: 100%;
 }
 
-.timetable #stop {
-    float: none;
-    width: 100%;
-    box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24);
-    padding-bottom: 0;
-}
-.timetable #streetview-header {
-    width: 50%;
-    padding-bottom: 33.3%;
-    display: inline-block;
-}
-.timetable #stop_details {
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-}
-.timetable #information,
-.timetable #schedule {
-    width: 100%;
-}
-
-caption {
-    font-size: 24px;
-}
-thead td {
-    height: 136px;
-}
-thead div {
-    width: 32px;
-    transform: translateY(46px) rotate(-90deg);
-}
-thead span {
-    width: 128px;
-    display: block;
-}
-table {
-    border-collapse: collapse;
-}
-td,
-th {
-    padding: 0;
-    margin: 0;
-    border: 1px solid #7e7e7e;
-}
-
 #schedule {
     padding-bottom: 8px;
 }
