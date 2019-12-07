@@ -268,7 +268,7 @@ function updateAside(schedule: GTFSData) {
     function generateListItems() {
         for (const route of Object.values(schedule.routes)) {
             const listItem = document.createElement('li') as RouteListItem;
-            listItem.className = 'sidebar__item routes__item'
+            listItem.className = 'sidebar__item routes__item';
             listItem.style.borderColor = `#${route.route_color}`;
             listItem.route_id = route.route_id;
             const link = dynamicLinkNode(Type.ROUTE, route.route_id, true);
@@ -642,12 +642,12 @@ function openStop(stop_id: Stop['stop_id']) {
         for (const route_id of thisStop.routes) {
             const route = buses.routes[route_id];
             const linkItem = dynamicLinkNode(Type.ROUTE, route_id, false);
-            linkItem.className = 'connections__link'
+            linkItem.className = 'connections__link';
             linkItem.style.borderColor = `#${route.route_color}`;
             linkItem.textContent = route.route_long_name;
 
             const listItem = document.createElement('li');
-            listItem.className = 'connections__item'
+            listItem.className = 'connections__item';
             listItem.append(linkItem);
             if (Active.Route.ID === route_id) {
                 listItem.classList.add('connections__item--active-route');
@@ -698,7 +698,7 @@ function openTrip(trip_id: Trip['trip_id']) {
         for (const sequence of stopSequence) {
             const tripStop = trip.stop_times[sequence];
             const routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id);
-            routeListItem.className = 'schedule__stop'
+            routeListItem.className = 'schedule__stop';
 
             const lines = createElement('div', { className: 'lines' });
             for (let j = 0; j < 2; j++) {

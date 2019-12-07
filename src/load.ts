@@ -106,7 +106,7 @@ export function getScheduleData(): Promise<GTFSData> {
 
 export function createElement<Tag extends keyof HTMLElementTagNameMap>(
     type: Tag,
-    props: Partial<HTMLElementTagNameMap[Tag]>
+    props: Partial<HTMLElementTagNameMap[Tag]>,
 ) {
     return Object.assign(document.createElement(type), props);
 }
