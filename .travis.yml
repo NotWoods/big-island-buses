@@ -1,20 +1,20 @@
 language: node_js
 node_js:
-    - node
+  - node
 sudo: false
 cache: npm
 script:
-    # Copy app-challenge branch into ./heleon
-    ## - source checkout.sh
-    ## - create_all_branches
-    ## - mkdir -p heleon
-    ## - git --work-tree=./heleon checkout app-challenge -- .
-    # Lint and build JS
-    - npm run lint:check
-    - npm run build
+  # Copy app-challenge branch into ./heleon
+  ## - source checkout.sh
+  ## - create_all_branches
+  ## - mkdir -p heleon
+  ## - git --work-tree=./heleon checkout app-challenge -- .
+  # Lint and build JS
+  - npm run lint:check
+  - npm run build
 deploy:
-    provider: pages
-    skip_cleanup: true
-    github-token: $GITHUB_TOKEN # Set in the settings page of your repository
-    on:
-        branch: master
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN # Set in the settings page of your repository
+  on:
+    branch: master
