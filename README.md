@@ -39,6 +39,22 @@ locate nearby bus stops and routes for the user.
 The schedule data is located in a
 [separate repository](https://github.com/NotWoods/hawaii-gtfs).
 
+## Deployment
+
+Currently deployment is manual until I can get Travis working properly.
+
+```sh
+npm ci
+# Lint and build JS
+npm run lint:check
+npm run build
+# Copy app-challenge branch into ./heleon
+source checkout.sh
+create_all_branches
+mkdir -p heleon
+git --work-tree=./heleon checkout app-challenge -- .
+```
+
 ## Licensing
 
 Copyright (c) 2015 Tiger Oakes All Rights Reserved
