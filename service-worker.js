@@ -1,0 +1,2 @@
+const e="network-or-cache";self.addEventListener("install",t=>{t.waitUntil(caches.open(e).then(e=>e.addAll(["./","index.html","style.css","main.js","api.json","assets/logo.svg","assets/lines.svg","assets/tigeroakes.svg"])))}),self.addEventListener("fetch",t=>{t.respondWith(function(e,t){return new Promise((s,n)=>{const r=setTimeout(n,t);fetch(e).then(e=>{clearTimeout(r),s(e)},n)})}(t.request,400).catch(()=>(function(t){return caches.open(e).then(e=>e.match(t)).then(e=>{if(e)return e;throw new Error("no-match")})})(t.request)))});
+//# sourceMappingURL=service-worker.js.map
