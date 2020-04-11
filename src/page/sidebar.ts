@@ -19,15 +19,7 @@ export function hydrateAside() {
     routeListItems.set(route_id, listItem);
   }
 
-  let firstLocationChange = true;
-
   return function onLocationChange(nearbyRoutes: Set<Route['route_id']>) {
-    if (firstLocationChange) {
-      // Remove all children from nearby list
-      while (nearbyList.firstChild) nearbyList.removeChild(nearbyList.firstChild);
-    }
-    firstLocationChange = false;
-
     for (const [route_id, listItem] of routeListItems) {
       if (nearbyRoutes.has(route_id)) {
         nearbyList.appendChild(listItem);

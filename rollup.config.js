@@ -1,23 +1,34 @@
 import commonjs from 'rollup-plugin-commonjs';
+import consts from 'rollup-plugin-consts';
 import typescript from 'rollup-plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
+const eleventy = require('./.eleventy.js');
+
+const eleventyConfig = eleventy({
+  addPassthroughCopy() {},
+});
 
 /** @type {import('rollup').RollupOptions} */
 const config = {
   input: 'src/page/main.ts',
   output: {
-    file: 'dist/main.js',
+    file: eleventyConfig.dir.output + '/main.js',
     format: 'iife',
     sourcemap: true,
   },
-  plugins: [commonjs(), typescript(), terser()],
+  plugins: [
+    consts({ pathPrefix: eleventyConfig.pathPrefix }),
+    commonjs(),
+    typescript(),
+    terser(),
+  ],
 };
 
 /** @type {import('rollup').RollupOptions} */
 const serviceWorker = {
   input: 'src/service-worker.ts',
   output: {
-    file: 'dist/service-worker.js',
+    file: eleventyConfig.dir.output + '/service-worker.js',
     format: 'esm',
     sourcemap: true,
   },

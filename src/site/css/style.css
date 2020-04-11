@@ -718,10 +718,10 @@ main {
 
 .about {
   margin-top: 24px;
-}
-.about p {
-  margin: 8px 24px;
   color: #9e9e9e;
+}
+.sidebar p {
+  margin: 8px 24px;
 }
 .about a,
 .about a:visited {

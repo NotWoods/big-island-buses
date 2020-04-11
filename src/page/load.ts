@@ -4,6 +4,7 @@
  * @copyright    2014 Tiger Oakes
  */
 
+import pathPrefix from 'consts:pathPrefix';
 import { GTFSData, Stop, Trip } from '../gtfs-types';
 import { toInt } from './utils/num';
 
@@ -45,7 +46,7 @@ export let Active: ActiveState = {
 
 export const updateEvent = new CustomEvent('pageupdate');
 
-navigator.serviceWorker?.register('service-worker.js');
+navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
 
 /**
  * @type {Record<Type, Function>}
@@ -96,7 +97,7 @@ export function setActiveState(newState: ActiveState) {
  * Grabs the API data and parses it into a GTFSData object for the rest of the program.
  */
 export function getScheduleData(): Promise<GTFSData> {
-  return fetch('api.json')
+  return fetch(pathPrefix + 'api.json')
     .then(res => {
       if (res.ok) return res.json();
       throw new Error(res.statusText);
@@ -177,7 +178,7 @@ export function locateUser(
       }
       return results;
     } else {
-      throw Error(JSON.stringify(userPos));
+      throw new Error(JSON.stringify(userPos));
     }
   });
 }

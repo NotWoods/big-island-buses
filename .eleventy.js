@@ -3,15 +3,15 @@ module.exports = function(config) {
   config.addPassthroughCopy({
     'src/site/assets': true,
     'src/site/icon': true,
-    'src/site/roboto': true,
     'src/site/manifest.json': true,
     'src/site/css': '.',
   });
 
   return {
+    pathPrefix: '/big-island-buses/',
     dir: {
       input: 'src/site',
-      output: 'dist',
+      output: 'big-island-buses',
     },
   };
 };

@@ -1,0 +1,35 @@
+---
+pagination:
+  data: api.routes
+  size: 1
+  alias: route
+  resolve: values
+permalink: "/routes/{{ route.route_id }}/"
+---
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../../style.css" />
+    <title>{{ route.route_long_name }} | Big Island Buses</title>
+    <link rel="manifest" href="../../manifest.json" />
+    <link rel="icon" sizes="512x512" href="../../icon/transparent.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="../../icon/maskable.png" />
+    <link rel="icon" href="../../icon/favicon.ico" sizes="16x16 32x32 48x48 256x256" />
+    {% include 'meta.html' %}
+    <script async src="../../main.js"></script>
+  </head>
+  <body>
+    {% include 'noscript.html' %}
+
+    {% include 'sidebar.njk' %}
+
+    <div id="screen-cover"></div>
+
+    <main id="main" class="open">
+      {% include 'map.njk' %}
+
+      {% include 'route.njk' %}
+    </main>
+  </body>
+</html>
