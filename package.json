@@ -5,6 +5,7 @@
     "private": true,
     "dependencies": {},
     "devDependencies": {
+        "@11ty/eleventy": "^0.10.0",
         "@types/google.analytics": "0.0.40",
         "@types/googlemaps": "^3.37.0",
         "@types/jszip": "^3.1.6",
@@ -25,8 +26,9 @@
     },
     "homepage": "https://github.com/NotWoods/big-island-buses#readme",
     "scripts": {
-        "build": "rollup -c",
-        "postbuild": "node lib/api.js google_transit.zip api.json",
+        "prebuild": "rollup -c",
+        "build": "node lib/api.js src/site/google_transit.zip src/site/api.json",
+        "postbuild": "eleventy",
         "lint:files": "tsc --noEmit && prettier \"*.{md,css,html}\" \"src/*.ts\"",
         "lint": "npm run lint:files -- --write",
         "lint:check": "npm run lint:files -- --check"

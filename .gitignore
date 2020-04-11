@@ -1,9 +1,11 @@
 Thumbs.db
 node_modules
-lib
+/lib
+dist
 
 heleon
 *.map
+api.json
+
 /main.js
-/api.json
 /service-worker.js

@@ -4,9 +4,9 @@ import { terser } from 'rollup-plugin-terser';
 
 /** @type {import('rollup').RollupOptions} */
 const config = {
-    input: 'src/main.ts',
+    input: 'src/page/main.ts',
     output: {
-        file: 'main.js',
+        file: 'dist/main.js',
         format: 'iife',
         sourcemap: true,
     },
@@ -17,7 +17,7 @@ const config = {
 const serviceWorker = {
     input: 'src/service-worker.ts',
     output: {
-        file: 'service-worker.js',
+        file: 'dist/service-worker.js',
         format: 'esm',
         sourcemap: true,
     },
@@ -26,7 +26,7 @@ const serviceWorker = {
 
 /** @type {import('rollup').RollupOptions} */
 const apiGenerator = {
-    input: 'src/api.ts',
+    input: 'src/lib/api.ts',
     output: {
         file: 'lib/api.js',
         format: 'cjs',

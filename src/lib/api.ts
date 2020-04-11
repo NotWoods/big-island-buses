@@ -13,7 +13,7 @@ import {
   Stop,
   StopTime,
   Trip,
-} from './gtfs-types';
+} from '../gtfs-types';
 
 interface CsvFile {
   name: string;

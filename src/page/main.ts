@@ -4,7 +4,7 @@
  * @copyright    2014 Tiger Oakes
  */
 
-import { GTFSData, Route, Stop, Trip } from './gtfs-types.js';
+import { GTFSData, Route, Stop, Trip } from '../gtfs-types.js';
 import {
   Active,
   ActiveState,
@@ -34,8 +34,8 @@ import {
   gtfsArrivalToString,
   nowDateTime,
   stringTime,
-} from './page/date.js';
-import { toInt } from './page/num.js';
+} from './utils/date.js';
+import { toInt } from './utils/num.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;

@@ -4,8 +4,8 @@
  * @copyright    2014 Tiger Oakes
  */
 
-import { GTFSData, Stop, Trip } from './gtfs-types';
-import { toInt } from './page/num';
+import { GTFSData, Stop, Trip } from '../gtfs-types';
+import { toInt } from './utils/num';
 
 export const enum Type {
   ROUTE,
