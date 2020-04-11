@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="/big-island-buses/style.css" />
+<link rel="manifest" href="/big-island-buses/manifest.json" />
+<link rel="icon" sizes="512x512" href="/big-island-buses/icon/transparent.png" />
+<link rel="apple-touch-icon" sizes="512x512" href="/big-island-buses/icon/maskable.png" />
+<link rel="icon" href="/big-island-buses/icon/favicon.ico" sizes="16x16 32x32 48x48 256x256" />
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI&libraries=places"></script>
+<script async src="/big-island-buses/main.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#4d74ab" />
+<meta name="author" content="Tiger Oakes" />
+<script>
+(function(i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r;
+  (i[r] =
+    i[r] ||
+    function() {
+      (i[r].q = i[r].q || []).push(arguments);
+    }),
+    (i[r].l = 1 * new Date());
+  (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+  a.async = 1;
+  a.src = g;
+  m.parentNode.insertBefore(a, m);
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+ga('create', 'UA-37324002-1', 'auto');
+ga('require', 'linkid', 'linkid.js');
+ga('send', 'pageview');
+</script>
+
+
+    <title>Hilo - Waikea Uka | Big Island Buses</title>
+  </head>
+  <body>
+    <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
+  <header class="app__header">
+    <img class="app__logo" src="/big-island-buses/assets/logo.svg" alt="" itemprop="image" height="48" width="42" />
+    <span class="app__logotype" itemprop="name">Big Island Buses</span>
+  </header>
+
+  <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
+  <ul class="sidebar__list routes__list" id="nearby"></ul>
+
+  <h2 class="sidebar__heading routes__heading">Other Routes</h2>
+  <ul class="sidebar__list routes__list" id="other">
+    
+      <li class="sidebar__item routes__item" style="border-color: #5677FC" data-route="hilo-kaumana">
+        <a href="#!route=hilo-kaumana" class="sidebar__link routes__link">
+          Hilo - Ainako/Kaumana
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #009688" data-route="hilo-downtown">
+        <a href="#!route=hilo-downtown" class="sidebar__link routes__link">
+          Downtown Hilo-Aupuni Center-Prince Kuhio
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #00BCD4" data-route="hilo-keaukaha">
+        <a href="#!route=hilo-keaukaha" class="sidebar__link routes__link">
+          Hilo - Keaukaha
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #CDDC39" data-route="hilo-waikea">
+        <a href="#!route=hilo-waikea" class="sidebar__link routes__link">
+          Hilo - Waikea Uka
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #795548" data-route="hilo-resort">
+        <a href="#!route=hilo-resort" class="sidebar__link routes__link">
+          Hilo - Waikoloa Resorts
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #3F51B5" data-route="hilo-honokaa">
+        <a href="#!route=hilo-honokaa" class="sidebar__link routes__link">
+          Honoka&#39;a - Hilo
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #E51C23" data-route="hilo-volcano">
+        <a href="#!route=hilo-volcano" class="sidebar__link routes__link">
+          Ka&#39;u-Volcano - Hilo
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #9C27B0" data-route="hilo-kona">
+        <a href="#!route=hilo-kona" class="sidebar__link routes__link">
+          Kona/Hilo
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #259B24" data-route="kona">
+        <a href="#!route=kona" class="sidebar__link routes__link">
+          Intra Kona
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #03A9F4" data-route="kohala-resort">
+        <a href="#!route=kohala-resort" class="sidebar__link routes__link">
+          North Kohala to South Kohala Resorts
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #607D8B" data-route="kohala-kona">
+        <a href="#!route=kohala-kona" class="sidebar__link routes__link">
+          North Kohala to Waimea and Kailua-Kona
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #8BC34A" data-route="pahala-kona">
+        <a href="#!route=pahala-kona" class="sidebar__link routes__link">
+          Pahala/Ocean View - West Hawaii
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #673AB7" data-route="hilo-pahala">
+        <a href="#!route=hilo-pahala" class="sidebar__link routes__link">
+          Pahoa/Pohoiki/Hilo
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #FFC107" data-route="waimea">
+        <a href="#!route=waimea" class="sidebar__link routes__link">
+          Waimea Shuttle
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #FFEB3B" data-route="hilo-waimea">
+        <a href="#!route=hilo-waimea" class="sidebar__link routes__link">
+          Waimea - Hilo
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #FF5722" data-route="waikoloa">
+        <a href="#!route=waikoloa" class="sidebar__link routes__link">
+          Waikoloa Village Shuttle
+        </a>
+      </li>
+    
+      <li class="sidebar__item routes__item" style="border-color: #FF5722" data-route="uh-hilo">
+        <a href="#!route=uh-hilo" class="sidebar__link routes__link">
+          University of Hawaii to Downtown Hilo and Prince Kuhio Plaza
+        </a>
+      </li>
+    
+  </ul>
+
+  <h2 class="sidebar__heading">Information</h2>
+  <ul class="sidebar__list" id="info">
+    
+      <li class="sidebar__item">
+        <a class="sidebar__link" href="https://github.com/NotWoods/big-island-buses">
+          About this app
+        </a>
+      </li>
+    
+      <li class="sidebar__item">
+        <a class="sidebar__link" href="http://www.heleonbus.org/how-to-ride-hele-on/rules-and-regulations/">
+          Rules and Regulations
+        </a>
+      </li>
+    
+      <li class="sidebar__item">
+        <a class="sidebar__link" href="http://www.heleonbus.org/how-to-ride-hele-on/fares-and-fees/">
+          Fares and Fees
+        </a>
+      </li>
+    
+      <li class="sidebar__item">
+        <a class="sidebar__link" href="http://www.heleonbus.org/how-to-ride-hele-on/getting-on-and-off/">
+          Getting on and off
+        </a>
+      </li>
+    
+  </ul>
+
+  <div class="about">
+    <p>
+      Created by
+      <a href="http://tigeroakes.com">
+        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+      </a>
+    </p>
+    <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
+
+    <p itemprop="permissions">
+      Finding routes near your location requires the Location permission.
+    </p>
+  </div>
+
+  <img src="/big-island-buses/assets/lines.svg" alt="" class="footer-lines" width="239" height="68" />
+</aside>
+
+
+    <div id="screen-cover"></div>
+
+    <main id="main" class="open">
+      <section id="map">
+  <div id="map-canvas"></div>
+  <header id="map-header">
+    <button id="menu" title="Menu" aria-label="Menu">
+      <svg viewBox="0 0 24 24">
+        <path d="M3,18h18v-2H3V18z M3,13h18v-2H3V13z M3,6v2h18V6H3z"></path>
+      </svg>
+    </button>
+    <input type="search" name="Map Search" id="search" aria-label="Map Search" />
+  </header>
+</section>
+
+
+      <div id="content" style="--route-color:#CDDC39; --route-text-color:#000000;">
+  <header class="route__header" id="route-header">
+    <button id="alt-menu" title="Menu">
+      <svg viewBox="0 0 24 24">
+        <path d="M3,18h18v-2H3V18z M3,13h18v-2H3V13z M3,6v2h18V6H3z"></path>
+      </svg>
+    </button>
+    <h1 class="route__name" id="route_long_name">Hilo - Waikea Uka</h1>
+
+    <button id="map-toggle" title="Enlarge Street View">
+      <svg viewBox="0 0 24 24" id="fullscreen">
+        <path d="M7,14H5v5h5v-2H7V14z M5,10h2V7h3V5H5V10z M17,17h-3v2h5v-5h-2V17z M14,5v2h3v3h2V5H14z"></path>
+      </svg>
+      <svg viewBox="0 0 24 24" id="fullscreen-exit">
+        <path d="M5,16h3v3h2v-5H5V16z M8,8H5v2h5V5H8V8z M14,19h2v-3h3v-2h-5V19z M16,8V5h-2v5h5V8H16z"></path>
+      </svg>
+    </button>
+  </header>
+
+  <div id="schedule-column">
+    <section class="info" id="information">
+      <div id="trip-select-container" title="Select different trip">
+        <label for="trip-select">
+          <svg class="info__icon" viewBox="0 0 24 24">
+            <path d="M10,18h4v-2h-4V18z M3,6v2h18V6H3z M6,13h12v-2H6V13z"></path>
+          </svg>
+        </label>
+        <select class="info__select" id="trip-select">
+          
+            <option value="HWK070">to Waiakea-Uka (7:05am - 7:50am)</option>
+          
+            <option value="HWK095">to Waiakea-Uka (9:30am - 10am)</option>
+          
+            <option value="HWK110">to Waiakea-Uka (10:50am - 11:20am)</option>
+          
+            <option value="HWK120">to Waiakea-Uka (12:05pm - 12:40pm)</option>
+          
+            <option value="HWK155">to Waiakea-Uka (3:20pm - 4pm)</option>
+          
+            <option value="HWK080">to Downtown Hilo (7:50am - 8:25am)</option>
+          
+            <option value="HWK100">to Downtown Hilo (10:10am - 10:25am)</option>
+          
+            <option value="HWK115">to Downtown Hilo (11:30am - 11:45am)</option>
+          
+            <option value="HWK125">to Downtown Hilo (12:40pm - 1:10pm)</option>
+          
+            <option value="HWK160">to Downtown Hilo (4pm - 4:45pm)</option>
+          
+        </select>
+      </div>
+
+      <div id="place" title="Bus route location">
+        <svg class="info__icon" viewBox="0 0 24 24">
+          <path
+            d="M20.5,3c-0.1,0-0.1,0-0.2,0L15,5.1L9,3L3.4,4.9C3.2,5,3,5.1,3,5.4v15.1C3,20.8,3.2,21,3.5,21c0.1,0,0.1,0,0.2, 0L9,18.9l6,2.1l5.6-1.9c0.2-0.1,0.4-0.3,0.4-0.5V3.5C21,3.2,20.8,3,20.5,3z M15,19l-6-2.1V5l6,2.1V19z"
+          ></path>
+        </svg>
+        <span id="place-value"></span>
+      </div>
+
+      <div id="time" title="Bus route time">
+        <svg class="info__icon" viewBox="0 0 24 24">
+          <path
+            d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10c5.5,0,10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8s3.6-8,8-8c4.4, 0,8,3.6,8,8S16.4,20,12,20z"
+          ></path>
+          <polygon points="12.5,7 11,7 11,13 16.2,16.2 17,14.9 12.5,12.2 "></polygon>
+        </svg>
+        <span id="time-value"></span>
+      </div>
+
+      <div id="next-stop" title="Next bus stop">
+        <svg class="info__icon" viewBox="0 0 24 24">
+          <path
+            d="M4,16c0,0.9,0.4,1.7,1,2.2V20c0,0.6,0.4,1,1,1h1c0.6,0,1-0.4,1-1v-1h8v1c0,0.6,0.4,1,1,1h1c0.6,0,1-0.4,1-1v-1.8c0.6-0.5,1-1.3,1-2.2V6c0-3.5-3.6-4-8-4C7.6,2,4,2.5,4,6V16z M7.5,17C6.7,17,6,16.3,6,15.5S6.7,14,7.5,14C8.3,14,9,14.7,9,15.5S8.3,17,7.5,17z M16.5,17c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5c0.8,0,1.5,0.7,1.5,1.5S17.3,17,16.5,17z M18,11H6V6h12V11z"
+          ></path>
+        </svg>
+        <span id="next-stop-value"></span>
+      </div>
+
+      <div id="week-days" title="Next bus stop">
+        <svg class="info__icon" viewBox="0 0 24 24">
+          <path
+            d="M19,3h-1V1h-2v2H8V1H6v2H5C3.9,3,3,3.9,3,5l0,14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M19,19H5V8h14V19z"
+          ></path>
+          <rect x="7" y="10" width="5" height="5"></rect>
+        </svg>
+        <span id="week-days-value"></span>
+      </div>
+    </section>
+
+    <section class="schedule" id="schedule"></section>
+  </div>
+
+  <section id="stop">
+  <div id="stop-container">
+    <header class="stop__header" id="streetview-header">
+      <div class="stop__streetview-canvas" id="streetview-canvas"></div>
+      <h1 class="stop__name" id="stop_name"></h1>
+    </header>
+    <div id="stop_details">
+      <address id="address-container" title="Bus stop address">
+        <svg class="stop__address-icon" viewBox="0 0 24 24">
+          <path
+            d="M12,2C8.1,2,5,5.1,5,9c0,5.2,7,13,7,13s7-7.8,7-13C19,5.1,15.9,2,12,2z M12,11.5c-1.4, 0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5c1.4,0,2.5,1.1,2.5 2.5S13.4,11.5,12,11.5z"
+          ></path>
+        </svg>
+        <span class="stop__address" id="address"></span>
+      </address>
+      <h2 class="connections__heading">Connects to</h2>
+      <ul class="connections__list" id="connections"></ul>
+    </div>
+  </div>
+</section>
+
+  <div class="float-clear"></div>
+</div>
+
+    </main>
+  </body>
+</html>
