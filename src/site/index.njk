@@ -172,32 +172,13 @@
 
       <h2 class="sidebar__heading">Information</h2>
       <ul class="sidebar__list" id="info">
-        <li class="sidebar__item">
-          <a class="sidebar__link" target="_blank" href="about.html" itemprop="sameAs">About this app</a>
-        </li>
-        <li class="sidebar__item">
-          <a
-            class="sidebar__link"
-            target="_blank"
-            href="http://www.heleonbus.org/how-to-ride-hele-on/rules-and-regulations/"
-          >
-            Rules and Regulations
-          </a>
-        </li>
-        <li class="sidebar__item">
-          <a class="sidebar__link" target="_blank" href="http://www.heleonbus.org/how-to-ride-hele-on/fares-and-fees/">
-            Fares and Fees
-          </a>
-        </li>
-        <li class="sidebar__item">
-          <a
-            class="sidebar__link"
-            target="_blank"
-            href="http://www.heleonbus.org/how-to-ride-hele-on/getting-on-and-off/"
-          >
-            Getting on and off
-          </a>
-        </li>
+        {% for item in sidebar_info %}
+          <li class="sidebar__item">
+            <a class="sidebar__link" href="{{ item.link }}">
+              {{ item.name }}
+            </a>
+          </li>
+        {% endfor %}
       </ul>
 
       <div class="about">

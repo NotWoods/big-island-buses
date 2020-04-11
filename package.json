@@ -27,9 +27,9 @@
     "homepage": "https://github.com/NotWoods/big-island-buses#readme",
     "scripts": {
         "prebuild": "rollup -c",
-        "build": "node lib/api.js src/site/google_transit.zip src/site/api.json",
+        "build": "node lib/api.js google_transit.zip src/site/_data/api.json",
         "postbuild": "eleventy",
-        "lint:files": "tsc --noEmit && prettier \"*.{md,css,html}\" \"src/*.ts\"",
+        "lint:files": "tsc --noEmit && prettier \"*.{md,css,html}\" \"src/**/*.ts\" \"src/**/*.js\" rollup.config.js .eleventy.js",
         "lint": "npm run lint:files -- --write",
         "lint:check": "npm run lint:files -- --check"
     },
