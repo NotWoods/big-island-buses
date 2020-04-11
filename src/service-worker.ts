@@ -7,9 +7,20 @@ self.addEventListener('install', evt => {
 });
 
 self.addEventListener('fetch', evt => {
-  evt.respondWith(
-    fromNetwork(evt.request, 400).catch(() => fromCache(evt.request)),
-  );
+  const url = new URL(evt.request.url);
+  if (url.host === location.host) {
+    if (url.pathname.includes('/routes/')) {
+      evt.respondWith(
+        fromCache('index.html')
+      )
+    } else {
+      evt.respondWith(
+        fromNetwork(evt.request, 400).catch(() => fromCache(evt.request)),
+      );
+    }
+  } else {
+    evt.respondWith(fetch(evt.request));
+  }
 });
 
 function precache() {

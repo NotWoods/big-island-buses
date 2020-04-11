@@ -1,5 +1,6 @@
 import { Route } from "../gtfs-types";
-import { Type, convertToLinkable } from './load';
+import { convertToLinkable } from './load';
+import { Type } from './utils/link';
 
 /**
  * Hydrate the pre-rendered sidebar HTML.

@@ -20,7 +20,7 @@ const config = {
     consts({ pathPrefix: eleventyConfig.pathPrefix }),
     commonjs(),
     typescript(),
-    terser(),
+    //terser(),
   ],
 };
 

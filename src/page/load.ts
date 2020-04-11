@@ -7,12 +7,8 @@
 import pathPrefix from 'consts:pathPrefix';
 import { GTFSData, Stop, Trip } from '../gtfs-types';
 import { toInt } from './utils/num';
+import { createLink, Type, Linkable } from './utils/link';
 
-export const enum Type {
-  ROUTE,
-  STOP,
-  TRIP,
-}
 export const enum View {
   LIST,
 
@@ -211,45 +207,7 @@ export function documentLoad() {
  * @return {string} URL to use for href, based on active object.
  */
 function pageLink(type: Type, value: string) {
-  const params = new URLSearchParams();
-  switch (type) {
-    case Type.ROUTE:
-      params.set('route', value);
-
-      if (Active.Route.TRIP != null) {
-        params.set('trip', Active.Route.TRIP);
-      }
-
-      if (Active.STOP != null) {
-        params.set('stop', Active.STOP);
-      }
-      break;
-    case Type.STOP:
-      if (Active.Route.ID != null) {
-        params.set('route', Active.Route.ID);
-      }
-      params.set('stop', value);
-      if (Active.Route.TRIP != null) {
-        params.set('trip', Active.Route.TRIP);
-      }
-      break;
-    case Type.TRIP:
-      params.set('route', Active.Route.ID!);
-      params.set('trip', value);
-      if (Active.STOP != null) {
-        params.set('stop', Active.STOP);
-      }
-      break;
-    default:
-      console.warn('Invalid type provided for link: %i', type);
-      break;
-  }
-  return `#!${params}`;
-}
-
-export interface Linkable {
-  Type: Type;
-  Value: string;
+  return createLink(type, value, Active);
 }
 
 type DynamicLinkNode = HTMLAnchorElement & Linkable;
@@ -319,34 +277,6 @@ export function clickEvent(this: Linkable, e: Event) {
   e.stopPropagation?.();
   openLinkable(this);
   return false;
-}
-
-/**
- * Returns an object with URL variables.
- */
-export function getQueryVariables(): Partial<Record<string, string>> {
-  let query = '';
-  let vars: string[];
-  if (window.location.hash.indexOf('#!') > -1) {
-    query = window.location.hash.substring(
-      window.location.hash.indexOf('#!') + 2,
-    );
-    vars = query.split('&');
-  } else if (window.location.search.indexOf('_escaped_fragment_') > -1) {
-    query = window.location.search.substring(
-      window.location.search.indexOf('_escaped_fragment_') + 19,
-    );
-    vars = query.split('%26');
-  }
-
-  const result: Partial<Record<string, string>> = {};
-  if (query !== '') {
-    for (const parts of vars!) {
-      const [key, value] = parts.split('=');
-      result[key] = value;
-    }
-  }
-  return result;
 }
 
 /**

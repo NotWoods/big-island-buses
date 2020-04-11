@@ -11,9 +11,7 @@ import {
   clickEvent,
   documentLoad,
   dynamicLinkNode,
-  getQueryVariables,
   getScheduleData,
-  Linkable,
   locateUser,
   LocationUpdate,
   normal,
@@ -22,7 +20,6 @@ import {
   sequence,
   setActiveState,
   stopShape,
-  Type,
   unimportant,
   updateEvent,
   userShape,
@@ -37,6 +34,7 @@ import {
 } from './utils/date.js';
 import { toInt } from './utils/num.js';
 import { hydrateAside } from './sidebar.js';
+import { Linkable, Type, parseLink } from './utils/link.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -253,33 +251,33 @@ documentPromise.then(function() {
 
 function openActive(state: ActiveState) {
   console.log(state);
-  return Promise.all([
-    openRoute(state.Route.ID!).then(bestTrip =>
+  let routePromise;
+  if (state.Route.ID) {
+    routePromise = openRoute(state.Route.ID!).then(bestTrip =>
       openTrip(state.Route.TRIP ? state.Route.TRIP : bestTrip!),
-    ),
+    )
+  }
+  return Promise.all([
+    routePromise,
     state.STOP ? openStop(state.STOP) : undefined,
   ]).then(() => {});
 }
 
 Promise.all([documentPromise, schedulePromise]).then(function() {
-  if (!window.history.state && window.location.search.includes('#!')) {
-    const vars = getQueryVariables();
-    Active.Route.ID = vars['route'] || Active.Route.ID;
-    Active.Route.TRIP = vars['trip'] || Active.Route.TRIP;
-    Active.STOP = vars['stop'] || Active.STOP;
-
-    openActive(Active);
-  } else if (window.history.state) {
+  if (window.history.state) {
     setActiveState(window.history.state);
-    openActive(Active);
+  } else {
+    const state = parseLink(new URL(location.href)) as ActiveState;
+    state.View = Active.View;
+    setActiveState(state);
   }
+  openActive(Active);
 });
 
 window.onhashchange = function() {
-  const vars = getQueryVariables();
-  Active.Route.ID = vars['route'] || Active.Route.ID;
-  Active.Route.TRIP = vars['trip'] || Active.Route.TRIP;
-  Active.STOP = vars['stop'] || Active.STOP;
+  const state = parseLink(new URL(location.href)) as ActiveState;
+  state.View = Active.View;
+  setActiveState(state);
   openActive(Active);
 };
 window.onpopstate = function(e: PopStateEvent) {
@@ -376,7 +374,7 @@ function openRoute(route_id: Route['route_id']) {
     Active.Route.ID = route_id;
     Active.Route.TRIP = null;
 
-    document.title = thisRoute.route_long_name;
+    document.title = `${thisRoute.route_long_name} | Big Island Buses`;
 
     document.body.style.setProperty(
       '--route-color',
@@ -591,10 +589,13 @@ function openStop(stop_id: Stop['stop_id']) {
 function openTrip(trip_id: Trip['trip_id']) {
   return schedulePromise.then(buses => {
     const route = buses.routes[Active.Route.ID!];
+    if (!route) {
+      console.error('Invalid Route %s', Active.Route.ID);
+      return;
+    }
     const trip = route.trips[trip_id];
     if (!trip || !trip.trip_id) {
       console.error('Invalid trip %s in route %s', trip_id, Active.Route.ID);
-      //throw trip_id;
       return;
     }
 
