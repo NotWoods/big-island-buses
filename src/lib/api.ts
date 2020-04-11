@@ -15,6 +15,9 @@ import {
   Trip,
 } from '../gtfs-types';
 
+const readFileAsync = promisify(readFile);
+const writeFileAsync = promisify(writeFile);
+
 interface CsvFile {
   name: string;
   body: string;
@@ -196,27 +199,44 @@ async function createApiData(
 async function generateApi(
   gtfsZipPath: string,
   apiFilePath: string,
-): Promise<void> {
-  const readFileAsync = promisify(readFile);
-  const writeFileAsync = promisify(writeFile);
-
+): Promise<GTFSData> {
   const zipData = await readFileAsync(gtfsZipPath, { encoding: null });
   const api = await createApiData(zipData);
   const json = JSON.stringify(api);
   await writeFileAsync(apiFilePath, json, { encoding: 'utf8' });
+  return api;
+}
+
+async function generateTrips(
+  apiData: GTFSData,
+  tripsFilePath: string
+): Promise<void> {
+  const trips: Record<Trip['trip_id'], Route['route_id']> = {};
+  for (const route of Object.values(apiData.routes)) {
+    for (const trip_id of Object.keys(route.trips)) {
+      trips[trip_id] = route.route_id;
+    }
+  }
+
+  const json = JSON.stringify(trips);
+  await writeFileAsync(tripsFilePath, json, { encoding: 'utf8' });
 }
 
 if (require.main === module) {
   const args = process.argv.slice(2);
-  if (args.length !== 2) {
+  if (args.length < 2) {
     throw new TypeError(`should pass 2 arguments, not ${args.length}.`);
   }
 
   const gtfsZipPath = resolve(args[0]);
   const apiFilePath = resolve(args[1]);
+  const tripsFilePath = args[2] ? resolve(args[2]) : undefined;
 
   generateApi(gtfsZipPath, apiFilePath)
-    .then(() => console.log('Wrote API file'))
+    .then((data) => {
+      console.log('Wrote API file');
+      return tripsFilePath ? generateTrips(data, tripsFilePath) : undefined;
+    })
     .catch(err => {
       console.error(err);
       process.exit(1);

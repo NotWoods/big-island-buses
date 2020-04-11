@@ -1,13 +1,13 @@
 ---
 pagination:
-  data: api.routes
+  data: trips
   size: 1
-  alias: route
-  resolve: values
-permalink: "/routes/{{ route.route_id }}/"
+  alias: trip_id
+permalink: "/routes/{{ trips[trip_id] }}/{{ trip_id }}.html"
 ---
 <!DOCTYPE html>
 <html>
+  {% set route = api.routes[trips[trip_id]] %}
   <head>
     {% include 'meta.html' %}
     <title>{{ route.route_long_name }} | Big Island Buses</title>
