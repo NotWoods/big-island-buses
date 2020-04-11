@@ -7,7 +7,7 @@
         "sourceMap": true,
         "importHelpers": true,
         "pretty": true,
-        "lib": ["dom", "esnext", "webworker"],
+        "lib": ["dom", "esnext", "webworker", "dom.iterable"],
         "skipLibCheck": true,
         /* Strict Type-Checking Options */
         "strict": true,

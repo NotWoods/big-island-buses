@@ -36,6 +36,7 @@ import {
   stringTime,
 } from './utils/date.js';
 import { toInt } from './utils/num.js';
+import { hydrateAside } from './sidebar.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -242,58 +243,9 @@ function loadMap() {
   });
 }
 
-schedulePromise.then(updateAside);
-function updateAside(schedule: GTFSData) {
-  interface Aside extends HTMLElement {
-    routeListItems: RouteListItem[];
-  }
-
-  interface RouteListItem extends HTMLLIElement {
-    route_id: string;
-  }
-
-  let aside: Aside | null = null;
-  const routeListItems: RouteListItem[] = [];
-  function generateListItems() {
-    for (const route of Object.values(schedule.routes)) {
-      const listItem = document.createElement('li') as RouteListItem;
-      listItem.className = 'sidebar__item routes__item';
-      listItem.style.borderColor = `#${route.route_color}`;
-      listItem.route_id = route.route_id;
-      const link = dynamicLinkNode(Type.ROUTE, route.route_id, true);
-      link.className = 'sidebar__link routes__link';
-      link.textContent = route.route_long_name;
-      listItem.append(link);
-      routeListItems.push(listItem);
-    }
-  }
-
-  documentPromise.then(function() {
-    if (aside != undefined) {
-      insertListItems(aside);
-    } else {
-      generateListItems();
-      aside = document.getElementById('aside') as Aside;
-      aside.routeListItems = routeListItems;
-      insertListItems(aside);
-    }
-  });
-
-  function insertListItems(aside: Aside) {
-    const nearbyList = document.getElementById('nearby')!;
-    const otherList = document.getElementById('other')!;
-    otherList.append(...aside.routeListItems);
-    locatePromise.then(function(result) {
-      for (const item of aside.routeListItems) {
-        if (schedule.stops[result.stop].routes.includes(item.route_id)) {
-          nearbyList.appendChild(item);
-        } else {
-          otherList.appendChild(item);
-        }
-      }
-    });
-  }
-}
+Promise.all([documentPromise.then(hydrateAside), schedulePromise, locatePromise]).then(([onLocationChange, schedule, locationResult]) => {
+  onLocationChange(new Set(schedule.stops[locationResult.stop].routes))
+});
 
 documentPromise.then(function() {
   uiEvents();

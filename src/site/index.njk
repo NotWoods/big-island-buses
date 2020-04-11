@@ -157,51 +157,7 @@
       </ul>
     </noscript>
 
-    <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
-      <header class="app__header">
-        <img class="app__logo" src="assets/logo.svg" alt="" itemprop="image" height="48" width="42" />
-        <span class="app__logotype" itemprop="name">Big Island Buses</span>
-      </header>
-      <meta itemprop="softwareVersion" content="2.0.1" />
-
-      <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
-      <ul class="sidebar__list routes__list" id="nearby"></ul>
-
-      <h2 class="sidebar__heading routes__heading">Other Routes</h2>
-      <ul class="sidebar__list routes__list" id="other"></ul>
-
-      <h2 class="sidebar__heading">Information</h2>
-      <ul class="sidebar__list" id="info">
-        {% for item in sidebar_info %}
-          <li class="sidebar__item">
-            <a class="sidebar__link" href="{{ item.link }}">
-              {{ item.name }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-
-      <div class="about">
-        <p>
-          Created by
-          <a href="http://tigeroakes.com">
-            <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
-          </a>
-        </p>
-        <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
-
-        <p itemprop="permissions">
-          Finding routes near your location requires the Location permission.
-        </p>
-
-        <meta
-          itemprop="browserRequirements"
-          content="Nearby routes requires Geolocation support. Offline functionality requires appcache support"
-        />
-      </div>
-
-      <img src="assets/lines.svg" alt="" class="footer-lines" width="239" height="68" />
-    </aside>
+    {% include 'sidebar.njk' %}
 
     <div id="screen-cover"></div>
 

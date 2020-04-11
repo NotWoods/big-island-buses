@@ -215,27 +215,27 @@ function pageLink(type: Type, value: string) {
     case Type.ROUTE:
       params.set('route', value);
 
-      if (Active.Route.TRIP !== null) {
+      if (Active.Route.TRIP != null) {
         params.set('trip', Active.Route.TRIP);
       }
 
-      if (Active.STOP !== null) {
+      if (Active.STOP != null) {
         params.set('stop', Active.STOP);
       }
       break;
     case Type.STOP:
-      if (Active.Route.ID !== null) {
+      if (Active.Route.ID != null) {
         params.set('route', Active.Route.ID);
       }
       params.set('stop', value);
-      if (Active.Route.TRIP !== null) {
+      if (Active.Route.TRIP != null) {
         params.set('trip', Active.Route.TRIP);
       }
       break;
     case Type.TRIP:
       params.set('route', Active.Route.ID!);
       params.set('trip', value);
-      if (Active.STOP !== null) {
+      if (Active.STOP != null) {
         params.set('stop', Active.STOP);
       }
       break;
@@ -254,16 +254,14 @@ export interface Linkable {
 type DynamicLinkNode = HTMLAnchorElement & Linkable;
 
 /**
- * Creates an A element with custom click events for links.  Can update itself.
+ * Converts an A element into an automatically updating link.
  * @param  {Type} type      What value to change in link
  * @param  {string} value   Value to use
  * @param  {boolean} update Wheter or not to listen for "pageupdate" event and update href
  * @return {Node}           A element with custom properties
  */
-export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
-  const node = document.createElement('a') as DynamicLinkNode;
-  node.Type = type;
-  node.Value = value;
+export function convertToLinkable(node: HTMLAnchorElement, type: Type, value: string, update?: boolean) {
+  Object.assign(node, { Type: type, Value: value, href: pageLink(type, value) });
   node.href = pageLink(type, value);
   node.addEventListener('click', clickEvent);
   if (update) {
@@ -273,6 +271,18 @@ export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
   }
 
   return node;
+}
+
+/**
+ * Creates an A element with custom click events for links.  Can update itself.
+ * @param  {Type} type      What value to change in link
+ * @param  {string} value   Value to use
+ * @param  {boolean} update Wheter or not to listen for "pageupdate" event and update href
+ * @return {Node}           A element with custom properties
+ */
+export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
+  const node = document.createElement('a') as DynamicLinkNode;
+  return convertToLinkable(node, type, value, update);
 }
 
 /**
