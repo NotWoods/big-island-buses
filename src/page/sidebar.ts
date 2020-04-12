@@ -1,4 +1,4 @@
-import { Route } from "../gtfs-types";
+import { Route } from '../gtfs-types';
 import { convertToLinkable } from './load';
 import { Type } from './utils/link';
 
@@ -28,5 +28,5 @@ export function hydrateAside() {
         otherList.appendChild(listItem);
       }
     }
-  }
+  };
 }

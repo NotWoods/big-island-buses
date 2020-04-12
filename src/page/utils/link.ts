@@ -36,7 +36,7 @@ export function createLink(type: Type, value: string, state: State) {
       }
 
       if (state.STOP != null) {
-        url += `?stop=${state.STOP}`
+        url += `?stop=${state.STOP}`;
       }
       break;
     case Type.STOP:
@@ -44,7 +44,7 @@ export function createLink(type: Type, value: string, state: State) {
     case Type.TRIP:
       url += `routes/${state.Route.ID}/${value}`;
       if (state.STOP != null) {
-        url += `?stop=${state.STOP}`
+        url += `?stop=${state.STOP}`;
       }
       break;
     default:

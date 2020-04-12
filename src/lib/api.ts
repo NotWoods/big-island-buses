@@ -209,7 +209,7 @@ async function generateApi(
 
 async function generateTrips(
   apiData: GTFSData,
-  tripsFilePath: string
+  tripsFilePath: string,
 ): Promise<void> {
   const trips: Record<Trip['trip_id'], Route['route_id']> = {};
   for (const route of Object.values(apiData.routes)) {
@@ -233,7 +233,7 @@ if (require.main === module) {
   const tripsFilePath = args[2] ? resolve(args[2]) : undefined;
 
   generateApi(gtfsZipPath, apiFilePath)
-    .then((data) => {
+    .then(data => {
       console.log('Wrote API file');
       return tripsFilePath ? generateTrips(data, tripsFilePath) : undefined;
     })

@@ -241,8 +241,12 @@ function loadMap() {
   });
 }
 
-Promise.all([documentPromise.then(hydrateAside), schedulePromise, locatePromise]).then(([onLocationChange, schedule, locationResult]) => {
-  onLocationChange(new Set(schedule.stops[locationResult.stop].routes))
+Promise.all([
+  documentPromise.then(hydrateAside),
+  schedulePromise,
+  locatePromise,
+]).then(([onLocationChange, schedule, locationResult]) => {
+  onLocationChange(new Set(schedule.stops[locationResult.stop].routes));
 });
 
 documentPromise.then(function() {
@@ -255,7 +259,7 @@ function openActive(state: ActiveState) {
   if (state.Route.ID) {
     routePromise = openRoute(state.Route.ID!).then(bestTrip =>
       openTrip(state.Route.TRIP ? state.Route.TRIP : bestTrip!),
-    )
+    );
   }
   return Promise.all([
     routePromise,
@@ -376,11 +380,9 @@ function openRoute(route_id: Route['route_id']) {
 
     document.title = `${thisRoute.route_long_name} | Big Island Buses`;
 
-    document.body.style.setProperty(
-      '--route-color',
-      `#${thisRoute.route_color}`,
-    );
-    document.body.style.setProperty(
+    const container = document.getElementById('content')!;
+    container.style.setProperty('--route-color', `#${thisRoute.route_color}`);
+    container.style.setProperty(
       '--route-text-color',
       `#${thisRoute.route_text_color}`,
     );

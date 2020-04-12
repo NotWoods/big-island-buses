@@ -1,4 +1,4 @@
-const CACHE = 'network-or-cache';
+const CACHE = 'big-island-buses-4';
 
 export declare var self: ServiceWorkerGlobalScope;
 
@@ -8,24 +8,16 @@ self.addEventListener('install', evt => {
 
 self.addEventListener('fetch', evt => {
   const url = new URL(evt.request.url);
+
   if (url.host === location.host) {
     if (url.pathname.includes('/routes/')) {
       // Route pages have same layout as main page
-      evt.respondWith(
-        fromNetwork(evt.request, 400).catch(() => fromCache('index.html')),
-      );
+      evt.respondWith(fromCache('index.html'));
     } else {
       // Network then fallback
-      evt.respondWith(
-        fromNetwork(evt.request, 400).then(
-          response => {
-            // Update cache after network success
-            evt.waitUntil(putInCache(evt.request, response));
-            return response;
-          },
-          () => fromCache(evt.request),
-        ),
-      );
+      evt.respondWith(fromCache(evt.request));
+
+      evt.waitUntil(update(evt.request));
     }
   } else {
     // External scripts (Google Maps) aren't cached
@@ -43,7 +35,9 @@ function precache() {
         'style.css',
         'main.js',
         'api.json',
+        'manifest.json',
         'assets/logo.svg',
+        'assets/pins.png',
         'assets/lines.svg',
         'assets/tigeroakes.svg',
         'icon/favicon.ico',
@@ -51,16 +45,6 @@ function precache() {
         'icon/transparent.png',
       ]),
     );
-}
-
-function fromNetwork(request: RequestInfo, timeout: number) {
-  return new Promise<Response>((fulfill, reject) => {
-    const timeoutId = setTimeout(reject, timeout);
-    fetch(request).then(response => {
-      clearTimeout(timeoutId);
-      fulfill(response);
-    }, reject);
-  });
 }
 
 function fromCache(request: RequestInfo) {
@@ -71,13 +55,16 @@ function fromCache(request: RequestInfo) {
       if (matching) {
         return matching;
       } else {
-        throw new Error(`${request} not cached`);
+        const url = typeof request === 'string' ? request : request.url;
+        throw new Error(`${url} not cached`);
       }
     });
 }
 
-function putInCache(request: RequestInfo, response: Response) {
+function update(request: RequestInfo) {
   return caches.open(CACHE).then(cache => {
-    return cache.put(request, response);
+    return fetch(request).then(response => {
+      return cache.put(request, response);
+    });
   });
 }

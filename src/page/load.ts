@@ -49,36 +49,38 @@ navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
  */
 export const openCallbacks: Record<Type, Function> = {} as any;
 
+const PIN_URL = pathPrefix + 'assets/pins.png';
+
 export const normal = {
-    url: 'assets/pins.png',
+    url: PIN_URL,
     size: { height: 26, width: 24 },
     scaledSize: { height: 26, width: 120 },
     origin: { x: 0, y: 0 },
     anchor: { x: 12, y: 12 },
   } as google.maps.Icon,
   unimportant = {
-    url: 'assets/pins.png',
+    url: PIN_URL,
     size: { height: 26, width: 24 },
     scaledSize: { height: 26, width: 120 },
     origin: { x: 96, y: 0 },
     anchor: { x: 12, y: 12 },
   } as google.maps.Icon,
   userShape = {
-    url: 'assets/pins.png',
+    url: PIN_URL,
     size: { height: 26, width: 24 },
     scaledSize: { height: 26, width: 120 },
     origin: { x: 48, y: 0 },
     anchor: { x: 12, y: 12 },
   } as google.maps.Icon,
   placeShape = {
-    url: 'assets/pins.png',
+    url: PIN_URL,
     size: { height: 26, width: 24 },
     scaledSize: { height: 26, width: 120 },
     origin: { x: 72, y: 0 },
     anchor: { x: 12, y: 23 },
   } as google.maps.Icon,
   stopShape = {
-    url: 'assets/pins.png',
+    url: PIN_URL,
     size: { height: 26, width: 24 },
     scaledSize: { height: 26, width: 120 },
     origin: { x: 24, y: 0 },
@@ -219,8 +221,17 @@ type DynamicLinkNode = HTMLAnchorElement & Linkable;
  * @param  {boolean} update Wheter or not to listen for "pageupdate" event and update href
  * @return {Node}           A element with custom properties
  */
-export function convertToLinkable(node: HTMLAnchorElement, type: Type, value: string, update?: boolean) {
-  Object.assign(node, { Type: type, Value: value, href: pageLink(type, value) });
+export function convertToLinkable(
+  node: HTMLAnchorElement,
+  type: Type,
+  value: string,
+  update?: boolean,
+) {
+  Object.assign(node, {
+    Type: type,
+    Value: value,
+    href: pageLink(type, value),
+  });
   node.href = pageLink(type, value);
   node.addEventListener('click', clickEvent);
   if (update) {
