@@ -7,11 +7,11 @@ export const enum Type {
 }
 
 interface State {
-  Route: {
-    ID: string | null;
-    TRIP: string | null;
+  route: {
+    id?: string | null;
+    trip?: string | null;
   };
-  STOP: string | null;
+  stop?: string | null;
 }
 
 export interface Linkable {
@@ -31,20 +31,20 @@ export function createLink(type: Type, value: string, state: State) {
     case Type.ROUTE:
       url += `routes/${value}/`;
 
-      if (state.Route.TRIP != null) {
-        url += state.Route.TRIP;
+      if (state.route.trip != null) {
+        url += state.route.trip;
       }
 
-      if (state.STOP != null) {
-        url += `?stop=${state.STOP}`;
+      if (state.stop != null) {
+        url += `?stop=${state.stop}`;
       }
       break;
     case Type.STOP:
       return `?stop=${value}`;
     case Type.TRIP:
-      url += `routes/${state.Route.ID}/${value}`;
-      if (state.STOP != null) {
-        url += `?stop=${state.STOP}`;
+      url += `routes/${state.route.id}/${value}`;
+      if (state.stop != null) {
+        url += `?stop=${state.stop}`;
       }
       break;
     default:
@@ -87,32 +87,29 @@ export function parseLink(url: URL): State {
   if (query) {
     const params = new URLSearchParams(query);
     return {
-      Route: {
-        ID: params.get('route'),
-        TRIP: params.get('trip'),
+      route: {
+        id: params.get('route'),
+        trip: params.get('trip'),
       },
-      STOP: params.get('stop'),
+      stop: params.get('stop'),
     };
   }
 
   const path = url.pathname.match(LINK_FORMAT);
   const stop = url.searchParams.get('stop');
   if (path) {
-    const [, route, trip = null] = path;
+    const [, route, trip] = path;
     return {
-      Route: {
-        ID: route,
-        TRIP: trip,
+      route: {
+        id: route,
+        trip,
       },
-      STOP: stop,
+      stop,
     };
   } else {
     return {
-      Route: {
-        ID: null,
-        TRIP: null,
-      },
-      STOP: stop,
+      route: {},
+      stop,
     };
   }
 }

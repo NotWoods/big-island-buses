@@ -4,51 +4,15 @@
  * @copyright    2014 Tiger Oakes
  */
 
-import { LatLngLike, computeDistanceBetween } from 'spherical-geometry-js';
 import pathPrefix from 'consts:pathPrefix';
-import { GTFSData, Stop, Trip } from '../gtfs-types';
+import { GTFSData, Trip } from '../gtfs-types';
 import { toInt } from './utils/num';
 import { createLink, Type, Linkable } from './utils/link';
-
-export const enum View {
-  LIST,
-
-  MAP_PRIMARY,
-  STREET_PRIMARY,
-}
-
-export interface ActiveState {
-  Route: {
-    ID: string | null;
-    TRIP: string | null;
-  };
-  STOP: string | null;
-  View: {
-    ROUTE: View;
-    STOP: View;
-  };
-}
-
-export let Active: ActiveState = {
-  Route: {
-    ID: null,
-    TRIP: null,
-  },
-  STOP: null,
-  View: {
-    ROUTE: View.LIST,
-    STOP: View.MAP_PRIMARY,
-  },
-};
+import { store } from './state/store';
 
 export const updateEvent = new CustomEvent('pageupdate');
 
 navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
-
-/**
- * @type {Record<Type, Function>}
- */
-export const openCallbacks: Record<Type, Function> = {} as any;
 
 const PIN_URL = pathPrefix + 'assets/pins.png';
 
@@ -87,10 +51,6 @@ export const normal = {
     origin: { x: 24, y: 0 },
     anchor: { x: 12, y: 20 },
   } as google.maps.Icon;
-
-export function setActiveState(newState: ActiveState) {
-  Active = newState;
-}
 
 /**
  * Grabs the API data and parses it into a GTFSData object for the rest of the program.
@@ -139,7 +99,7 @@ export function documentLoad() {
  * @return {string} URL to use for href, based on active object.
  */
 function pageLink(type: Type, value: string) {
-  return createLink(type, value, Active);
+  return createLink(type, value, store.getState());
 }
 
 type DynamicLinkNode = HTMLAnchorElement & Linkable;
@@ -189,23 +149,21 @@ export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
  * Navigate to the page described by the `Linkable`.
  */
 export function openLinkable(link: Linkable) {
-  const state = Active;
+  const { route } = store.getState();
   const val = link.Value;
   const newLink = pageLink(link.Type, val);
-  const callback = openCallbacks[link.Type];
   switch (link.Type) {
     case Type.ROUTE:
-      state.Route.ID = val;
+      store.setState({ route: { id: val, trip: route.trip } })
       break;
     case Type.STOP:
-      state.STOP = val;
+      store.setState({ stop: val, focus: 'stop' })
       break;
     case Type.TRIP:
-      state.Route.TRIP = val;
+      store.setState({ route: { trip: val, id: route.id } })
       break;
   }
-  callback(val);
-  history.pushState(state, null as any, newLink);
+  history.pushState(store.getState(), null as any, newLink);
   ga?.('send', 'pageview', { page: newLink, title: document.title });
 }
 
