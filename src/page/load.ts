@@ -4,6 +4,7 @@
  * @copyright    2014 Tiger Oakes
  */
 
+import { LatLngLike, computeDistanceBetween } from 'spherical-geometry-js';
 import pathPrefix from 'consts:pathPrefix';
 import { GTFSData, Stop, Trip } from '../gtfs-types';
 import { toInt } from './utils/num';
@@ -122,6 +123,24 @@ export interface LocationUpdate {
   custom: boolean;
 }
 
+export function findClosestStop(
+  stops: GTFSData['stops'],
+  location: LatLngLike
+) {
+  let closestDistance = Number.MAX_VALUE;
+  let closestStop: Stop | undefined;
+
+  for (const stop of Object.values(stops)) {
+    const distance = computeDistanceBetween(location, { lat: stop.stop_lat, lng: stop.stop_lon });
+    if (distance < closestDistance) {
+      closestStop = stop;
+      closestDistance = distance;
+    }
+  }
+
+  return closestStop;
+}
+
 /**
  * Locates the nearest bus stop to the user or custom location
  * @param {Promise} schedulePromise Schedule promise to wait for
@@ -145,25 +164,12 @@ export function locateUser(
     locatePromise = getCurrentPosition();
   }
 
-  let closestDistance = Number.MAX_VALUE;
-  let closestStop: Stop['stop_id'];
-
   return Promise.all([locatePromise, busPromise]).then(([e, schedule]) => {
     const userPos = e.coords;
-    for (const stop_id of Object.keys(schedule.stops)) {
-      const stop = schedule.stops[stop_id];
-      const distance = Math.sqrt(
-        Math.pow(userPos.latitude - parseFloat(stop.stop_lat), 2) +
-          Math.pow(userPos.longitude - parseFloat(stop.stop_lon), 2),
-      );
-      if (distance < closestDistance) {
-        closestStop = stop_id;
-        closestDistance = distance;
-      }
-    }
+    const closestStop = findClosestStop(schedule.stops, userPos);
     if (closestStop) {
       const results = {
-        stop: closestStop,
+        stop: closestStop.stop_id,
         location: userPos,
         custom: e.customLocationFlag ? true : false,
       };

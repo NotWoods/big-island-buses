@@ -16,6 +16,7 @@
     "rollup-plugin-consts": "^1.0.1",
     "rollup-plugin-terser": "^5.1.1",
     "rollup-plugin-typescript": "^1.0.1",
+    "spherical-geometry-js": "^2.0.0",
     "tslib": "^1.10.0",
     "typescript": "^3.7.2"
   },
