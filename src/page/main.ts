@@ -12,8 +12,6 @@ import {
   documentLoad,
   dynamicLinkNode,
   getScheduleData,
-  locateUser,
-  LocationUpdate,
   normal,
   openCallbacks,
   placeShape,
@@ -35,33 +33,68 @@ import {
 import { toInt } from './utils/num.js';
 import { hydrateAside } from './sidebar.js';
 import { Linkable, Type, parseLink } from './utils/link.js';
+import { store, LatLngLiteral, State } from './state/store.js';
+import { findClosestStop } from './location/closest-stop.js';
+import { createLocationMarker } from './location/marker.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
 let autocomplete: google.maps.places.Autocomplete | undefined;
 let boundsAllStops: google.maps.LatLngBounds | undefined;
 let markers: StopMarker[] = [];
-let userMapMarker: LinkableMarker | undefined;
 let stopMarker: google.maps.Marker | undefined;
 
 const documentPromise = documentLoad();
 const schedulePromise = getScheduleData();
-const locatePromise = locateUser(schedulePromise);
-let placeMapMarker: LinkableMarker | undefined;
-try {
-  loadMap();
-} catch (err) {
-  console.error(err);
-  locatePromise.then(function(position) {
-    if (!Active.STOP) openStop(position.stop);
-  });
-}
+const mapPromise = loadMap();
+const asidePromise = documentPromise.then(hydrateAside);
 
-type LinkableMarker = google.maps.Marker & Linkable;
+export type LinkableMarker = google.maps.Marker & Linkable;
 interface StopMarker extends LinkableMarker {
   stop_id: string;
   activeInRoute?: boolean;
 }
+
+// Update map when location changes
+schedulePromise.then(schedule => {
+  function buildLocationHandler(markerOptions: google.maps.ReadonlyMarkerOptions) {
+    let lastLocation: LatLngLiteral | undefined;
+    const buildMarker = createLocationMarker(markerOptions);
+    return (state: State, location?: LatLngLiteral, callback?: (stop: Stop) => void) => {
+      if (location && location !== lastLocation) {
+        const stop = findClosestStop(schedule.stops, location);
+        // Stop is not returned if location is undefined.
+        if (stop) {
+          if (stop.stop_id != state.stop) openStop(stop.stop_id);
+          mapPromise.then(map => buildMarker(map, location, stop.stop_id));
+          callback?.(stop);
+        }
+      }
+    }
+  }
+
+  const userHandler = buildLocationHandler({
+    title: 'My Location',
+    icon: userShape,
+    animation: google.maps.Animation.DROP,
+    zIndex: 1000,
+  })
+  const placeHandler = buildLocationHandler({
+    title: 'Search Location',
+    icon: placeShape,
+    animation: google.maps.Animation.DROP,
+    zIndex: 1000,
+  });
+
+  function updateNearbyRoutes(stop: Stop) {
+    asidePromise.then((onLocationChange) => onLocationChange(new Set(stop.routes)));
+  }
+
+  store.subscribe(function handleLocationChanges(state) {
+    userHandler(state, state.userLocation, updateNearbyRoutes);
+    placeHandler(state, state.searchLocation);
+  })
+})
 
 function stopToPos(stop: Stop) {
   return new google.maps.LatLng(
@@ -157,37 +190,16 @@ function loadMap() {
       google.maps.event.addListener(autocomplete, 'place_changed', function() {
         const place = autocomplete!.getPlace();
         if (!place.geometry) return;
-        const loc = place.geometry.location;
-        console.log('Lat %s, Lon %s', loc.lat(), loc.lng());
-        locateUser(schedulePromise, {
-          latitude: loc.lat(),
-          longitude: loc.lng(),
-        }).then(position => {
-          if (!placeMapMarker) {
-            placeMapMarker = new google.maps.Marker({
-              position: new google.maps.LatLng(
-                position.location.latitude,
-                position.location.longitude,
-              ),
-              title: 'Search Location',
-              icon: placeShape,
-              map: map,
-              animation: google.maps.Animation.DROP,
-              zIndex: 1000,
-            }) as LinkableMarker;
-            placeMapMarker.Type = Type.STOP;
-            google.maps.event.addListener(placeMapMarker, 'click', clickEvent);
-          }
-          placeMapMarker.Value = position.stop;
-          openStop(position.stop);
-        });
+        store.setState({ searchLocation: place.geometry.location.toJSON() });
       });
       return map;
     });
   }
 
+  const mapReady = documentPromise.then(mapLoad);
+
   Promise.all([
-    documentPromise.then(mapLoad),
+    mapReady,
     schedulePromise.then(markersAndLatLng),
   ]).then(function([map, { markers, bounds }]) {
     map.setCenter(bounds.getCenter());
@@ -203,32 +215,6 @@ function loadMap() {
       }
     });
     markers.forEach(marker => marker.setMap(map));
-    locatePromise.then(function(position) {
-      userMapMarker = new google.maps.Marker({
-        position: new google.maps.LatLng(
-          position.location.latitude,
-          position.location.longitude,
-        ),
-        title: position.custom ? 'Location of Place' : 'My Location',
-        icon: position.custom ? placeShape : userShape,
-        map: map,
-        animation: google.maps.Animation.DROP,
-        zIndex: 1000,
-      }) as LinkableMarker;
-      userMapMarker.Type = Type.STOP;
-      userMapMarker.Value = position.stop;
-      google.maps.event.addListener(userMapMarker, 'click', clickEvent);
-      if (!Active.STOP) openStop(position.stop);
-      window.addEventListener('locationupdate', (evt: Event) => {
-        const { custom, location } = (evt as CustomEvent<
-          LocationUpdate
-        >).detail;
-        userMapMarker!.setIcon(custom ? placeShape : userShape);
-        userMapMarker!.setPosition(
-          new google.maps.LatLng(location.latitude, location.longitude),
-        );
-      });
-    });
   });
 
   window.addEventListener('resize', function() {
@@ -239,15 +225,9 @@ function loadMap() {
       map!.fitBounds(boundsAllStops!);
     }
   });
-}
 
-Promise.all([
-  documentPromise.then(hydrateAside),
-  schedulePromise,
-  locatePromise,
-]).then(([onLocationChange, schedule, locationResult]) => {
-  onLocationChange(new Set(schedule.stops[locationResult.stop].routes));
-});
+  return mapReady;
+}
 
 documentPromise.then(function() {
   uiEvents();

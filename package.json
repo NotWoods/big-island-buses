@@ -18,7 +18,8 @@
     "rollup-plugin-typescript": "^1.0.1",
     "spherical-geometry-js": "^2.0.0",
     "tslib": "^1.10.0",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.2",
+    "unistore": "^3.5.1"
   },
   "repository": "github:NotWoods/big-island-buses",
   "author": "Tiger Oakes",
