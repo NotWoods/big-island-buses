@@ -27,7 +27,9 @@
         </label>
         <select class="info__select" id="trip-select">
           {% for id, trip in route.trips %}
-            <option value="{{ id }}">{{ trip.trip_short_name }}</option>
+            <option value="{{ id }}"{% if id === trip_id %} selected{% endif %}>
+              {{ trip.trip_short_name }}
+            </option>
           {% endfor %}
         </select>
       </div>
@@ -67,11 +69,32 @@
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        {% if trip %}
+          {{ api.calendar[trip.service_id].text_name }}
+        {% endif %}
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    {% if trip %}
+    {% for sequence, stopTime in trip.stop_times | dictsort %}
+      <a href="?stop={{ stopTime.stop_id }}" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          {{ api.stops[stopTime.stop_id].stop_name }}
+        </span>
+        <time class="schedule__time">
+          {{ stopTime.arrival_time | gtfsArrivalToString }}
+        </time>
+      </a>
+    {% endfor %}
+    {% endif %}
+    </section>
   </div>
 
   {% include 'stop.njk' %}

@@ -1,15 +1,18 @@
 import { Store } from 'unistore';
-import { State } from '../state/store';
+import { State, LocationPermission } from '../state/store';
+
+let watchId: number = 0;
 
 /**
  * Start watching the user positon and update the store.
  */
 export function locateUser(store: Store<State>) {
   let firstPosition = true;
-  navigator.geolocation.watchPosition(
+  navigator.geolocation.clearWatch(watchId);
+  watchId = navigator.geolocation.watchPosition(
     function onsuccess({ coords }) {
       let newState: Partial<State> = {
-        locatePermission: true,
+        locatePermission: LocationPermission.GRANTED,
         userLocation: { lat: coords.latitude, lng: coords.longitude },
       };
       if (firstPosition) {
@@ -20,7 +23,7 @@ export function locateUser(store: Store<State>) {
     },
     function onerror(error) {
       console.error(error);
-      store.setState({ locatePermission: false });
+      store.setState({ locatePermission: error.code as LocationPermission });
     },
   );
 }

@@ -727,3 +727,16 @@ main {
 .about a:visited {
   color: #0277bd;
 }
+
+.nearby__info {
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 8px 24px;
+  border-radius: 0;
+  font: inherit;
+  width: auto;
+  height: auto;
+  transition: none;
+  color: #9e9e9e;
+}

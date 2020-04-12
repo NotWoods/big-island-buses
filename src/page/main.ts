@@ -28,14 +28,7 @@ import {
 import { toInt } from './utils/num.js';
 import { hydrateAside } from './sidebar.js';
 import { Linkable, Type, parseLink } from './utils/link.js';
-import {
-  store,
-  LatLngLiteral,
-  State,
-  View,
-  memoize,
-  connect,
-} from './state/store.js';
+import { store, LatLngLiteral, View, memoize, connect } from './state/store.js';
 import { createLocationMarker } from './location/marker.js';
 import { stopToDisplay, closestToUser, closestToSearch } from './state/map.js';
 
@@ -49,6 +42,11 @@ let stopMarker: google.maps.Marker | undefined;
 const documentPromise = documentLoad();
 const schedulePromise = getScheduleData();
 const mapPromise = loadMap();
+
+schedulePromise.then(api => {
+  window.api = api;
+  window.store = store;
+});
 
 export type LinkableMarker = google.maps.Marker & Linkable;
 interface StopMarker extends LinkableMarker {
@@ -81,30 +79,31 @@ Promise.all([schedulePromise, mapPromise]).then(([schedule, map]) => {
     zIndex: 1000,
   });
 
-  connect(store, state => ({
-    location: state.userLocation,
-    stop: closestToUser(schedule.stops, state),
-    buildMarker: buildUserMarker,
-  }))(updateMarker);
-  connect(store, state => ({
-    location: state.searchLocation,
-    stop: closestToSearch(schedule.stops, state),
-    buildMarker: buildPlaceMarker,
-  }))(updateMarker);
+  connect(
+    store,
+    state => ({
+      location: state.userLocation,
+      stop: closestToUser(schedule.stops, state),
+      buildMarker: buildUserMarker,
+    }),
+    updateMarker,
+  );
+  connect(
+    store,
+    state => ({
+      location: state.searchLocation,
+      stop: closestToSearch(schedule.stops, state),
+      buildMarker: buildPlaceMarker,
+    }),
+    updateMarker,
+  );
 });
 
 // Create sidebar, and update it when nearby routes changes
-Promise.all([schedulePromise, documentPromise.then(hydrateAside)]).then(
-  ([schedule, onLocationChange]) => {
-    function updateNearbyRoutes({ nearest }: { nearest: Stop | undefined }) {
-      onLocationChange(new Set(nearest?.routes ?? []));
-    }
-
-    connect(store, state => ({
-      nearest: closestToUser(schedule.stops, state),
-    }))(updateNearbyRoutes);
-  },
-);
+Promise.all([
+  schedulePromise,
+  documentPromise.then(hydrateAside),
+]).then(([schedule, connectStore]) => connectStore(schedule, store));
 
 function stopToPos(stop: Stop) {
   return new google.maps.LatLng(
@@ -264,13 +263,16 @@ schedulePromise.then(schedule => {
     return routePromise;
   }
 
-  connect(store, state =>
-    stopToDisplay(schedule.stops, state).then(stop_id => ({
-      route_id: state.route.id || undefined,
-      trip_id: state.route.trip || undefined,
-      stop_id: stop_id || undefined,
-    })),
-  )(openActive);
+  connect(
+    store,
+    state =>
+      stopToDisplay(schedule.stops, state).then(stop_id => ({
+        route_id: state.route.id || undefined,
+        trip_id: state.route.trip || undefined,
+        stop_id: stop_id || undefined,
+      })),
+    openActive,
+  );
 });
 
 Promise.all([documentPromise, schedulePromise]).then(function() {
@@ -640,23 +642,6 @@ function openTrip(
     });
     routeListItem.appendChild(time);
 
-    const connection = createElement('div', {
-      className: 'connections',
-    });
-    for (const connectRoute of buses.stops[tripStop.stop_id].routes) {
-      if (connectRoute === route_id) {
-        continue;
-      }
-
-      const item = createElement('span', {
-        className: 'route-dash',
-        title: buses.routes[connectRoute].route_long_name,
-      });
-      item.style.backgroundColor = buses.routes[connectRoute].route_color;
-
-      connection.appendChild(item);
-    }
-    routeListItem.appendChild(connection);
     schedule.appendChild(routeListItem);
   }
 

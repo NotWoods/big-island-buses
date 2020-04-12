@@ -7,6 +7,14 @@ export const enum View {
   STREET_PRIMARY,
 }
 
+export const enum LocationPermission {
+  NOT_ASKED = -1,
+  GRANTED = 0,
+  DENIED = 1,
+  UNAVALIABLE = 2,
+  TIMEOUT = 3,
+}
+
 export type LatLngLiteral = google.maps.ReadonlyLatLngLiteral;
 
 export interface State {
@@ -19,7 +27,7 @@ export interface State {
     route: View;
     stop: View;
   };
-  locatePermission: boolean;
+  locatePermission: LocationPermission;
   userLocation?: LatLngLiteral;
   searchLocation?: LatLngLiteral;
   focus: 'user' | 'search' | 'stop';
@@ -31,7 +39,7 @@ export const store = createStore<State>({
     route: View.LIST,
     stop: View.MAP_PRIMARY,
   },
-  locatePermission: false,
+  locatePermission: LocationPermission.NOT_ASKED,
   focus: 'stop',
 });
 
@@ -56,16 +64,15 @@ function differentObjects<T>(a: T, b: T) {
 export function connect<Props>(
   store: Store<State>,
   mapStateToProps: (state: State) => Promise<Props> | Props,
+  callback: (props: Props) => void,
 ) {
-  return function connected<Result>(fn: (props: Props) => Result) {
-    let lastProps: Props | undefined;
-    store.subscribe(state => {
-      Promise.resolve(mapStateToProps(state)).then(props => {
-        if (!lastProps || differentObjects(props, lastProps)) {
-          lastProps = props;
-          fn(props);
-        }
-      });
-    });
-  };
+  let lastProps: Props | undefined;
+  return store.subscribe(state =>
+    Promise.resolve(mapStateToProps(state)).then(props => {
+      if (!lastProps || differentObjects(props, lastProps)) {
+        lastProps = props;
+        callback(props);
+      }
+    }),
+  );
 }

@@ -6,6 +6,8 @@ const eleventy = require('./.eleventy.js');
 
 const eleventyConfig = eleventy({
   addPassthroughCopy() {},
+  addFilter() {},
+  addTransform() {},
 });
 
 /** @type {import('rollup').RollupOptions} */
@@ -20,7 +22,7 @@ const config = {
     consts({ pathPrefix: eleventyConfig.pathPrefix }),
     nodeResolve(),
     typescript(),
-    terser(),
+    //terser(),
   ],
 };
 
@@ -47,4 +49,15 @@ const apiGenerator = {
   plugins: [typescript()],
 };
 
-export default [config, serviceWorker, apiGenerator];
+/** @type {import('rollup').RollupOptions} */
+const filters = {
+  input: 'src/lib/filters.ts',
+  output: {
+    file: 'lib/filters.js',
+    format: 'cjs',
+    sourcemap: true,
+  },
+  plugins: [typescript()],
+};
+
+export default [config, serviceWorker, apiGenerator, filters];
