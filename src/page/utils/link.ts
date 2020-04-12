@@ -113,3 +113,19 @@ export function parseLink(url: URL): State {
     };
   }
 }
+
+export function getStateWithLink(state: State, type: Type, value: string) {
+  const newState = { route: state.route, stop: state.stop };
+  switch (type) {
+    case Type.STOP:
+      newState.stop = value;
+      break;
+    case Type.ROUTE:
+      newState.route = { id: value, trip: state.route.trip };
+      break;
+    case Type.TRIP:
+      newState.route = { id: state.route.id, trip: value };
+      break;
+  }
+  return newState;
+}

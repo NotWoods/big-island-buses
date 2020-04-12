@@ -1,5 +1,12 @@
-import { computeDistanceBetween, LatLngLike } from 'spherical-geometry-js';
+import url from 'consts:closestStopWorker';
+import pathPrefix from 'consts:pathPrefix';
+import { LatLngLike } from 'spherical-geometry-js';
 import { GTFSData, Stop } from '../../gtfs-types';
+import { PromiseWorker } from '../../worker/promise-worker';
+
+const worker = new PromiseWorker(new Worker(pathPrefix + url));
+
+let sentStops = false;
 
 /**
  * Find the closest stop to the user's location or searched place.
@@ -8,20 +15,14 @@ import { GTFSData, Stop } from '../../gtfs-types';
  */
 export function findClosestStop(
   stops: GTFSData['stops'],
-  location?: LatLngLike
-) {
-  if (!location) return undefined;
+  location?: LatLngLike,
+): Promise<Stop | undefined> {
+  if (!location) return Promise.resolve(undefined);
 
-  let closestDistance = Number.MAX_VALUE;
-  let closestStop: Stop | undefined;
-
-  for (const stop of Object.values(stops)) {
-    const distance = computeDistanceBetween(location, { lat: stop.stop_lat, lng: stop.stop_lon });
-    if (distance < closestDistance) {
-      closestStop = stop;
-      closestDistance = distance;
-    }
+  if (!sentStops) {
+    worker.postMessage({ stops: Object.values(stops) });
+    sentStops = true;
   }
 
-  return closestStop;
+  return worker.postMessage(location) as Promise<Stop | undefined>;
 }

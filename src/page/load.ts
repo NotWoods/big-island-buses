@@ -7,7 +7,7 @@
 import pathPrefix from 'consts:pathPrefix';
 import { GTFSData, Trip } from '../gtfs-types';
 import { toInt } from './utils/num';
-import { createLink, Type, Linkable } from './utils/link';
+import { createLink, Type, Linkable, getStateWithLink } from './utils/link';
 import { store } from './state/store';
 
 export const updateEvent = new CustomEvent('pageupdate');
@@ -149,21 +149,11 @@ export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
  * Navigate to the page described by the `Linkable`.
  */
 export function openLinkable(link: Linkable) {
-  const { route } = store.getState();
-  const val = link.Value;
-  const newLink = pageLink(link.Type, val);
-  switch (link.Type) {
-    case Type.ROUTE:
-      store.setState({ route: { id: val, trip: route.trip } })
-      break;
-    case Type.STOP:
-      store.setState({ stop: val, focus: 'stop' })
-      break;
-    case Type.TRIP:
-      store.setState({ route: { trip: val, id: route.id } })
-      break;
-  }
-  history.pushState(store.getState(), null as any, newLink);
+  const { Type, Value } = link;
+  const newLink = pageLink(Type, Value);
+  const newState = getStateWithLink(store.getState(), Type, Value);
+  store.setState(newState);
+  history.pushState(newState, null as any, newLink);
   ga?.('send', 'pageview', { page: newLink, title: document.title });
 }
 

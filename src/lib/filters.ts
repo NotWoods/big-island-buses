@@ -1,1 +1,1 @@
-export { gtfsArrivalToString } from "../page/utils/date";
+export { gtfsArrivalToString } from '../page/utils/date';

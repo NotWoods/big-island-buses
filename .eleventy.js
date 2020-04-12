@@ -16,18 +16,17 @@ module.exports = function(config) {
 
   config.addFilter('gtfsArrivalToString', filters.gtfsArrivalToString);
 
-  config.addTransform('htmlmin', (content, outputPath) => {
+  /*config.addTransform('htmlmin', (content, outputPath) => {
     if (outputPath.endsWith('.html')) {
       return htmlmin.minify(content, {
         collapseWhitespace: true,
-        removeAttributeQuotes: true,
         removeComments: true,
         useShortDoctype: true,
       })
     } else {
       return content;
     }
-  })
+  })*/
 
   return {
     pathPrefix: '/big-island-buses/',

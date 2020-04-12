@@ -1,3 +1,5 @@
+import closestStopWorker from 'consts:closestStopWorker';
+
 const CACHE = 'big-island-buses-4';
 
 export declare var self: ServiceWorkerGlobalScope;
@@ -43,6 +45,7 @@ function precache() {
         'icon/favicon.ico',
         'icon/maskable.png',
         'icon/transparent.png',
+        closestStopWorker,
       ]),
     );
 }

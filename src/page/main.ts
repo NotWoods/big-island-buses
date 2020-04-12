@@ -7,6 +7,7 @@
 import { GTFSData, Route, Stop, Trip } from '../gtfs-types.js';
 import {
   clickEvent,
+  createElement,
   documentLoad,
   dynamicLinkNode,
   getScheduleData,
@@ -17,20 +18,19 @@ import {
   unimportant,
   updateEvent,
   userShape,
-  createElement,
 } from './load.js';
+import { createLocationMarker } from './location/marker.js';
+import { hydrateAside } from './sidebar.js';
+import { closestToSearch, closestToUser, stopToDisplay } from './state/map.js';
+import { connect, LatLngLiteral, memoize, store, View } from './state/store.js';
 import {
   gtfsArrivalToDate,
   gtfsArrivalToString,
   nowDateTime,
   stringTime,
 } from './utils/date.js';
+import { Linkable, parseLink, Type } from './utils/link.js';
 import { toInt } from './utils/num.js';
-import { hydrateAside } from './sidebar.js';
-import { Linkable, Type, parseLink } from './utils/link.js';
-import { store, LatLngLiteral, View, memoize, connect } from './state/store.js';
-import { createLocationMarker } from './location/marker.js';
-import { stopToDisplay, closestToUser, closestToSearch } from './state/map.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -43,10 +43,12 @@ const documentPromise = documentLoad();
 const schedulePromise = getScheduleData();
 const mapPromise = loadMap();
 
+/*
 schedulePromise.then(api => {
   window.api = api;
   window.store = store;
 });
+*/
 
 export type LinkableMarker = google.maps.Marker & Linkable;
 interface StopMarker extends LinkableMarker {
@@ -265,31 +267,27 @@ schedulePromise.then(schedule => {
 
   connect(
     store,
-    state =>
-      stopToDisplay(schedule.stops, state).then(stop_id => ({
-        route_id: state.route.id || undefined,
-        trip_id: state.route.trip || undefined,
-        stop_id: stop_id || undefined,
-      })),
+    state => ({
+      route_id: state.route.id || undefined,
+      trip_id: state.route.trip || undefined,
+      stop_id: stopToDisplay(schedule.stops, state),
+    }),
     openActive,
   );
 });
 
-Promise.all([documentPromise, schedulePromise]).then(function() {
-  if (window.history.state) {
-    store.setState(window.history.state);
-  } else {
-    const state = parseLink(new URL(location.href));
-    store.setState(state);
-  }
-});
-
-window.onhashchange = function() {
+if (window.history.state) {
+  store.setState(window.history.state);
+} else {
+  const state = parseLink(new URL(location.href));
+  store.setState(state);
+}
+window.onhashchange = () => {
   const state = parseLink(new URL(location.href));
   store.setState(state);
 };
-window.onpopstate = function(e: PopStateEvent) {
-  store.setState(e.state);
+window.onpopstate = (evt: PopStateEvent) => {
+  store.setState(evt.state);
 };
 
 /**

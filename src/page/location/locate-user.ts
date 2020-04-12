@@ -22,7 +22,6 @@ export function locateUser(store: Store<State>) {
       store.setState(newState as State);
     },
     function onerror(error) {
-      console.error(error);
       store.setState({ locatePermission: error.code as LocationPermission });
     },
   );

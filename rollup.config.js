@@ -10,6 +10,8 @@ const eleventyConfig = eleventy({
   addTransform() {},
 });
 
+const closestStopWorker = 'worker/closest-stop.js';
+
 /** @type {import('rollup').RollupOptions} */
 const config = {
   input: 'src/page/main.ts',
@@ -19,10 +21,10 @@ const config = {
     sourcemap: true,
   },
   plugins: [
-    consts({ pathPrefix: eleventyConfig.pathPrefix }),
+    consts({ pathPrefix: eleventyConfig.pathPrefix, closestStopWorker }),
     nodeResolve(),
     typescript(),
-    //terser(),
+    terser(),
   ],
 };
 
@@ -34,7 +36,22 @@ const serviceWorker = {
     format: 'esm',
     sourcemap: true,
   },
-  plugins: [typescript(), terser()],
+  plugins: [consts({ closestStopWorker }), typescript(), terser()],
+};
+
+/** @type {import('rollup').RollupOptions} */
+const closestStopWorkerConfig = {
+  input: 'src/worker/closest-stop-worker.ts',
+  output: {
+    file: eleventyConfig.dir.output + '/' + closestStopWorker,
+    format: 'esm',
+    sourcemap: true,
+  },
+  plugins: [
+    nodeResolve(),
+    typescript(),
+    terser(),
+  ],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -60,4 +77,10 @@ const filters = {
   plugins: [typescript()],
 };
 
-export default [config, serviceWorker, apiGenerator, filters];
+export default [
+  config,
+  serviceWorker,
+  closestStopWorkerConfig,
+  apiGenerator,
+  filters,
+];

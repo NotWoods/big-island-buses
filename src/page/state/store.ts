@@ -1,5 +1,11 @@
 import createStore, { Store } from 'unistore';
 
+type PromiseValue<T> = T extends Promise<infer R> ? R : T;
+
+type PromiseValues<T> = {
+  readonly [P in keyof T]: PromiseValue<T[P]>;
+};
+
 export const enum View {
   LIST,
 
@@ -61,14 +67,28 @@ function differentObjects<T>(a: T, b: T) {
   return (Object.keys(a) as Array<keyof T>).some(key => a[key] === b[key]);
 }
 
+/**
+ * Like Promise.all, but for objects with promises in the values.
+ */
+function awaitObject<T>(obj: T) {
+  const keys = Object.keys(obj) as Array<keyof T>;
+  return Promise.all(keys.map(key => obj[key])).then(values => {
+    const result: Partial<T> = {};
+    keys.forEach((key, i) => {
+      result[key] = values[i];
+    });
+    return result as PromiseValues<T>;
+  });
+}
+
 export function connect<Props>(
   store: Store<State>,
-  mapStateToProps: (state: State) => Promise<Props> | Props,
-  callback: (props: Props) => void,
+  mapStateToProps: (state: State) => Props,
+  callback: (props: PromiseValues<Props>) => void,
 ) {
-  let lastProps: Props | undefined;
+  let lastProps: PromiseValues<Props> | undefined;
   return store.subscribe(state =>
-    Promise.resolve(mapStateToProps(state)).then(props => {
+    awaitObject(mapStateToProps(state)).then(props => {
       if (!lastProps || differentObjects(props, lastProps)) {
         lastProps = props;
         callback(props);

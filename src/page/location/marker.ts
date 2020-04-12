@@ -4,11 +4,14 @@ import { LinkableMarker } from '../main';
 import { LatLngLiteral } from '../state/store';
 import { Type } from '../utils/link';
 
-export function createLocationMarker(options: google.maps.ReadonlyMarkerOptions) {
+export function createLocationMarker(
+  options: google.maps.ReadonlyMarkerOptions,
+) {
   let marker: LinkableMarker | undefined;
-  return (map: google.maps.Map,
+  return (
+    map: google.maps.Map,
     location: LatLngLiteral,
-    stop_id?: Stop['stop_id']
+    stop_id?: Stop['stop_id'],
   ) => {
     if (!marker) {
       marker = new google.maps.Marker(options) as LinkableMarker;
@@ -22,5 +25,5 @@ export function createLocationMarker(options: google.maps.ReadonlyMarkerOptions)
     marker.setPosition(location);
 
     return marker;
-  }
+  };
 }
