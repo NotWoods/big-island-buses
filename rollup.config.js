@@ -47,11 +47,7 @@ const closestStopWorkerConfig = {
     format: 'esm',
     sourcemap: true,
   },
-  plugins: [
-    nodeResolve(),
-    typescript(),
-    terser(),
-  ],
+  plugins: [nodeResolve(), typescript(), terser()],
 };
 
 /** @type {import('rollup').RollupOptions} */

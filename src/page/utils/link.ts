@@ -19,6 +19,10 @@ export interface Linkable {
   Value: string;
 }
 
+export function getLinkState(state: State) {
+  return { route: state.route, stop: state.stop };
+}
+
 /**
  * Generates a link for href values. Meant to maintain whatever active data is avaliable.
  * @param {Type} type  		Type of item to change
@@ -115,7 +119,7 @@ export function parseLink(url: URL): State {
 }
 
 export function getStateWithLink(state: State, type: Type, value: string) {
-  const newState = { route: state.route, stop: state.stop };
+  const newState = getLinkState(state);
   switch (type) {
     case Type.STOP:
       newState.stop = value;

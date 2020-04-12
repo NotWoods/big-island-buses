@@ -16,7 +16,6 @@ import {
   sequence,
   stopShape,
   unimportant,
-  updateEvent,
   userShape,
 } from './load.js';
 import { createLocationMarker } from './location/marker.js';
@@ -361,7 +360,6 @@ function switchMapStreetview(this: HTMLElement) {
     view.stop = View.MAP_PRIMARY;
   }
   store.setState({ view });
-  dispatchEvent(updateEvent);
 }
 
 /**
@@ -508,7 +506,6 @@ const openRoute = memoize(function openRoute(
     google.maps.event.trigger(streetview, 'resize');
   }
 
-  window.dispatchEvent(updateEvent);
   return Promise.resolve(closestTrip);
 });
 
@@ -565,7 +562,7 @@ function openStop(
   removeChildren(list);
   for (const route_id of thisStop.routes) {
     const route = buses.routes[route_id];
-    const linkItem = dynamicLinkNode(Type.ROUTE, route_id, false);
+    const linkItem = dynamicLinkNode(Type.ROUTE, route_id);
     linkItem.className = 'connections__link';
     linkItem.style.borderColor = `#${route.route_color}`;
     linkItem.textContent = route.route_long_name;
@@ -580,7 +577,6 @@ function openStop(
   }
 
   document.getElementById('main')!.classList.add('open-stop');
-  window.dispatchEvent(updateEvent);
 }
 
 function openTrip(
@@ -642,6 +638,4 @@ function openTrip(
 
     schedule.appendChild(routeListItem);
   }
-
-  window.dispatchEvent(updateEvent);
 }

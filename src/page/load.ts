@@ -7,10 +7,15 @@
 import pathPrefix from 'consts:pathPrefix';
 import { GTFSData, Trip } from '../gtfs-types';
 import { toInt } from './utils/num';
-import { createLink, Type, Linkable, getStateWithLink } from './utils/link';
-import { store } from './state/store';
-
-export const updateEvent = new CustomEvent('pageupdate');
+import {
+  createLink,
+  Type,
+  Linkable,
+  getStateWithLink,
+  getLinkState,
+} from './utils/link';
+import { store, connect, State } from './state/store';
+import { Store } from 'unistore';
 
 navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
 
@@ -106,16 +111,16 @@ type DynamicLinkNode = HTMLAnchorElement & Linkable;
 
 /**
  * Converts an A element into an automatically updating link.
- * @param  {Type} type      What value to change in link
- * @param  {string} value   Value to use
- * @param  {boolean} update Wheter or not to listen for "pageupdate" event and update href
- * @return {Node}           A element with custom properties
+ * @param type What value to change in link
+ * @param value Value to use
+ * @param store If given, used to update the link when state changes
+ * @return A element with custom properties
  */
 export function convertToLinkable(
   node: HTMLAnchorElement,
   type: Type,
   value: string,
-  update?: boolean,
+  store?: Store<State>,
 ) {
   Object.assign(node, {
     Type: type,
@@ -124,9 +129,9 @@ export function convertToLinkable(
   });
   node.href = pageLink(type, value);
   node.addEventListener('click', clickEvent);
-  if (update) {
-    node.addEventListener('pageupdate', function() {
-      node.href = pageLink(type, value);
+  if (store) {
+    connect(store, getLinkState, state => {
+      node.href = createLink(type, value, state);
     });
   }
 
@@ -135,14 +140,18 @@ export function convertToLinkable(
 
 /**
  * Creates an A element with custom click events for links.  Can update itself.
- * @param  {Type} type      What value to change in link
- * @param  {string} value   Value to use
- * @param  {boolean} update Wheter or not to listen for "pageupdate" event and update href
- * @return {Node}           A element with custom properties
+ * @param type What value to change in link
+ * @param value Value to use
+ * @param store If given, used to update the link when state changes
+ * @return A element with custom properties
  */
-export function dynamicLinkNode(type: Type, value: string, update?: boolean) {
+export function dynamicLinkNode(
+  type: Type,
+  value: string,
+  store?: Store<State>,
+) {
   const node = document.createElement('a') as DynamicLinkNode;
-  return convertToLinkable(node, type, value, update);
+  return convertToLinkable(node, type, value, store);
 }
 
 /**
