@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   
+  
   <head>
     <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="/big-island-buses/style.css" />
@@ -36,6 +37,7 @@ ga('send', 'pageview');
 
 
     <title>Pahoa/Pohoiki/Hilo | Big Island Buses</title>
+    <link rel="canonical" href="https://notwoods.github.io/big-island-buses/routes/hilo-pahala/">
   </head>
   <body>
     <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -46,6 +48,9 @@ ga('send', 'pageview');
 
   <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
   <ul class="sidebar__list routes__list" id="nearby"></ul>
+  <button type="button" class="nearby__info" id="nearby-info">
+    Find routes near my location >
+  </button>
 
   <h2 class="sidebar__heading routes__heading">Other Routes</h2>
   <ul class="sidebar__list routes__list" id="other">
@@ -187,7 +192,7 @@ ga('send', 'pageview');
     <p>
       Created by
       <a href="http://tigeroakes.com">
-        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+        <img class="created" src="/big-island-buses/assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
       </a>
     </p>
     <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
@@ -246,65 +251,125 @@ ga('send', 'pageview');
         </label>
         <select class="info__select" id="trip-select">
           
-            <option value="HPA050">to Hilo (5:20am - 7:35am | Mon - Fri)</option>
+            <option value="HPA050" selected>
+              to Hilo (5:20am - 7:35am | Mon - Fri)
+            </option>
           
-            <option value="HPA083">to Hilo (8:15am - 9:05am | Mon - Fri)</option>
+            <option value="HPA083">
+              to Hilo (8:15am - 9:05am | Mon - Fri)
+            </option>
           
-            <option value="HPA091">to Hilo (8:50am - 10:55am | Mon - Fri)</option>
+            <option value="HPA091">
+              to Hilo (8:50am - 10:55am | Mon - Fri)
+            </option>
           
-            <option value="HPA114">to Hilo (11:20am - 1:05pm | Mon - Fri)</option>
+            <option value="HPA114">
+              to Hilo (11:20am - 1:05pm | Mon - Fri)
+            </option>
           
-            <option value="HPA120">to Hilo (12pm - 1:30pm | Mon - Fri)</option>
+            <option value="HPA120">
+              to Hilo (12pm - 1:30pm | Mon - Fri)
+            </option>
           
-            <option value="HPA135">to Hilo (1:35pm - 3:40pm | Mon - Fri)</option>
+            <option value="HPA135">
+              to Hilo (1:35pm - 3:40pm | Mon - Fri)
+            </option>
           
-            <option value="HPA159">to Hilo (3:55pm - 4:45pm | Mon - Fri)</option>
+            <option value="HPA159">
+              to Hilo (3:55pm - 4:45pm | Mon - Fri)
+            </option>
           
-            <option value="HPA163">to Hilo (4:20pm - 5:25pm | Mon - Fri)</option>
+            <option value="HPA163">
+              to Hilo (4:20pm - 5:25pm | Mon - Fri)
+            </option>
           
-            <option value="HPA179">to Hilo (5:55pm - 6:50pm | Mon - Fri)</option>
+            <option value="HPA179">
+              to Hilo (5:55pm - 6:50pm | Mon - Fri)
+            </option>
           
-            <option value="HPA197">to Hilo (7:45pm - 9:20pm | Mon - Fri)</option>
+            <option value="HPA197">
+              to Hilo (7:45pm - 9:20pm | Mon - Fri)
+            </option>
           
-            <option value="HPA207">to Hilo (8:40pm - 10pm | Mon - Fri)</option>
+            <option value="HPA207">
+              to Hilo (8:40pm - 10pm | Mon - Fri)
+            </option>
           
-            <option value="HPA070">to Pahoa/Pohoiki (7:15am - 8:05am | Mon - Fri)</option>
+            <option value="HPA070">
+              to Pahoa/Pohoiki (7:15am - 8:05am | Mon - Fri)
+            </option>
           
-            <option value="HPA075">to Pahoa/Pohoiki (7:30am - 9:25am | Mon - Fri)</option>
+            <option value="HPA075">
+              to Pahoa/Pohoiki (7:30am - 9:25am | Mon - Fri)
+            </option>
           
-            <option value="HPA100">to Pahoa/Pohoiki (10am - 11:20 | Mon - Fri)</option>
+            <option value="HPA100">
+              to Pahoa/Pohoiki (10am - 11:20 | Mon - Fri)
+            </option>
           
-            <option value="HPA110">to Pahoa/Pohoiki (11am - 12pm | Mon - Fri)</option>
+            <option value="HPA110">
+              to Pahoa/Pohoiki (11am - 12pm | Mon - Fri)
+            </option>
           
-            <option value="HPA125">to Pahoa/Pohoiki (12:15pm - 2:10pm | Mon - Fri)</option>
+            <option value="HPA125">
+              to Pahoa/Pohoiki (12:15pm - 2:10pm | Mon - Fri)
+            </option>
           
-            <option value="HPA140">to Pahoa/Pohoiki (2pm - 3:55pm | Mon - Fri)</option>
+            <option value="HPA140">
+              to Pahoa/Pohoiki (2pm - 3:55pm | Mon - Fri)
+            </option>
           
-            <option value="HPA145">to Pahoa/Pohoiki (2:40pm - 4:20pm | Mon - Fri)</option>
+            <option value="HPA145">
+              to Pahoa/Pohoiki (2:40pm - 4:20pm | Mon - Fri)
+            </option>
           
-            <option value="HPA160">to Pahoa/Pohoiki (4pm - 5:55pm | Mon - Fri)</option>
+            <option value="HPA160">
+              to Pahoa/Pohoiki (4pm - 5:55pm | Mon - Fri)
+            </option>
           
-            <option value="HPA175">to Pahoa/Pohoiki (5:45pm - 8:20pm | Mon - Fri)</option>
+            <option value="HPA175">
+              to Pahoa/Pohoiki (5:45pm - 8:20pm | Mon - Fri)
+            </option>
           
-            <option value="HPA190">to Pahoa/Pohoiki (7:05pm - 8:40pm | Mon - Fri)</option>
+            <option value="HPA190">
+              to Pahoa/Pohoiki (7:05pm - 8:40pm | Mon - Fri)
+            </option>
           
-            <option value="HPA215">to Pahoa/Pohoiki (9:30pm - 10:45pm | Mon - Fri)</option>
+            <option value="HPA215">
+              to Pahoa/Pohoiki (9:30pm - 10:45pm | Mon - Fri)
+            </option>
           
-            <option value="HPA060">to Hilo (6:05am - 7:30am | Sat)</option>
+            <option value="HPA060">
+              to Hilo (6:05am - 7:30am | Sat)
+            </option>
           
-            <option value="HPA089">to Hilo (8:50am - 10:55am | Sat)</option>
+            <option value="HPA089">
+              to Hilo (8:50am - 10:55am | Sat)
+            </option>
           
-            <option value="HPA150">to Hilo (3:15pm - 4pm | Sat)</option>
+            <option value="HPA150">
+              to Hilo (3:15pm - 4pm | Sat)
+            </option>
           
-            <option value="HPA180">to Hilo (5:55pm - 8pm | Sat)</option>
+            <option value="HPA180">
+              to Hilo (5:55pm - 8pm | Sat)
+            </option>
           
-            <option value="HPA076">to Pahoa/Pohoiki (7:30am - 9:25am | Sat)</option>
+            <option value="HPA076">
+              to Pahoa/Pohoiki (7:30am - 9:25am | Sat)
+            </option>
           
-            <option value="HPA137">to Pahoa/Pohoiki (1:45pm - 3:15pm | Sat)</option>
+            <option value="HPA137">
+              to Pahoa/Pohoiki (1:45pm - 3:15pm | Sat)
+            </option>
           
-            <option value="HPA161">to Pahoa/Pohoiki (4pm - 6:30pm | Sat)</option>
+            <option value="HPA161">
+              to Pahoa/Pohoiki (4pm - 6:30pm | Sat)
+            </option>
           
-            <option value="HPA200">to Pahoa/Pohoiki (8pm - 9:05pm | Sat)</option>
+            <option value="HPA200">
+              to Pahoa/Pohoiki (8pm - 9:05pm | Sat)
+            </option>
           
         </select>
       </div>
@@ -344,11 +409,188 @@ ga('send', 'pageview');
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        
+          Monday - Friday
+        
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    
+    
+      <a href="?stop=pk" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Prince Kuhio Plaza
+        </span>
+        <time class="schedule__time">
+          7:15am
+        </time>
+      </a>
+    
+      <a href="?stop=cc" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hawaii Community College
+        </span>
+        <time class="schedule__time">
+          7:18am
+        </time>
+      </a>
+    
+      <a href="?stop=uh" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          University of Hawaii Hilo
+        </span>
+        <time class="schedule__time">
+          7:20am
+        </time>
+      </a>
+    
+      <a href="?stop=hs" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hilo Shopping Center
+        </span>
+        <time class="schedule__time">
+          7:22am
+        </time>
+      </a>
+    
+      <a href="?stop=ac" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Aupuni Center
+        </span>
+        <time class="schedule__time">
+          7:25am
+        </time>
+      </a>
+    
+      <a href="?stop=st" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          St. Joseph
+        </span>
+        <time class="schedule__time">
+          7:30am
+        </time>
+      </a>
+    
+      <a href="?stop=mb" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Mo&#39;oheau Bus Terminal
+        </span>
+        <time class="schedule__time">
+          7:35am
+        </time>
+      </a>
+    
+      <a href="?stop=nn" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Nanawale
+        </span>
+        <time class="schedule__time">
+          5:20am
+        </time>
+      </a>
+    
+      <a href="?stop=ph" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Pahoa
+        </span>
+        <time class="schedule__time">
+          5:25am
+        </time>
+      </a>
+    
+      <a href="?stop=hb" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hawaiian Beaches
+        </span>
+        <time class="schedule__time">
+          5:40am
+        </time>
+      </a>
+    
+      <a href="?stop=ao" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Ainaloa
+        </span>
+        <time class="schedule__time">
+          6:15am
+        </time>
+      </a>
+    
+      <a href="?stop=hf" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hawaiian Paradise Park
+        </span>
+        <time class="schedule__time">
+          6:25am
+        </time>
+      </a>
+    
+      <a href="?stop=ku" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Keaau
+        </span>
+        <time class="schedule__time">
+          6:50am
+        </time>
+      </a>
+    
+    
+    </section>
   </div>
 
   <section id="stop">

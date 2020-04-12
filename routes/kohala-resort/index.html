@@ -35,6 +35,7 @@ ga('send', 'pageview');
 
 
     <title>North Kohala to South Kohala Resorts | Big Island Buses</title>
+    <link rel="canonical" href="https://notwoods.github.io/big-island-buses/routes/kohala-resort/">
   </head>
   <body>
     <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -45,6 +46,9 @@ ga('send', 'pageview');
 
   <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
   <ul class="sidebar__list routes__list" id="nearby"></ul>
+  <button type="button" class="nearby__info" id="nearby-info">
+    Find routes near my location >
+  </button>
 
   <h2 class="sidebar__heading routes__heading">Other Routes</h2>
   <ul class="sidebar__list routes__list" id="other">
@@ -186,7 +190,7 @@ ga('send', 'pageview');
     <p>
       Created by
       <a href="http://tigeroakes.com">
-        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+        <img class="created" src="/big-island-buses/assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
       </a>
     </p>
     <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
@@ -245,9 +249,13 @@ ga('send', 'pageview');
         </label>
         <select class="info__select" id="trip-select">
           
-            <option value="KRS060">to South Kohala Resorts</option>
+            <option value="KRS060">
+              to South Kohala Resorts
+            </option>
           
-            <option value="KRS160">to North Kohala</option>
+            <option value="KRS160">
+              to North Kohala
+            </option>
           
         </select>
       </div>
@@ -287,11 +295,15 @@ ga('send', 'pageview');
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    
+    </section>
   </div>
 
   <section id="stop">

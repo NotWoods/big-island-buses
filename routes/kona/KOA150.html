@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   
+  
   <head>
     <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="/big-island-buses/style.css" />
@@ -36,6 +37,7 @@ ga('send', 'pageview');
 
 
     <title>Intra Kona | Big Island Buses</title>
+    <link rel="canonical" href="https://notwoods.github.io/big-island-buses/routes/kona/">
   </head>
   <body>
     <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -46,6 +48,9 @@ ga('send', 'pageview');
 
   <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
   <ul class="sidebar__list routes__list" id="nearby"></ul>
+  <button type="button" class="nearby__info" id="nearby-info">
+    Find routes near my location >
+  </button>
 
   <h2 class="sidebar__heading routes__heading">Other Routes</h2>
   <ul class="sidebar__list routes__list" id="other">
@@ -187,7 +192,7 @@ ga('send', 'pageview');
     <p>
       Created by
       <a href="http://tigeroakes.com">
-        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+        <img class="created" src="/big-island-buses/assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
       </a>
     </p>
     <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
@@ -246,45 +251,85 @@ ga('send', 'pageview');
         </label>
         <select class="info__select" id="trip-select">
           
-            <option value="KOA050">Northbound (5am - 5:30am | Daily)</option>
+            <option value="KOA050">
+              Northbound (5am - 5:30am | Daily)
+            </option>
           
-            <option value="KOA055">Northbound (5:45am - 6:55am | Mon - Sat)</option>
+            <option value="KOA055">
+              Northbound (5:45am - 6:55am | Mon - Sat)
+            </option>
           
-            <option value="KOA070">Northbound (7:10am - 8:25am | Mon - Sat)</option>
+            <option value="KOA070">
+              Northbound (7:10am - 8:25am | Mon - Sat)
+            </option>
           
-            <option value="KOA080">Northbound (8:15am - 9:50am | Mon - Sat)</option>
+            <option value="KOA080">
+              Northbound (8:15am - 9:50am | Mon - Sat)
+            </option>
           
-            <option value="KOA095">Northbound (9:20am - 10:10am | Mon - Sat)</option>
+            <option value="KOA095">
+              Northbound (9:20am - 10:10am | Mon - Sat)
+            </option>
           
-            <option value="KOA120">Northbound (11:50am - 1:10pm | Mon - Sat)</option>
+            <option value="KOA120">
+              Northbound (11:50am - 1:10pm | Mon - Sat)
+            </option>
           
-            <option value="KOA135">Northbound (1:20pm - 2:55pm | Mon - Sat)</option>
+            <option value="KOA135">
+              Northbound (1:20pm - 2:55pm | Mon - Sat)
+            </option>
           
-            <option value="KOA151">Northbound (3:05pm - 4:55pm | Mon - Fri)</option>
+            <option value="KOA151">
+              Northbound (3:05pm - 4:55pm | Mon - Fri)
+            </option>
           
-            <option value="KOA170">Northbound (4:55pm - 6:25pm | Mon - Sat)</option>
+            <option value="KOA170">
+              Northbound (4:55pm - 6:25pm | Mon - Sat)
+            </option>
           
-            <option value="KOA185">Northbound (6:25pm - 7:40pm | Mon - Fri)</option>
+            <option value="KOA185">
+              Northbound (6:25pm - 7:40pm | Mon - Fri)
+            </option>
           
-            <option value="KOA060">Southbound (6:25am - 8:15am | Mon - Sat)</option>
+            <option value="KOA060">
+              Southbound (6:25am - 8:15am | Mon - Sat)
+            </option>
           
-            <option value="KOA085">Southbound (8:30am - 9:45am | Mon - Sat)</option>
+            <option value="KOA085">
+              Southbound (8:30am - 9:45am | Mon - Sat)
+            </option>
           
-            <option value="KOA100">Southbound (9:50am - 11:40am | Mon - Sat)</option>
+            <option value="KOA100">
+              Southbound (9:50am - 11:40am | Mon - Sat)
+            </option>
           
-            <option value="KOA115">Southbound (11:30am - 1:20pm | Mon - Sat)</option>
+            <option value="KOA115">
+              Southbound (11:30am - 1:20pm | Mon - Sat)
+            </option>
           
-            <option value="KOA130">Southbound (1:15pm - 3:05pm | Mon - Fri)</option>
+            <option value="KOA130">
+              Southbound (1:15pm - 3:05pm | Mon - Fri)
+            </option>
           
-            <option value="KOA150">Southbound (3:00pm - 4:55pm | Mon - Sat)</option>
+            <option value="KOA150" selected>
+              Southbound (3:00pm - 4:55pm | Mon - Sat)
+            </option>
           
-            <option value="KOA160">Southbound (3:55pm - 4:25pm | Daily)</option>
+            <option value="KOA160">
+              Southbound (3:55pm - 4:25pm | Daily)
+            </option>
           
-            <option value="KOA162">Southbound (4:15pm - 5:30pm | Mon - Sat)</option>
+            <option value="KOA162">
+              Southbound (4:15pm - 5:30pm | Mon - Sat)
+            </option>
           
-            <option value="KOA169">Southbound (4:55pm - 6:25pm | Mon - Fri)</option>
+            <option value="KOA169">
+              Southbound (4:55pm - 6:25pm | Mon - Fri)
+            </option>
           
-            <option value="KOA168">Southbound (4:50pm - 6:10pm | Mon - Sat)</option>
+            <option value="KOA168">
+              Southbound (4:50pm - 6:10pm | Mon - Sat)
+            </option>
           
         </select>
       </div>
@@ -324,11 +369,240 @@ ga('send', 'pageview');
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        
+          Monday - Saturday
+        
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    
+    
+      <a href="?stop=fp" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          The Friendly Place Campus
+        </span>
+        <time class="schedule__time">
+          3:55pm
+        </time>
+      </a>
+    
+      <a href="?stop=oa" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Old Airport/Kona Commons
+        </span>
+        <time class="schedule__time">
+          3:57pm
+        </time>
+      </a>
+    
+      <a href="?stop=al" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Ali&#39;i Drive
+        </span>
+        <time class="schedule__time">
+          4:02pm
+        </time>
+      </a>
+    
+      <a href="?stop=ks" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Keauhou Shopping Center
+        </span>
+        <time class="schedule__time">
+          4:12pm
+        </time>
+      </a>
+    
+      <a href="?stop=sk" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Sheraton Keauhou Resort
+        </span>
+        <time class="schedule__time">
+          4:17pm
+        </time>
+      </a>
+    
+      <a href="?stop=ka" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kainaliu Honalo
+        </span>
+        <time class="schedule__time">
+          4:25pm
+        </time>
+      </a>
+    
+      <a href="?stop=kh" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kona Hospital
+        </span>
+        <time class="schedule__time">
+          4:35pm
+        </time>
+      </a>
+    
+      <a href="?stop=kk" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kealakekua
+        </span>
+        <time class="schedule__time">
+          4:45pm
+        </time>
+      </a>
+    
+      <a href="?stop=cy" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Capt. Cook Yano Hall
+        </span>
+        <time class="schedule__time">
+          4:55pm
+        </time>
+      </a>
+    
+      <a href="?stop=ms" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Matsuyama Store
+        </span>
+        <time class="schedule__time">
+          3pm
+        </time>
+      </a>
+    
+      <a href="?stop=ke" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kealakehe
+        </span>
+        <time class="schedule__time">
+          3:05pm
+        </time>
+      </a>
+    
+      <a href="?stop=wm" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Walmart
+        </span>
+        <time class="schedule__time">
+          3:10pm
+        </time>
+      </a>
+    
+      <a href="?stop=km" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kmart/Macy&#39;s
+        </span>
+        <time class="schedule__time">
+          3:15pm
+        </time>
+      </a>
+    
+      <a href="?stop=kq" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kaiser Permanente
+        </span>
+        <time class="schedule__time">
+          3:20pm
+        </time>
+      </a>
+    
+      <a href="?stop=lh" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Lokahi Apartments
+        </span>
+        <time class="schedule__time">
+          3:30pm
+        </time>
+      </a>
+    
+      <a href="?stop=ct" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Costco
+        </span>
+        <time class="schedule__time">
+          3:40pm
+        </time>
+      </a>
+    
+      <a href="?stop=kc" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          West Hawaii Civic Center
+        </span>
+        <time class="schedule__time">
+          3:45pm
+        </time>
+      </a>
+    
+    
+    </section>
   </div>
 
   <section id="stop">

@@ -35,6 +35,7 @@ ga('send', 'pageview');
 
 
     <title>Waimea Shuttle | Big Island Buses</title>
+    <link rel="canonical" href="https://notwoods.github.io/big-island-buses/routes/waimea/">
   </head>
   <body>
     <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -45,6 +46,9 @@ ga('send', 'pageview');
 
   <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
   <ul class="sidebar__list routes__list" id="nearby"></ul>
+  <button type="button" class="nearby__info" id="nearby-info">
+    Find routes near my location >
+  </button>
 
   <h2 class="sidebar__heading routes__heading">Other Routes</h2>
   <ul class="sidebar__list routes__list" id="other">
@@ -186,7 +190,7 @@ ga('send', 'pageview');
     <p>
       Created by
       <a href="http://tigeroakes.com">
-        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+        <img class="created" src="/big-island-buses/assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
       </a>
     </p>
     <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
@@ -245,49 +249,93 @@ ga('send', 'pageview');
         </label>
         <select class="info__select" id="trip-select">
           
-            <option value="WAI065">to Kamuela View Estates (6:30am - 7am)</option>
+            <option value="WAI065">
+              to Kamuela View Estates (6:30am - 7am)
+            </option>
           
-            <option value="WAI075">to Kamuela View Estates (7:30am - 8am)</option>
+            <option value="WAI075">
+              to Kamuela View Estates (7:30am - 8am)
+            </option>
           
-            <option value="WAI085">to Kamuela View Estates (8:30am - 9am)</option>
+            <option value="WAI085">
+              to Kamuela View Estates (8:30am - 9am)
+            </option>
           
-            <option value="WAI095">to Kamuela View Estates (9:30am - 10am)</option>
+            <option value="WAI095">
+              to Kamuela View Estates (9:30am - 10am)
+            </option>
           
-            <option value="WAI105">to Kamuela View Estates (10:30am - 11am)</option>
+            <option value="WAI105">
+              to Kamuela View Estates (10:30am - 11am)
+            </option>
           
-            <option value="WAI115">to Kamuela View Estates (11:30am - 12pm)</option>
+            <option value="WAI115">
+              to Kamuela View Estates (11:30am - 12pm)
+            </option>
           
-            <option value="WAI125">to Kamuela View Estates (12:30pm - 1pm)</option>
+            <option value="WAI125">
+              to Kamuela View Estates (12:30pm - 1pm)
+            </option>
           
-            <option value="WAI135">to Kamuela View Estates (1:30pm - 2pm)</option>
+            <option value="WAI135">
+              to Kamuela View Estates (1:30pm - 2pm)
+            </option>
           
-            <option value="WAI145">to Kamuela View Estates (2:30pm - 3pm)</option>
+            <option value="WAI145">
+              to Kamuela View Estates (2:30pm - 3pm)
+            </option>
           
-            <option value="WAI155">to Kamuela View Estates (3:30pm - 4pm)</option>
+            <option value="WAI155">
+              to Kamuela View Estates (3:30pm - 4pm)
+            </option>
           
-            <option value="WAI165">to Kamuela View Estates (4:30pm - 5pm)</option>
+            <option value="WAI165">
+              to Kamuela View Estates (4:30pm - 5pm)
+            </option>
           
-            <option value="WAI070">to Lakeland (7am - 7:30am)</option>
+            <option value="WAI070">
+              to Lakeland (7am - 7:30am)
+            </option>
           
-            <option value="WAI080">to Lakeland (8am - 8:30am)</option>
+            <option value="WAI080">
+              to Lakeland (8am - 8:30am)
+            </option>
           
-            <option value="WAI090">to Lakeland (9am - 9:30am)</option>
+            <option value="WAI090">
+              to Lakeland (9am - 9:30am)
+            </option>
           
-            <option value="WAI100">to Lakeland (10am - 10:30am)</option>
+            <option value="WAI100">
+              to Lakeland (10am - 10:30am)
+            </option>
           
-            <option value="WAI110">to Lakeland (11am - 11:30am)</option>
+            <option value="WAI110">
+              to Lakeland (11am - 11:30am)
+            </option>
           
-            <option value="WAI120">to Lakeland (12pm - 12:30pm)</option>
+            <option value="WAI120">
+              to Lakeland (12pm - 12:30pm)
+            </option>
           
-            <option value="WAI130">to Lakeland (1pm - 1:30pm)</option>
+            <option value="WAI130">
+              to Lakeland (1pm - 1:30pm)
+            </option>
           
-            <option value="WAI140">to Lakeland (2pm - 2:30pm)</option>
+            <option value="WAI140">
+              to Lakeland (2pm - 2:30pm)
+            </option>
           
-            <option value="WAI150">to Lakeland (3pm - 3:30pm)</option>
+            <option value="WAI150">
+              to Lakeland (3pm - 3:30pm)
+            </option>
           
-            <option value="WAI160">to Lakeland (4pm - 4:30pm)</option>
+            <option value="WAI160">
+              to Lakeland (4pm - 4:30pm)
+            </option>
           
-            <option value="WAI170">to Lakeland (5pm - 5:30pm)</option>
+            <option value="WAI170">
+              to Lakeland (5pm - 5:30pm)
+            </option>
           
         </select>
       </div>
@@ -327,11 +375,15 @@ ga('send', 'pageview');
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    
+    </section>
   </div>
 
   <section id="stop">

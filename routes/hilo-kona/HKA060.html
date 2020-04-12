@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   
+  
   <head>
     <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="/big-island-buses/style.css" />
@@ -36,6 +37,7 @@ ga('send', 'pageview');
 
 
     <title>Kona/Hilo | Big Island Buses</title>
+    <link rel="canonical" href="https://notwoods.github.io/big-island-buses/routes/hilo-kona/">
   </head>
   <body>
     <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -46,6 +48,9 @@ ga('send', 'pageview');
 
   <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
   <ul class="sidebar__list routes__list" id="nearby"></ul>
+  <button type="button" class="nearby__info" id="nearby-info">
+    Find routes near my location >
+  </button>
 
   <h2 class="sidebar__heading routes__heading">Other Routes</h2>
   <ul class="sidebar__list routes__list" id="other">
@@ -187,7 +192,7 @@ ga('send', 'pageview');
     <p>
       Created by
       <a href="http://tigeroakes.com">
-        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+        <img class="created" src="/big-island-buses/assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
       </a>
     </p>
     <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
@@ -246,17 +251,29 @@ ga('send', 'pageview');
         </label>
         <select class="info__select" id="trip-select">
           
-            <option value="HKA050">to Hilo (5:45am - 10:05am)</option>
+            <option value="HKA050">
+              to Hilo (5:45am - 10:05am)
+            </option>
           
-            <option value="HKA060">to Hilo (6:35am - 9:40am)</option>
+            <option value="HKA060" selected>
+              to Hilo (6:35am - 9:40am)
+            </option>
           
-            <option value="HKA160">to Hilo (4pm - 7pm)</option>
+            <option value="HKA160">
+              to Hilo (4pm - 7pm)
+            </option>
           
-            <option value="HKA040">to Kona (3:50am - 6:45am)</option>
+            <option value="HKA040">
+              to Kona (3:50am - 6:45am)
+            </option>
           
-            <option value="HKA090">to Kona (9am - 11:50am)</option>
+            <option value="HKA090">
+              to Kona (9am - 11:50am)
+            </option>
           
-            <option value="HKA130">to Kona (1:10pm - 5:30pm)</option>
+            <option value="HKA130">
+              to Kona (1:10pm - 5:30pm)
+            </option>
           
         </select>
       </div>
@@ -296,11 +313,266 @@ ga('send', 'pageview');
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        
+          Monday - Saturday
+        
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    
+    
+      <a href="?stop=sh" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Four Seasons @ Hualalai
+        </span>
+        <time class="schedule__time">
+          7:10am
+        </time>
+      </a>
+    
+      <a href="?stop=hl" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hilton Waikoloa
+        </span>
+        <time class="schedule__time">
+          7:35am
+        </time>
+      </a>
+    
+      <a href="?stop=mr" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Marriott
+        </span>
+        <time class="schedule__time">
+          7:40am
+        </time>
+      </a>
+    
+      <a href="?stop=or" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Fairmont Orchid Mauna Lani
+        </span>
+        <time class="schedule__time">
+          7:50am
+        </time>
+      </a>
+    
+      <a href="?stop=ml" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Mauna Lani Bay
+        </span>
+        <time class="schedule__time">
+          7:55am
+        </time>
+      </a>
+    
+      <a href="?stop=ha" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hapuna Prince
+        </span>
+        <time class="schedule__time">
+          8:05am
+        </time>
+      </a>
+    
+      <a href="?stop=pr" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Parker Ranch Shopping Center
+        </span>
+        <time class="schedule__time">
+          8:25am
+        </time>
+      </a>
+    
+      <a href="?stop=hg" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Honokaa 76 Gas Station
+        </span>
+        <time class="schedule__time">
+          8:45am
+        </time>
+      </a>
+    
+      <a href="?stop=pa" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Paauilo
+        </span>
+        <time class="schedule__time">
+          8:50am
+        </time>
+      </a>
+    
+      <a href="?stop=la" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Laupahoehoe
+        </span>
+        <time class="schedule__time">
+          9:05am
+        </time>
+      </a>
+    
+      <a href="?stop=pp" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Papaaloa
+        </span>
+        <time class="schedule__time">
+          9:10am
+        </time>
+      </a>
+    
+      <a href="?stop=ni" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Ninole
+        </span>
+        <time class="schedule__time">
+          9:15am
+        </time>
+      </a>
+    
+      <a href="?stop=hh" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hakalau
+        </span>
+        <time class="schedule__time">
+          9:20am
+        </time>
+      </a>
+    
+      <a href="?stop=pe" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Pepeekeo
+        </span>
+        <time class="schedule__time">
+          9:25am
+        </time>
+      </a>
+    
+      <a href="?stop=pi" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Papaikou
+        </span>
+        <time class="schedule__time">
+          9:30am
+        </time>
+      </a>
+    
+      <a href="?stop=mb" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Mo&#39;oheau Bus Terminal
+        </span>
+        <time class="schedule__time">
+          9:40am
+        </time>
+      </a>
+    
+      <a href="?stop=al" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Ali&#39;i Drive
+        </span>
+        <time class="schedule__time">
+          6:35am
+        </time>
+      </a>
+    
+      <a href="?stop=oa" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Old Airport/Kona Commons
+        </span>
+        <time class="schedule__time">
+          6:40am
+        </time>
+      </a>
+    
+      <a href="?stop=km" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kmart/Macy&#39;s
+        </span>
+        <time class="schedule__time">
+          6:45am
+        </time>
+      </a>
+    
+    
+    </section>
   </div>
 
   <section id="stop">

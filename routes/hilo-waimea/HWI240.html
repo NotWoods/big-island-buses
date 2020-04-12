@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   
+  
   <head>
     <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="/big-island-buses/style.css" />
@@ -36,6 +37,7 @@ ga('send', 'pageview');
 
 
     <title>Waimea - Hilo | Big Island Buses</title>
+    <link rel="canonical" href="https://notwoods.github.io/big-island-buses/routes/hilo-waimea/">
   </head>
   <body>
     <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -46,6 +48,9 @@ ga('send', 'pageview');
 
   <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
   <ul class="sidebar__list routes__list" id="nearby"></ul>
+  <button type="button" class="nearby__info" id="nearby-info">
+    Find routes near my location >
+  </button>
 
   <h2 class="sidebar__heading routes__heading">Other Routes</h2>
   <ul class="sidebar__list routes__list" id="other">
@@ -187,7 +192,7 @@ ga('send', 'pageview');
     <p>
       Created by
       <a href="http://tigeroakes.com">
-        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+        <img class="created" src="/big-island-buses/assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
       </a>
     </p>
     <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
@@ -246,47 +251,89 @@ ga('send', 'pageview');
         </label>
         <select class="info__select" id="trip-select">
           
-            <option value="HWI030">to Waimea (3:30am - 4:50am)</option>
+            <option value="HWI030">
+              to Waimea (3:30am - 4:50am)
+            </option>
           
-            <option value="HWI040">to Waimea (3:50am - 5:10am)</option>
+            <option value="HWI040">
+              to Waimea (3:50am - 5:10am)
+            </option>
           
-            <option value="HWI045">to Waimea (4:55am - 6:05am)</option>
+            <option value="HWI045">
+              to Waimea (4:55am - 6:05am)
+            </option>
           
-            <option value="HWI050">to Waimea (5:05am - 6:25am)</option>
+            <option value="HWI050">
+              to Waimea (5:05am - 6:25am)
+            </option>
           
-            <option value="HWI051">to Waimea (5:15am - 6:30am)</option>
+            <option value="HWI051">
+              to Waimea (5:15am - 6:30am)
+            </option>
           
-            <option value="HWI052">to Waimea (5:20am - 6:40am)</option>
+            <option value="HWI052">
+              to Waimea (5:20am - 6:40am)
+            </option>
           
-            <option value="HWI080">to Hilo (7:45am - 10:05am | Mon - Sat)</option>
+            <option value="HWI080">
+              to Hilo (7:45am - 10:05am | Mon - Sat)
+            </option>
           
-            <option value="HWI085">to Hilo (8:25am - 9:35am)</option>
+            <option value="HWI085">
+              to Hilo (8:25am - 9:35am)
+            </option>
           
-            <option value="HWI090">to Waimea (9:00am - 10:45am | Mon - Sat)</option>
+            <option value="HWI090">
+              to Waimea (9:00am - 10:45am | Mon - Sat)
+            </option>
           
-            <option value="HWI110">to Hilo (11:00am - 1:15pm | Mon - Sat)</option>
+            <option value="HWI110">
+              to Hilo (11:00am - 1:15pm | Mon - Sat)
+            </option>
           
-            <option value="HWI115">to Waimea (11:15am - 12:45pm)</option>
+            <option value="HWI115">
+              to Waimea (11:15am - 12:45pm)
+            </option>
           
-            <option value="HWI120">to Waimea (12:00pm - 1:30pm | Mon - Fri)</option>
+            <option value="HWI120">
+              to Waimea (12:00pm - 1:30pm | Mon - Fri)
+            </option>
           
-            <option value="HWI130">to Waimea (1:10pm - 3:20pm | Mon - Sat)</option>
+            <option value="HWI130">
+              to Waimea (1:10pm - 3:20pm | Mon - Sat)
+            </option>
           
-            <option value="HWI140">to Hilo (2:55pm - 4:10pm)</option>
+            <option value="HWI140">
+              to Hilo (2:55pm - 4:10pm)
+            </option>
           
-            <option value="HWI150">to Hilo (3:55pm - 5:15pm)</option>
+            <option value="HWI150">
+              to Hilo (3:55pm - 5:15pm)
+            </option>
           
-            <option value="HWI160">to Hilo (4:35pm - 5:45pm)</option>
+            <option value="HWI160">
+              to Hilo (4:35pm - 5:45pm)
+            </option>
           
-            <option value="HWI165">to Hilo (4:45pm - 6:05pm)</option>
+            <option value="HWI165">
+              to Hilo (4:45pm - 6:05pm)
+            </option>
           
-            <option value="HWI170">to Hilo (4:50pm - 6:10pm)</option>
+            <option value="HWI170">
+              to Hilo (4:50pm - 6:10pm)
+            </option>
           
-            <option value="HWI175">to Hilo (5:15pm - 7:00pm | Mon - Sat)</option>
+            <option value="HWI175">
+              to Hilo (5:15pm - 7:00pm | Mon - Sat)
+            </option>
           
-            <option value="HWI190">to Waimea (7:30pm - 8:45pm)</option>
+            <option value="HWI190">
+              to Waimea (7:30pm - 8:45pm)
+            </option>
           
-            <option value="HWI240">to Hilo (11:55pm - 1:05am)</option>
+            <option value="HWI240" selected>
+              to Hilo (11:55pm - 1:05am)
+            </option>
           
         </select>
       </div>
@@ -326,11 +373,123 @@ ga('send', 'pageview');
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        
+          Daily
+        
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    
+    
+      <a href="?stop=pi" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Papaikou
+        </span>
+        <time class="schedule__time">
+          2am
+        </time>
+      </a>
+    
+      <a href="?stop=mb" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Mo&#39;oheau Bus Terminal
+        </span>
+        <time class="schedule__time">
+          2:05am
+        </time>
+      </a>
+    
+      <a href="?stop=pr" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Parker Ranch Shopping Center
+        </span>
+        <time class="schedule__time">
+          11:55pm
+        </time>
+      </a>
+    
+      <a href="?stop=gy" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Gym Complex
+        </span>
+        <time class="schedule__time">
+          12:15am
+        </time>
+      </a>
+    
+      <a href="?stop=pa" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Paauilo
+        </span>
+        <time class="schedule__time">
+          12:20am
+        </time>
+      </a>
+    
+      <a href="?stop=la" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Laupahoehoe
+        </span>
+        <time class="schedule__time">
+          12:35am
+        </time>
+      </a>
+    
+      <a href="?stop=hh" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hakalau
+        </span>
+        <time class="schedule__time">
+          12:45am
+        </time>
+      </a>
+    
+      <a href="?stop=hx" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Honomu
+        </span>
+        <time class="schedule__time">
+          12:50am
+        </time>
+      </a>
+    
+    
+    </section>
   </div>
 
   <section id="stop">

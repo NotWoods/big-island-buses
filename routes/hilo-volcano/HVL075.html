@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   
+  
   <head>
     <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="/big-island-buses/style.css" />
@@ -36,6 +37,7 @@ ga('send', 'pageview');
 
 
     <title>Ka&#39;u-Volcano - Hilo | Big Island Buses</title>
+    <link rel="canonical" href="https://notwoods.github.io/big-island-buses/routes/hilo-volcano/">
   </head>
   <body>
     <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -46,6 +48,9 @@ ga('send', 'pageview');
 
   <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
   <ul class="sidebar__list routes__list" id="nearby"></ul>
+  <button type="button" class="nearby__info" id="nearby-info">
+    Find routes near my location >
+  </button>
 
   <h2 class="sidebar__heading routes__heading">Other Routes</h2>
   <ul class="sidebar__list routes__list" id="other">
@@ -187,7 +192,7 @@ ga('send', 'pageview');
     <p>
       Created by
       <a href="http://tigeroakes.com">
-        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+        <img class="created" src="/big-island-buses/assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
       </a>
     </p>
     <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
@@ -246,25 +251,45 @@ ga('send', 'pageview');
         </label>
         <select class="info__select" id="trip-select">
           
-            <option value="HVL060">to Hilo (6:10am - 7:20am)</option>
+            <option value="HVL060">
+              to Hilo (6:10am - 7:20am)
+            </option>
           
-            <option value="HVL070">to Hilo (6:40am - 9:20am)</option>
+            <option value="HVL070">
+              to Hilo (6:40am - 9:20am)
+            </option>
           
-            <option value="HVL090">to Hilo (9am - 10:40am)</option>
+            <option value="HVL090">
+              to Hilo (9am - 10:40am)
+            </option>
           
-            <option value="HVL155">to Hilo (3:25pm - 4:35pm)</option>
+            <option value="HVL155">
+              to Hilo (3:25pm - 4:35pm)
+            </option>
           
-            <option value="HVL180">to Hilo (5:50pm - 6:55pm)</option>
+            <option value="HVL180">
+              to Hilo (5:50pm - 6:55pm)
+            </option>
           
-            <option value="HVL050">to Volcano/Ka&#39;u (5am - 6:10pm)</option>
+            <option value="HVL050">
+              to Volcano/Ka&#39;u (5am - 6:10pm)
+            </option>
           
-            <option value="HVL075">to Volcano/Ka&#39;u (7:40am - 8:55am)</option>
+            <option value="HVL075" selected>
+              to Volcano/Ka&#39;u (7:40am - 8:55am)
+            </option>
           
-            <option value="HVL135">to Volcano/Ka&#39;u (1:40pm - 3:20pm)</option>
+            <option value="HVL135">
+              to Volcano/Ka&#39;u (1:40pm - 3:20pm)
+            </option>
           
-            <option value="HVL145">to Volcano/Ka&#39;u (2:40pm - 5:15pm)</option>
+            <option value="HVL145">
+              to Volcano/Ka&#39;u (2:40pm - 5:15pm)
+            </option>
           
-            <option value="HVL170">to Volcano/Ka&#39;u (4:40pm - 5:50pm)</option>
+            <option value="HVL170">
+              to Volcano/Ka&#39;u (4:40pm - 5:50pm)
+            </option>
           
         </select>
       </div>
@@ -304,11 +329,149 @@ ga('send', 'pageview');
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        
+          Monday - Saturday
+        
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    
+    
+      <a href="?stop=mb" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Mo&#39;oheau Bus Terminal
+        </span>
+        <time class="schedule__time">
+          7:40am
+        </time>
+      </a>
+    
+      <a href="?stop=mv" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Mountain View
+        </span>
+        <time class="schedule__time">
+          8:25am
+        </time>
+      </a>
+    
+      <a href="?stop=vv" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Volcano Village
+        </span>
+        <time class="schedule__time">
+          8:45am
+        </time>
+      </a>
+    
+      <a href="?stop=vp" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Volcano National Park Visitor&#39;s Center
+        </span>
+        <time class="schedule__time">
+          8:55am
+        </time>
+      </a>
+    
+      <a href="?stop=ac" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Aupuni Center
+        </span>
+        <time class="schedule__time">
+          7:43am
+        </time>
+      </a>
+    
+      <a href="?stop=uh" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          University of Hawaii Hilo
+        </span>
+        <time class="schedule__time">
+          7:50am
+        </time>
+      </a>
+    
+      <a href="?stop=cc" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hawaii Community College
+        </span>
+        <time class="schedule__time">
+          7:55am
+        </time>
+      </a>
+    
+      <a href="?stop=pk" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Prince Kuhio Plaza
+        </span>
+        <time class="schedule__time">
+          8am
+        </time>
+      </a>
+    
+      <a href="?stop=ku" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Keaau
+        </span>
+        <time class="schedule__time">
+          8:10am
+        </time>
+      </a>
+    
+      <a href="?stop=kx" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kurtistown
+        </span>
+        <time class="schedule__time">
+          8:15am
+        </time>
+      </a>
+    
+    
+    </section>
   </div>
 
   <section id="stop">

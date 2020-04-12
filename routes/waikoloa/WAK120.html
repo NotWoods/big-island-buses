@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   
+  
   <head>
     <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="/big-island-buses/style.css" />
@@ -36,6 +37,7 @@ ga('send', 'pageview');
 
 
     <title>Waikoloa Village Shuttle | Big Island Buses</title>
+    <link rel="canonical" href="https://notwoods.github.io/big-island-buses/routes/waikoloa/">
   </head>
   <body>
     <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -46,6 +48,9 @@ ga('send', 'pageview');
 
   <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
   <ul class="sidebar__list routes__list" id="nearby"></ul>
+  <button type="button" class="nearby__info" id="nearby-info">
+    Find routes near my location >
+  </button>
 
   <h2 class="sidebar__heading routes__heading">Other Routes</h2>
   <ul class="sidebar__list routes__list" id="other">
@@ -187,7 +192,7 @@ ga('send', 'pageview');
     <p>
       Created by
       <a href="http://tigeroakes.com">
-        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+        <img class="created" src="/big-island-buses/assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
       </a>
     </p>
     <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
@@ -246,19 +251,33 @@ ga('send', 'pageview');
         </label>
         <select class="info__select" id="trip-select">
           
-            <option value="WAK050">5:20 - 6:20</option>
+            <option value="WAK050">
+              5:20 - 6:20
+            </option>
           
-            <option value="WAK070">7:05 - 7:40</option>
+            <option value="WAK070">
+              7:05 - 7:40
+            </option>
           
-            <option value="WAK080">7:40 - 8:45</option>
+            <option value="WAK080">
+              7:40 - 8:45
+            </option>
           
-            <option value="WAK120">12:30 - 1:40</option>
+            <option value="WAK120" selected>
+              12:30 - 1:40
+            </option>
           
-            <option value="WAK130">1:40 - 2:15</option>
+            <option value="WAK130">
+              1:40 - 2:15
+            </option>
           
-            <option value="WAK140">2:15 - 3:15</option>
+            <option value="WAK140">
+              2:15 - 3:15
+            </option>
           
-            <option value="WAK150">3:15 - 4:10</option>
+            <option value="WAK150">
+              3:15 - 4:10
+            </option>
           
         </select>
       </div>
@@ -298,11 +317,201 @@ ga('send', 'pageview');
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        
+          Monday - Saturday
+        
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    
+    
+      <a href="?stop=pr" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Parker Ranch Shopping Center
+        </span>
+        <time class="schedule__time">
+          12:30pm
+        </time>
+      </a>
+    
+      <a href="?stop=bc" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Waikoloa Baptist Church
+        </span>
+        <time class="schedule__time">
+          1:30pm
+        </time>
+      </a>
+    
+      <a href="?stop=hu" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hulu St.
+        </span>
+        <time class="schedule__time">
+          1:32pm
+        </time>
+      </a>
+    
+      <a href="?stop=lp" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Laie/Paniolo
+        </span>
+        <time class="schedule__time">
+          1:35pm
+        </time>
+      </a>
+    
+      <a href="?stop=wf" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Waikoloa Village Market
+        </span>
+        <time class="schedule__time">
+          1:37pm
+        </time>
+      </a>
+    
+      <a href="?stop=po" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Waikoloa Post Office
+        </span>
+        <time class="schedule__time">
+          1:40pm
+        </time>
+      </a>
+    
+      <a href="?stop=po" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Waikoloa Post Office
+        </span>
+        <time class="schedule__time">
+          1:05pm
+        </time>
+      </a>
+    
+      <a href="?stop=lk" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Lua Kula
+        </span>
+        <time class="schedule__time">
+          1:07pm
+        </time>
+      </a>
+    
+      <a href="?stop=lp" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Laie/Paniolo
+        </span>
+        <time class="schedule__time">
+          1:10pm
+        </time>
+      </a>
+    
+      <a href="?stop=cp" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Waikoloa Community Park
+        </span>
+        <time class="schedule__time">
+          1:15pm
+        </time>
+      </a>
+    
+      <a href="?stop=li" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Lina Poepoe Street
+        </span>
+        <time class="schedule__time">
+          1:18pm
+        </time>
+      </a>
+    
+      <a href="?stop=hk" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hooko Street
+        </span>
+        <time class="schedule__time">
+          1:19pm
+        </time>
+      </a>
+    
+      <a href="?stop=wk" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Waikoloa Park
+        </span>
+        <time class="schedule__time">
+          1:25pm
+        </time>
+      </a>
+    
+      <a href="?stop=we" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Waikoloa Elementary
+        </span>
+        <time class="schedule__time">
+          1:27pm
+        </time>
+      </a>
+    
+    
+    </section>
   </div>
 
   <section id="stop">

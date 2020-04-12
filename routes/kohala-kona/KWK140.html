@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   
+  
   <head>
     <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="/big-island-buses/style.css" />
@@ -36,6 +37,7 @@ ga('send', 'pageview');
 
 
     <title>North Kohala to Waimea and Kailua-Kona | Big Island Buses</title>
+    <link rel="canonical" href="https://notwoods.github.io/big-island-buses/routes/kohala-kona/">
   </head>
   <body>
     <aside class="sidebar routes__container" id="aside" itemscope itemtype="http://schema.org/SoftwareApplication">
@@ -46,6 +48,9 @@ ga('send', 'pageview');
 
   <h2 class="sidebar__heading routes__heading">Nearby Routes</h2>
   <ul class="sidebar__list routes__list" id="nearby"></ul>
+  <button type="button" class="nearby__info" id="nearby-info">
+    Find routes near my location >
+  </button>
 
   <h2 class="sidebar__heading routes__heading">Other Routes</h2>
   <ul class="sidebar__list routes__list" id="other">
@@ -187,7 +192,7 @@ ga('send', 'pageview');
     <p>
       Created by
       <a href="http://tigeroakes.com">
-        <img class="created" src="assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
+        <img class="created" src="/big-island-buses/assets/tigeroakes.svg" alt="Tiger Oakes" width="122" height="18" />
       </a>
     </p>
     <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
@@ -246,13 +251,21 @@ ga('send', 'pageview');
         </label>
         <select class="info__select" id="trip-select">
           
-            <option value="KWK070">Kohala-Waimea-Keauhou (Mon - Fri)</option>
+            <option value="KWK070">
+              Kohala-Waimea-Keauhou (Mon - Fri)
+            </option>
           
-            <option value="KWK140">Keauhou-Waimea-Kohala (Mon - Fri)</option>
+            <option value="KWK140" selected>
+              Keauhou-Waimea-Kohala (Mon - Fri)
+            </option>
           
-            <option value="KWK090">Kohala-Waimea-Keauhou (Saturday)</option>
+            <option value="KWK090">
+              Kohala-Waimea-Keauhou (Saturday)
+            </option>
           
-            <option value="KWK150">Keauhou-Waimea-Kohala (Saturday)</option>
+            <option value="KWK150">
+              Keauhou-Waimea-Kohala (Saturday)
+            </option>
           
         </select>
       </div>
@@ -292,11 +305,175 @@ ga('send', 'pageview');
           ></path>
           <rect x="7" y="10" width="5" height="5"></rect>
         </svg>
-        <span id="week-days-value"></span>
+        <span id="week-days-value">
+        
+          Monday - Friday
+        
+        </span>
       </div>
     </section>
 
-    <section class="schedule" id="schedule"></section>
+    <section class="schedule" id="schedule">
+    
+    
+      <a href="?stop=ks" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Keauhou Shopping Center
+        </span>
+        <time class="schedule__time">
+          1:35pm
+        </time>
+      </a>
+    
+      <a href="?stop=hw" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Highway 19 &amp; 250 Intersection
+        </span>
+        <time class="schedule__time">
+          3:45pm
+        </time>
+      </a>
+    
+      <a href="?stop=kr" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kawaihae Road
+        </span>
+        <time class="schedule__time">
+          4pm
+        </time>
+      </a>
+    
+      <a href="?stop=hi" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Hawi Intersection
+        </span>
+        <time class="schedule__time">
+          4:50pm
+        </time>
+      </a>
+    
+      <a href="?stop=kd" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kapaau Dispensary
+        </span>
+        <time class="schedule__time">
+          4:55pm
+        </time>
+      </a>
+    
+      <a href="?stop=al" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Ali&#39;i Drive
+        </span>
+        <time class="schedule__time">
+          1:50pm
+        </time>
+      </a>
+    
+      <a href="?stop=km" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Kmart/Macy&#39;s
+        </span>
+        <time class="schedule__time">
+          2pm
+        </time>
+      </a>
+    
+      <a href="?stop=wv" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Waikoloa Village Paniolo Avenue
+        </span>
+        <time class="schedule__time">
+          2:45pm
+        </time>
+      </a>
+    
+      <a href="?stop=pr" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Parker Ranch Shopping Center
+        </span>
+        <time class="schedule__time">
+          3:25pm
+        </time>
+      </a>
+    
+      <a href="?stop=ps" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Parker School
+        </span>
+        <time class="schedule__time">
+          3:30pm
+        </time>
+      </a>
+    
+      <a href="?stop=wp" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          Waimea Park
+        </span>
+        <time class="schedule__time">
+          3:35pm
+        </time>
+      </a>
+    
+      <a href="?stop=hp" class="schedule__stop">
+        <div class="lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="schedule__stopname name">
+          HPA Lower Campus
+        </span>
+        <time class="schedule__time">
+          3:40pm
+        </time>
+      </a>
+    
+    
+    </section>
   </div>
 
   <section id="stop">
