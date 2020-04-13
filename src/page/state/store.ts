@@ -87,12 +87,16 @@ export function connect<Props>(
   callback: (props: PromiseValues<Props>) => void,
 ) {
   let lastProps: PromiseValues<Props> | undefined;
-  return store.subscribe(state =>
-    awaitObject(mapStateToProps(state)).then(props => {
+
+  function listener(state: State) {
+    return awaitObject(mapStateToProps(state)).then(props => {
       if (!lastProps || differentObjects(props, lastProps)) {
         lastProps = props;
         callback(props);
       }
-    }),
-  );
+    });
+  }
+
+  listener(store.getState());
+  return store.subscribe(listener);
 }

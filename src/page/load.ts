@@ -158,9 +158,12 @@ export function dynamicLinkNode(
  * Navigate to the page described by the `Linkable`.
  */
 export function openLinkable(link: Linkable) {
-  const { Type, Value } = link;
-  const newLink = pageLink(Type, Value);
-  const newState = getStateWithLink(store.getState(), Type, Value);
+  const { Type: type, Value: value } = link;
+  const newLink = pageLink(type, value);
+  const newState = getStateWithLink(store.getState(), type, value) as State;
+  if (type === Type.STOP) {
+    newState.focus = 'stop';
+  }
   store.setState(newState);
   history.pushState(newState, null as any, newLink);
   ga?.('send', 'pageview', { page: newLink, title: document.title });

@@ -42,12 +42,12 @@ const documentPromise = documentLoad();
 const schedulePromise = getScheduleData();
 const mapPromise = loadMap();
 
-/*
 schedulePromise.then(api => {
+  // @ts-ignore
   window.api = api;
+  // @ts-ignore
   window.store = store;
 });
-*/
 
 export type LinkableMarker = google.maps.Marker & Linkable;
 interface StopMarker extends LinkableMarker {
