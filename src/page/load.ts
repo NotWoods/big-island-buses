@@ -185,10 +185,8 @@ export function clickEvent(this: Linkable, e: Event) {
  * @param {GTFSData stop_times} stopTimes
  * @return ordered list
  */
-export function sequence(stopTimes: Trip['stop_times']): string[] {
-  const stopSequence = [];
-  for (const key in stopTimes) {
-    stopSequence.push(key);
-  }
-  return stopSequence.sort((a, b) => toInt(a) - toInt(b));
+export function sequence(stopTimes: Trip['stop_times']): number[] {
+  return Object.keys(stopTimes)
+    .map(toInt)
+    .sort((a, b) => a - b);
 }

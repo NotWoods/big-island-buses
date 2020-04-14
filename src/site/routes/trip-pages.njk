@@ -1,13 +1,13 @@
 ---
 pagination:
-  data: trips
+  data: api.trips
   size: 1
   alias: trip_id
-permalink: "/routes/{{ trips[trip_id] }}/{{ trip_id }}.html"
+permalink: "/routes/{{ api.trips[trip_id] }}/{{ trip_id }}.html"
 ---
 <!DOCTYPE html>
 <html>
-  {% set route = api.routes[trips[trip_id]] %}
+  {% set route = api.routes[api.trips[trip_id]] %}
   {% set trip = route.trips[trip_id] %}
   <head>
     {% include 'meta.html' %}

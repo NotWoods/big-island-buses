@@ -8,15 +8,21 @@ import {
   CsvRoute,
   CsvStop,
   CsvTrip,
-  GTFSData,
+  GTFSDataWithTrips,
   Route,
   Stop,
   StopTime,
   Trip,
 } from '../gtfs-types';
+import { toInt } from '../page/utils/num';
 
 const readFileAsync = promisify(readFile);
 const writeFileAsync = promisify(writeFile);
+
+function writeJson(path: string, json: unknown) {
+  const str = JSON.stringify(json);
+  return writeFileAsync(path, str, { encoding: 'utf8' });
+}
 
 interface CsvFile {
   name: string;
@@ -52,7 +58,7 @@ function csvFilesToObject(csvFiles: readonly CsvFile[]) {
  * @param i 0 returns false, 1 returns true
  */
 function toBool(i: number | string): boolean {
-  return parseInt(i as string, 10) !== 0;
+  return toInt(i) !== 0;
 }
 
 function makeCalendarTextName(days: Calendar['days']) {
@@ -95,7 +101,7 @@ function makeCalendarTextName(days: Calendar['days']) {
  */
 async function createApiData(
   gtfsZipData: Buffer | ArrayBuffer | Uint8Array,
-): Promise<GTFSData> {
+): Promise<GTFSDataWithTrips> {
   const fileList = [
     'agency.txt',
     'calendar.txt',
@@ -120,10 +126,11 @@ async function createApiData(
     ),
   );
 
-  const variable: GTFSData = {
+  const variable: GTFSDataWithTrips = {
     routes: {},
     stops: {},
     calendar: {},
+    trips: {},
   };
   const json = csvFilesToObject(csvFiles) as {
     routes: CsvRoute[];
@@ -142,6 +149,7 @@ async function createApiData(
     const trip = csvTrip as Trip;
     trip.stop_times = {};
     variable.routes[trip.route_id].trips[trip.trip_id] = trip;
+    variable.trips[trip.trip_id] = trip.route_id;
   }
   for (const csvStop of json.stops) {
     const stop = csvStop as Stop;
@@ -165,27 +173,26 @@ async function createApiData(
   }
   for (const stopTime of json.stop_times) {
     const stop = variable.stops[stopTime.stop_id];
-    for (const { route_id } of json.routes) {
-      const trip = variable.routes[route_id].trips[stopTime.trip_id];
-      if (trip) {
-        trip.stop_times[stopTime.stop_sequence] = stopTime;
+    const route_id = variable.trips[stopTime.trip_id];
+    const route = variable.routes[route_id];
+    const trip = route.trips[stopTime.trip_id];
 
-        const tripAdded = stop.trips.find(
-          ({ trip }) => trip === stopTime.trip_id,
-        );
-        if (!tripAdded) {
-          stop.trips.push({
-            trip: stopTime.trip_id,
-            dir: trip.direction_id,
-            route: route_id,
-            sequence: stopTime.stop_sequence,
-            time: stopTime.arrival_time,
-          });
-        }
-        if (!stop.routes.includes(route_id)) {
-          stop.routes.push(route_id);
-        }
-      }
+    const stopSequence = toInt(stopTime.stop_sequence);
+
+    trip.stop_times[stopSequence] = stopTime;
+
+    const tripAdded = stop.trips.find(({ trip }) => trip === stopTime.trip_id);
+    if (!tripAdded) {
+      stop.trips.push({
+        trip: stopTime.trip_id,
+        dir: trip.direction_id,
+        route: route_id,
+        sequence: stopSequence,
+        time: stopTime.arrival_time,
+      });
+    }
+    if (!stop.routes.includes(route_id)) {
+      stop.routes.push(route_id);
     }
   }
 
@@ -199,43 +206,25 @@ async function createApiData(
 async function generateApi(
   gtfsZipPath: string,
   apiFilePath: string,
-): Promise<GTFSData> {
+): Promise<void> {
   const zipData = await readFileAsync(gtfsZipPath, { encoding: null });
   const api = await createApiData(zipData);
-  const json = JSON.stringify(api);
-  await writeFileAsync(apiFilePath, json, { encoding: 'utf8' });
-  return api;
-}
 
-async function generateTrips(
-  apiData: GTFSData,
-  tripsFilePath: string,
-): Promise<void> {
-  const trips: Record<Trip['trip_id'], Route['route_id']> = {};
-  for (const route of Object.values(apiData.routes)) {
-    for (const trip_id of Object.keys(route.trips)) {
-      trips[trip_id] = route.route_id;
-    }
-  }
-
-  const json = JSON.stringify(trips);
-  await writeFileAsync(tripsFilePath, json, { encoding: 'utf8' });
+  await writeJson(apiFilePath, api);
 }
 
 if (require.main === module) {
   const args = process.argv.slice(2);
-  if (args.length < 2) {
+  if (args.length !== 2) {
     throw new TypeError(`should pass 2 arguments, not ${args.length}.`);
   }
 
   const gtfsZipPath = resolve(args[0]);
   const apiFilePath = resolve(args[1]);
-  const tripsFilePath = args[2] ? resolve(args[2]) : undefined;
 
   generateApi(gtfsZipPath, apiFilePath)
-    .then(data => {
-      console.log('Wrote API file');
-      return tripsFilePath ? generateTrips(data, tripsFilePath) : undefined;
+    .then(() => {
+      console.log('Wrote API files');
     })
     .catch(err => {
       console.error(err);

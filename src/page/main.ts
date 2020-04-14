@@ -22,14 +22,9 @@ import { createLocationMarker } from './location/marker.js';
 import { hydrateAside } from './sidebar.js';
 import { closestToSearch, closestToUser, stopToDisplay } from './state/map.js';
 import { connect, LatLngLiteral, memoize, store, View } from './state/store.js';
-import {
-  gtfsArrivalToDate,
-  gtfsArrivalToString,
-  nowDateTime,
-  stringTime,
-} from './utils/date.js';
+import { gtfsArrivalToString, stringTime } from './utils/date.js';
 import { Linkable, parseLink, Type } from './utils/link.js';
-import { toInt } from './utils/num.js';
+import { getRouteDetails } from './route/details.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -377,6 +372,7 @@ const openRoute = memoize(function openRoute(
     return Promise.resolve(undefined);
   }
 
+  const detailsPromise = getRouteDetails(thisRoute);
   document.title = `${thisRoute.route_long_name} | Big Island Buses`;
 
   const container = document.getElementById('content')!;
@@ -389,71 +385,9 @@ const openRoute = memoize(function openRoute(
   const name = document.getElementById('route_long_name')!;
   name.textContent = thisRoute.route_long_name;
 
-  let firstStop: Stop['stop_id'] | undefined;
-  let lastStop: Stop['stop_id'] | undefined;
-  let largest = 0;
-  let earliest = new Date(0, 0, 0, 23, 59, 59, 0);
-  let latest = new Date(0, 0, 0, 0, 0, 0, 0);
-  let earliestTrip: Trip['trip_id'] | undefined;
-  let earliestTripStop: Stop['stop_id'] | undefined;
-
-  const nowTime = nowDateTime();
-  let closestTrip: Trip['trip_id'] | undefined;
-  let closestTripTime = Number.MAX_VALUE;
-  let closestTripStop: Stop['stop_id'] | undefined;
   const select = document.getElementById('trip-select')!;
   removeChildren(select);
-
-  const routeStops = new Set<Stop['stop_id']>();
-
-  for (const trip_id of Object.keys(thisRoute.trips)) {
-    const trip = thisRoute.trips[trip_id];
-    for (const stop in trip.stop_times) {
-      if (stop == '1' && toInt(trip.direction_id) === 0) {
-        firstStop = trip.stop_times[stop].stop_id;
-      } else {
-        if (toInt(stop) > largest && toInt(trip.direction_id) === 0) {
-          largest = toInt(stop);
-          lastStop = trip.stop_times[stop].stop_id;
-        }
-      }
-
-      routeStops.add(trip.stop_times[stop].stop_id);
-
-      const timeDate = gtfsArrivalToDate(trip.stop_times[stop].arrival_time);
-      if (timeDate > latest) {
-        latest = timeDate;
-      }
-      if (timeDate < earliest) {
-        earliest = timeDate;
-        earliestTrip = trip.trip_id;
-        earliestTripStop = trip.stop_times[stop].stop_id;
-      }
-
-      if (
-        timeDate.getTime() - nowTime.getTime() < closestTripTime &&
-        timeDate.getTime() - nowTime.getTime() > 0
-      ) {
-        closestTripTime = timeDate.getTime() - nowTime.getTime();
-        closestTrip = trip.trip_id;
-        closestTripStop = trip.stop_times[stop].stop_id;
-      }
-    }
-    if (!closestTrip) {
-      //Too late for all bus routes
-      closestTripTime =
-        new Date(
-          0,
-          0,
-          1,
-          earliest.getHours(),
-          earliest.getMinutes(),
-          earliest.getSeconds(),
-          0,
-        ).getTime() - nowTime.getTime();
-      closestTrip = earliestTrip;
-      closestTripStop = earliestTripStop;
-    }
+  for (const trip of Object.values(thisRoute.trips)) {
     const option = createElement('option', {
       value: trip.trip_id,
       textContent: trip.trip_short_name,
@@ -461,52 +395,53 @@ const openRoute = memoize(function openRoute(
     select.appendChild(option);
   }
 
-  const minString =
-    Math.floor(closestTripTime / 60000) != 1
-      ? Math.floor(closestTripTime / 60000) + ' minutes'
-      : '1 minute';
-  document.getElementById('place-value')!.textContent =
-    'Between ' +
-    buses!.stops[firstStop!].stop_name +
-    ' - ' +
-    buses!.stops[lastStop!].stop_name;
-  document.getElementById('time-value')!.textContent =
-    stringTime(earliest) + ' - ' + stringTime(latest);
-  document.getElementById('next-stop-value')!.textContent =
-    'Reaches ' + buses!.stops[closestTripStop!].stop_name + ' in ' + minString;
+  return detailsPromise.then(details => {
+    const minString =
+      details.closestTrip.minutes !== 1
+        ? details.closestTrip.minutes + ' minutes'
+        : '1 minute';
+    document.getElementById('place-value')!.textContent =
+      'Between ' +
+      buses.stops[details.firstStop].stop_name +
+      ' - ' +
+      buses.stops[details.lastStop].stop_name;
+    document.getElementById('time-value')!.textContent =
+      stringTime(details.earliest) + ' - ' + stringTime(details.latest);
+    document.getElementById('next-stop-value')!.textContent =
+      'Reaches ' +
+      buses.stops[details.closestTrip.stop].stop_name +
+      ' in ' +
+      minString;
 
-  document.getElementById('main')!.classList.add('open');
+    document.getElementById('main')!.classList.add('open');
 
-  if (
-    navigator.onLine &&
-    typeof google === 'object' &&
-    typeof google.maps === 'object'
-  ) {
-    const routeBounds = new google.maps.LatLngBounds();
-    for (const marker of markers) {
-      if (routeStops.has(marker.stop_id)) {
-        marker.setIcon(normal);
-        marker.setZIndex(200);
-        marker.activeInRoute = true;
-        routeBounds.extend(marker.getPosition()!);
-      } else {
-        marker.setIcon(unimportant);
-        marker.setZIndex(null);
-        marker.activeInRoute = false;
+    if (map) {
+      const routeBounds = new google.maps.LatLngBounds();
+      for (const marker of markers) {
+        if (details.stops.has(marker.stop_id)) {
+          marker.setIcon(normal);
+          marker.setZIndex(200);
+          marker.activeInRoute = true;
+          routeBounds.extend(marker.getPosition()!);
+        } else {
+          marker.setIcon(unimportant);
+          marker.setZIndex(null);
+          marker.activeInRoute = false;
+        }
       }
-    }
-    if (stopMarker) {
-      stopMarker.setIcon(stopShape);
-      stopMarker.setZIndex(300);
+      if (stopMarker) {
+        stopMarker.setIcon(stopShape);
+        stopMarker.setZIndex(300);
+      }
+
+      google.maps.event.trigger(map, 'resize');
+      map!.setCenter(routeBounds.getCenter());
+      map!.fitBounds(routeBounds);
+      google.maps.event.trigger(streetview, 'resize');
     }
 
-    google.maps.event.trigger(map, 'resize');
-    map!.setCenter(routeBounds.getCenter());
-    map!.fitBounds(routeBounds);
-    google.maps.event.trigger(streetview, 'resize');
-  }
-
-  return Promise.resolve(closestTrip);
+    return details.closestTrip.id;
+  });
 });
 
 /**

@@ -1,4 +1,4 @@
 ---
 permalink: /api.json
 ---
-{{ api | dump | safe }}
+{% set data = { 'routes': api.routes, 'stops': api.stops, 'calendar': api.calendar } %}{{ data | dump | safe }}

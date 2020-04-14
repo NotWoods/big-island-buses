@@ -4,6 +4,11 @@ export interface GTFSData {
   calendar: { [service_id: string]: Calendar };
 }
 
+/* Server needs to iterate through all trips, client doesn't. */
+export interface GTFSDataWithTrips extends GTFSData {
+  trips: { [trip_id: string]: Route['route_id'] };
+}
+
 export interface CsvCalendar {
   service_id: string;
   monday: '0' | '1';
@@ -56,7 +61,7 @@ export interface CsvTrip {
 }
 
 export interface Trip extends CsvTrip {
-  stop_times: { [stop_sequence: string]: StopTime };
+  stop_times: { [stop_sequence: number]: StopTime };
 }
 
 export interface CsvStop {
@@ -71,7 +76,7 @@ export interface Stop extends CsvStop {
     trip: Trip['trip_id'];
     dir: string;
     route: Route['route_id'];
-    sequence: string;
+    sequence: number;
     time: string;
   }[];
   routes: Route['route_id'][];
