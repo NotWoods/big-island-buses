@@ -94,6 +94,10 @@ function makeCalendarTextName(days: Calendar['days']) {
   }
 }
 
+function notNull<T>(value: T | null | undefined): value is T {
+  return value != null;
+}
+
 /**
  * Creates a JSON object representing the Big Island Buses schedule.
  * The JSON data can be written to a file for the client to load later.
@@ -115,15 +119,17 @@ async function createApiData(
 
   const zip = await loadAsync(gtfsZipData);
   const csvFiles = await Promise.all(
-    fileList.map(fileName =>
-      zip
-        .file(fileName)
-        .async('text')
-        .then(body => ({
-          name: fileName.substring(0, fileName.length - 4),
-          body,
-        })),
-    ),
+    fileList
+      .map((fileName) =>
+        zip
+          .file(fileName)
+          ?.async('text')
+          ?.then((body) => ({
+            name: fileName.substring(0, fileName.length - 4),
+            body,
+          })),
+      )
+      .filter(notNull),
   );
 
   const variable: GTFSDataWithTrips = {
@@ -226,7 +232,7 @@ if (require.main === module) {
     .then(() => {
       console.log('Wrote API files');
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       process.exit(1);
     });

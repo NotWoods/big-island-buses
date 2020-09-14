@@ -4,7 +4,7 @@ export class PromiseWorker {
   callbacks = new Map<number, (error: Error | null, result: unknown) => void>();
 
   constructor(private worker: Worker) {
-    worker.addEventListener('message', evt => this.onMessage(evt.data));
+    worker.addEventListener('message', (evt) => this.onMessage(evt.data));
   }
 
   private onMessage(message: unknown) {

@@ -62,11 +62,11 @@ export const normal = {
  */
 export function getScheduleData(): Promise<GTFSData> {
   return fetch(pathPrefix + 'api.json')
-    .then(res => {
+    .then((res) => {
       if (res.ok) return res.json();
       throw new Error(res.statusText);
     })
-    .then(json => json as GTFSData);
+    .then((json) => json as GTFSData);
 }
 
 export function createElement<Tag extends keyof HTMLElementTagNameMap>(
@@ -88,7 +88,7 @@ export function documentLoad() {
     return Promise.resolve(document.readyState);
   }
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     document.addEventListener('readystatechange', () => {
       if (document.readyState === 'interactive') {
         resolve(document.readyState);
@@ -130,7 +130,7 @@ export function convertToLinkable(
   node.href = pageLink(type, value);
   node.addEventListener('click', clickEvent);
   if (store) {
-    connect(store, getLinkState, state => {
+    connect(store, getLinkState, (state) => {
       node.href = createLink(type, value, state);
     });
   }

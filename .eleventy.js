@@ -5,7 +5,7 @@ try {
   filters = require('./lib/filters.js');
 } catch (err) {}
 
-module.exports = function(config) {
+module.exports = function (config) {
   // pass some assets right through
   config.addPassthroughCopy({
     'src/site/assets': true,

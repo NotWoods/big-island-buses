@@ -37,7 +37,7 @@ const documentPromise = documentLoad();
 const schedulePromise = getScheduleData();
 const mapPromise = loadMap();
 
-schedulePromise.then(api => {
+schedulePromise.then((api) => {
   // @ts-ignore
   window.api = api;
   // @ts-ignore
@@ -77,7 +77,7 @@ Promise.all([schedulePromise, mapPromise]).then(([schedule, map]) => {
 
   connect(
     store,
-    state => ({
+    (state) => ({
       location: state.userLocation,
       stop: closestToUser(schedule.stops, state),
       buildMarker: buildUserMarker,
@@ -86,7 +86,7 @@ Promise.all([schedulePromise, mapPromise]).then(([schedule, map]) => {
   );
   connect(
     store,
-    state => ({
+    (state) => ({
       location: state.searchLocation,
       stop: closestToSearch(schedule.stops, state),
       buildMarker: buildPlaceMarker,
@@ -114,7 +114,7 @@ function loadMap() {
     typeof google !== 'object' ||
     typeof google.maps !== 'object'
   ) {
-    documentPromise.then(function() {
+    documentPromise.then(function () {
       document.body.classList.add('no-map');
     });
     throw new Error('Google Maps API has not loaded');
@@ -193,7 +193,7 @@ function loadMap() {
         document.getElementById('search') as HTMLInputElement,
       );
       autocomplete.bindTo('bounds', map);
-      google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      google.maps.event.addListener(autocomplete, 'place_changed', function () {
         const place = autocomplete!.getPlace();
         if (!place.geometry) return;
         store.setState({
@@ -208,10 +208,10 @@ function loadMap() {
   const mapReady = documentPromise.then(mapLoad);
 
   Promise.all([mapReady, schedulePromise.then(markersAndLatLng)]).then(
-    function([map, { markers, bounds }]) {
+    function ([map, { markers, bounds }]) {
       map.setCenter(bounds.getCenter());
       map.fitBounds(bounds);
-      google.maps.event.addListener(map, 'bounds_changed', function() {
+      google.maps.event.addListener(map, 'bounds_changed', function () {
         const mapBounds = map.getBounds()!;
         for (const marker of markers) {
           if (mapBounds.contains(marker.getPosition()!)) {
@@ -221,11 +221,11 @@ function loadMap() {
           }
         }
       });
-      markers.forEach(marker => marker.setMap(map));
+      markers.forEach((marker) => marker.setMap(map));
     },
   );
 
-  window.addEventListener('resize', function() {
+  window.addEventListener('resize', function () {
     google.maps.event.trigger(map, 'resize');
     google.maps.event.trigger(streetview, 'resize');
     if (!store.getState().route.id) {
@@ -237,11 +237,11 @@ function loadMap() {
   return mapReady;
 }
 
-documentPromise.then(function() {
+documentPromise.then(function () {
   uiEvents();
 });
 
-schedulePromise.then(schedule => {
+schedulePromise.then((schedule) => {
   function openActive(props: {
     route_id?: string;
     trip_id?: string;
@@ -249,7 +249,7 @@ schedulePromise.then(schedule => {
   }) {
     let routePromise = Promise.resolve();
     if (props.route_id) {
-      routePromise = openRoute(schedule, props.route_id).then(bestTrip =>
+      routePromise = openRoute(schedule, props.route_id).then((bestTrip) =>
         openTrip(schedule, props.route_id, props.trip_id ?? bestTrip!),
       );
     }
@@ -261,7 +261,7 @@ schedulePromise.then(schedule => {
 
   connect(
     store,
-    state => ({
+    (state) => ({
       route_id: state.route.id || undefined,
       trip_id: state.route.trip || undefined,
       stop_id: stopToDisplay(schedule.stops, state),
@@ -297,7 +297,7 @@ function uiEvents() {
   const select = document.getElementById('trip-select') as HTMLSelectElement &
     Linkable;
   select.Type = Type.TRIP;
-  select.addEventListener('change', function(e) {
+  select.addEventListener('change', function (e) {
     select.Value = select.options[select.selectedIndex].value;
     clickEvent.call(select, e);
   });
@@ -395,7 +395,7 @@ const openRoute = memoize(function openRoute(
     select.appendChild(option);
   }
 
-  return detailsPromise.then(details => {
+  return detailsPromise.then((details) => {
     const minString =
       details.closestTrip.minutes !== 1
         ? details.closestTrip.minutes + ' minutes'
@@ -480,7 +480,7 @@ function openStop(
 
     streetview!.setPosition(stopMarker!.getPosition()!);
     google.maps.event.trigger(streetview, 'resize');
-    google.maps.event.addListener(streetview!, 'pano_changed', function() {
+    google.maps.event.addListener(streetview!, 'pano_changed', function () {
       document.getElementById(
         'address',
       )!.textContent = streetview!.getLocation().description!;

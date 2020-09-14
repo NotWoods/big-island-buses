@@ -31,7 +31,7 @@ function findClosestStop(location: LatLngLike) {
   return closestStop;
 }
 
-registerPromiseWorker(message => {
+registerPromiseWorker((message) => {
   if (message.stops) {
     stops = message.stops;
     return undefined;

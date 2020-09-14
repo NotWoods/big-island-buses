@@ -52,7 +52,7 @@ export const store = createStore<State>({
 export function memoize<Func extends (...args: any[]) => any>(fn: Func): Func {
   let lastArgs: Parameters<Func> | undefined;
   let lastResult: ReturnType<Func> | undefined;
-  return function(...args: Parameters<Func>) {
+  return function (...args: Parameters<Func>) {
     if (lastArgs?.every((arg, i) => arg === args[i])) {
       return lastResult;
     }
@@ -64,7 +64,7 @@ export function memoize<Func extends (...args: any[]) => any>(fn: Func): Func {
 }
 
 function differentObjects<T>(a: T, b: T) {
-  return (Object.keys(a) as Array<keyof T>).some(key => a[key] === b[key]);
+  return (Object.keys(a) as Array<keyof T>).some((key) => a[key] === b[key]);
 }
 
 /**
@@ -72,7 +72,7 @@ function differentObjects<T>(a: T, b: T) {
  */
 function awaitObject<T>(obj: T) {
   const keys = Object.keys(obj) as Array<keyof T>;
-  return Promise.all(keys.map(key => obj[key])).then(values => {
+  return Promise.all(keys.map((key) => obj[key])).then((values) => {
     const result: Partial<T> = {};
     keys.forEach((key, i) => {
       result[key] = values[i];
@@ -89,7 +89,7 @@ export function connect<Props>(
   let lastProps: PromiseValues<Props> | undefined;
 
   function listener(state: State) {
-    return awaitObject(mapStateToProps(state)).then(props => {
+    return awaitObject(mapStateToProps(state)).then((props) => {
       if (!lastProps || differentObjects(props, lastProps)) {
         lastProps = props;
         callback(props);

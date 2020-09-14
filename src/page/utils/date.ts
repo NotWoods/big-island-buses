@@ -53,7 +53,7 @@ export function stringTime(date: Date | string): string {
  * @return {Date}
  */
 export function gtfsArrivalToDate(string: string): Date {
-  const [hour, min, second] = string.split(':').map(s => toInt(s));
+  const [hour, min, second] = string.split(':').map((s) => toInt(s));
   let extraDays = 0;
   let extraHours = 0;
   if (hour > 23) {

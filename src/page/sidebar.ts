@@ -31,7 +31,7 @@ export function hydrateAside() {
 
     connect(
       store,
-      state => ({
+      (state) => ({
         permission: state.locatePermission,
       }),
       function showHideButton({ permission }) {
@@ -61,7 +61,7 @@ export function hydrateAside() {
 
     connect(
       store,
-      state => ({
+      (state) => ({
         nearest: closestToUser(schedule.stops, state),
       }),
       function updateNearbyRoutes({ nearest }) {

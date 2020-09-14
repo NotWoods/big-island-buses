@@ -104,6 +104,6 @@ function getRouteDetails(trips: readonly Trip[], now: Date): RouteDetails {
   };
 }
 
-registerPromiseWorker(trips => {
+registerPromiseWorker((trips) => {
   return getRouteDetails(trips, nowDateTime());
 });

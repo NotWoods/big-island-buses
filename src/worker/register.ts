@@ -24,8 +24,8 @@ export function registerPromiseWorker(
     const [messageId, message] = payload;
 
     Promise.resolve(callback(message)).then(
-      result => postOutgoingMessage(messageId, null, result),
-      error => postOutgoingMessage(messageId, error),
+      (result) => postOutgoingMessage(messageId, null, result),
+      (error) => postOutgoingMessage(messageId, error),
     );
   });
 }

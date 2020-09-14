@@ -1,6 +1,6 @@
 import consts from 'rollup-plugin-consts';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import typescript from 'rollup-plugin-typescript';
+import typescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
 const eleventy = require('./.eleventy.js');
 
@@ -41,7 +41,11 @@ const serviceWorker = {
     format: 'esm',
     sourcemap: true,
   },
-  plugins: [consts({ closestStopWorker }), typescript(), terser()],
+  plugins: [
+    consts({ closestStopWorker, routeDetailsWorker }),
+    typescript(),
+    terser(),
+  ],
 };
 
 /** @type {import('rollup').RollupOptions} */

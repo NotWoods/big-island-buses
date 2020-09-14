@@ -1,14 +1,15 @@
 import closestStopWorker from 'consts:closestStopWorker';
+import routeDetailsWorker from 'consts:routeDetailsWorker';
 
 const CACHE = 'big-island-buses-4';
 
 export declare var self: ServiceWorkerGlobalScope;
 
-self.addEventListener('install', evt => {
+self.addEventListener('install', (evt) => {
   evt.waitUntil(precache());
 });
 
-self.addEventListener('fetch', evt => {
+self.addEventListener('fetch', (evt) => {
   const url = new URL(evt.request.url);
 
   if (url.host === location.host) {
@@ -30,7 +31,7 @@ self.addEventListener('fetch', evt => {
 function precache() {
   return caches
     .open(CACHE)
-    .then(cache =>
+    .then((cache) =>
       cache.addAll([
         './',
         'index.html',
@@ -46,6 +47,7 @@ function precache() {
         'icon/maskable.png',
         'icon/transparent.png',
         closestStopWorker,
+        routeDetailsWorker,
       ]),
     );
 }
@@ -53,8 +55,8 @@ function precache() {
 function fromCache(request: RequestInfo) {
   return caches
     .open(CACHE)
-    .then(cache => cache.match(request))
-    .then(matching => {
+    .then((cache) => cache.match(request))
+    .then((matching) => {
       if (matching) {
         return matching;
       } else {
@@ -65,8 +67,8 @@ function fromCache(request: RequestInfo) {
 }
 
 function update(request: RequestInfo) {
-  return caches.open(CACHE).then(cache => {
-    return fetch(request).then(response => {
+  return caches.open(CACHE).then((cache) => {
+    return fetch(request).then((response) => {
       return cache.put(request, response);
     });
   });
