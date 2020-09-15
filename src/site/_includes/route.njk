@@ -79,7 +79,7 @@
 
     <section class="schedule" id="schedule">
     {% if trip %}
-    {% for sequence, stopTime in trip.stop_times | dictsort %}
+    {% for stopTime in trip.stop_times %}
       <a href="?stop={{ stopTime.stop_id }}" class="schedule__stop">
         <div class="lines">
           <span class="line"></span>

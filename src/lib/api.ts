@@ -7,6 +7,7 @@ import {
   CsvCalendar,
   CsvRoute,
   CsvStop,
+  CsvStopTime,
   CsvTrip,
   GTFSDataWithTrips,
   Route,
@@ -143,7 +144,7 @@ async function createApiData(
     trips: CsvTrip[];
     stops: CsvStop[];
     calendar: CsvCalendar[];
-    stop_times: StopTime[];
+    stop_times: CsvStopTime[];
   };
 
   for (const csvRoute of json.routes) {
@@ -153,7 +154,7 @@ async function createApiData(
   }
   for (const csvTrip of json.trips) {
     const trip = csvTrip as Trip;
-    trip.stop_times = {};
+    trip.stop_times = [];
     variable.routes[trip.route_id].trips[trip.trip_id] = trip;
     variable.trips[trip.trip_id] = trip.route_id;
   }
@@ -177,15 +178,16 @@ async function createApiData(
     calendar.text_name = makeCalendarTextName(calendar.days);
     variable.calendar[calendar.service_id] = calendar;
   }
-  for (const stopTime of json.stop_times) {
+  for (const csvStopTime of json.stop_times) {
+    const stopTime = csvStopTime as StopTime;
+    stopTime.stop_sequence = toInt(stopTime.stop_sequence);
+
     const stop = variable.stops[stopTime.stop_id];
     const route_id = variable.trips[stopTime.trip_id];
     const route = variable.routes[route_id];
     const trip = route.trips[stopTime.trip_id];
 
-    const stopSequence = toInt(stopTime.stop_sequence);
-
-    trip.stop_times[stopSequence] = stopTime;
+    trip.stop_times.push(stopTime);
 
     const tripAdded = stop.trips.find(({ trip }) => trip === stopTime.trip_id);
     if (!tripAdded) {
@@ -193,12 +195,18 @@ async function createApiData(
         trip: stopTime.trip_id,
         dir: trip.direction_id,
         route: route_id,
-        sequence: stopSequence,
+        sequence: stopTime.stop_sequence,
         time: stopTime.arrival_time,
       });
     }
     if (!stop.routes.includes(route_id)) {
       stop.routes.push(route_id);
+    }
+  }
+
+  for (const route of Object.values(variable.routes)) {
+    for (const trip of Object.values(route.trips)) {
+      trip.stop_times.sort((a, b) => a.stop_sequence - b.stop_sequence);
     }
   }
 

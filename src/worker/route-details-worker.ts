@@ -39,8 +39,8 @@ function getRouteDetails(trips: readonly Trip[], now: Date): RouteDetails {
   const routeStops = new Set<Stop['stop_id']>();
 
   for (const trip of trips) {
-    for (const stopTime of Object.values(trip.stop_times)) {
-      const sequence = toInt(stopTime.stop_sequence);
+    for (const stopTime of trip.stop_times) {
+      const sequence = stopTime.stop_sequence;
       if (toInt(trip.direction_id) === 0) {
         if (sequence < smallestSequence) {
           firstStop = stopTime.stop_id;

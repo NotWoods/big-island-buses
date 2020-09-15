@@ -24,7 +24,6 @@ import { connect, LatLngLiteral, memoize, store, View } from './state/store.js';
 import { gtfsArrivalToString, stringTime } from './utils/date.js';
 import { Linkable, parseLink, Type } from './utils/link.js';
 import { getRouteDetails } from './route/details.js';
-import { sortedStopTimes } from './trip/sort.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -545,7 +544,7 @@ function openTrip(
   document.getElementById('week-days-value')!.textContent =
     buses.calendar[trip.service_id].text_name;
 
-  for (const tripStop of sortedStopTimes(trip.stop_times)) {
+  for (const tripStop of trip.stop_times) {
     const routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id);
     routeListItem.className = 'schedule__stop';
 

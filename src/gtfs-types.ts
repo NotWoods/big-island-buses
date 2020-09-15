@@ -61,7 +61,10 @@ export interface CsvTrip {
 }
 
 export interface Trip extends CsvTrip {
-  stop_times: { [stop_sequence: number]: StopTime };
+  /**
+   * Stop times, sorted by `stop_sequence`.
+   */
+  stop_times: StopTime[];
 }
 
 export interface CsvStop {
@@ -82,10 +85,14 @@ export interface Stop extends CsvStop {
   routes: Route['route_id'][];
 }
 
-export interface StopTime {
+export interface CsvStopTime {
   trip_id: string;
   arrival_time: string;
   departure_time: string;
   stop_id: string;
-  stop_sequence: string;
+  stop_sequence: string | number;
+}
+
+export interface StopTime extends CsvStopTime {
+  stop_sequence: number;
 }
