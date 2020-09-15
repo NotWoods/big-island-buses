@@ -63,14 +63,24 @@ export function memoize<Func extends (...args: any[]) => any>(fn: Func): Func {
   } as Func;
 }
 
-function differentObjects<T>(a: T, b: T) {
-  return (Object.keys(a) as Array<keyof T>).some((key) => a[key] === b[key]);
+export function strictEqual<T>(a: T, b: T) {
+  return a === b;
+}
+
+export function deepEqual<T>(a: T, b: T) {
+  const aKeys = Object.keys(a);
+  const bKeys = Object.keys(b);
+  if (aKeys.length !== bKeys.length) {
+    return false;
+  }
+
+  return (aKeys as Array<keyof T>).every((key) => a[key] === b[key]);
 }
 
 /**
  * Like Promise.all, but for objects with promises in the values.
  */
-function awaitObject<T>(obj: T) {
+export function awaitObject<T>(obj: T) {
   const keys = Object.keys(obj) as Array<keyof T>;
   return Promise.all(keys.map((key) => obj[key])).then((values) => {
     const result: Partial<T> = {};
@@ -83,14 +93,15 @@ function awaitObject<T>(obj: T) {
 
 export function connect<Props>(
   store: Store<State>,
-  mapStateToProps: (state: State) => Props,
-  callback: (props: PromiseValues<Props>) => void,
+  mapStateToProps: (state: State) => Promise<Props> | Props,
+  propsEqual: (a: Props, b: Props) => boolean,
+  callback: (props: Props) => void,
 ) {
-  let lastProps: PromiseValues<Props> | undefined;
+  let lastProps: Props | undefined;
 
   function listener(state: State) {
-    return awaitObject(mapStateToProps(state)).then((props) => {
-      if (!lastProps || differentObjects(props, lastProps)) {
+    return Promise.resolve(mapStateToProps(state)).then(props => {
+      if (!lastProps || !propsEqual(lastProps, props)) {
         lastProps = props;
         callback(props);
       }

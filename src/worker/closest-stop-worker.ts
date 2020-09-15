@@ -18,10 +18,7 @@ function findClosestStop(location: LatLngLike) {
   let closestStop: Stop | undefined;
 
   for (const stop of stops) {
-    const distance = computeDistanceBetween(location, {
-      lat: stop.stop_lat,
-      lng: stop.stop_lon,
-    });
+    const distance = computeDistanceBetween(location, stop.position);
     if (distance < closestDistance) {
       closestStop = stop;
       closestDistance = distance;

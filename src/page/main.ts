@@ -19,7 +19,7 @@ import {
 import { createLocationMarker } from './location/marker.js';
 import { hydrateAside } from './sidebar.js';
 import { closestToSearch, closestToUser, stopToDisplay } from './state/map.js';
-import { connect, LatLngLiteral, memoize, store, View } from './state/store.js';
+import { awaitObject, connect, deepEqual, LatLngLiteral, memoize, store, View } from './state/store.js';
 import { gtfsArrivalToString, stringTime } from './utils/date.js';
 import { Linkable, parseLink, Type } from './utils/link.js';
 import { getRouteDetails } from './route/details.js';
@@ -76,20 +76,22 @@ Promise.all([schedulePromise, mapPromise]).then(([schedule, map]) => {
 
   connect(
     store,
-    (state) => ({
+    (state) => awaitObject({
       location: state.userLocation,
       stop: closestToUser(schedule.stops, state),
       buildMarker: buildUserMarker,
     }),
+    deepEqual,
     updateMarker,
   );
   connect(
     store,
-    (state) => ({
+    (state) => awaitObject({
       location: state.searchLocation,
       stop: closestToSearch(schedule.stops, state),
       buildMarker: buildPlaceMarker,
     }),
+    deepEqual,
     updateMarker,
   );
 });
@@ -99,13 +101,6 @@ Promise.all([
   schedulePromise,
   documentPromise.then(hydrateAside),
 ]).then(([schedule, connectStore]) => connectStore(schedule, store));
-
-function stopToPos(stop: Stop) {
-  return new google.maps.LatLng(
-    parseFloat(stop.stop_lat),
-    parseFloat(stop.stop_lon),
-  );
-}
 
 function loadMap() {
   if (
@@ -125,7 +120,7 @@ function loadMap() {
     return Promise.resolve().then(() => {
       for (const stop of Object.values(api.stops)) {
         const marker = new google.maps.Marker({
-          position: stopToPos(stop),
+          position: stop.position,
           title: stop.stop_name,
           icon: normal,
         }) as StopMarker;
@@ -260,11 +255,12 @@ schedulePromise.then((schedule) => {
 
   connect(
     store,
-    (state) => ({
+    (state) => awaitObject({
       route_id: state.route.id || undefined,
       trip_id: state.route.trip || undefined,
       stop_id: stopToDisplay(schedule.stops, state),
     }),
+    deepEqual,
     openActive,
   );
 });
@@ -463,7 +459,7 @@ function openStop(
   }
 
   if (streetview) {
-    streetview.setPosition(stopToPos(thisStop));
+    streetview.setPosition(thisStop.position);
   }
   if (map) {
     for (const marker of markers) {

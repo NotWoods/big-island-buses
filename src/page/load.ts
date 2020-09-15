@@ -5,7 +5,7 @@
  */
 
 import pathPrefix from 'consts:pathPrefix';
-import { connect, State, store } from './state/store';
+import { connect, deepEqual, State, store } from './state/store';
 import {
   createLink,
   getLinkState,
@@ -130,7 +130,7 @@ export function convertToLinkable(
   node.href = pageLink(type, value);
   node.addEventListener('click', clickEvent);
   if (store) {
-    connect(store, getLinkState, (state) => {
+    connect(store, getLinkState, deepEqual, (state) => {
       node.href = createLink(type, value, state);
     });
   }

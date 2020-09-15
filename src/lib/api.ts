@@ -160,9 +160,15 @@ async function createApiData(
     variable.trips[trip.trip_id] = trip.route_id;
   }
   for (const csvStop of json.stops) {
-    const stop = csvStop as Mutable<Stop>;
+    const stop = (csvStop as unknown) as Mutable<Stop>;
+    stop.position = {
+      lat: parseFloat(csvStop.stop_lat),
+      lng: parseFloat(csvStop.stop_lon),
+    };
     stop.trips = [];
     stop.routes = [];
+    delete (csvStop as any).stop_lat;
+    delete (csvStop as any).stop_lon;
     variable.stops[stop.stop_id] = stop;
   }
   for (const csvCalendar of json.calendar) {

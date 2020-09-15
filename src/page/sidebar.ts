@@ -1,5 +1,5 @@
 import { convertToLinkable } from './load';
-import { State, connect, LocationPermission, store } from './state/store';
+import { State, connect, LocationPermission, store, strictEqual } from './state/store';
 import { Type } from './utils/link';
 import { closestToUser } from './state/map';
 import { locateUser } from './location/locate-user';
@@ -35,26 +35,28 @@ export function hydrateAside() {
 
   return function connectStore(api: GTFSData, store: Store<State>) {
     // Start searching user location on click
-    nearbyInfo.addEventListener('click', () => locateUser(store));
+    nearbyInfo.addEventListener('click', () => {
+      nearbyInfo.textContent = 'Loading...';
+      nearbyInfo.hidden = false;
+      locateUser(store);
+    });
 
     connect(
       store,
-      (state) => ({
-        permission: state.locatePermission,
-      }),
-      function showHideButton({ permission }) {
+      state => state.locatePermission,
+      strictEqual,
+      function showHideButton(permission) {
         const text = NEARBY_INFO_TEXT[permission];
         nearbyInfo.textContent = text;
         nearbyInfo.hidden = !text;
-      },
-    );
+      }
+    )
 
     connect(
       store,
-      (state) => ({
-        nearest: closestToUser(api.stops, state),
-      }),
-      function updateNearbyRoutes({ nearest }) {
+      (state) => closestToUser(api.stops, state),
+      strictEqual,
+      function updateNearbyRoutes(nearest) {
         const nearbyRoutes = new Set(nearest?.routes);
         for (const [route_id, listItem] of routeListItems) {
           if (nearbyRoutes.has(route_id)) {

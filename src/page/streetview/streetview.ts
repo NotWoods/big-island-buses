@@ -2,13 +2,6 @@ import { Stop } from '../../gtfs-types';
 
 let streetview: google.maps.StreetViewPanorama | undefined;
 
-function stopToPos(stop: Stop) {
-  return new google.maps.LatLng(
-    parseFloat(stop.stop_lat),
-    parseFloat(stop.stop_lon),
-  );
-}
-
 export function loadStreetView() {
   const panoElement = document.getElementById('streetview-canvas')!;
 
@@ -43,7 +36,7 @@ export function showStop(stop: Stop, stopMarker?: google.maps.Marker) {
   const address = document.getElementById('address')!;
   if (streetview) {
     streetview.setPosition(
-      (stopMarker && stopMarker.getPosition()) || stopToPos(stop),
+      (stopMarker && stopMarker.getPosition()) || stop.position,
     );
 
     google.maps.event.trigger(streetview, 'resize');
