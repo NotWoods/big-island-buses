@@ -1,7 +1,7 @@
 let messageIds = 0;
 
 export class PromiseWorker {
-  callbacks = new Map<number, (error: Error | null, result: unknown) => void>();
+  private callbacks = new Map<number, (error: Error | null, result: unknown) => void>();
 
   constructor(private worker: Worker) {
     worker.addEventListener('message', (evt) => this.onMessage(evt.data));

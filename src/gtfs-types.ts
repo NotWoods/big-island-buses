@@ -24,13 +24,13 @@ export interface CsvCalendar {
 
 export interface Calendar extends CsvCalendar {
   days: readonly [
-    boolean,
-    boolean,
-    boolean,
-    boolean,
-    boolean,
-    boolean,
-    boolean,
+    sunday: boolean,
+    monday: boolean,
+    tuesday: boolean,
+    wednesday: boolean,
+    thursday: boolean,
+    friday: boolean,
+    saturday: boolean,
   ];
   text_name: string;
 }

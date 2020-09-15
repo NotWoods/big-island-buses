@@ -13,6 +13,12 @@ const eleventyConfig = eleventy({
 const closestStopWorker = 'worker/closest-stop.js';
 const routeDetailsWorker = 'worker/route-details.js';
 
+const constants = {
+  pathPrefix: eleventyConfig.pathPrefix,
+  closestStopWorker,
+  routeDetailsWorker,
+};
+
 /** @type {import('rollup').RollupOptions} */
 const config = {
   input: 'src/page/main.ts',
@@ -22,11 +28,7 @@ const config = {
     sourcemap: true,
   },
   plugins: [
-    consts({
-      pathPrefix: eleventyConfig.pathPrefix,
-      closestStopWorker,
-      routeDetailsWorker,
-    }),
+    consts(constants),
     nodeResolve(),
     typescript(),
     terser(),
@@ -42,7 +44,7 @@ const serviceWorker = {
     sourcemap: true,
   },
   plugins: [
-    consts({ closestStopWorker, routeDetailsWorker }),
+    consts(constants),
     typescript(),
     terser(),
   ],

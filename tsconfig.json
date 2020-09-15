@@ -9,6 +9,7 @@
         "pretty": true,
         "lib": ["dom", "esnext", "webworker", "dom.iterable"],
         "skipLibCheck": true,
+        "noEmit": true,
         /* Strict Type-Checking Options */
         "strict": true,
         "noUnusedLocals": true,

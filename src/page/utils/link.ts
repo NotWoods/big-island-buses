@@ -25,9 +25,9 @@ export function getLinkState(state: State) {
 
 /**
  * Generates a link for href values. Meant to maintain whatever active data is avaliable.
- * @param {Type} type  		Type of item to change
- * @param {string} value 	ID to change
- * @return {string} URL to use for href, based on active object.
+ * @param type Type of item to change
+ * @param value	ID to change
+ * @return URL to use for href, based on active object.
  */
 export function createLink(type: Type, value: string, state: State) {
   let url = pathPrefix;
