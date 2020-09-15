@@ -24,19 +24,19 @@ export const enum LocationPermission {
 export type LatLngLiteral = google.maps.ReadonlyLatLngLiteral;
 
 export interface State {
-  route: {
-    id?: string | null;
-    trip?: string | null;
+  readonly route: {
+    readonly id?: string | null;
+    readonly trip?: string | null;
   };
-  stop?: string | null;
-  view: {
-    route: View;
-    stop: View;
+  readonly stop?: string | null;
+  readonly view: {
+    readonly route: View;
+    readonly stop: View;
   };
-  locatePermission: LocationPermission;
-  userLocation?: LatLngLiteral;
-  searchLocation?: LatLngLiteral;
-  focus: 'user' | 'search' | 'stop';
+  readonly locatePermission: LocationPermission;
+  readonly userLocation?: LatLngLiteral;
+  readonly searchLocation?: LatLngLiteral;
+  readonly focus: 'user' | 'search' | 'stop';
 }
 
 export const store = createStore<State>({

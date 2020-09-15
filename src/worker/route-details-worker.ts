@@ -4,15 +4,15 @@ import { toInt } from '../page/utils/num';
 import { registerPromiseWorker } from './register';
 
 export interface RouteDetails {
-  firstStop: Stop['stop_id'];
-  lastStop: Stop['stop_id'];
-  earliest: Date;
-  latest: Date;
-  stops: Set<Stop['stop_id']>;
-  closestTrip: {
-    id: Trip['trip_id'];
-    minutes: number;
-    stop: Stop['stop_id'];
+  readonly firstStop: Stop['stop_id'];
+  readonly lastStop: Stop['stop_id'];
+  readonly earliest: Date;
+  readonly latest: Date;
+  readonly stops: Set<Stop['stop_id']>;
+  readonly closestTrip: {
+    readonly id: Trip['trip_id'];
+    readonly minutes: number;
+    readonly stop: Stop['stop_id'];
   };
 }
 

@@ -19,6 +19,7 @@
     "rollup-plugin-terser": "^7.0.2",
     "spherical-geometry-js": "^2.0.0",
     "tslib": "^2.0.1",
+    "type-fest": "^0.16.0",
     "typescript": "^4.0.2",
     "unistore": "^3.5.2"
   },

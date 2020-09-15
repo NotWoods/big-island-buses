@@ -16,6 +16,7 @@ import {
 } from './utils/link';
 import { store, connect, State } from './state/store';
 import { Store } from 'unistore';
+import type { Mutable } from 'type-fest';
 
 navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
 
@@ -160,12 +161,12 @@ export function dynamicLinkNode(
 export function openLinkable(link: Linkable) {
   const { Type: type, Value: value } = link;
   const newLink = pageLink(type, value);
-  const newState = getStateWithLink(store.getState(), type, value) as State;
+  const newState: Mutable<Partial<State>> = getStateWithLink(store.getState(), type, value);
   if (type === Type.STOP) {
     newState.focus = 'stop';
   }
-  store.setState(newState);
-  history.pushState(newState, null as any, newLink);
+  store.setState(newState as State);
+  history.pushState(newState, '', newLink);
   ga?.('send', 'pageview', { page: newLink, title: document.title });
 }
 

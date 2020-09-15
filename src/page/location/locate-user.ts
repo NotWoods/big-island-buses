@@ -1,5 +1,6 @@
 import { Store } from 'unistore';
 import { State, LocationPermission } from '../state/store';
+import type { Mutable } from 'type-fest';
 
 let watchId: number = 0;
 
@@ -11,7 +12,7 @@ export function locateUser(store: Store<State>) {
   navigator.geolocation.clearWatch(watchId);
   watchId = navigator.geolocation.watchPosition(
     function onsuccess({ coords }) {
-      let newState: Partial<State> = {
+      let newState: Mutable<Partial<State>> = {
         locatePermission: LocationPermission.GRANTED,
         userLocation: { lat: coords.latitude, lng: coords.longitude },
       };
