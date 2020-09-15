@@ -22,8 +22,8 @@ export interface CsvCalendar {
   end_date: string;
 }
 
-export interface Calendar extends CsvCalendar {
-  days: readonly [
+export interface Calendar extends Readonly<CsvCalendar> {
+  readonly days: readonly [
     sunday: boolean,
     monday: boolean,
     tuesday: boolean,
@@ -32,7 +32,7 @@ export interface Calendar extends CsvCalendar {
     friday: boolean,
     saturday: boolean,
   ];
-  text_name: string;
+  readonly text_name: string;
 }
 
 export interface CsvRoute {
@@ -46,8 +46,8 @@ export interface CsvRoute {
   route_url: string;
 }
 
-export interface Route extends CsvRoute {
-  trips: { [trip_id: string]: Trip };
+export interface Route extends Readonly<CsvRoute> {
+  readonly trips: { [trip_id: string]: Trip };
 }
 
 export interface CsvTrip {
@@ -60,11 +60,11 @@ export interface CsvTrip {
   shape_id: string;
 }
 
-export interface Trip extends CsvTrip {
+export interface Trip extends Readonly<CsvTrip> {
   /**
    * Stop times, sorted by `stop_sequence`.
    */
-  stop_times: StopTime[];
+  readonly stop_times: StopTime[];
 }
 
 export interface CsvStop {
@@ -74,15 +74,15 @@ export interface CsvStop {
   stop_lon: string;
 }
 
-export interface Stop extends CsvStop {
-  trips: {
+export interface Stop extends Readonly<CsvStop> {
+  readonly trips: {
     trip: Trip['trip_id'];
     dir: string;
     route: Route['route_id'];
     sequence: number;
     time: string;
   }[];
-  routes: Route['route_id'][];
+  readonly routes: Route['route_id'][];
 }
 
 export interface CsvStopTime {
@@ -93,6 +93,6 @@ export interface CsvStopTime {
   stop_sequence: string | number;
 }
 
-export interface StopTime extends CsvStopTime {
-  stop_sequence: number;
+export interface StopTime extends Readonly<CsvStopTime> {
+  readonly stop_sequence: number;
 }

@@ -2,7 +2,9 @@ import { readFile, writeFile } from 'fs';
 import { loadAsync } from 'jszip';
 import { resolve } from 'path';
 import { promisify } from 'util';
-import {
+import { toInt } from '../page/utils/num';
+import type { Mutable } from 'type-fest';
+import type {
   Calendar,
   CsvCalendar,
   CsvRoute,
@@ -15,7 +17,6 @@ import {
   StopTime,
   Trip,
 } from '../gtfs-types';
-import { toInt } from '../page/utils/num';
 
 const readFileAsync = promisify(readFile);
 const writeFileAsync = promisify(writeFile);
@@ -148,24 +149,24 @@ async function createApiData(
   };
 
   for (const csvRoute of json.routes) {
-    const route = csvRoute as Route;
+    const route = csvRoute as Mutable<Route>;
     route.trips = {};
     variable.routes[route.route_id] = route;
   }
   for (const csvTrip of json.trips) {
-    const trip = csvTrip as Trip;
+    const trip = csvTrip as Mutable<Trip>;
     trip.stop_times = [];
     variable.routes[trip.route_id].trips[trip.trip_id] = trip;
     variable.trips[trip.trip_id] = trip.route_id;
   }
   for (const csvStop of json.stops) {
-    const stop = csvStop as Stop;
+    const stop = csvStop as Mutable<Stop>;
     stop.trips = [];
     stop.routes = [];
     variable.stops[stop.stop_id] = stop;
   }
   for (const csvCalendar of json.calendar) {
-    const calendar = csvCalendar as Calendar;
+    const calendar = csvCalendar as Mutable<Calendar>;
     calendar.days = [
       toBool(calendar.sunday),
       toBool(calendar.monday),
@@ -179,7 +180,7 @@ async function createApiData(
     variable.calendar[calendar.service_id] = calendar;
   }
   for (const csvStopTime of json.stop_times) {
-    const stopTime = csvStopTime as StopTime;
+    const stopTime = csvStopTime as Mutable<StopTime>;
     stopTime.stop_sequence = toInt(stopTime.stop_sequence);
 
     const stop = variable.stops[stopTime.stop_id];
