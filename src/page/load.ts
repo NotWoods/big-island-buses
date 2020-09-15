@@ -5,18 +5,17 @@
  */
 
 import pathPrefix from 'consts:pathPrefix';
-import { GTFSData, Trip } from '../gtfs-types';
-import { toInt } from './utils/num';
+import type { Mutable } from 'type-fest';
+import { Store } from 'unistore';
+import { GTFSData } from '../gtfs-types';
+import { connect, State, store } from './state/store';
 import {
   createLink,
-  Type,
-  Linkable,
-  getStateWithLink,
   getLinkState,
+  getStateWithLink,
+  Linkable,
+  Type,
 } from './utils/link';
-import { store, connect, State } from './state/store';
-import { Store } from 'unistore';
-import type { Mutable } from 'type-fest';
 
 navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
 
@@ -161,7 +160,11 @@ export function dynamicLinkNode(
 export function openLinkable(link: Linkable) {
   const { Type: type, Value: value } = link;
   const newLink = pageLink(type, value);
-  const newState: Mutable<Partial<State>> = getStateWithLink(store.getState(), type, value);
+  const newState: Mutable<Partial<State>> = getStateWithLink(
+    store.getState(),
+    type,
+    value,
+  );
   if (type === Type.STOP) {
     newState.focus = 'stop';
   }
@@ -179,15 +182,4 @@ export function clickEvent(this: Linkable, e: Event) {
   e.stopPropagation?.();
   openLinkable(this);
   return false;
-}
-
-/**
- * Sorts stop time keys
- * @param {GTFSData stop_times} stopTimes
- * @return ordered list
- */
-export function sequence(stopTimes: Trip['stop_times']): number[] {
-  return Object.keys(stopTimes)
-    .map(toInt)
-    .sort((a, b) => a - b);
 }

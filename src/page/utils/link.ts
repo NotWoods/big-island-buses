@@ -1,9 +1,9 @@
 import pathPrefix from 'consts:pathPrefix';
 
 export const enum Type {
-  ROUTE,
-  STOP,
-  TRIP,
+  ROUTE = "route",
+  STOP = "stop",
+  TRIP = "trip",
 }
 
 interface State {
