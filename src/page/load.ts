@@ -5,9 +5,6 @@
  */
 
 import pathPrefix from 'consts:pathPrefix';
-import type { Mutable } from 'type-fest';
-import { Store } from 'unistore';
-import { GTFSData } from '../gtfs-types';
 import { connect, State, store } from './state/store';
 import {
   createLink,
@@ -16,6 +13,9 @@ import {
   Linkable,
   Type,
 } from './utils/link';
+import type { Store } from 'unistore';
+import type { Mutable } from 'type-fest';
+import type { GTFSData } from '../gtfs-types';
 
 navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
 

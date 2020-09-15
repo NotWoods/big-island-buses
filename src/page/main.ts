@@ -4,7 +4,6 @@
  * @copyright    2014 Tiger Oakes
  */
 
-import { GTFSData, Route, Stop, Trip } from '../gtfs-types.js';
 import {
   clickEvent,
   createElement,
@@ -24,6 +23,7 @@ import { connect, LatLngLiteral, memoize, store, View } from './state/store.js';
 import { gtfsArrivalToString, stringTime } from './utils/date.js';
 import { Linkable, parseLink, Type } from './utils/link.js';
 import { getRouteDetails } from './route/details.js';
+import type { GTFSData, Route, Stop, Trip } from '../gtfs-types.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -121,9 +121,9 @@ function loadMap() {
   boundsAllStops = new google.maps.LatLngBounds();
   markers = [];
 
-  function markersAndLatLng(schedule: GTFSData) {
+  function markersAndLatLng(api: GTFSData) {
     return Promise.resolve().then(() => {
-      for (const stop of Object.values(schedule.stops)) {
+      for (const stop of Object.values(api.stops)) {
         const marker = new google.maps.Marker({
           position: stopToPos(stop),
           title: stop.stop_name,
@@ -358,14 +358,14 @@ function switchMapStreetview(this: HTMLElement) {
 
 /**
  * Creates a route UI and opens the section if the map is currently in fullscreen mode.
- * @param  {string} route_id ID of the route
- * @return {Promise<string>} trip_id that can be used in openTrip. Best matches time and open stop, if any.
+ * @param route_id ID of the route
+ * @return trip_id that can be used in openTrip. Best matches time and open stop, if any.
  */
 const openRoute = memoize(function openRoute(
-  buses: GTFSData,
+  api: GTFSData,
   route_id: Route['route_id'],
 ): Promise<string | undefined> {
-  const thisRoute = buses.routes[route_id];
+  const thisRoute = api.routes[route_id];
   if (!thisRoute || !thisRoute.route_id) {
     console.error('Invalid Route %s', route_id);
     return Promise.resolve(undefined);
@@ -395,22 +395,25 @@ const openRoute = memoize(function openRoute(
   }
 
   return detailsPromise.then((details) => {
+    function stopName(id: Stop['stop_id']) {
+      return api.stops[id].stop_name;
+    }
+
     const minString =
       details.closestTrip.minutes !== 1
-        ? details.closestTrip.minutes + ' minutes'
+        ? `${details.closestTrip.minutes} minutes`
         : '1 minute';
-    document.getElementById('place-value')!.textContent =
-      'Between ' +
-      buses.stops[details.firstStop].stop_name +
-      ' - ' +
-      buses.stops[details.lastStop].stop_name;
-    document.getElementById('time-value')!.textContent =
-      stringTime(details.earliest) + ' - ' + stringTime(details.latest);
-    document.getElementById('next-stop-value')!.textContent =
-      'Reaches ' +
-      buses.stops[details.closestTrip.stop].stop_name +
-      ' in ' +
-      minString;
+    document.getElementById('place-value')!.textContent = `Between ${stopName(
+      details.firstStop,
+    )} - ${stopName(details.lastStop)}`;
+    document.getElementById('time-value')!.textContent = `${stringTime(
+      details.earliest,
+    )} - ${stringTime(details.latest)}`;
+    document.getElementById(
+      'next-stop-value',
+    )!.textContent = `Reaches ${stopName(
+      details.closestTrip.stop,
+    )} in ${minString}`;
 
     document.getElementById('main')!.classList.add('open');
 
@@ -449,11 +452,11 @@ const openRoute = memoize(function openRoute(
  * @return {void}           Creates an element
  */
 function openStop(
-  buses: GTFSData,
+  api: GTFSData,
   currentRoute: Route['route_id'] | null | undefined,
   stop_id: Stop['stop_id'],
 ) {
-  const thisStop = buses.stops[stop_id];
+  const thisStop = api.stops[stop_id];
   if (!thisStop || !thisStop.stop_id) {
     console.error('Invalid Stop %s', stop_id);
     return;
@@ -495,7 +498,7 @@ function openStop(
   const list = document.getElementById('connections')!;
   removeChildren(list);
   for (const route_id of thisStop.routes) {
-    const route = buses.routes[route_id];
+    const route = api.routes[route_id];
     const linkItem = dynamicLinkNode(Type.ROUTE, route_id);
     linkItem.className = 'connections__link';
     linkItem.style.borderColor = `#${route.route_color}`;
@@ -514,11 +517,11 @@ function openStop(
 }
 
 function openTrip(
-  buses: GTFSData,
+  api: GTFSData,
   route_id: Route['route_id'] | null | undefined,
   trip_id: Trip['trip_id'],
 ) {
-  const route = buses.routes[route_id!];
+  const route = api.routes[route_id!];
   if (!route) {
     console.error('Invalid Route %s', route_id);
     return;
@@ -542,7 +545,7 @@ function openTrip(
   }
 
   document.getElementById('week-days-value')!.textContent =
-    buses.calendar[trip.service_id].text_name;
+    api.calendar[trip.service_id].text_name;
 
   for (const tripStop of trip.stop_times) {
     const routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id);
@@ -557,7 +560,7 @@ function openTrip(
 
     const name = createElement('span', {
       className: 'schedule__stopname name',
-      textContent: buses.stops[tripStop.stop_id].stop_name,
+      textContent: api.stops[tripStop.stop_id].stop_name,
     });
     routeListItem.appendChild(name);
 

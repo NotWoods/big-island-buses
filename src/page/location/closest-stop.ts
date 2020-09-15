@@ -1,8 +1,8 @@
 import url from 'consts:closestStopWorker';
 import pathPrefix from 'consts:pathPrefix';
-import { LatLngLike } from 'spherical-geometry-js';
-import { GTFSData, Stop } from '../../gtfs-types';
 import { PromiseWorker } from '../../worker/promise-worker';
+import type { LatLngLike } from 'spherical-geometry-js';
+import type { GTFSData, Stop } from '../../gtfs-types';
 
 const worker = new PromiseWorker(new Worker(pathPrefix + url));
 

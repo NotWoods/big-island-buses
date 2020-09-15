@@ -27,12 +27,7 @@ const config = {
     format: 'iife',
     sourcemap: true,
   },
-  plugins: [
-    consts(constants),
-    nodeResolve(),
-    typescript(),
-    terser(),
-  ],
+  plugins: [consts(constants), nodeResolve(), typescript(), terser()],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -43,11 +38,7 @@ const serviceWorker = {
     format: 'esm',
     sourcemap: true,
   },
-  plugins: [
-    consts(constants),
-    typescript(),
-    terser(),
-  ],
+  plugins: [consts(constants), typescript(), terser()],
 };
 
 /** @type {import('rollup').RollupOptions} */

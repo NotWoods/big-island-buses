@@ -1,10 +1,10 @@
-import { Store } from 'unistore';
-import { GTFSData } from '../gtfs-types';
 import { convertToLinkable } from './load';
 import { State, connect, LocationPermission, store } from './state/store';
 import { Type } from './utils/link';
 import { closestToUser } from './state/map';
 import { locateUser } from './location/locate-user';
+import type { Store } from 'unistore';
+import type { GTFSData } from '../gtfs-types';
 
 const NEARBY_INFO_TEXT: Record<LocationPermission, string> = {
   [LocationPermission.NOT_ASKED]: 'Find routes near my location >',
@@ -12,7 +12,7 @@ const NEARBY_INFO_TEXT: Record<LocationPermission, string> = {
   [LocationPermission.DENIED]: 'Location permission denied.',
   [LocationPermission.UNAVALIABLE]: 'Location search failed.',
   [LocationPermission.TIMEOUT]: 'Location search timed out.',
-}
+};
 
 /**
  * Hydrate the pre-rendered sidebar HTML.
@@ -33,7 +33,7 @@ export function hydrateAside() {
     routeListItems.set(route_id, listItem);
   }
 
-  return function connectStore(schedule: GTFSData, store: Store<State>) {
+  return function connectStore(api: GTFSData, store: Store<State>) {
     // Start searching user location on click
     nearbyInfo.addEventListener('click', () => locateUser(store));
 
@@ -52,7 +52,7 @@ export function hydrateAside() {
     connect(
       store,
       (state) => ({
-        nearest: closestToUser(schedule.stops, state),
+        nearest: closestToUser(api.stops, state),
       }),
       function updateNearbyRoutes({ nearest }) {
         const nearbyRoutes = new Set(nearest?.routes);
