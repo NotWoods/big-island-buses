@@ -1,6 +1,22 @@
 import { toInt } from './num.js';
 
 /**
+ * Returns a special `Date` without an associated year or month.
+ *
+ * Used throughout the application to represent times with no dates attached.
+ * This roughly equates to `Temporal.PlainTime` with space for overflow.
+ */
+export function plainTime(hours: number, minutes: number, seconds: number) {
+  let days = 0;
+  if (hours >= 24) {
+    days = Math.floor(hours / 24);
+    hours = hours % 24;
+  }
+
+  return new Date(0, 0, days, hours, minutes, seconds, 0);
+}
+
+/**
  * Turns a date into a string with hours, minutes.
  * @param  {Date} 	date Date to convert
  * @param  {string} date 24hr string in format 12:00:00 to convert to string in 12hr format
@@ -10,7 +26,7 @@ export function stringTime(date: Date | string): string {
   if (typeof date === 'string') {
     if (date.indexOf(':') > -1 && date.lastIndexOf(':') > date.indexOf(':')) {
       const [hour, min, second] = date.split(':').map(toInt);
-      date = new Date(0, 0, 0, hour, min, second, 0);
+      date = plainTime(hour, min, second);
     }
   }
   if (typeof date != 'object') {
@@ -54,13 +70,7 @@ export function stringTime(date: Date | string): string {
  */
 export function gtfsArrivalToDate(string: string): Date {
   const [hour, min, second] = string.split(':').map((s) => toInt(s));
-  let extraDays = 0;
-  let extraHours = 0;
-  if (hour > 23) {
-    extraDays = Math.floor(hour / 24);
-    extraHours = hour % 24;
-  }
-  return new Date(0, 0, 0 + extraDays, hour + extraHours, min, second, 0);
+  return plainTime(hour, min, second);
 }
 
 /**
@@ -78,13 +88,9 @@ export function gtfsArrivalToString(string: string) {
  */
 export function nowDateTime(): Date {
   const now = new Date();
-  return new Date(
-    0,
-    0,
-    0,
+  return plainTime(
     now.getHours(),
     now.getMinutes(),
-    now.getSeconds(),
-    0,
+    now.getSeconds()
   );
 }

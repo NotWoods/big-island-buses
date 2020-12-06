@@ -1,5 +1,5 @@
 import { Stop, Trip } from '../gtfs-types';
-import { gtfsArrivalToDate, nowDateTime } from '../page/utils/date';
+import { gtfsArrivalToDate, nowDateTime, plainTime } from '../page/utils/date';
 import { toInt } from '../page/utils/num';
 import { registerPromiseWorker } from './register';
 
@@ -27,8 +27,8 @@ function getRouteDetails(trips: readonly Trip[], now: Date): RouteDetails {
   let smallestSequence = Infinity;
   let largestSequence = -1;
 
-  let earliest = new Date(0, 0, 0, 23, 59, 59, 0);
-  let latest = new Date(0, 0, 0, 0, 0, 0, 0);
+  let earliest = plainTime(23, 59, 59);
+  let latest = plainTime(0, 0, 0);
 
   let earliestTrip: Trip['trip_id'] | undefined;
   let earliestTripStop: Stop['stop_id'] | undefined;
@@ -76,14 +76,10 @@ function getRouteDetails(trips: readonly Trip[], now: Date): RouteDetails {
     if (!closestTrip) {
       //Too late for all bus routes
       closestTripTime =
-        new Date(
-          0,
-          0,
-          1,
-          earliest.getHours(),
+        plainTime(
+          earliest.getHours() + 24,
           earliest.getMinutes(),
           earliest.getSeconds(),
-          0,
         ).getTime() - now.getTime();
       closestTrip = earliestTrip;
       closestTripStop = earliestTripStop;
