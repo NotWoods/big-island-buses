@@ -1,4 +1,4 @@
-<img src="./icon/transparent.png" alt="" width="128" height="128">
+<img src="./src/site/icon/transparent.png" alt="" width="128" height="128">
 
 # Big Island Buses
 
