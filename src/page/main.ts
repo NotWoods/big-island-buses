@@ -19,7 +19,15 @@ import {
 import { createLocationMarker } from './location/marker.js';
 import { hydrateAside } from './sidebar.js';
 import { closestToSearch, closestToUser, stopToDisplay } from './state/map.js';
-import { awaitObject, connect, deepEqual, LatLngLiteral, memoize, store, View } from './state/store.js';
+import {
+  awaitObject,
+  connect,
+  deepEqual,
+  LatLngLiteral,
+  memoize,
+  store,
+  View,
+} from './state/store.js';
 import { gtfsArrivalToString, stringTime } from './utils/date.js';
 import { Linkable, parseLink, Type } from './utils/link.js';
 import { getRouteDetails } from './route/details.js';
@@ -76,21 +84,23 @@ Promise.all([schedulePromise, mapPromise]).then(([schedule, map]) => {
 
   connect(
     store,
-    (state) => awaitObject({
-      location: state.userLocation,
-      stop: closestToUser(schedule.stops, state),
-      buildMarker: buildUserMarker,
-    }),
+    (state) =>
+      awaitObject({
+        location: state.userLocation,
+        stop: closestToUser(schedule.stops, state),
+        buildMarker: buildUserMarker,
+      }),
     deepEqual,
     updateMarker,
   );
   connect(
     store,
-    (state) => awaitObject({
-      location: state.searchLocation,
-      stop: closestToSearch(schedule.stops, state),
-      buildMarker: buildPlaceMarker,
-    }),
+    (state) =>
+      awaitObject({
+        location: state.searchLocation,
+        stop: closestToSearch(schedule.stops, state),
+        buildMarker: buildPlaceMarker,
+      }),
     deepEqual,
     updateMarker,
   );
@@ -255,11 +265,12 @@ schedulePromise.then((schedule) => {
 
   connect(
     store,
-    (state) => awaitObject({
-      route_id: state.route.id || undefined,
-      trip_id: state.route.trip || undefined,
-      stop_id: stopToDisplay(schedule.stops, state),
-    }),
+    (state) =>
+      awaitObject({
+        route_id: state.route.id || undefined,
+        trip_id: state.route.trip || undefined,
+        stop_id: stopToDisplay(schedule.stops, state),
+      }),
     deepEqual,
     openActive,
   );

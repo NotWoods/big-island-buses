@@ -1,5 +1,11 @@
 import { convertToLinkable } from './load';
-import { State, connect, LocationPermission, store, strictEqual } from './state/store';
+import {
+  State,
+  connect,
+  LocationPermission,
+  store,
+  strictEqual,
+} from './state/store';
 import { Type } from './utils/link';
 import { closestToUser } from './state/map';
 import { locateUser } from './location/locate-user';
@@ -43,14 +49,14 @@ export function hydrateAside() {
 
     connect(
       store,
-      state => state.locatePermission,
+      (state) => state.locatePermission,
       strictEqual,
       function showHideButton(permission) {
         const text = NEARBY_INFO_TEXT[permission];
         nearbyInfo.textContent = text;
         nearbyInfo.hidden = !text;
-      }
-    )
+      },
+    );
 
     connect(
       store,

@@ -100,7 +100,7 @@ export function connect<Props>(
   let lastProps: Props | undefined;
 
   function listener(state: State) {
-    return Promise.resolve(mapStateToProps(state)).then(props => {
+    return Promise.resolve(mapStateToProps(state)).then((props) => {
       if (!lastProps || !propsEqual(lastProps, props)) {
         lastProps = props;
         callback(props);
