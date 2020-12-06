@@ -1,10 +1,13 @@
+import { SearchRequest } from './helpers';
+
 /**
  * @see https://developers.google.com/places/web-service/autocomplete#place_autocomplete_requests
  */
-export interface AutocompletionRequest {
+export interface AutocompletionRequest extends SearchRequest {
   input: string;
   key: string;
   sessiontoken: string;
+  offset: number;
   location?: google.maps.LatLngLiteral;
   radius?: number;
   strictbounds?: boolean;
@@ -19,7 +22,7 @@ export interface AutocompletionResponse {
   error_message?: string
 }
 
-const BASIC_KEYS = ['input', 'key', 'sessiontoken', 'radius'] as const;
+const BASIC_KEYS = ['input', 'key', 'sessiontoken', 'radius', 'offset'] as const;
 
 function requestToParams(
   request: AutocompletionRequest,

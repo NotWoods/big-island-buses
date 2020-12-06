@@ -3,7 +3,7 @@
     "compilerOptions": {
         /* Basic Options */
         "target": "es2018",
-        "module": "esnext",
+        "module": "commonjs",
         "sourceMap": true,
         "importHelpers": true,
         "pretty": true,

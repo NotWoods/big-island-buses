@@ -3,13 +3,17 @@
   "version": "3.0.0",
   "description": "A far easier to use unofficial schedule for the Hawaii Hele-On Bus.",
   "private": true,
-  "dependencies": {},
+  "type": "module",
+  "dependencies": {
+    "flexsearch": "github:nextapps-de/flexsearch#0.7.0"
+  },
   "devDependencies": {
     "@11ty/eleventy": "^0.11.1",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
     "@types/google.analytics": "^0.0.41",
     "@types/googlemaps": "^3.40.3",
+    "ava": "^3.13.0",
     "html-minifier": "^4.0.0",
     "jszip": "^3.5.0",
     "prettier": "^2.2.1",
@@ -17,6 +21,7 @@
     "rollup-plugin-consts": "^1.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "spherical-geometry-js": "^2.0.0",
+    "ts-node": "^9.1.0",
     "tslib": "^2.0.3",
     "type-fest": "^0.20.2",
     "typescript": "^4.1.2",
@@ -35,10 +40,16 @@
     "postbuild": "eleventy",
     "lint:files": "tsc --noEmit && prettier \"*.{md,css,html}\" \"src/**/*.ts\" rollup.config.js .eleventy.js",
     "lint": "npm run lint:files -- --write",
-    "lint:check": "npm run lint:files -- --check"
+    "lint:check": "npm run lint:files -- --check",
+    "test": "ava"
   },
-  "jest": {
-    "preset": "ts-jest/presets/js-with-ts"
+  "ava": {
+    "extensions": [
+			"ts"
+		],
+		"require": [
+			"ts-node/register"
+		]
   },
   "prettier": {
     "singleQuote": true,

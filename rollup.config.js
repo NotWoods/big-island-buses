@@ -27,7 +27,12 @@ const config = {
     format: 'iife',
     sourcemap: true,
   },
-  plugins: [consts(constants), nodeResolve(), typescript(), terser()],
+  plugins: [
+    consts(constants),
+    nodeResolve(),
+    typescript({ module: 'esnext' }),
+    terser(),
+  ],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -38,7 +43,7 @@ const serviceWorker = {
     format: 'esm',
     sourcemap: true,
   },
-  plugins: [consts(constants), typescript(), terser()],
+  plugins: [consts(constants), typescript({ module: 'esnext' }), terser()],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -49,7 +54,7 @@ const closestStopWorkerConfig = {
     format: 'esm',
     sourcemap: true,
   },
-  plugins: [nodeResolve(), typescript(), terser()],
+  plugins: [nodeResolve(), typescript({ module: 'esnext' }), terser()],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -60,7 +65,7 @@ const routeDetailsWorkerConfig = {
     format: 'esm',
     sourcemap: true,
   },
-  plugins: [typescript(), terser()],
+  plugins: [typescript({ module: 'esnext' }), terser()],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -72,7 +77,7 @@ const apiGenerator = {
     sourcemap: true,
   },
   external: ['fs', 'path', 'util', 'jszip'],
-  plugins: [typescript()],
+  plugins: [typescript({ module: 'esnext' })],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -83,7 +88,7 @@ const filters = {
     format: 'cjs',
     sourcemap: true,
   },
-  plugins: [typescript()],
+  plugins: [typescript({ module: 'esnext' })],
 };
 
 export default [
