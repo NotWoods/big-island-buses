@@ -3,7 +3,6 @@
   "version": "3.0.0",
   "description": "A far easier to use unofficial schedule for the Hawaii Hele-On Bus.",
   "private": true,
-  "type": "module",
   "dependencies": {
     "flexsearch": "github:nextapps-de/flexsearch#0.7.0"
   },

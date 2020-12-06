@@ -1,4 +1,4 @@
-import { findClosestStop } from '../location/closest-stop';
+import { findClosestStop } from '../info-worker';
 import { memoize, State } from './store';
 import type { GTFSData, Stop } from '../../gtfs-types';
 

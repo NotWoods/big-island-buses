@@ -1,5 +1,4 @@
-import closestStopWorker from 'consts:closestStopWorker';
-import routeDetailsWorker from 'consts:routeDetailsWorker';
+import infoWorker from 'consts:infoWorker';
 
 const CACHE = 'big-island-buses-4';
 
@@ -46,8 +45,7 @@ function precache() {
         'icon/favicon.ico',
         'icon/maskable.png',
         'icon/transparent.png',
-        closestStopWorker,
-        routeDetailsWorker,
+        infoWorker,
       ]),
     );
 }

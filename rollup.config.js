@@ -10,13 +10,11 @@ const eleventyConfig = eleventy({
   addTransform() {},
 });
 
-const closestStopWorker = 'worker/closest-stop.js';
-const routeDetailsWorker = 'worker/route-details.js';
+const infoWorker = 'worker/info.js';
 
 const constants = {
   pathPrefix: eleventyConfig.pathPrefix,
-  closestStopWorker,
-  routeDetailsWorker,
+  infoWorker
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -47,25 +45,14 @@ const serviceWorker = {
 };
 
 /** @type {import('rollup').RollupOptions} */
-const closestStopWorkerConfig = {
-  input: 'src/worker/closest-stop-worker.ts',
+const infoWorkerConfig = {
+  input: 'src/worker/info/index.ts',
   output: {
-    file: eleventyConfig.dir.output + '/' + closestStopWorker,
+    file: eleventyConfig.dir.output + '/' + infoWorker,
     format: 'esm',
     sourcemap: true,
   },
   plugins: [nodeResolve(), typescript({ module: 'esnext' }), terser()],
-};
-
-/** @type {import('rollup').RollupOptions} */
-const routeDetailsWorkerConfig = {
-  input: 'src/worker/route-details-worker.ts',
-  output: {
-    file: eleventyConfig.dir.output + '/' + routeDetailsWorker,
-    format: 'esm',
-    sourcemap: true,
-  },
-  plugins: [typescript({ module: 'esnext' }), terser()],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -94,8 +81,7 @@ const filters = {
 export default [
   config,
   serviceWorker,
-  closestStopWorkerConfig,
-  routeDetailsWorkerConfig,
+  infoWorkerConfig,
   apiGenerator,
   filters,
 ];

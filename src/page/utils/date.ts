@@ -86,7 +86,7 @@ export function gtfsArrivalToString(string: string) {
  * Returns the current time, with date stripped out
  * @return {Date} Current time in hour, min, seconds; other params set to 0
  */
-export function nowDateTime(): Date {
+export function nowPlainTime(): Date {
   const now = new Date();
   return plainTime(
     now.getHours(),

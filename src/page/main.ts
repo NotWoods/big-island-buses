@@ -30,7 +30,7 @@ import {
 } from './state/store.js';
 import { gtfsArrivalToString, stringTime } from './utils/date.js';
 import { Linkable, parseLink, Type } from './utils/link.js';
-import { getRouteDetails } from './route/details.js';
+import { getRouteDetails } from './info-worker.js';
 import type { GTFSData, Route, Stop, Trip } from '../gtfs-types.js';
 
 let map: google.maps.Map | undefined;

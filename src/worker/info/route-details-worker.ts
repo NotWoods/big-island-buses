@@ -1,7 +1,6 @@
-import { Stop, Trip } from '../gtfs-types';
-import { gtfsArrivalToDate, nowDateTime, plainTime } from '../page/utils/date';
-import { toInt } from '../page/utils/num';
-import { registerPromiseWorker } from './register';
+import type { Stop, Trip } from '../../gtfs-types';
+import { gtfsArrivalToDate, plainTime } from '../../page/utils/date';
+import { toInt } from '../../page/utils/num';
 
 export interface RouteDetails {
   readonly firstStop: Stop['stop_id'];
@@ -21,7 +20,7 @@ export interface RouteDetails {
  * along with other route details.
  * @param trips All trips for a route.
  */
-function getRouteDetails(trips: readonly Trip[], now: Date): RouteDetails {
+export function getRouteDetails(trips: readonly Trip[], now: Date): RouteDetails {
   let firstStop: Stop['stop_id'] | undefined;
   let lastStop: Stop['stop_id'] | undefined;
   let smallestSequence = Infinity;
@@ -99,7 +98,3 @@ function getRouteDetails(trips: readonly Trip[], now: Date): RouteDetails {
     },
   };
 }
-
-registerPromiseWorker((trips) => {
-  return getRouteDetails(trips, nowDateTime());
-});

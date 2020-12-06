@@ -3,12 +3,7 @@ declare module 'consts:pathPrefix' {
   export default pathPrefix;
 }
 
-declare module 'consts:closestStopWorker' {
-  declare const path: string;
-  export default path;
-}
-
-declare module 'consts:routeDetailsWorker' {
+declare module 'consts:infoWorker' {
   declare const path: string;
   export default path;
 }
