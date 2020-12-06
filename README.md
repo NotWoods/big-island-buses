@@ -19,11 +19,7 @@ during my 11th grade in high school, where it won
 
 For my senior project, I redesigned the app and began to work directly with the
 County of Hawai'i'. The app was updated with an enhanced map interface along
-with server rendering. Since GitHub Pages only supports static websites, this
-version of the code is from before I added server rendering, but backports a
-couple features. You can see the source code for the final version in the
-[server-render](https://github.com/NotWoods/big-island-buses/tree/server-render)
-branch.
+with server rendering. Today's version uses pre-rendering with Eleventy.
 
 The program went on to be featured in
 [West Hawaii Today](http://westhawaiitoday.com/news/local-news/hele-schedule-be-available-app),
