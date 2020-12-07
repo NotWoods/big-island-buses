@@ -1,4 +1,4 @@
-import { Store } from 'unistore';
+import { Writable } from 'svelte/store';
 import { State, LocationPermission } from '../state/store';
 import type { Mutable } from 'type-fest';
 
@@ -7,7 +7,7 @@ let watchId: number = 0;
 /**
  * Start watching the user positon and update the store.
  */
-export function locateUser(store: Store<State>) {
+export function locateUser(store: Writable<State>) {
   let firstPosition = true;
   navigator.geolocation.clearWatch(watchId);
   watchId = navigator.geolocation.watchPosition(
@@ -20,10 +20,13 @@ export function locateUser(store: Store<State>) {
         newState.focus = 'user';
         firstPosition = false;
       }
-      store.setState(newState as State);
+      store.update((oldState) => ({ ...oldState, ...newState }));
     },
     function onerror(error) {
-      store.setState({ locatePermission: error.code as LocationPermission });
+      store.update((oldState) => ({
+        ...oldState,
+        locatePermission: error.code as LocationPermission,
+      }));
     },
   );
 }

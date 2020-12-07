@@ -1,4 +1,4 @@
-import type { Store } from 'unistore';
+import type { Writable } from 'svelte/store';
 import type { GTFSData } from '../gtfs-types';
 import { convertToLinkable } from './links/open';
 import { locateUser } from './location/locate-user';
@@ -38,7 +38,7 @@ export function hydrateAside() {
     routeListItems.set(route_id, listItem);
   }
 
-  return function connectStore(api: GTFSData, store: Store<State>) {
+  return function connectStore(api: GTFSData, store: Writable<State>) {
     // Start searching user location on click
     nearbyInfo.addEventListener('click', () => {
       nearbyInfo.textContent = 'Loading...';

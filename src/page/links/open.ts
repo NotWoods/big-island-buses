@@ -1,6 +1,6 @@
 import { Mutable } from 'type-fest';
-import { Store } from 'unistore';
-import { connect, deepEqual, State, store } from '../state/store';
+import { get, Readable } from 'svelte/store';
+import { connect, deepEqual, store, State } from '../state/store';
 import { createLink, getLinkState, getStateWithLink, Type } from './state';
 
 export interface LinkableMarker extends google.maps.Marker {
@@ -25,8 +25,8 @@ export type Linkable = (LinkableElement & HTMLElement) | LinkableMarker;
  * @param {string} value 	ID to change
  * @return {string} URL to use for href, based on active object.
  */
-export function pageLink(type: Type, value: string, store: Store<State>) {
-  return createLink(type, value, store.getState());
+export function pageLink(type: Type, value: string, store: Readable<State>) {
+  return createLink(type, value, get(store));
 }
 
 /**
@@ -35,14 +35,14 @@ export function pageLink(type: Type, value: string, store: Store<State>) {
 export function openLinkableValues(type: Type, value: string) {
   const newLink = pageLink(type, value, store);
   const newState: Mutable<Partial<State>> = getStateWithLink(
-    store.getState(),
+    get(store),
     type,
     value,
   );
   if (type === 'stop') {
     newState.focus = 'stop';
   }
-  store.setState(newState as State);
+  store.update((oldState) => ({ ...oldState, ...newState }));
   history.pushState(newState, '', newLink);
   ga?.('send', 'pageview', { page: newLink, title: document.title });
 }
@@ -71,9 +71,8 @@ export function convertToLinkable(
   node: HTMLAnchorElement,
   type: Type,
   value: string,
-  store: Store<State>,
+  store: Readable<State>,
 ) {
-  node.href = pageLink(type, value, store);
   node.dataset.type = type;
   node.dataset.value = value;
   node.addEventListener('click', clickEvent);

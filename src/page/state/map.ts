@@ -30,7 +30,8 @@ function getStopId(stop: Stop | undefined) {
  */
 export function stopToDisplay(
   stops: GTFSData['stops'],
-  state: Pick<State, 'userLocation' | 'searchLocation' | 'focus' | 'stop'>,
+  selectedStop: string | null | undefined,
+  state: State,
 ) {
   return Promise.resolve().then(() => {
     switch (state.focus) {
@@ -39,7 +40,7 @@ export function stopToDisplay(
       case 'search':
         return closestToSearch(stops, state).then(getStopId);
       case 'stop':
-        return state.stop || undefined;
+        return selectedStop || undefined;
     }
   });
 }

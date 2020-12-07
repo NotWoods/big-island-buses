@@ -4,6 +4,7 @@
  * @copyright    2014 Tiger Oakes
  */
 
+import { get } from 'svelte/store';
 import {
   createElement,
   documentLoad,
@@ -23,8 +24,9 @@ import {
   deepEqual,
   LatLngLiteral,
   memoize,
-  store,
+  stopViewStore,
   View,
+  store,
 } from './state/store.js';
 import { stringTime } from './utils/date.js';
 import { parseLink } from './links/state.js';
@@ -56,12 +58,12 @@ const stopConnections = new StopConnections({
   target: removeChildren(document.getElementById('connections-wrapper')!),
   props: { store },
   // hydrate: true,
-})
+});
 const tripSchedule = new Schedule({
   target: removeChildren(document.getElementById('schedule')!),
   props: { store },
   // hydrate: true,
-})
+});
 
 interface StopMarker extends LinkableMarker {
   stop_id: string;
@@ -161,7 +163,7 @@ function loadMap() {
 
   function mapLoad() {
     return Promise.resolve().then(() => {
-      const stopView = store.getState().view.stop;
+      const stopView = get(stopViewStore);
       const mapElement =
         stopView === View.MAP_PRIMARY
           ? document.getElementById('map-canvas')!
@@ -211,10 +213,11 @@ function loadMap() {
       google.maps.event.addListener(autocomplete, 'place_changed', function () {
         const place = autocomplete!.getPlace();
         if (!place.geometry) return;
-        store.setState({
-          searchLocation: place.geometry.location.toJSON(),
+        store.update(oldState => ({
+          ...oldState,
+          searchLocation: place.geometry!.location.toJSON(),
           focus: 'search',
-        });
+        }));
       });
       return map;
     });
@@ -243,7 +246,7 @@ function loadMap() {
   window.addEventListener('resize', function () {
     google.maps.event.trigger(map, 'resize');
     google.maps.event.trigger(streetview, 'resize');
-    if (!store.getState().route.id) {
+    if (!get(store).route.id) {
       map!.setCenter(boundsAllStops!.getCenter());
       map!.fitBounds(boundsAllStops!);
     }
@@ -257,19 +260,19 @@ documentPromise.then(function () {
 });
 
 schedulePromise.then((schedule) => {
-  function openActive(props: {
-    route_id?: string;
-    trip_id?: string;
-    stop_id?: string;
+  function openActive(state: {
+    route?: string;
+    trip?: string;
+    stop?: string
   }) {
     let routePromise = Promise.resolve();
-    if (props.route_id) {
-      routePromise = openRoute(schedule, props.route_id).then((bestTrip) =>
-        openTrip(schedule, props.route_id, props.trip_id ?? bestTrip!),
+    if (state.route) {
+      routePromise = openRoute(schedule, state.route).then((bestTrip) =>
+        openTrip(schedule, state.route, state.trip ?? bestTrip!),
       );
     }
 
-    if (props.stop_id) openStop(schedule, props.route_id, props.stop_id);
+    if (state.stop) openStop(schedule, state.route, state.stop);
 
     return routePromise;
   }
@@ -278,9 +281,9 @@ schedulePromise.then((schedule) => {
     store,
     (state) =>
       awaitObject({
-        route_id: state.route.id || undefined,
-        trip_id: state.route.trip || undefined,
-        stop_id: stopToDisplay(schedule.stops, state),
+        route: state.route?.id || undefined,
+        trip: state.route?.trip || undefined,
+        stop: stopToDisplay(schedule.stops, state.stop, state),
       }),
     deepEqual,
     openActive,
@@ -288,17 +291,17 @@ schedulePromise.then((schedule) => {
 });
 
 if (window.history.state) {
-  store.setState(window.history.state);
+  store.update((oldState) => ({ ...oldState, ...window.history.state }));
 } else {
   const state = parseLink(new URL(location.href));
-  store.setState(state);
+  store.update((oldState) => ({ ...oldState, ...state }));
 }
 window.onhashchange = () => {
   const state = parseLink(new URL(location.href));
-  store.setState(state);
+  store.update((oldState) => ({ ...oldState, ...state }));
 };
 window.onpopstate = (evt: PopStateEvent) => {
-  store.setState(evt.state);
+  store.update((oldState) => ({ ...oldState, ...evt.state }));
 };
 
 /**
@@ -347,32 +350,33 @@ function switchMapStreetview(this: HTMLElement) {
   const mapParent = document.getElementById('map')!;
   const panoParent = document.getElementById('streetview-header')!;
 
-  const view = { ...store.getState().view };
-
-  if (view.stop === View.MAP_PRIMARY) {
-    mapParent.insertBefore(
-      document.getElementById('streetview-canvas')!,
-      mapParent.firstChild,
-    );
-    panoParent.insertBefore(
-      document.getElementById('map-canvas')!,
-      mapParent.firstChild,
-    );
-    this.classList.add('on');
-    view.stop = View.STREET_PRIMARY;
-  } else if (view.stop === View.STREET_PRIMARY) {
-    mapParent.insertBefore(
-      document.getElementById('map-canvas')!,
-      mapParent.firstChild,
-    );
-    panoParent.insertBefore(
-      document.getElementById('streetview-canvas')!,
-      mapParent.firstChild,
-    );
-    this.classList.remove('on');
-    view.stop = View.MAP_PRIMARY;
-  }
-  store.setState({ view });
+  stopViewStore.update((stopView) => {
+    if (stopView === View.MAP_PRIMARY) {
+      mapParent.insertBefore(
+        document.getElementById('streetview-canvas')!,
+        mapParent.firstChild,
+      );
+      panoParent.insertBefore(
+        document.getElementById('map-canvas')!,
+        mapParent.firstChild,
+      );
+      this.classList.add('on');
+      return View.STREET_PRIMARY;
+    } else if (stopView === View.STREET_PRIMARY) {
+      mapParent.insertBefore(
+        document.getElementById('map-canvas')!,
+        mapParent.firstChild,
+      );
+      panoParent.insertBefore(
+        document.getElementById('streetview-canvas')!,
+        mapParent.firstChild,
+      );
+      this.classList.remove('on');
+      return View.MAP_PRIMARY;
+    } else {
+      return stopView;
+    }
+  });
 }
 
 /**

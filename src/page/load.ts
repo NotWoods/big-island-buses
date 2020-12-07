@@ -5,11 +5,7 @@
  */
 
 import pathPrefix from 'consts:pathPrefix';
-import type { Store } from 'unistore';
 import type { GTFSData } from '../gtfs-types';
-import { convertToLinkable, LinkableElement } from './links/open';
-import { Type } from './links/state';
-import { State } from './state/store';
 
 navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
 
@@ -89,22 +85,4 @@ export function documentLoad() {
       }
     });
   });
-}
-
-type DynamicLinkNode = HTMLAnchorElement & LinkableElement;
-
-/**
- * Creates an A element with custom click events for links.  Can update itself.
- * @param type What value to change in link
- * @param value Value to use
- * @param store If given, used to update the link when state changes
- * @return A element with custom properties
- */
-export function dynamicLinkNode(
-  type: Type,
-  value: string,
-  store: Store<State>,
-) {
-  const node = document.createElement('a') as DynamicLinkNode;
-  return convertToLinkable(node, type, value, store);
 }

@@ -1,4 +1,4 @@
-import createStore, { Store } from 'unistore';
+import { writable, Readable } from 'svelte/store';
 
 type PromiseValue<T> = T extends Promise<infer R> ? R : T;
 
@@ -29,22 +29,16 @@ export interface State {
     readonly trip?: string | null;
   };
   readonly stop?: string | null;
-  readonly view: {
-    readonly route: View;
-    readonly stop: View;
-  };
   readonly locatePermission: LocationPermission;
   readonly userLocation?: LatLngLiteral;
   readonly searchLocation?: LatLngLiteral;
   readonly focus: 'user' | 'search' | 'stop';
 }
 
-export const store = createStore<State>({
+export const stopViewStore = writable<View>(View.MAP_PRIMARY);
+
+export const store = writable<State>({
   route: {},
-  view: {
-    route: View.LIST,
-    stop: View.MAP_PRIMARY,
-  },
   locatePermission: LocationPermission.NOT_ASKED,
   focus: 'stop',
 });
@@ -91,8 +85,8 @@ export function awaitObject<T>(obj: T) {
   });
 }
 
-export function connect<Props>(
-  store: Store<State>,
+export function connect<Props, State>(
+  store: Readable<State>,
   mapStateToProps: (state: State) => Promise<Props> | Props,
   propsEqual: (a: Props, b: Props) => boolean,
   callback: (props: Props) => void,
@@ -108,6 +102,5 @@ export function connect<Props>(
     });
   }
 
-  listener(store.getState());
   return store.subscribe(listener);
 }
