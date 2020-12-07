@@ -23,7 +23,7 @@ export type Linkable = (LinkableElement & HTMLElement) | LinkableMarker;
  * @param {string} value 	ID to change
  * @return {string} URL to use for href, based on active object.
  */
-function pageLink(type: Type, value: string) {
+export function pageLink(type: Type, value: string, store: Store<State>) {
   return createLink(type, value, store.getState());
 }
 
@@ -31,7 +31,7 @@ function pageLink(type: Type, value: string) {
  * Navigate to the described page
  */
 function openLinkableValues(type: Type, value: string) {
-  const newLink = pageLink(type, value);
+  const newLink = pageLink(type, value, store);
   const newState: Mutable<Partial<State>> = getStateWithLink(
     store.getState(),
     type,
@@ -69,9 +69,9 @@ export function convertToLinkable(
   node: HTMLAnchorElement,
   type: Type,
   value: string,
-  store?: Store<State>,
+  store: Store<State>,
 ) {
-  node.href = pageLink(type, value);
+  node.href = pageLink(type, value, store);
   node.dataset.type = type;
   node.dataset.value = value;
   node.addEventListener('click', clickEvent);

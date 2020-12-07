@@ -103,7 +103,7 @@ type DynamicLinkNode = HTMLAnchorElement & LinkableElement;
 export function dynamicLinkNode(
   type: Type,
   value: string,
-  store?: Store<State>,
+  store: Store<State>,
 ) {
   const node = document.createElement('a') as DynamicLinkNode;
   return convertToLinkable(node, type, value, store);

@@ -505,7 +505,7 @@ function openStop(
   removeChildren(list);
   for (const route_id of thisStop.routes) {
     const route = api.routes[route_id];
-    const linkItem = dynamicLinkNode(Type.ROUTE, route_id);
+    const linkItem = dynamicLinkNode(Type.ROUTE, route_id, store);
     linkItem.className = 'connections__link';
     linkItem.style.borderColor = `#${route.route_color}`;
     linkItem.textContent = route.route_long_name;
@@ -554,7 +554,7 @@ function openTrip(
     api.calendar[trip.service_id].text_name;
 
   for (const tripStop of trip.stop_times) {
-    const routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id);
+    const routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id, store);
     routeListItem.className = 'schedule__stop';
 
     const lines = createElement('div', { className: 'lines' });
