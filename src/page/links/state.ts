@@ -1,10 +1,6 @@
 import pathPrefix from 'consts:pathPrefix';
 
-export const enum Type {
-  ROUTE = 'route',
-  STOP = 'stop',
-  TRIP = 'trip',
-}
+export type Type = 'route' | 'stop' | 'trip';
 
 interface State {
   route: {
@@ -27,7 +23,7 @@ export function getLinkState(state: State) {
 export function createLink(type: Type, value: string, state: State) {
   let url = pathPrefix;
   switch (type) {
-    case Type.ROUTE:
+    case 'route':
       url += `routes/${value}/`;
 
       if (state.route.trip != null) {
@@ -38,9 +34,9 @@ export function createLink(type: Type, value: string, state: State) {
         url += `?stop=${state.stop}`;
       }
       break;
-    case Type.STOP:
+    case 'stop':
       return `?stop=${value}`;
-    case Type.TRIP:
+    case 'trip':
       url += `routes/${state.route.id}/${value}`;
       if (state.stop != null) {
         url += `?stop=${state.stop}`;
@@ -116,13 +112,13 @@ export function parseLink(url: URL): State {
 export function getStateWithLink(state: State, type: Type, value: string) {
   const newState = getLinkState(state);
   switch (type) {
-    case Type.STOP:
+    case 'stop':
       newState.stop = value;
       break;
-    case Type.ROUTE:
+    case 'route':
       newState.route = { id: value, trip: state.route.trip };
       break;
-    case Type.TRIP:
+    case 'trip':
       newState.route = { id: state.route.id, trip: value };
       break;
   }

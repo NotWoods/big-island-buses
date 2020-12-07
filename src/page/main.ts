@@ -7,7 +7,6 @@
 import {
   createElement,
   documentLoad,
-  dynamicLinkNode,
   getScheduleData,
   normal,
   placeShape,
@@ -27,11 +26,13 @@ import {
   store,
   View,
 } from './state/store.js';
-import { gtfsArrivalToString, stringTime } from './utils/date.js';
-import { parseLink, Type } from './links/state.js';
+import { stringTime } from './utils/date.js';
+import { parseLink } from './links/state.js';
 import { getRouteDetails } from './info-worker.js';
 import type { GTFSData, Route, Stop, Trip } from '../gtfs-types.js';
 import { clickEvent, LinkableElement, LinkableMarker } from './links/open.js';
+import StopConnections from './component/stop/StopConnections.svelte';
+import Schedule from './component/trip/Schedule.svelte';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -50,6 +51,17 @@ schedulePromise.then((api) => {
   // @ts-ignore
   window.store = store;
 });
+
+const stopConnections = new StopConnections({
+  target: removeChildren(document.getElementById('connections-wrapper')!),
+  props: { store },
+  // hydrate: true,
+})
+const tripSchedule = new Schedule({
+  target: removeChildren(document.getElementById('schedule')!),
+  props: { store },
+  // hydrate: true,
+})
 
 interface StopMarker extends LinkableMarker {
   stop_id: string;
@@ -133,7 +145,7 @@ function loadMap() {
           title: stop.stop_name,
           icon: normal,
         }) as StopMarker;
-        marker.set('type', Type.STOP);
+        marker.set('type', 'stop');
         marker.set('value', stop.stop_id);
         marker.stop_id = stop.stop_id;
         google.maps.event.addListener(marker, 'click', clickEvent);
@@ -301,7 +313,7 @@ function uiEvents() {
     .addEventListener('click', switchMapStreetview);
   const select = document.getElementById('trip-select') as HTMLSelectElement &
     LinkableElement;
-  select.dataset.type = Type.TRIP;
+  select.dataset.type = 'trip';
   select.addEventListener('change', function (e) {
     select.dataset.value = select.options[select.selectedIndex].value;
     clickEvent.call(select, e);
@@ -319,6 +331,7 @@ function uiEvents() {
 
 function removeChildren(parent: HTMLElement) {
   while (parent.firstChild) parent.removeChild(parent.firstChild);
+  return parent;
 }
 
 /**
@@ -501,23 +514,12 @@ function openStop(
 
   document.getElementById('stop_name')!.textContent = thisStop.stop_name;
 
-  const list = document.getElementById('connections')!;
-  removeChildren(list);
-  for (const route_id of thisStop.routes) {
-    const route = api.routes[route_id];
-    const linkItem = dynamicLinkNode(Type.ROUTE, route_id, store);
-    linkItem.className = 'connections__link';
-    linkItem.style.borderColor = `#${route.route_color}`;
-    linkItem.textContent = route.route_long_name;
-
-    const listItem = document.createElement('li');
-    listItem.className = 'connections__item';
-    listItem.append(linkItem);
-    if (currentRoute === route_id) {
-      listItem.classList.add('connections__item--active-route');
-    }
-    list.append(listItem);
-  }
+  stopConnections.$set({
+    store,
+    routes: api.routes,
+    stop: thisStop,
+    currentRoute,
+  });
 
   document.getElementById('main')!.classList.add('open-stop');
 }
@@ -538,9 +540,6 @@ function openTrip(
     return;
   }
 
-  const schedule = document.getElementById('schedule')!;
-  removeChildren(schedule);
-
   const select = document.getElementById('trip-select') as HTMLSelectElement;
   for (let option = 0; option < select.options.length; option++) {
     if (select.options[option].value === trip_id) {
@@ -553,29 +552,9 @@ function openTrip(
   document.getElementById('week-days-value')!.textContent =
     api.calendar[trip.service_id].text_name;
 
-  for (const tripStop of trip.stop_times) {
-    const routeListItem = dynamicLinkNode(Type.STOP, tripStop.stop_id, store);
-    routeListItem.className = 'schedule__stop';
-
-    const lines = createElement('div', { className: 'lines' });
-    for (let j = 0; j < 2; j++) {
-      const line = createElement('span', { className: 'line' });
-      lines.appendChild(line);
-    }
-    routeListItem.appendChild(lines);
-
-    const name = createElement('span', {
-      className: 'schedule__stopname name',
-      textContent: api.stops[tripStop.stop_id].stop_name,
-    });
-    routeListItem.appendChild(name);
-
-    const time = createElement('time', {
-      className: 'schedule__time',
-      textContent: gtfsArrivalToString(tripStop.arrival_time),
-    });
-    routeListItem.appendChild(time);
-
-    schedule.appendChild(routeListItem);
-  }
+  tripSchedule.$set({
+    store,
+    stops: api.stops,
+    trip,
+  });
 }

@@ -6,14 +6,14 @@ type PromiseValues<T> = {
   readonly [P in keyof T]: PromiseValue<T[P]>;
 };
 
-export const enum View {
+export enum View {
   LIST,
 
   MAP_PRIMARY,
   STREET_PRIMARY,
 }
 
-export const enum LocationPermission {
+export enum LocationPermission {
   NOT_ASKED = -1,
   GRANTED = 0,
   DENIED = 1,

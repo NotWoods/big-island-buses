@@ -1,24 +1,26 @@
 <script lang="ts">
   import type { Store } from 'unistore';
+  import type { GTFSData } from '../../../gtfs-types';
   import type { State } from '../../state/store';
   import DynamicLinkNode from '../DynamicLinkNode.svelte';
-  import { Type } from '../../links/state';
-  import type { Route } from '../../../gtfs-types';
 
   export let store: Store<State>;
-  export let route: Route;
-  export let currentRoute: string;
+  export let routes: GTFSData['routes'];
+  export let routeId: string;
+  export let current: boolean;
+
+  $: route = routes[routeId];
 </script>
 
 <li
   class="connections__item"
-  class:connections__item--active-route={currentRoute === route.route_id}>
+  class:connections__item--active-route={current}>
   <DynamicLinkNode
-    type={Type.ROUTE}
-    value={route.route_id}
+    type="route"
+    value={routeId}
     class="connections__link"
     {store}
-    style="border-color: #{route.route_color}">
-    {route.route_long_name}
+    style="border-color: #{route?.route_color}">
+    {route?.route_long_name}
   </DynamicLinkNode>
 </li>

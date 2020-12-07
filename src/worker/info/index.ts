@@ -5,7 +5,7 @@ import { registerPromiseWorker } from '../register';
 import { findClosestStop } from './closest-stop-worker';
 import { getRouteDetails } from './route-details-worker';
 
-export { RouteDetails } from './route-details-worker';
+export type { RouteDetails } from './route-details-worker';
 
 interface DataMessage {
   type: 'data';

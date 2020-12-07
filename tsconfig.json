@@ -17,6 +17,9 @@
         "noFallthroughCasesInSwitch": true,
         /* Module Resolution Options */
         "moduleResolution": "node",
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "forceConsistentCasingInFileNames": true,
+        "types": ["svelte", "googlemaps", "google.analytics"],
     }
 }

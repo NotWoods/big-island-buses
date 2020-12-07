@@ -3,7 +3,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
-import autoPreprocess from 'svelte-preprocess'
+import { typescript as typescriptPreprocess } from 'svelte-preprocess'
 const eleventy = require('./.eleventy.js');
 
 const eleventyConfig = eleventy({
@@ -31,12 +31,14 @@ const config = {
     svelte({
       // @ts-ignore
       dev: true,
-      preprocess: autoPreprocess(),
+      preprocess: typescriptPreprocess({
+        compilerOptions: { module: 'esnext' }
+      }),
     }),
     consts(constants),
     nodeResolve(),
     typescript({ module: 'esnext' }),
-    terser(),
+    // terser(),
   ],
 };
 

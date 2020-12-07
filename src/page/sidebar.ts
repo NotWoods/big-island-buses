@@ -1,16 +1,15 @@
-import {
-  State,
-  connect,
-  LocationPermission,
-  store,
-  strictEqual,
-} from './state/store';
-import { Type } from './links/state';
-import { closestToUser } from './state/map';
-import { locateUser } from './location/locate-user';
 import type { Store } from 'unistore';
 import type { GTFSData } from '../gtfs-types';
 import { convertToLinkable } from './links/open';
+import { locateUser } from './location/locate-user';
+import { closestToUser } from './state/map';
+import {
+  connect,
+  LocationPermission,
+  State,
+  store,
+  strictEqual,
+} from './state/store';
 
 const NEARBY_INFO_TEXT: Record<LocationPermission, string> = {
   [LocationPermission.NOT_ASKED]: 'Find routes near my location >',
@@ -34,7 +33,7 @@ export function hydrateAside() {
     const route_id = listItem.dataset.route!;
 
     const link = listItem.querySelector<HTMLAnchorElement>('a.routes__link')!;
-    convertToLinkable(link, Type.ROUTE, route_id, store);
+    convertToLinkable(link, 'route', route_id, store);
 
     routeListItems.set(route_id, listItem);
   }

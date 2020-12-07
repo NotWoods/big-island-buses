@@ -5,7 +5,9 @@ import { createLink, getLinkState, getStateWithLink, Type } from './state';
 
 export interface LinkableMarker extends google.maps.Marker {
   get(key: 'type'): Type;
+  set(key: 'type', value: Type): void;
   get(key: 'value'): string;
+  set(key: 'value', value: string): void;
 }
 
 export interface LinkableElement {
@@ -30,14 +32,14 @@ export function pageLink(type: Type, value: string, store: Store<State>) {
 /**
  * Navigate to the described page
  */
-function openLinkableValues(type: Type, value: string) {
+export function openLinkableValues(type: Type, value: string) {
   const newLink = pageLink(type, value, store);
   const newState: Mutable<Partial<State>> = getStateWithLink(
     store.getState(),
     type,
     value,
   );
-  if (type === Type.STOP) {
+  if (type === 'stop') {
     newState.focus = 'stop';
   }
   store.setState(newState as State);
