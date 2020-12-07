@@ -20,18 +20,7 @@
   <div id="schedule-column">
     <section class="info" id="information">
       <div id="trip-select-container" title="Select different trip">
-        <label for="trip-select">
-          <svg class="info__icon" viewBox="0 0 24 24">
-            <path d="M10,18h4v-2h-4V18z M3,6v2h18V6H3z M6,13h12v-2H6V13z"></path>
-          </svg>
-        </label>
-        <select class="info__select" id="trip-select">
-          {% for id, trip in route.trips %}
-            <option value="{{ id }}"{% if id === trip_id %} selected{% endif %}>
-              {{ trip.trip_short_name }}
-            </option>
-          {% endfor %}
-        </select>
+        {% TripSelect { route: route, selectedTrip: trip_id } %}
       </div>
 
       <div id="place" title="Bus route location">
@@ -78,22 +67,23 @@
     </section>
 
     <section class="schedule" id="schedule">
-    {% if trip %}
-    {% for stopTime in trip.stop_times %}
-      <a href="?stop={{ stopTime.stop_id }}" class="schedule__stop">
-        <div class="lines">
-          <span class="line"></span>
-          <span class="line"></span>
-        </div>
-        <span class="schedule__stopname name">
-          {{ api.stops[stopTime.stop_id].stop_name }}
-        </span>
-        <time class="schedule__time">
-          {{ stopTime.arrival_time | gtfsArrivalToString }}
-        </time>
-      </a>
-    {% endfor %}
-    {% endif %}
+      {% Schedule { schedule: api, trip: trip } %}
+      {% if trip %}
+      {% for stopTime in trip.stop_times %}
+        <a href="?stop={{ stopTime.stop_id }}" class="schedule__stop">
+          <div class="lines">
+            <span class="line"></span>
+            <span class="line"></span>
+          </div>
+          <span class="schedule__stopname name">
+            {{ api.stops[stopTime.stop_id].stop_name }}
+          </span>
+          <time class="schedule__time">
+            {{ stopTime.arrival_time | gtfsArrivalToString }}
+          </time>
+        </a>
+      {% endfor %}
+      {% endif %}
     </section>
   </div>
 

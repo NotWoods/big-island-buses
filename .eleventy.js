@@ -1,11 +1,23 @@
 const htmlmin = require('html-minifier');
 
-let filters = {};
-try {
-  filters = require('./lib/filters.js');
-} catch (err) {}
+function requireSafe(path) {
+  try {
+    return require(path);
+  } catch (err) {
+    return {};
+  }
+}
+
+const filters = requireSafe('./lib/filters.js');
+const components = requireSafe('./lib/components.js');
 
 module.exports = function (config) {
+  for (const [name, component] of Object.entries(components)) {
+    config.addShortcode(name, (props) => {
+      return component.render(props).html;
+    })
+  }
+
   // pass some assets right through
   config.addPassthroughCopy({
     'src/site/assets': true,

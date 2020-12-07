@@ -1,12 +1,10 @@
 <script lang="ts">
-  import type { Store } from 'unistore';
   import type { Type } from '../links/state';
   import type { LinkableElement } from '../links/open';
-  import type { State } from '../state/store';
+  import { store } from '../state/store';
   import { createLink } from '../links/state';
   import { openLinkable } from '../links/open';
 
-  export let store: Store<State>;
   export let type: Type;
   export let value: string;
 

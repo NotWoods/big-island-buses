@@ -14,8 +14,7 @@
         <span class="stop__address" id="address"></span>
       </address>
       <div id="connections-wrapper">
-        <h2 class="connections__heading">Connects to</h2>
-        <ul class="connections__list" id="connections"></ul>
+        {% StopConnections { schedule: api } %}
       </div>
     </div>
   </div>

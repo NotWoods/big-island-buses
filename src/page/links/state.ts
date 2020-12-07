@@ -116,7 +116,7 @@ export function getStateWithLink(state: State, type: Type, value: string) {
       newState.stop = value;
       break;
     case 'route':
-      newState.route = { id: value, trip: state.route.trip };
+      newState.route = { id: value, trip: undefined };
       break;
     case 'trip':
       newState.route = { id: state.route.id, trip: value };

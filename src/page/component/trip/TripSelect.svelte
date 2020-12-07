@@ -4,9 +4,9 @@
   import { store } from '../../state/store';
 
   export let route: Route | undefined = undefined;
+  export let selectedTrip = $store.route?.trip
 
   $: trips = route ? Object.values(route.trips) : [];
-  $: selectedTrip = $store.route?.trip;
 
   function handleChange(evt: Event) {
     const option = evt.target as HTMLOptionElement;

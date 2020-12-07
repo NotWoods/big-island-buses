@@ -55,19 +55,19 @@ schedulePromise.then((api) => {
 });
 
 const stopConnections = new StopConnections({
-  target: removeChildren(document.getElementById('connections-wrapper')!),
-  props: { store, schedulePromise },
-  // hydrate: true,
+  target: document.getElementById('connections-wrapper')!,
+  props: { schedule: schedulePromise },
+  hydrate: true,
 });
 const tripSchedule = new Schedule({
-  target: removeChildren(document.getElementById('schedule')!),
-  props: { store, schedulePromise },
-  // hydrate: true,
+  target: document.getElementById('schedule')!,
+  props: { schedule: schedulePromise },
+  hydrate: true,
 });
 const tripSelect = new TripSelect({
-  target: removeChildren(document.getElementById('trip-select-container')!),
+  target: document.getElementById('trip-select-container')!,
   props: {},
-  // hydrate: true,
+  hydrate: true,
 })
 
 interface StopMarker extends LinkableMarker {
@@ -330,11 +330,6 @@ function uiEvents() {
   document.getElementById('alt-menu')!.addEventListener('click', toggleSidebar);
 }
 
-function removeChildren(parent: HTMLElement) {
-  while (parent.firstChild) parent.removeChild(parent.firstChild);
-  return parent;
-}
-
 /**
  * Swaps map and streetview divs
  * @return {[type]} [description]
@@ -511,8 +506,6 @@ function openStop(
   document.getElementById('stop_name')!.textContent = thisStop.stop_name;
 
   stopConnections.$set({
-    store,
-    schedulePromise,
     stop: thisStop,
     currentRoute,
   });
@@ -540,8 +533,6 @@ function openTrip(
     api.calendar[trip.service_id].text_name;
 
   tripSchedule.$set({
-    store,
-    schedulePromise,
     trip,
   });
 }

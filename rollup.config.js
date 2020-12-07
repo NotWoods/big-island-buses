@@ -9,6 +9,7 @@ const eleventy = require('./.eleventy.js');
 const eleventyConfig = eleventy({
   addPassthroughCopy() {},
   addFilter() {},
+  addShortcode() {},
   addTransform() {},
 });
 
@@ -31,6 +32,9 @@ const config = {
     svelte({
       // @ts-ignore
       dev: true,
+      hydratable: true,
+      immutable: true,
+      css: false,
       preprocess: typescriptPreprocess({
         compilerOptions: { module: 'esnext' }
       }),
@@ -87,4 +91,31 @@ const filters = {
   plugins: [typescript({ module: 'esnext' })],
 };
 
-export default [config, serviceWorker, infoWorkerConfig, apiGenerator, filters];
+/** @type {import('rollup').RollupOptions} */
+const components = {
+  input: 'src/page/component/index.ts',
+  output: {
+    file: 'lib/components.js',
+    format: 'cjs',
+    sourcemap: true,
+  },
+  plugins: [
+    svelte({
+      // @ts-ignore
+      generate: 'ssr',
+      dev: true,
+      hydratable: true,
+      immutable: true,
+      css: false,
+      preprocess: typescriptPreprocess({
+        compilerOptions: { module: 'esnext' }
+      }),
+    }),
+    consts(constants),
+    nodeResolve(),
+    typescript({ module: 'esnext' }),
+    // terser(),
+  ],
+};
+
+export default [config, serviceWorker, infoWorkerConfig, apiGenerator, filters, components];
