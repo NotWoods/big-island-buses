@@ -1,8 +1,7 @@
 import { Stop } from '../../gtfs-types';
-import { clickEvent } from '../load';
-import { LinkableMarker } from '../main';
 import { LatLngLiteral } from '../state/store';
-import { Type } from '../utils/link';
+import { Type } from '../links/state';
+import { clickEvent, LinkableMarker } from '../links/open';
 
 export function createLocationMarker(
   options: google.maps.ReadonlyMarkerOptions,
@@ -16,12 +15,12 @@ export function createLocationMarker(
     if (!marker) {
       marker = new google.maps.Marker(options) as LinkableMarker;
       marker.setMap(map);
-      marker.Type = Type.STOP;
+      marker.set('type', Type.STOP);
 
       google.maps.event.addListener(marker, 'click', clickEvent);
     }
 
-    marker.Value = stop_id!;
+    marker.set('value', stop_id);
     marker.setPosition(location);
 
     return marker;

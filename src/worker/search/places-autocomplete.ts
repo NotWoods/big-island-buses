@@ -19,10 +19,16 @@ export interface AutocompletionRequest extends SearchRequest {
 export interface AutocompletionResponse {
   status: google.maps.places.PlacesServiceStatus;
   predictions: google.maps.places.AutocompletePrediction[];
-  error_message?: string
+  error_message?: string;
 }
 
-const BASIC_KEYS = ['input', 'key', 'sessiontoken', 'radius', 'offset'] as const;
+const BASIC_KEYS = [
+  'input',
+  'key',
+  'sessiontoken',
+  'radius',
+  'offset',
+] as const;
 
 function requestToParams(
   request: AutocompletionRequest,

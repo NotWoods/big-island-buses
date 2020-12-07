@@ -10,4 +10,4 @@ test('applyOffset', (t) => {
 
   t.is(applyOffset('Google abc', 0), ' abc');
   t.is(applyOffset('Google abc', 7), 'Google ');
-})
+});

@@ -5,17 +5,11 @@
  */
 
 import pathPrefix from 'consts:pathPrefix';
-import { connect, deepEqual, State, store } from './state/store';
-import {
-  createLink,
-  getLinkState,
-  getStateWithLink,
-  Linkable,
-  Type,
-} from './utils/link';
 import type { Store } from 'unistore';
-import type { Mutable } from 'type-fest';
 import type { GTFSData } from '../gtfs-types';
+import { convertToLinkable, LinkableElement } from './links/open';
+import { Type } from './links/state';
+import { State } from './state/store';
 
 navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
 
@@ -97,46 +91,7 @@ export function documentLoad() {
   });
 }
 
-/**
- * Generates a link for href values. Meant to maintain whatever active data is avaliable.
- * @param {Type} type  		Type of item to change
- * @param {string} value 	ID to change
- * @return {string} URL to use for href, based on active object.
- */
-function pageLink(type: Type, value: string) {
-  return createLink(type, value, store.getState());
-}
-
-type DynamicLinkNode = HTMLAnchorElement & Linkable;
-
-/**
- * Converts an A element into an automatically updating link.
- * @param type What value to change in link
- * @param value Value to use
- * @param store If given, used to update the link when state changes
- * @return A element with custom properties
- */
-export function convertToLinkable(
-  node: HTMLAnchorElement,
-  type: Type,
-  value: string,
-  store?: Store<State>,
-) {
-  Object.assign(node, {
-    Type: type,
-    Value: value,
-    href: pageLink(type, value),
-  });
-  node.href = pageLink(type, value);
-  node.addEventListener('click', clickEvent);
-  if (store) {
-    connect(store, getLinkState, deepEqual, (state) => {
-      node.href = createLink(type, value, state);
-    });
-  }
-
-  return node;
-}
+type DynamicLinkNode = HTMLAnchorElement & LinkableElement;
 
 /**
  * Creates an A element with custom click events for links.  Can update itself.
@@ -152,34 +107,4 @@ export function dynamicLinkNode(
 ) {
   const node = document.createElement('a') as DynamicLinkNode;
   return convertToLinkable(node, type, value, store);
-}
-
-/**
- * Navigate to the page described by the `Linkable`.
- */
-export function openLinkable(link: Linkable) {
-  const { Type: type, Value: value } = link;
-  const newLink = pageLink(type, value);
-  const newState: Mutable<Partial<State>> = getStateWithLink(
-    store.getState(),
-    type,
-    value,
-  );
-  if (type === Type.STOP) {
-    newState.focus = 'stop';
-  }
-  store.setState(newState as State);
-  history.pushState(newState, '', newLink);
-  ga?.('send', 'pageview', { page: newLink, title: document.title });
-}
-
-/**
- * Used for the click event of a dynamicLinkNode
- * @param  {Event} e
- */
-export function clickEvent(this: Linkable, e: Event) {
-  e.preventDefault?.();
-  e.stopPropagation?.();
-  openLinkable(this);
-  return false;
 }

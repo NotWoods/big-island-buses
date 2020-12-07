@@ -20,7 +20,10 @@ export interface RouteDetails {
  * along with other route details.
  * @param trips All trips for a route.
  */
-export function getRouteDetails(trips: readonly Trip[], now: Date): RouteDetails {
+export function getRouteDetails(
+  trips: readonly Trip[],
+  now: Date,
+): RouteDetails {
   let firstStop: Stop['stop_id'] | undefined;
   let lastStop: Stop['stop_id'] | undefined;
   let smallestSequence = Infinity;

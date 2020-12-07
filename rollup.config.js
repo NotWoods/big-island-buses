@@ -14,7 +14,7 @@ const infoWorker = 'worker/info.js';
 
 const constants = {
   pathPrefix: eleventyConfig.pathPrefix,
-  infoWorker
+  infoWorker,
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -78,10 +78,4 @@ const filters = {
   plugins: [typescript({ module: 'esnext' })],
 };
 
-export default [
-  config,
-  serviceWorker,
-  infoWorkerConfig,
-  apiGenerator,
-  filters,
-];
+export default [config, serviceWorker, infoWorkerConfig, apiGenerator, filters];

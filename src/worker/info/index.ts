@@ -2,10 +2,10 @@ import { LatLngLike } from 'spherical-geometry-js';
 import { Stop, Trip } from '../../gtfs-types';
 import { nowPlainTime } from '../../page/utils/date';
 import { registerPromiseWorker } from '../register';
-import { findClosestStop } from './closest-stop-worker'
-import { getRouteDetails } from './route-details-worker'
+import { findClosestStop } from './closest-stop-worker';
+import { getRouteDetails } from './route-details-worker';
 
-export { RouteDetails } from './route-details-worker'
+export { RouteDetails } from './route-details-worker';
 
 interface DataMessage {
   type: 'data';

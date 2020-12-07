@@ -88,9 +88,5 @@ export function gtfsArrivalToString(string: string) {
  */
 export function nowPlainTime(): Date {
   const now = new Date();
-  return plainTime(
-    now.getHours(),
-    now.getMinutes(),
-    now.getSeconds()
-  );
+  return plainTime(now.getHours(), now.getMinutes(), now.getSeconds());
 }

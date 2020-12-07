@@ -14,11 +14,6 @@ interface State {
   stop?: string | null;
 }
 
-export interface Linkable {
-  Type: Type;
-  Value: string;
-}
-
 export function getLinkState(state: State) {
   return { route: state.route, stop: state.stop };
 }

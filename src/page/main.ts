@@ -5,7 +5,6 @@
  */
 
 import {
-  clickEvent,
   createElement,
   documentLoad,
   dynamicLinkNode,
@@ -29,9 +28,10 @@ import {
   View,
 } from './state/store.js';
 import { gtfsArrivalToString, stringTime } from './utils/date.js';
-import { Linkable, parseLink, Type } from './utils/link.js';
+import { parseLink, Type } from './links/state.js';
 import { getRouteDetails } from './info-worker.js';
 import type { GTFSData, Route, Stop, Trip } from '../gtfs-types.js';
+import { clickEvent, LinkableElement, LinkableMarker } from './links/open.js';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -51,7 +51,6 @@ schedulePromise.then((api) => {
   window.store = store;
 });
 
-export type LinkableMarker = google.maps.Marker & Linkable;
 interface StopMarker extends LinkableMarker {
   stop_id: string;
   activeInRoute?: boolean;
@@ -134,8 +133,8 @@ function loadMap() {
           title: stop.stop_name,
           icon: normal,
         }) as StopMarker;
-        marker.Type = Type.STOP;
-        marker.Value = stop.stop_id;
+        marker.set('type', Type.STOP);
+        marker.set('value', stop.stop_id);
         marker.stop_id = stop.stop_id;
         google.maps.event.addListener(marker, 'click', clickEvent);
         boundsAllStops!.extend(marker.getPosition()!);
@@ -301,10 +300,10 @@ function uiEvents() {
     .getElementById('map-toggle')!
     .addEventListener('click', switchMapStreetview);
   const select = document.getElementById('trip-select') as HTMLSelectElement &
-    Linkable;
-  select.Type = Type.TRIP;
+    LinkableElement;
+  select.dataset.type = Type.TRIP;
   select.addEventListener('change', function (e) {
-    select.Value = select.options[select.selectedIndex].value;
+    select.dataset.value = select.options[select.selectedIndex].value;
     clickEvent.call(select, e);
   });
 

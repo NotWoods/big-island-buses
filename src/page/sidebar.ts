@@ -1,4 +1,3 @@
-import { convertToLinkable } from './load';
 import {
   State,
   connect,
@@ -6,11 +5,12 @@ import {
   store,
   strictEqual,
 } from './state/store';
-import { Type } from './utils/link';
+import { Type } from './links/state';
 import { closestToUser } from './state/map';
 import { locateUser } from './location/locate-user';
 import type { Store } from 'unistore';
 import type { GTFSData } from '../gtfs-types';
+import { convertToLinkable } from './links/open';
 
 const NEARBY_INFO_TEXT: Record<LocationPermission, string> = {
   [LocationPermission.NOT_ASKED]: 'Find routes near my location >',
