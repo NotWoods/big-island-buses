@@ -1,7 +1,9 @@
 import consts from 'rollup-plugin-consts';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
+import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
+import autoPreprocess from 'svelte-preprocess'
 const eleventy = require('./.eleventy.js');
 
 const eleventyConfig = eleventy({
@@ -26,6 +28,11 @@ const config = {
     sourcemap: true,
   },
   plugins: [
+    svelte({
+      // @ts-ignore
+      dev: true,
+      preprocess: autoPreprocess(),
+    }),
     consts(constants),
     nodeResolve(),
     typescript({ module: 'esnext' }),
