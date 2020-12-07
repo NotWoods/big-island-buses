@@ -68,7 +68,7 @@ const tripSelect = new TripSelect({
   target: document.getElementById('trip-select-container')!,
   props: {},
   hydrate: true,
-})
+});
 
 interface StopMarker extends LinkableMarker {
   stop_id: string;
@@ -218,7 +218,7 @@ function loadMap() {
       google.maps.event.addListener(autocomplete, 'place_changed', function () {
         const place = autocomplete!.getPlace();
         if (!place.geometry) return;
-        store.update(oldState => ({
+        store.update((oldState) => ({
           ...oldState,
           searchLocation: place.geometry!.location.toJSON(),
           focus: 'search',
@@ -265,11 +265,7 @@ documentPromise.then(function () {
 });
 
 schedulePromise.then((schedule) => {
-  function openActive(state: {
-    route?: string;
-    trip?: string;
-    stop?: string
-  }) {
+  function openActive(state: { route?: string; trip?: string; stop?: string }) {
     let routePromise = Promise.resolve();
     if (state.route) {
       routePromise = openRoute(schedule, state.route).then((bestTrip) =>
@@ -402,7 +398,7 @@ const openRoute = memoize(function openRoute(
 
   tripSelect.$set({
     route: thisRoute,
-  })
+  });
 
   return detailsPromise.then((details) => {
     function stopName(id: Stop['stop_id']) {

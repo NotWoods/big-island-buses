@@ -1,9 +1,10 @@
+// @ts-check
 import consts from 'rollup-plugin-consts';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import svelte from 'rollup-plugin-svelte';
 import { terser } from 'rollup-plugin-terser';
-import { typescript as typescriptPreprocess } from 'svelte-preprocess'
+import { typescript as typescriptPreprocess } from 'svelte-preprocess';
 const eleventy = require('./.eleventy.js');
 
 const eleventyConfig = eleventy({
@@ -15,9 +16,23 @@ const eleventyConfig = eleventy({
 
 const infoWorker = 'worker/info.js';
 
+const development = true;
+
 const constants = {
   pathPrefix: eleventyConfig.pathPrefix,
   infoWorker,
+  development,
+};
+
+const svelteOptions = {
+  dev: development,
+  hydratable: true,
+  immutable: true,
+  css: false,
+};
+
+const typescriptOptions = {
+  module: 'esnext',
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -30,19 +45,15 @@ const config = {
   },
   plugins: [
     svelte({
-      // @ts-ignore
-      dev: true,
-      hydratable: true,
-      immutable: true,
-      css: false,
+      compilerOptions: { ...svelteOptions, generate: 'dom' },
       preprocess: typescriptPreprocess({
-        compilerOptions: { module: 'esnext' }
+        compilerOptions: typescriptOptions,
       }),
     }),
     consts(constants),
     nodeResolve(),
-    typescript({ module: 'esnext' }),
-    // terser(),
+    typescript(typescriptOptions),
+    development ? undefined : terser(),
   ],
 };
 
@@ -54,7 +65,11 @@ const serviceWorker = {
     format: 'esm',
     sourcemap: true,
   },
-  plugins: [consts(constants), typescript({ module: 'esnext' }), terser()],
+  plugins: [
+    consts(constants),
+    typescript(typescriptOptions),
+    development ? undefined : terser(),
+  ],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -65,7 +80,11 @@ const infoWorkerConfig = {
     format: 'esm',
     sourcemap: true,
   },
-  plugins: [nodeResolve(), typescript({ module: 'esnext' }), terser()],
+  plugins: [
+    nodeResolve(),
+    typescript(typescriptOptions),
+    development ? undefined : terser(),
+  ],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -77,7 +96,7 @@ const apiGenerator = {
     sourcemap: true,
   },
   external: ['fs', 'path', 'util', 'jszip'],
-  plugins: [typescript({ module: 'esnext' })],
+  plugins: [typescript(typescriptOptions)],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -88,7 +107,7 @@ const filters = {
     format: 'cjs',
     sourcemap: true,
   },
-  plugins: [typescript({ module: 'esnext' })],
+  plugins: [typescript(typescriptOptions)],
 };
 
 /** @type {import('rollup').RollupOptions} */
@@ -101,21 +120,22 @@ const components = {
   },
   plugins: [
     svelte({
-      // @ts-ignore
-      generate: 'ssr',
-      dev: true,
-      hydratable: true,
-      immutable: true,
-      css: false,
+      compilerOptions: { ...svelteOptions, generate: 'ssr' },
       preprocess: typescriptPreprocess({
-        compilerOptions: { module: 'esnext' }
+        compilerOptions: typescriptOptions,
       }),
     }),
     consts(constants),
     nodeResolve(),
-    typescript({ module: 'esnext' }),
-    // terser(),
+    typescript(typescriptOptions),
   ],
 };
 
-export default [config, serviceWorker, infoWorkerConfig, apiGenerator, filters, components];
+export default [
+  config,
+  serviceWorker,
+  infoWorkerConfig,
+  apiGenerator,
+  filters,
+  components,
+];

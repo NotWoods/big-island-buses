@@ -15,7 +15,7 @@ module.exports = function (config) {
   for (const [name, component] of Object.entries(components)) {
     config.addShortcode(name, (props) => {
       return component.render(props).html;
-    })
+    });
   }
 
   // pass some assets right through
