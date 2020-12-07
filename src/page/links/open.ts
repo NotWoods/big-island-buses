@@ -1,5 +1,5 @@
-import { Mutable } from 'type-fest';
-import { get, Readable } from 'svelte/store';
+import type { Mutable } from 'type-fest';
+import type { Readable } from 'svelte/store';
 import { connect, deepEqual, store, State } from '../state/store';
 import { createLink, getLinkState, getStateWithLink, Type } from './state';
 
@@ -20,31 +20,25 @@ export interface LinkableElement {
 export type Linkable = (LinkableElement & HTMLElement) | LinkableMarker;
 
 /**
- * Generates a link for href values. Meant to maintain whatever active data is avaliable.
- * @param {Type} type  		Type of item to change
- * @param {string} value 	ID to change
- * @return {string} URL to use for href, based on active object.
- */
-export function pageLink(type: Type, value: string, store: Readable<State>) {
-  return createLink(type, value, get(store));
-}
-
-/**
  * Navigate to the described page
  */
 export function openLinkableValues(type: Type, value: string) {
-  const newLink = pageLink(type, value, store);
-  const newState: Mutable<Partial<State>> = getStateWithLink(
-    get(store),
-    type,
-    value,
-  );
-  if (type === 'stop') {
-    newState.focus = 'stop';
-  }
-  store.update((oldState) => ({ ...oldState, ...newState }));
-  history.pushState(newState, '', newLink);
-  ga?.('send', 'pageview', { page: newLink, title: document.title });
+  store.update((state) => {
+    const newLink = createLink(type, value, state);
+    const newState: Mutable<Partial<State>> = getStateWithLink(
+      state,
+      type,
+      value,
+    );
+    if (type === 'stop') {
+      newState.focus = 'stop';
+    }
+
+    history.pushState(newState, '', newLink);
+    ga?.('send', 'pageview', { page: newLink, title: document.title });
+
+    return { ...state, ...newState };
+  });
 }
 
 export function openLinkable(linkable: Linkable) {

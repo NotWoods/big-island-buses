@@ -6,7 +6,6 @@
 
 import { get } from 'svelte/store';
 import {
-  createElement,
   documentLoad,
   getScheduleData,
   normal,
@@ -32,9 +31,10 @@ import { stringTime } from './utils/date.js';
 import { parseLink } from './links/state.js';
 import { getRouteDetails } from './info-worker.js';
 import type { GTFSData, Route, Stop, Trip } from '../gtfs-types.js';
-import { clickEvent, LinkableElement, LinkableMarker } from './links/open.js';
+import { clickEvent, LinkableMarker } from './links/open.js';
 import StopConnections from './component/stop/StopConnections.svelte';
 import Schedule from './component/trip/Schedule.svelte';
+import TripSelect from './component/trip/TripSelect.svelte';
 
 let map: google.maps.Map | undefined;
 let streetview: google.maps.StreetViewPanorama | undefined;
@@ -56,14 +56,19 @@ schedulePromise.then((api) => {
 
 const stopConnections = new StopConnections({
   target: removeChildren(document.getElementById('connections-wrapper')!),
-  props: { store },
+  props: { store, schedulePromise },
   // hydrate: true,
 });
 const tripSchedule = new Schedule({
   target: removeChildren(document.getElementById('schedule')!),
-  props: { store },
+  props: { store, schedulePromise },
   // hydrate: true,
 });
+const tripSelect = new TripSelect({
+  target: removeChildren(document.getElementById('trip-select-container')!),
+  props: {},
+  // hydrate: true,
+})
 
 interface StopMarker extends LinkableMarker {
   stop_id: string;
@@ -314,13 +319,6 @@ function uiEvents() {
   document
     .getElementById('map-toggle')!
     .addEventListener('click', switchMapStreetview);
-  const select = document.getElementById('trip-select') as HTMLSelectElement &
-    LinkableElement;
-  select.dataset.type = 'trip';
-  select.addEventListener('change', function (e) {
-    select.dataset.value = select.options[select.selectedIndex].value;
-    clickEvent.call(select, e);
-  });
 
   function toggleSidebar() {
     document.getElementById('aside')!.classList.toggle('open');
@@ -407,15 +405,9 @@ const openRoute = memoize(function openRoute(
   const name = document.getElementById('route_long_name')!;
   name.textContent = thisRoute.route_long_name;
 
-  const select = document.getElementById('trip-select')!;
-  removeChildren(select);
-  for (const trip of Object.values(thisRoute.trips)) {
-    const option = createElement('option', {
-      value: trip.trip_id,
-      textContent: trip.trip_short_name,
-    });
-    select.appendChild(option);
-  }
+  tripSelect.$set({
+    route: thisRoute,
+  })
 
   return detailsPromise.then((details) => {
     function stopName(id: Stop['stop_id']) {
@@ -520,7 +512,7 @@ function openStop(
 
   stopConnections.$set({
     store,
-    routes: api.routes,
+    schedulePromise,
     stop: thisStop,
     currentRoute,
   });
@@ -544,21 +536,12 @@ function openTrip(
     return;
   }
 
-  const select = document.getElementById('trip-select') as HTMLSelectElement;
-  for (let option = 0; option < select.options.length; option++) {
-    if (select.options[option].value === trip_id) {
-      select.selectedIndex = option;
-      select.options[option].selected = true;
-      break;
-    }
-  }
-
   document.getElementById('week-days-value')!.textContent =
     api.calendar[trip.service_id].text_name;
 
   tripSchedule.$set({
     store,
-    stops: api.stops,
+    schedulePromise,
     trip,
   });
 }

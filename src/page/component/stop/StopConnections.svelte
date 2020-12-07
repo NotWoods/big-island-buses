@@ -5,7 +5,7 @@
   import Connection from './Connection.svelte';
 
   export let store: Store<State>;
-  export let routes: GTFSData['routes'] = {};
+  export let schedulePromise: Promise<Pick<GTFSData, 'routes'>>;
   export let stop: Stop | undefined = undefined;
   export let currentRoute: string | undefined = undefined;
 
@@ -14,7 +14,13 @@
 
 <h2 class="connections__heading">Connects to</h2>
 <ul class="connections__list" id="connections">
-  {#each connections as routeId (routeId)}
-    <Connection {store} {routes} {routeId} current={currentRoute === routeId} />
-  {/each}
+  {#await schedulePromise then { routes }}
+    {#each connections as routeId (routeId)}
+      <Connection
+        {store}
+        {routes}
+        {routeId}
+        current={currentRoute === routeId} />
+    {/each}
+  {/await}
 </ul>

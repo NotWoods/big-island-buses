@@ -1,4 +1,4 @@
-import { writable, Readable } from 'svelte/store';
+import { writable, derived, Readable } from 'svelte/store';
 
 type PromiseValue<T> = T extends Promise<infer R> ? R : T;
 
@@ -103,4 +103,27 @@ export function connect<Props, State>(
   }
 
   return store.subscribe(listener);
+}
+
+/** One or more `Readable`s. */
+type Stores = Readable<any> | [Readable<any>, ...Array<Readable<any>>];
+/** One or more values from `Readable` stores. */
+type StoresValues<T> = T extends Readable<infer U>
+  ? U
+  : {
+      [K in keyof T]: T[K] extends Readable<infer U> ? U : never;
+    };
+
+export function derivedAsync<S extends Stores, T>(
+  stores: S,
+  fn: (values: StoresValues<S>) => Promise<T>,
+  initialValue?: T,
+) {
+  return derived(
+    stores,
+    (values, set) => {
+      fn(values).then(set);
+    },
+    initialValue,
+  );
 }
