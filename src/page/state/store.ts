@@ -31,7 +31,10 @@ export interface State {
   readonly stop?: string | null;
   readonly locatePermission: LocationPermission;
   readonly userLocation?: LatLngLiteral;
-  readonly searchLocation?: LatLngLiteral;
+  readonly searchLocation?: {
+    placeId: string;
+    location: LatLngLiteral;
+  };
   readonly focus: 'user' | 'search' | 'stop';
 }
 

@@ -115,7 +115,7 @@ Promise.all([schedulePromise, mapPromise]).then(([schedule, map]) => {
     store,
     (state) =>
       awaitObject({
-        location: state.searchLocation,
+        location: state.searchLocation?.location,
         stop: closestToSearch(schedule.stops, state),
         buildMarker: buildPlaceMarker,
       }),
@@ -182,7 +182,7 @@ function loadMap() {
         center: new google.maps.LatLng(19.6, -155.56),
         zoom: 10,
         mapTypeControlOptions: {
-          position: google.maps.ControlPosition.TOP_CENTER,
+          position: google.maps.ControlPosition.BOTTOM_CENTER,
         },
         panControlOptions: {
           position: google.maps.ControlPosition.RIGHT_TOP,
@@ -220,7 +220,10 @@ function loadMap() {
         if (!place.geometry) return;
         store.update((oldState) => ({
           ...oldState,
-          searchLocation: place.geometry!.location.toJSON(),
+          searchLocation: {
+            placeId: place.place_id!,
+            location: place.geometry!.location.toJSON()
+          },
           focus: 'search',
         }));
       });
