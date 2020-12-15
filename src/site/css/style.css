@@ -20,6 +20,12 @@ svg {
   height: 24px;
   width: 24px;
 }
+.author {
+  height: 32px;
+  width: 160px;
+  display: block;
+  margin-top: 2px;
+}
 
 #disclaimer {
   display: none;
@@ -112,7 +118,7 @@ noscript ul {
   text-decoration: underline;
 }
 .sidebar__link {
-  color: inherit;
+  color: inherit !important;
   text-decoration: inherit;
   display: block;
   padding: 4px 16px;
@@ -720,12 +726,33 @@ main {
   margin-top: 24px;
   color: #9e9e9e;
 }
-.sidebar p {
-  margin: 8px 24px;
+.about__item {
+  margin: 0;
+  padding: 8px 24px;
+  font-size: inherit;
 }
 .about a,
 .about a:visited {
   color: #0277bd;
+}
+
+.text-overlay path {
+  stroke-dasharray: 25;
+  stroke-dashoffset: 25;
+  transition: stroke-dashoffset 0.5s linear;
+}
+.logo-icon {
+  transition: opacity 0.3s linear;
+}
+.logo-icon--color,
+.author__link:hover .logo-icon--monochrome {
+  opacity: 0;
+}
+.author__link:hover .logo-icon--color {
+  opacity: 1;
+}
+.author__link:hover .text-overlay path {
+  stroke-dashoffset: 0;
 }
 
 .nearby__info {

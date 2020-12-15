@@ -33,15 +33,13 @@
   </ul>
 
   <div class="about">
-    <p>
+    <a class="about__item sidebar__item sidebar__link author__link">
       Created by
-      <a href="http://tigeroakes.com">
-        <img class="created" src="{{ '/assets/tigeroakes.svg' | url }}" alt="Tiger Oakes" width="122" height="18" />
-      </a>
-    </p>
-    <p>Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
+      {% include 'tiger-logo.svg' %}
+    </a>
+    <p class="about__item">Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
 
-    <p itemprop="permissions">
+    <p class="about__item" itemprop="permissions">
       Finding routes near your location requires the Location permission.
     </p>
   </div>

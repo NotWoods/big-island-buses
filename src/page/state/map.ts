@@ -16,7 +16,7 @@ export function closestToSearch(
   stops: GTFSData['stops'],
   state: Pick<State, 'searchLocation'>,
 ) {
-  return getClosestToSearch(stops, state.searchLocation);
+  return getClosestToSearch(stops, state.searchLocation?.location);
 }
 
 function getStopId(stop: Stop | undefined) {
