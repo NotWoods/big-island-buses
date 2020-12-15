@@ -68,22 +68,6 @@
 
     <section class="schedule" id="schedule">
       {% Schedule { schedule: api, trip: trip } %}
-      {% if trip %}
-      {% for stopTime in trip.stop_times %}
-        <a href="?stop={{ stopTime.stop_id }}" class="schedule__stop">
-          <div class="lines">
-            <span class="line"></span>
-            <span class="line"></span>
-          </div>
-          <span class="schedule__stopname name">
-            {{ api.stops[stopTime.stop_id].stop_name }}
-          </span>
-          <time class="schedule__time">
-            {{ stopTime.arrival_time | gtfsArrivalToString }}
-          </time>
-        </a>
-      {% endfor %}
-      {% endif %}
     </section>
   </div>
 

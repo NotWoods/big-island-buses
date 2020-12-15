@@ -68,7 +68,7 @@ const tripSelect = new TripSelect({
   target: document.getElementById('trip-select-container')!,
   props: {},
   hydrate: true,
-})
+});
 
 interface StopMarker extends LinkableMarker {
   stop_id: string;
@@ -115,7 +115,7 @@ Promise.all([schedulePromise, mapPromise]).then(([schedule, map]) => {
     store,
     (state) =>
       awaitObject({
-        location: state.searchLocation,
+        location: state.searchLocation?.location,
         stop: closestToSearch(schedule.stops, state),
         buildMarker: buildPlaceMarker,
       }),
@@ -182,7 +182,7 @@ function loadMap() {
         center: new google.maps.LatLng(19.6, -155.56),
         zoom: 10,
         mapTypeControlOptions: {
-          position: google.maps.ControlPosition.TOP_CENTER,
+          position: google.maps.ControlPosition.BOTTOM_CENTER,
         },
         panControlOptions: {
           position: google.maps.ControlPosition.RIGHT_TOP,
@@ -218,9 +218,12 @@ function loadMap() {
       google.maps.event.addListener(autocomplete, 'place_changed', function () {
         const place = autocomplete!.getPlace();
         if (!place.geometry) return;
-        store.update(oldState => ({
+        store.update((oldState) => ({
           ...oldState,
-          searchLocation: place.geometry!.location.toJSON(),
+          searchLocation: {
+            placeId: place.place_id!,
+            location: place.geometry!.location.toJSON()
+          },
           focus: 'search',
         }));
       });
@@ -265,11 +268,7 @@ documentPromise.then(function () {
 });
 
 schedulePromise.then((schedule) => {
-  function openActive(state: {
-    route?: string;
-    trip?: string;
-    stop?: string
-  }) {
+  function openActive(state: { route?: string; trip?: string; stop?: string }) {
     let routePromise = Promise.resolve();
     if (state.route) {
       routePromise = openRoute(schedule, state.route).then((bestTrip) =>
@@ -402,7 +401,7 @@ const openRoute = memoize(function openRoute(
 
   tripSelect.$set({
     route: thisRoute,
-  })
+  });
 
   return detailsPromise.then((details) => {
     function stopName(id: Stop['stop_id']) {

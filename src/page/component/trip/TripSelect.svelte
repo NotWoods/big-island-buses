@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Route } from '../../../gtfs-types';
-  import { openLinkableValues } from '../../links/open';
+  import { openLinkable } from '../../links/open';
   import { store } from '../../state/store';
 
   export let route: Route | undefined = undefined;
@@ -10,7 +10,7 @@
 
   function handleChange(evt: Event) {
     const option = evt.target as HTMLOptionElement;
-    openLinkableValues('trip', option.value);
+    openLinkable('trip', option.value);
   }
 </script>
 

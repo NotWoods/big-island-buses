@@ -22,7 +22,7 @@ export type Linkable = (LinkableElement & HTMLElement) | LinkableMarker;
 /**
  * Navigate to the described page
  */
-export function openLinkableValues(type: Type, value: string) {
+function openLinkableValues(type: Type, value: string) {
   store.update((state) => {
     const newLink = createLink(type, value, state);
     const newState: Mutable<Partial<State>> = getStateWithLink(
@@ -41,15 +41,20 @@ export function openLinkableValues(type: Type, value: string) {
   });
 }
 
-export function openLinkable(linkable: Linkable) {
+export function openLinkable(type: Type, value: string): void;
+export function openLinkable(linkable: Linkable): void;
+export function openLinkable(linkable: Linkable | Type, value?: string) {
   let type: Type;
-  let value: string;
+  if (value) {
+    type = linkable as Type;
+  }
   if (linkable instanceof HTMLElement) {
     type = linkable.dataset.type;
     value = linkable.dataset.value;
   } else {
-    type = linkable.get('type');
-    value = linkable.get('value');
+    const marker = linkable as LinkableMarker;
+    type = marker.get('type');
+    value = marker.get('value');
   }
   openLinkableValues(type, value);
 }
