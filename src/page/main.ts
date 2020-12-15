@@ -222,7 +222,7 @@ function loadMap() {
           ...oldState,
           searchLocation: {
             placeId: place.place_id!,
-            location: place.geometry!.location.toJSON()
+            location: place.geometry!.location.toJSON(),
           },
           focus: 'search',
         }));
