@@ -3,8 +3,6 @@ name: Lint and Test
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   lint:
@@ -34,10 +32,11 @@ jobs:
         with:
           ref: app-challenge
           path: big-island-buses/heleon
+          clean: false
+      - run: rm -rf big-island-buses/heleon/.git
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: "./big-island-buses"
-          public_branch: gh-pages-test
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
