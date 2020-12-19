@@ -1,2 +1,0 @@
-feed_publisher_name,feed_publisher_url,feed_lang,feed_version,feed_start_date,feed_end_date
-Tiger Oakes,http://tigeroakes.com,en,2,20140904,20141030
