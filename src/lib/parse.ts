@@ -1,4 +1,6 @@
 import jszip from 'jszip';
+import parse from 'csv-parse';
+import { promisify } from "util";
 import type { Mutable } from 'type-fest';
 import type {
   Calendar,
@@ -20,27 +22,21 @@ interface CsvFile {
   body: string;
 }
 
-function csvFilesToObject(csvFiles: readonly CsvFile[]) {
+const parseAsync: (input: Buffer | string, options?: parse.Options) => Promise<any> = promisify(parse);
+
+async function csvFilesToObject(csvFiles: readonly CsvFile[]) {
   const json: { [name: string]: unknown[] } = {};
 
   for (const { name, body } of csvFiles) {
     json[name] = [];
-    const rawRows = body.split('\n');
-    const csv: string[][] = [];
-    for (let i = 0; i < rawRows.length; i++) {
-      csv[i] = rawRows[i].replace(/(\r\n|\n|\r)/gm, '').split(',');
-
-      if (i > 0) {
-        const headerRow = csv[0];
-        const jsonFromCsv: { [header: string]: string } = {};
-        for (let j = 0; j < headerRow.length; j++) {
-          jsonFromCsv[headerRow[j]] = csv[i][j];
-        }
-        json[name].push(jsonFromCsv);
-      }
-    }
+    const jsonFromCsv = await parseAsync(body, {
+      cast: false,
+      columns: true,
+    })
+    json[name] = jsonFromCsv
   }
 
+  console.log(json)
   return json;
 }
 
@@ -129,7 +125,7 @@ export async function createApiData(
     calendar: {},
     trips: {},
   };
-  const json = csvFilesToObject(csvFiles) as {
+  const json = await csvFilesToObject(csvFiles) as {
     routes: CsvRoute[];
     trips: CsvTrip[];
     stops: CsvStop[];

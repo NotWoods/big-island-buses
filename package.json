@@ -5,6 +5,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "csv-parse": "^4.14.2",
     "fuse.js": "^6.4.6"
   },
   "devDependencies": {
@@ -44,6 +45,7 @@
     "lint:files": "prettier \"*.{md,css,html}\" \"src/**/*.ts\" \"!src/**/*.d.ts\" *.js **/tsconfig.json",
     "lint": "npm run lint:files -- --write",
     "lint:check": "npm run lint:files -- --check",
+    "pretest": "tsc --build src",
     "test": "ava"
   },
   "ava": {

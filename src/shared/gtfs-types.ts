@@ -58,6 +58,7 @@ export interface CsvTrip {
   trip_short_name: string;
   trip_headsign: string;
   shape_id: string;
+  block_id: string;
 }
 
 export interface Trip extends Readonly<CsvTrip> {

@@ -491,6 +491,11 @@
         "signature": "0f807a81d5e742104e0a2f7b53394a0131e0137b873480c42443fb49dfdb2ac3",
         "affectsGlobalScope": false
       },
+      "../../node_modules/csv-parse/lib/index.d.ts": {
+        "version": "088911e2dce053df0ab959dfa6374a1299003b64a2a489409d2869fb9d3591b8",
+        "signature": "088911e2dce053df0ab959dfa6374a1299003b64a2a489409d2869fb9d3591b8",
+        "affectsGlobalScope": false
+      },
       "../../node_modules/type-fest/source/basic.d.ts": {
         "version": "f20c9c09c8a0fea4784952305a937bdb092417908bad669dc789d3e54d8a5386",
         "signature": "f20c9c09c8a0fea4784952305a937bdb092417908bad669dc789d3e54d8a5386",
@@ -687,7 +692,7 @@
         "affectsGlobalScope": false
       },
       "./parse.ts": {
-        "version": "d45d4dd998f9845df476116eb4af45022b42486d8661173543d0d43ec0112656",
+        "version": "54fe85ae3977bfd6514f728588b3999404135c0e8a2e0a8bc2fc081f0f057ee6",
         "signature": "42da883807a6dc3a0ae0bcebb6bd67c2a12a5a5cd93b5a8c5eabdf86f72f21e8",
         "affectsGlobalScope": false
       },
@@ -1119,6 +1124,10 @@
       "../../node_modules/@types/sass/index.d.ts": [
         "../../node_modules/@types/node/index.d.ts"
       ],
+      "../../node_modules/csv-parse/lib/index.d.ts": [
+        "../../node_modules/@types/node/index.d.ts",
+        "../../node_modules/@types/node/stream.d.ts"
+      ],
       "../../node_modules/jszip/index.d.ts": [
         "../../node_modules/@types/node/index.d.ts"
       ],
@@ -1237,6 +1246,8 @@
         "../shared/utils/date.d.ts"
       ],
       "./parse.ts": [
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/csv-parse/lib/index.d.ts",
         "../../node_modules/jszip/index.d.ts",
         "../../node_modules/tslib/tslib.d.ts",
         "../../node_modules/type-fest/ts41/index.d.ts",
@@ -1451,6 +1462,10 @@
       "../../node_modules/@types/sass/index.d.ts": [
         "../../node_modules/@types/node/index.d.ts"
       ],
+      "../../node_modules/csv-parse/lib/index.d.ts": [
+        "../../node_modules/@types/node/index.d.ts",
+        "../../node_modules/@types/node/stream.d.ts"
+      ],
       "../../node_modules/jszip/index.d.ts": [
         "../../node_modules/@types/node/index.d.ts"
       ],
@@ -1641,6 +1656,7 @@
       "../../node_modules/@types/pug/index.d.ts",
       "../../node_modules/@types/resolve/index.d.ts",
       "../../node_modules/@types/sass/index.d.ts",
+      "../../node_modules/csv-parse/lib/index.d.ts",
       "../../node_modules/fuse.js/dist/fuse.d.ts",
       "../../node_modules/jszip/index.d.ts",
       "../../node_modules/tslib/tslib.d.ts",

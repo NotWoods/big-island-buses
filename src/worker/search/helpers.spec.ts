@@ -1,7 +1,7 @@
 import test from 'ava';
-import { applyOffset } from './helpers.js';
 
-test('applyOffset', (t) => {
+test('applyOffset', async (t) => {
+  const { applyOffset } = await import('./helpers.js')
   t.is(applyOffset('Google abc', 3), 'Goo abc');
   t.is(applyOffset('Google abc', 8), 'Google a');
 
