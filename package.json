@@ -50,12 +50,6 @@
     "test": "ava"
   },
   "ava": {
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ]
   },
   "prettier": {
     "singleQuote": true,

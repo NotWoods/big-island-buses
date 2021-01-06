@@ -19,7 +19,7 @@ import type {
 } from '../shared/gtfs-types';
 import { toInt } from '../shared/utils/num.js';
 
-async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
+export async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
   const arrays = await from(zipFiles.values())
     .pipe(
       map((file) =>
@@ -29,7 +29,7 @@ async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
       ),
       map((stream) => toArray(stream)),
     )
-    .pipe(source => Promise.all(source));
+    .pipe((source) => Promise.all(source));
 
   return zip(zipFiles.keys(), arrays).pipe((entry) =>
     Object.fromEntries(entry),
@@ -109,7 +109,7 @@ export async function createApiData(
         return file != null;
       }),
     )
-    .pipe(source => new Map(source));
+    .pipe((source) => new Map(source));
 
   const variable: GTFSDataWithTrips = {
     routes: {},

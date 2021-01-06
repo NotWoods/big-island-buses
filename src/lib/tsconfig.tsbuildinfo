@@ -1487,8 +1487,8 @@
         "affectsGlobalScope": false
       },
       "./parse.ts": {
-        "version": "f61cccf3b295b875230454ce6b0d586b1d3befc12a177a1bab9977311ca737c3",
-        "signature": "42da883807a6dc3a0ae0bcebb6bd67c2a12a5a5cd93b5a8c5eabdf86f72f21e8",
+        "version": "4cf110c3b595498642ac7ffcb1bfec6bf1fc4c9b8d178a783e9ea607374889d2",
+        "signature": "84c46df4ada5cb96f68658b365fe73fafd0b8080db61988a5ac037eb6a25e561",
         "affectsGlobalScope": false
       },
       "./api.ts": {
@@ -1509,6 +1509,16 @@
       "./filters.ts": {
         "version": "ced64f5c0b85c9241c813c8098f8289cb453418aa84e955afa29606d4736628a",
         "signature": "fdec109f752b3a435ff80fb0f439858391ef8adddbb8ac0c7dc7e93c271003d3",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/ava/index.d.ts": {
+        "version": "0ceec7923fb2a6e540f73682c7acffe9124c9c3517a02eac27632844b8a61251",
+        "signature": "0ceec7923fb2a6e540f73682c7acffe9124c9c3517a02eac27632844b8a61251",
+        "affectsGlobalScope": false
+      },
+      "./parse.spec.ts": {
+        "version": "bc69e40f0d71f5f9f42de3b704ffab692846472b30b3c3d69e047caeb2c07b0e",
+        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/babel-types/ts3.6/index.d.ts": {
@@ -2629,6 +2639,13 @@
         "../../node_modules/tslib/tslib.d.ts",
         "../shared/utils/date.d.ts"
       ],
+      "./parse.spec.ts": [
+        "../../node_modules/@types/node/fs/promises.d.ts",
+        "../../node_modules/ava/index.d.ts",
+        "../../node_modules/jszip/index.d.ts",
+        "../../node_modules/tslib/tslib.d.ts",
+        "./parse.ts"
+      ],
       "./parse.ts": [
         "../../node_modules/csv-parse/lib/index.d.ts",
         "../../node_modules/ix/asynciterable/index.d.ts",
@@ -3544,6 +3561,7 @@
         "../shared/utils/date.d.ts"
       ],
       "./parse.ts": [
+        "../../node_modules/jszip/index.d.ts",
         "../shared/gtfs-types.d.ts"
       ]
     },
@@ -3631,6 +3649,7 @@
       "../../node_modules/@types/pug/index.d.ts",
       "../../node_modules/@types/resolve/index.d.ts",
       "../../node_modules/@types/sass/index.d.ts",
+      "../../node_modules/ava/index.d.ts",
       "../../node_modules/csv-parse/lib/index.d.ts",
       "../../node_modules/fuse.js/dist/fuse.d.ts",
       "../../node_modules/ix/asynciterable/as.d.ts",
@@ -3882,6 +3901,7 @@
       "./api.ts",
       "./cli.ts",
       "./filters.ts",
+      "./parse.spec.ts",
       "./parse.ts",
       "../shared/gtfs-types.d.ts",
       "../shared/utils/date.d.ts",

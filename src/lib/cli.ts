@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { generateApi } from './api.js'
+import { generateApi } from './api.js';
 
 const args = process.argv.slice(2);
 if (args.length !== 2) {
