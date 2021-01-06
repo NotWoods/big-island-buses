@@ -1,6 +1,8 @@
-import jszip from 'jszip';
 import parse from 'csv-parse';
-import { promisify } from "util";
+import { toArray } from 'ix/asynciterable/index.js';
+import { from, zip } from 'ix/iterable/index.js';
+import { filter, map } from 'ix/iterable/operators/index.js';
+import JSZip, { JSZipObject } from 'jszip';
 import type { Mutable } from 'type-fest';
 import type {
   Calendar,
@@ -13,31 +15,25 @@ import type {
   Route,
   Stop,
   StopTime,
-  Trip
+  Trip,
 } from '../shared/gtfs-types';
 import { toInt } from '../shared/utils/num.js';
 
-interface CsvFile {
-  name: string;
-  body: string;
-}
+async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
+  const arrays = await from(zipFiles.values())
+    .pipe(
+      map((file) =>
+        file
+          .nodeStream('nodebuffer')
+          .pipe(parse({ cast: false, columns: true })),
+      ),
+      map((stream) => toArray(stream)),
+    )
+    .pipe(source => Promise.all(source));
 
-const parseAsync: (input: Buffer | string, options?: parse.Options) => Promise<any> = promisify(parse);
-
-async function csvFilesToObject(csvFiles: readonly CsvFile[]) {
-  const json: { [name: string]: unknown[] } = {};
-
-  for (const { name, body } of csvFiles) {
-    json[name] = [];
-    const jsonFromCsv = await parseAsync(body, {
-      cast: false,
-      columns: true,
-    })
-    json[name] = jsonFromCsv
-  }
-
-  console.log(json)
-  return json;
+  return zip(zipFiles.keys(), arrays).pipe((entry) =>
+    Object.fromEntries(entry),
+  );
 }
 
 /**
@@ -81,10 +77,6 @@ function makeCalendarTextName(days: Calendar['days']) {
   }
 }
 
-function notNull<T>(value: T | null | undefined): value is T {
-  return value != null;
-}
-
 /**
  * Creates a JSON object representing the Big Island Buses schedule.
  * The JSON data can be written to a file for the client to load later.
@@ -104,20 +96,20 @@ export async function createApiData(
     'trips.txt',
   ];
 
-  const zip = await jszip.loadAsync(gtfsZipData);
-  const csvFiles = await Promise.all(
-    fileList
-      .map((fileName) =>
-        zip
-          .file(fileName)
-          ?.async('text')
-          ?.then((body) => ({
-            name: fileName.substring(0, fileName.length - 4),
-            body,
-          })),
-      )
-      .filter(notNull),
-  );
+  const zip = await JSZip.loadAsync(gtfsZipData);
+  const zipFiles = from(fileList)
+    .pipe(
+      map((fileName) => {
+        const name = fileName.substring(0, fileName.length - 4);
+        const file = zip.file(fileName);
+        return [name, file] as const;
+      }),
+      filter((entry): entry is [string, JSZipObject] => {
+        const [, file] = entry;
+        return file != null;
+      }),
+    )
+    .pipe(source => new Map(source));
 
   const variable: GTFSDataWithTrips = {
     routes: {},
@@ -125,7 +117,7 @@ export async function createApiData(
     calendar: {},
     trips: {},
   };
-  const json = await csvFilesToObject(csvFiles) as {
+  const json = (await zipFilesToObject(zipFiles)) as {
     routes: CsvRoute[];
     trips: CsvTrip[];
     stops: CsvStop[];
@@ -145,15 +137,15 @@ export async function createApiData(
     variable.trips[trip.trip_id] = trip.route_id;
   }
   for (const csvStop of json.stops) {
-    const stop = (csvStop as unknown) as Mutable<Stop>;
+    const stop = (csvStop as Partial<Stop>) as Mutable<Stop>;
     stop.position = {
       lat: parseFloat(csvStop.stop_lat),
       lng: parseFloat(csvStop.stop_lon),
     };
     stop.trips = [];
     stop.routes = [];
-    delete (csvStop as any).stop_lat;
-    delete (csvStop as any).stop_lon;
+    delete (csvStop as Partial<CsvStop>).stop_lat;
+    delete (csvStop as Partial<CsvStop>).stop_lon;
     variable.stops[stop.stop_id] = stop;
   }
   for (const csvCalendar of json.calendar) {

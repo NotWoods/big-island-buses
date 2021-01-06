@@ -242,8 +242,8 @@
         "affectsGlobalScope": false
       },
       "../shared/gtfs-types.d.ts": {
-        "version": "c09bdc9ae83b228f68dba3ae850e6532be7fa94d2aef3048903b50d3406b2fe6",
-        "signature": "c09bdc9ae83b228f68dba3ae850e6532be7fa94d2aef3048903b50d3406b2fe6",
+        "version": "d955e908e79fd5ea3aa98647de5449f2350394014e3a3170db39df084e85e0be",
+        "signature": "d955e908e79fd5ea3aa98647de5449f2350394014e3a3170db39df084e85e0be",
         "affectsGlobalScope": false
       },
       "./info/closest-stop-worker.ts": {
