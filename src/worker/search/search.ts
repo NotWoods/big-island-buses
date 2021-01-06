@@ -1,9 +1,5 @@
 import { PredictionSubstring } from '../../shared/utils/search';
-import {
-  fuseRoutes,
-  fuseStops,
-  normalizeMatches,
-} from './gtfs-search';
+import { fuseRoutes, fuseStops, normalizeMatches } from './gtfs-search';
 import {
   AutocompletionRequest,
   getPlacePredictions,

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Route, Stop } from '../../../gtfs-types';
+  import type { Route, Stop } from '../../../shared/gtfs-types';
   import { openLinkable } from '../../links/open';
   import SearchResult from './SearchResult.svelte';
 

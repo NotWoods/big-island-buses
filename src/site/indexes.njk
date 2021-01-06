@@ -1,0 +1,4 @@
+---
+permalink: /indexes.json
+---
+{% set data = { 'routes': indexes.routes, 'stops': indexes.stops } %}{{ data | dump | safe }}

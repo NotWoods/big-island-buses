@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { GTFSData } from '../../../gtfs-types';
+  import type { GTFSData } from '../../../shared/gtfs-types';
   import DynamicLinkNode from '../DynamicLinkNode.svelte';
 
   export let routes: GTFSData['routes'];

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Route } from '../../../gtfs-types';
+  import type { Route } from '../../../shared/gtfs-types';
   import { openLinkable } from '../../links/open';
   import { store } from '../../state/store';
 

@@ -20,24 +20,17 @@ interface SearchMessage {
 export type Message = DataMessage | SearchMessage;
 
 function loadIndex() {
-  return fetch(pathPrefix + 'indexes.json')
-    .then((res) => {
-      if (res.ok) {
-        return res.json() as Promise<Record<'routes' | 'stops', unknown>>;
-      }
-      return undefined;
-    })
-    .then((indexData) => {
-      if (indexData) {
-        const { routes, stops } = indexData;
-        return {
-          routes: Fuse.parseIndex<Route>(routes),
-          stops: Fuse.parseIndex<Stop>(stops),
-        };
-      } else {
-        return undefined;
-      }
+  return fetch(pathPrefix + 'indexes.json').then((res) => {
+    if (!res.ok) return undefined;
+
+    return res.json().then((indexData: Record<'routes' | 'stops', unknown>) => {
+      const { routes, stops } = indexData;
+      return {
+        routes: Fuse.parseIndex<Route>(routes),
+        stops: Fuse.parseIndex<Stop>(stops),
+      };
     });
+  });
 }
 
 registerPromiseWorker((message: Message) => {

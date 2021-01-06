@@ -8,15 +8,36 @@ function requireSafe(path) {
   }
 }
 
-const filters = requireSafe('./lib/filters.js');
-const components = requireSafe('./lib/components.js');
+const filtersReady = import('./src/lib/filters.js');
+const componentsReady = import('./lib/components.js');
 
 module.exports = function (config) {
-  for (const [name, component] of Object.entries(components)) {
-    config.addShortcode(name, (props) => {
+  function addFilter(name) {
+    config.addNunjucksAsyncFilter(name, async (value, callback) => {
+      try {
+        const filters = await filtersReady;
+        const filter = filters[name];
+        const result = await filter(value);
+        callback(null, result);
+      } catch (err) {
+        callback(err);
+      }
+    });
+  }
+
+  function addShortcode(name) {
+    config.addNunjucksAsyncShortcode(name, async (props) => {
+      const components = await componentsReady;
+      const component = components[name];
       return component.render(props).html;
     });
   }
+
+  addShortcode('Schedule');
+  addShortcode('StopConnections');
+  addShortcode('TripSelect');
+
+  addFilter('gtfsArrivalToString');
 
   // pass some assets right through
   config.addPassthroughCopy({
@@ -25,8 +46,6 @@ module.exports = function (config) {
     'src/site/manifest.json': true,
     'src/site/css': '.',
   });
-
-  config.addFilter('gtfsArrivalToString', filters.gtfsArrivalToString);
 
   /*config.addTransform('htmlmin', (content, outputPath) => {
     if (outputPath.endsWith('.html')) {

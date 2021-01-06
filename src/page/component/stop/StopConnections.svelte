@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { GTFSData, Stop } from '../../../gtfs-types';
+  import type { GTFSData, Stop } from '../../../shared/gtfs-types';
   import Connection from './Connection.svelte';
 
   export let schedule: Pick<GTFSData, 'routes'> | Promise<Pick<GTFSData, 'routes'>>;

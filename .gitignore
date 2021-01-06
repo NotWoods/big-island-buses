@@ -1,9 +1,8 @@
 Thumbs.db
 node_modules
 big-island-buses
-
-/lib
 heleon
+/lib
 
 *.map
 src/site/_data/*.json

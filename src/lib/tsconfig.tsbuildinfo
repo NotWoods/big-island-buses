@@ -247,8 +247,8 @@
         "affectsGlobalScope": false
       },
       "../shared/gtfs-types.d.ts": {
-        "version": "b3a0a6ce2ff3c174d37b5c60b7ef23d53554a59bb94220647211f686f5f032f4",
-        "signature": "b3a0a6ce2ff3c174d37b5c60b7ef23d53554a59bb94220647211f686f5f032f4",
+        "version": "c09bdc9ae83b228f68dba3ae850e6532be7fa94d2aef3048903b50d3406b2fe6",
+        "signature": "c09bdc9ae83b228f68dba3ae850e6532be7fa94d2aef3048903b50d3406b2fe6",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/node/globals.d.ts": {
@@ -682,28 +682,33 @@
         "affectsGlobalScope": false
       },
       "../shared/utils/num.d.ts": {
-        "version": "e8a3c8f2ad2dc3bc869e8ecb87282161662c67acaab0cc8a380874db32ae1bbc",
-        "signature": "e8a3c8f2ad2dc3bc869e8ecb87282161662c67acaab0cc8a380874db32ae1bbc",
+        "version": "e39b4b0bb2884d1b922f6aac7ceb18e0455d71ee6fa38b89de93a02aa8d873be",
+        "signature": "e39b4b0bb2884d1b922f6aac7ceb18e0455d71ee6fa38b89de93a02aa8d873be",
         "affectsGlobalScope": false
       },
       "./parse.ts": {
-        "version": "599f0a1d35d40a786929a7a1256a27e03c5a188f8db832c3b0387c1e19d740be",
+        "version": "d45d4dd998f9845df476116eb4af45022b42486d8661173543d0d43ec0112656",
         "signature": "42da883807a6dc3a0ae0bcebb6bd67c2a12a5a5cd93b5a8c5eabdf86f72f21e8",
         "affectsGlobalScope": false
       },
       "./api.ts": {
-        "version": "d7f8ebe63268432922d80da7b563a543cec414b5296d6822b912cca9fe0c68f1",
+        "version": "2547dd1e1eb4b4b678e56ba601605649d29dfa164864f4c0de2338700c9a1a80",
+        "signature": "4e6aa26bcce0f1900d64b54814f374756b1ebbb7076bf8b835505adcfb8c6dba",
+        "affectsGlobalScope": false
+      },
+      "./cli.ts": {
+        "version": "d0df28b952f23d812af73850b8f62b555ba47eb50abc7c30a5d72ea5c720f74c",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
       "../shared/utils/date.d.ts": {
-        "version": "f3bdebe761ac488a045bf45a5f3178c23a492d95f49be8ec78e435365a239714",
-        "signature": "f3bdebe761ac488a045bf45a5f3178c23a492d95f49be8ec78e435365a239714",
+        "version": "d948647b6830c00e03d689b674a6b4d77eac477da629926b10a99241d4fdb36c",
+        "signature": "d948647b6830c00e03d689b674a6b4d77eac477da629926b10a99241d4fdb36c",
         "affectsGlobalScope": false
       },
       "./filters.ts": {
-        "version": "86e081d9ac9a2aa84972cd92ba73583b1eda94508cc9bb83b00c1756f0e0dcf9",
-        "signature": "d2a44cdab4d6a90acebe242a3c74171eeef17b50b7a6e8418ab60e3784bbe1f0",
+        "version": "ced64f5c0b85c9241c813c8098f8289cb453418aa84e955afa29606d4736628a",
+        "signature": "fdec109f752b3a435ff80fb0f439858391ef8adddbb8ac0c7dc7e93c271003d3",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/babel-types/ts3.6/index.d.ts": {
@@ -891,7 +896,7 @@
       "composite": true,
       "incremental": true,
       "target": 7,
-      "module": 6,
+      "module": 99,
       "sourceMap": true,
       "importHelpers": true,
       "pretty": true,
@@ -1221,6 +1226,11 @@
         "../../node_modules/tslib/tslib.d.ts",
         "../shared/gtfs-types.d.ts",
         "./parse.ts"
+      ],
+      "./cli.ts": [
+        "../../node_modules/@types/node/path.d.ts",
+        "../../node_modules/tslib/tslib.d.ts",
+        "./api.ts"
       ],
       "./filters.ts": [
         "../../node_modules/tslib/tslib.d.ts",
@@ -1720,6 +1730,7 @@
       "../../node_modules/typescript/lib/lib.scripthost.d.ts",
       "../../node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
       "./api.ts",
+      "./cli.ts",
       "./filters.ts",
       "./parse.ts",
       "../shared/gtfs-types.d.ts",

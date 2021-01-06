@@ -226,11 +226,6 @@
         "signature": "b3a0a6ce2ff3c174d37b5c60b7ef23d53554a59bb94220647211f686f5f032f4",
         "affectsGlobalScope": false
       },
-      "./missing-types.d.ts": {
-        "version": "7c3e90341bf6450d15a06ecd87eddef0d56aa63f5cfe695d9fe17193d480f685",
-        "signature": "7c3e90341bf6450d15a06ecd87eddef0d56aa63f5cfe695d9fe17193d480f685",
-        "affectsGlobalScope": false
-      },
       "./utils/num.ts": {
         "version": "82410eb3da41f8d59cbc0117e3ec211a4b4fe293aa60e27a6a1ecf163d3cf1c6",
         "signature": "e8a3c8f2ad2dc3bc869e8ecb87282161662c67acaab0cc8a380874db32ae1bbc",
@@ -666,7 +661,7 @@
       "composite": true,
       "incremental": true,
       "target": 4,
-      "module": 5,
+      "module": 99,
       "sourceMap": true,
       "importHelpers": true,
       "pretty": true,
@@ -1244,7 +1239,6 @@
       "../../node_modules/typescript/lib/lib.esnext.weakref.d.ts",
       "../../node_modules/typescript/lib/lib.webworker.d.ts",
       "./gtfs-types.ts",
-      "./missing-types.d.ts",
       "./utils/date.ts",
       "./utils/num.ts",
       "./utils/search.ts"

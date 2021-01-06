@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { splitString } from '../../utils/search';
+  import { splitString } from '../../shared/utils/search';
   export let title: string;
   export let matched: PredictionSubstring[] = [];
 

@@ -1,1 +1,1 @@
-export { gtfsArrivalToString } from '../shared/utils/date';
+export { gtfsArrivalToString } from '../shared/utils/date.js';

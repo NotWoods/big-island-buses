@@ -1,9 +1,9 @@
 import { readFile, writeFile } from 'fs';
 import Fuse from 'fuse.js';
-import { join, resolve } from 'path';
+import { join } from 'path';
 import { promisify } from 'util';
 import type { GTFSData } from '../shared/gtfs-types';
-import { createApiData } from './parse';
+import { createApiData } from './parse.js';
 
 const readFileAsync = promisify(readFile);
 const writeFileAsync = promisify(writeFile);
@@ -30,7 +30,7 @@ async function generateIndexes(api: GTFSData) {
  * Generate an API file from the given GTFS zip path.
  * @param gtfsZipPath
  */
-async function generateApi(
+export async function generateApi(
   gtfsZipPath: string,
   apiFolder: string,
 ): Promise<void> {
@@ -42,22 +42,4 @@ async function generateApi(
     writeJson(join(apiFolder, 'api.json'), api),
     writeJson(join(apiFolder, 'indexes.json'), indexes),
   ]);
-}
-
-if (require.main === module) {
-  const args = process.argv.slice(2);
-  if (args.length !== 2) {
-    throw new TypeError(`should pass 2 arguments, not ${args.length}.`);
-  }
-
-  const [gtfsZipPath, apiFolder] = args.map((path) => resolve(path));
-
-  generateApi(gtfsZipPath, apiFolder)
-    .then(() => {
-      console.log('Wrote API files');
-    })
-    .catch((err) => {
-      console.error(err);
-      process.exit(1);
-    });
 }

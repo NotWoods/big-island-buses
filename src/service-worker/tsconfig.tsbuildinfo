@@ -651,7 +651,7 @@
       "composite": true,
       "incremental": true,
       "target": 4,
-      "module": 5,
+      "module": 99,
       "sourceMap": true,
       "importHelpers": true,
       "pretty": true,

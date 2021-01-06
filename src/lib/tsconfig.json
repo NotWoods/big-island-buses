@@ -1,11 +1,8 @@
 {
   "extends": "../tsconfig.base.json",
   "include": ["*"],
-  "references": [
-    { "path": "../shared" }
-  ],
+  "references": [{ "path": "../shared" }],
   "compilerOptions": {
-    "target": "es2020",
-    "module": "es2020"
+    "target": "es2020"
   }
 }

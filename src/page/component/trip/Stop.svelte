@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { GTFSData, StopTime } from '../../../gtfs-types';
-  import { gtfsArrivalToString } from '../../utils/date';
+  import type { GTFSData, StopTime } from '../../../shared/gtfs-types';
+  import { gtfsArrivalToString } from '../../../shared/utils/date';
   import DynamicLinkNode from '../DynamicLinkNode.svelte';
 
   export let stops: GTFSData['stops'];

@@ -3,6 +3,7 @@
   "version": "3.0.0",
   "description": "A far easier to use unofficial schedule for the Hawaii Hele-On Bus.",
   "private": true,
+  "type": "module",
   "dependencies": {
     "fuse.js": "^6.4.6"
   },
@@ -38,9 +39,9 @@
   "homepage": "https://github.com/NotWoods/big-island-buses#readme",
   "scripts": {
     "prebuild": "tsc --build src && rollup -c",
-    "build": "node lib/api.js google_transit.zip src/site/_data/",
-    "postbuild": "eleventy",
-    "lint:files": "tsc --noEmit && prettier \"*.{md,css,html}\" \"src/**/*.ts\" *.js tsconfig.json",
+    "build": "node src/lib/cli.js google_transit.zip src/site/_data/",
+    "postbuild": "eleventy --config=.eleventy.cjs",
+    "lint:files": "prettier \"*.{md,css,html}\" \"src/**/*.ts\" \"!src/**/*.d.ts\" *.js **/tsconfig.json",
     "lint": "npm run lint:files -- --write",
     "lint:check": "npm run lint:files -- --check",
     "test": "ava"

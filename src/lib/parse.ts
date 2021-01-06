@@ -1,6 +1,5 @@
-import { loadAsync } from 'jszip';
+import jszip from 'jszip';
 import type { Mutable } from 'type-fest';
-import { toInt } from '../shared/utils/num';
 import type {
   Calendar,
   CsvCalendar,
@@ -12,8 +11,9 @@ import type {
   Route,
   Stop,
   StopTime,
-  Trip,
+  Trip
 } from '../shared/gtfs-types';
+import { toInt } from '../shared/utils/num.js';
 
 interface CsvFile {
   name: string;
@@ -108,7 +108,7 @@ export async function createApiData(
     'trips.txt',
   ];
 
-  const zip = await loadAsync(gtfsZipData);
+  const zip = await jszip.loadAsync(gtfsZipData);
   const csvFiles = await Promise.all(
     fileList
       .map((fileName) =>

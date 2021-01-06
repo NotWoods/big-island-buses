@@ -11,5 +11,9 @@
     "src/*/missing-types.d.ts": false,
     "src/*/*/**/*.d.ts": true,
     "src/lib/*.d.ts": true,
+    "src/service-worker/index.d.ts": true,
+    "src/shared/gtfs-types.d.ts": true,
+    "src/worker/promise-worker.d.ts": true,
+    "src/worker/register.d.ts": true,
   },
 }
