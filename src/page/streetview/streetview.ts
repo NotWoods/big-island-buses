@@ -1,4 +1,4 @@
-import { Stop } from '../../gtfs-types';
+import { Stop } from '../../shared/gtfs-types';
 
 let streetview: google.maps.StreetViewPanorama | undefined;
 

@@ -1,13 +1,14 @@
 Thumbs.db
 node_modules
-/lib
 big-island-buses
 
+/lib
 heleon
-*.map
-api.json
-indexes.json
-trips.json
 
-/main.js
-/service-worker.js
+*.map
+src/site/_data/*.json
+!src/site/_data/sidebar_info.json
+
+src/**/*.js
+src/**/*.d.ts
+!src/*/missing-types.d.ts

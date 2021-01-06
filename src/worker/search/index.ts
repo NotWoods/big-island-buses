@@ -1,6 +1,6 @@
 import pathPrefix from 'consts:pathPrefix';
 import Fuse from 'fuse.js';
-import { Route, Stop } from '../../gtfs-types';
+import { Route, Stop } from '../../shared/gtfs-types';
 import { registerPromiseWorker } from '../register';
 import { fuseRoutes, fuseStops } from './gtfs-search';
 import { AutocompletionRequest } from './places-autocomplete';

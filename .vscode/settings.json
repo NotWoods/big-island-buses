@@ -1,3 +1,15 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.exclude": {
+    "**/tsconfig.tsbuildinfo": true,
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*.js.map": {
+      "when": "$(basename)"
+    },
+    "src/*/missing-types.d.ts": false,
+    "src/*/*/**/*.d.ts": true,
+    "src/lib/*.d.ts": true,
+  },
 }

@@ -5,7 +5,7 @@
  */
 
 import pathPrefix from 'consts:pathPrefix';
-import type { GTFSData } from '../gtfs-types';
+import type { GTFSData } from '../shared/gtfs-types';
 
 navigator.serviceWorker?.register(pathPrefix + 'service-worker.js');
 

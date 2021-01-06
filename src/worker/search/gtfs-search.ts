@@ -1,11 +1,7 @@
 import Fuse from 'fuse.js';
-import { Route, Stop } from '../../gtfs-types';
+import { Route, Stop } from '../../shared/gtfs-types';
+import { PredictionSubstring } from '../../shared/utils/search';
 import { applyOffset, SearchRequest } from './helpers';
-
-export interface PredictionSubstring {
-  length: number;
-  offset: number;
-}
 
 export class GtfsSearch<T> {
   private fuse: Fuse<T>;

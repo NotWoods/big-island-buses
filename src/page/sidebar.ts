@@ -1,5 +1,5 @@
 import type { Writable } from 'svelte/store';
-import type { GTFSData } from '../gtfs-types';
+import type { GTFSData } from '../shared/gtfs-types';
 import { convertToLinkable } from './links/open';
 import { locateUser } from './location/locate-user';
 import { closestToUser } from './state/map';

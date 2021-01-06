@@ -1,5 +1,5 @@
 import { computeDistanceBetween, LatLngLike } from 'spherical-geometry-js';
-import type { Stop } from '../../gtfs-types';
+import type { Stop } from '../../shared/gtfs-types';
 
 /**
  * Find the closest stop to the user's location or searched place.

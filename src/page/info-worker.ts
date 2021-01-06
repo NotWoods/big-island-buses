@@ -1,7 +1,7 @@
 import url from 'consts:infoWorker';
 import pathPrefix from 'consts:pathPrefix';
 import type { LatLngLike } from 'spherical-geometry-js';
-import type { Route, GTFSData, Stop } from '../gtfs-types';
+import type { Route, GTFSData, Stop } from '../shared/gtfs-types';
 import type { Message, RouteDetails } from '../worker/info';
 import { PromiseWorker } from '../worker/promise-worker';
 

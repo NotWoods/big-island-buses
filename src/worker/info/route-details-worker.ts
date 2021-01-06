@@ -1,6 +1,6 @@
-import type { Stop, Trip } from '../../gtfs-types';
-import { gtfsArrivalToDate, plainTime } from '../../page/utils/date';
-import { toInt } from '../../page/utils/num';
+import type { Stop, Trip } from '../../shared/gtfs-types';
+import { gtfsArrivalToDate, plainTime } from '../../shared/utils/date';
+import { toInt } from '../../shared/utils/num';
 
 export interface RouteDetails {
   readonly firstStop: Stop['stop_id'];

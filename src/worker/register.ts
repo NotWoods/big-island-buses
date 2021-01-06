@@ -14,7 +14,7 @@ export function registerPromiseWorker(
     }
   }
 
-  self.addEventListener('message', function onIncomingMessage(e) {
+  self.onmessage = function onIncomingMessage(e) {
     const payload = e.data;
     if (!Array.isArray(payload) || payload.length !== 2) {
       // message doens't match communication format; ignore
@@ -27,5 +27,5 @@ export function registerPromiseWorker(
       (result) => postOutgoingMessage(messageId, null, result),
       (error) => postOutgoingMessage(messageId, error),
     );
-  });
+  };
 }

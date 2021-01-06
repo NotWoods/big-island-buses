@@ -1,0 +1,10 @@
+{
+  "files": [],
+  "references": [
+    { "path": "lib" },
+    { "path": "page" },
+    { "path": "service-worker" },
+    { "path": "shared" },
+    { "path": "worker" }
+  ]
+}

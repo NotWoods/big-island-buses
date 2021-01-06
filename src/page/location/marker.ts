@@ -1,4 +1,4 @@
-import { Stop } from '../../gtfs-types';
+import { Stop } from '../../shared/gtfs-types';
 import { LatLngLiteral } from '../state/store';
 import { clickEvent, LinkableMarker } from '../links/open';
 
