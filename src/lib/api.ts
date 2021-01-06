@@ -1,9 +1,9 @@
 import { readFile, writeFile } from 'fs';
 import { loadAsync } from 'jszip';
-import { resolve } from 'path';
-import { promisify } from 'util';
-import { toInt } from '../page/utils/num';
+import { join, resolve } from 'path';
+import Fuse from 'fuse.js';
 import type { Mutable } from 'type-fest';
+import { promisify } from 'util';
 import type {
   Calendar,
   CsvCalendar,
@@ -17,6 +17,7 @@ import type {
   StopTime,
   Trip,
 } from '../gtfs-types';
+import { toInt } from '../page/utils/num';
 
 const readFileAsync = promisify(readFile);
 const writeFileAsync = promisify(writeFile);
@@ -220,18 +221,35 @@ async function createApiData(
   return variable;
 }
 
+async function generateIndexes(api: GTFSDataWithTrips) {
+  const routes = Object.values(api.routes);
+  const stops = Object.values(api.stops);
+
+  const routeIndex = Fuse.createIndex(['route_long_name'], routes);
+  const stopIndex = Fuse.createIndex(['stop_name'], stops);
+
+  return {
+    routes: routeIndex.toJSON(),
+    stops: stopIndex.toJSON(),
+  };
+}
+
 /**
  * Generate an API file from the given GTFS zip path.
  * @param gtfsZipPath
  */
 async function generateApi(
   gtfsZipPath: string,
-  apiFilePath: string,
+  apiFolder: string,
 ): Promise<void> {
   const zipData = await readFileAsync(gtfsZipPath, { encoding: null });
   const api = await createApiData(zipData);
+  const indexes = await generateIndexes(api);
 
-  await writeJson(apiFilePath, api);
+  await Promise.all([
+    writeJson(join(apiFolder, 'api.json'), api),
+    writeJson(join(apiFolder, 'indexes.json'), indexes),
+  ]);
 }
 
 if (require.main === module) {
@@ -240,10 +258,9 @@ if (require.main === module) {
     throw new TypeError(`should pass 2 arguments, not ${args.length}.`);
   }
 
-  const gtfsZipPath = resolve(args[0]);
-  const apiFilePath = resolve(args[1]);
+  const [gtfsZipPath, apiFolder] = args.map((path) => resolve(path));
 
-  generateApi(gtfsZipPath, apiFilePath)
+  generateApi(gtfsZipPath, apiFolder)
     .then(() => {
       console.log('Wrote API files');
     })

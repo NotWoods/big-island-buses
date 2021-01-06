@@ -95,7 +95,7 @@ const apiGenerator = {
     format: 'cjs',
     sourcemap: true,
   },
-  external: ['fs', 'path', 'util', 'jszip'],
+  external: ['fs', 'path', 'util', 'jszip', 'fuse.js'],
   plugins: [typescript(typescriptOptions)],
 };
 

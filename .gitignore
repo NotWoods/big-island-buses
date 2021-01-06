@@ -6,6 +6,7 @@ big-island-buses
 heleon
 *.map
 api.json
+indexes.json
 trips.json
 
 /main.js
