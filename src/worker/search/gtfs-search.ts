@@ -1,34 +1,45 @@
 import Fuse from 'fuse.js';
 import { Route, Stop } from '../../gtfs-types';
-import { applyOffset } from './helpers';
+import { applyOffset, SearchRequest } from './helpers';
 
-const fuseRoutes = new Fuse<Route>([], {
-  includeMatches: true,
-  keys: ['route_long_name']
-})
+export interface PredictionSubstring {
+  length: number;
+  offset: number;
+}
 
-const fuseStops = new Fuse<Stop>([], {
-  includeMatches: true,
-  keys: ['stop_name']
-})
+export class GtfsSearch<T> {
+  private fuse: Fuse<T>;
 
-/**
- *
- * @param input The text string on which to search.
- * @param offset The position, in the input term, of the last character that
- * the service uses to match predictions. For example, if the input is
- * 'Google' and the offset is 3, the service will match on 'Goo'. The string
- * determined by the offset is matched against the first word in the input term
- * only. For example, if the input term is 'Google abc' and the offset is 3,
- * the service will attempt to match against 'Goo abc'. If no offset is
- * supplied, the service will use the whole term. The offset should generally
- * be set to the position of the text caret.
- */
-export async function search(input: string, offset: number) {
-  fuseRoutes.search(applyOffset(input, offset), {
-    limit: 3,
-  });
-  fuseStops.search(applyOffset(input, offset), {
-    limit: 3,
+  constructor(keys: Fuse.FuseOptionKey[]) {
+    this.fuse = new Fuse<T>([], {
+      includeMatches: true,
+      keys,
+    });
+  }
+
+  initialize(docs: readonly T[], index?: Fuse.FuseIndex<T>) {
+    this.fuse.setCollection(docs, index);
+  }
+
+  search(request: SearchRequest) {
+    const { input, offset } = request;
+    return this.fuse.search(applyOffset(input, offset), {
+      limit: 3,
+    });
+  }
+}
+
+export const fuseRoutes = new GtfsSearch<Route>(['route_long_name']);
+export const fuseStops = new GtfsSearch<Stop>(['stop_name']);
+
+export function normalizeMatches(
+  matches: readonly Fuse.FuseResultMatch[] = [],
+): PredictionSubstring[] {
+  return matches.map((match) => {
+    const [start, end] = match.indices[0];
+    return {
+      offset: start,
+      length: end - start,
+    };
   });
 }

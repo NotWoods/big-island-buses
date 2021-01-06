@@ -26,7 +26,7 @@ export type Message = DataMessage | ClosestStopMessage | RouteDetailsMessage;
 
 let stops: readonly Stop[] | undefined;
 
-registerPromiseWorker((message) => {
+registerPromiseWorker((message: Message) => {
   switch (message.type) {
     case 'data':
       stops = message.stops;
