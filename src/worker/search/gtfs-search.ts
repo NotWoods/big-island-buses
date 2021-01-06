@@ -1,12 +1,16 @@
-import FlexSearch from 'flexsearch';
+import Fuse from 'fuse.js';
+import { Route, Stop } from '../../gtfs-types';
 import { applyOffset } from './helpers';
 
-const index = FlexSearch.create({
-  encode: 'advanced',
-  tokenize: 'reverse',
-  cache: true,
-  async: true,
-});
+const fuseRoutes = new Fuse<Route>([], {
+  includeMatches: true,
+  keys: ['route_long_name']
+})
+
+const fuseStops = new Fuse<Stop>([], {
+  includeMatches: true,
+  keys: ['stop_name']
+})
 
 /**
  *
@@ -21,7 +25,10 @@ const index = FlexSearch.create({
  * be set to the position of the text caret.
  */
 export async function search(input: string, offset: number) {
-  await index.search(applyOffset(input, offset), {
-    suggest: true,
+  fuseRoutes.search(applyOffset(input, offset), {
+    limit: 3,
+  });
+  fuseStops.search(applyOffset(input, offset), {
+    limit: 3,
   });
 }
