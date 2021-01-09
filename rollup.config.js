@@ -13,6 +13,7 @@ const require = createRequire(import.meta.url);
 const eleventy = require('./.eleventy.cjs');
 
 const eleventyConfig = eleventy({
+  addPlugin() {},
   addPassthroughCopy() {},
   addNunjucksAsyncFilter() {},
   addNunjucksAsyncShortcode() {},

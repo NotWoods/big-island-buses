@@ -11,11 +11,12 @@ import type {
   CsvStop,
   CsvStopTime,
   CsvTrip,
-  GTFSDataWithTrips,
+  ServerGTFSData,
   Route,
   Stop,
   StopTime,
   Trip,
+  FeedInfo,
 } from '../shared/gtfs-types';
 import { toInt } from '../shared/utils/num.js';
 
@@ -49,11 +50,11 @@ function makeCalendarTextName(days: Calendar['days']) {
     case 'true, true, true, true, true, true, true':
       return 'Daily';
     case 'false, true, true, true, true, true, true':
-      return 'Monday - Saturday';
+      return 'Mon - Sat';
     case 'false, true, true, true, true, true, false':
       return 'Monday - Friday';
     case 'true, false, false, false, false, false, true':
-      return 'Saturday - Sunday';
+      return 'Sat - Sun';
     case 'false, false, false, false, false, false, true':
       return 'Saturday';
     default:
@@ -84,10 +85,11 @@ function makeCalendarTextName(days: Calendar['days']) {
  */
 export async function createApiData(
   gtfsZipData: Buffer | ArrayBuffer | Uint8Array,
-): Promise<GTFSDataWithTrips> {
+): Promise<ServerGTFSData> {
   const fileList = [
     'agency.txt',
     'calendar.txt',
+    'calendar_dates.txt',
     'fare_attributes.txt',
     'feed_info.txt',
     'routes.txt',
@@ -111,18 +113,20 @@ export async function createApiData(
     )
     .pipe((source) => new Map(source));
 
-  const variable: GTFSDataWithTrips = {
-    routes: {},
-    stops: {},
-    calendar: {},
-    trips: {},
-  };
   const json = (await zipFilesToObject(zipFiles)) as {
     routes: CsvRoute[];
     trips: CsvTrip[];
     stops: CsvStop[];
     calendar: CsvCalendar[];
     stop_times: CsvStopTime[];
+    feed_info: FeedInfo[];
+  };
+  const variable: ServerGTFSData = {
+    routes: {},
+    stops: {},
+    calendar: {},
+    trips: {},
+    info: json.feed_info[0],
   };
 
   for (const csvRoute of json.routes) {

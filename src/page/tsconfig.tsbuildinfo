@@ -232,8 +232,8 @@
         "affectsGlobalScope": false
       },
       "../shared/gtfs-types.d.ts": {
-        "version": "d955e908e79fd5ea3aa98647de5449f2350394014e3a3170db39df084e85e0be",
-        "signature": "d955e908e79fd5ea3aa98647de5449f2350394014e3a3170db39df084e85e0be",
+        "version": "76e5049451e89b109960a785e58a99551640e512a2ee6a3f668339faf02c7899",
+        "signature": "76e5049451e89b109960a785e58a99551640e512a2ee6a3f668339faf02c7899",
         "affectsGlobalScope": false
       },
       "../worker/info/route-details-worker.d.ts": {
@@ -592,8 +592,8 @@
         "affectsGlobalScope": false
       },
       "../shared/utils/date.d.ts": {
-        "version": "d948647b6830c00e03d689b674a6b4d77eac477da629926b10a99241d4fdb36c",
-        "signature": "d948647b6830c00e03d689b674a6b4d77eac477da629926b10a99241d4fdb36c",
+        "version": "f3bdebe761ac488a045bf45a5f3178c23a492d95f49be8ec78e435365a239714",
+        "signature": "f3bdebe761ac488a045bf45a5f3178c23a492d95f49be8ec78e435365a239714",
         "affectsGlobalScope": false
       },
       "./main.ts": {

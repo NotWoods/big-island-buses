@@ -222,8 +222,8 @@
         "affectsGlobalScope": false
       },
       "./gtfs-types.ts": {
-        "version": "ab19e297af8b0b007104601761cb40e3c613c6063cf43c5380b24e93703becd7",
-        "signature": "d955e908e79fd5ea3aa98647de5449f2350394014e3a3170db39df084e85e0be",
+        "version": "ce3eccca02d854afbf04f29611b245b9748725b1c2fd2c928d1582e18e30dd68",
+        "signature": "76e5049451e89b109960a785e58a99551640e512a2ee6a3f668339faf02c7899",
         "affectsGlobalScope": false
       },
       "./utils/num.ts": {
@@ -232,7 +232,7 @@
         "affectsGlobalScope": false
       },
       "./utils/date.ts": {
-        "version": "3fa25852d75091df0bc2e7c427a6d1859dc3b0cf176f7f8d7fd826261f85db51",
+        "version": "dcbda27c735819614e2881e00637b1ca299bcde06726001fbf5d152b5d071c82",
         "signature": "f3bdebe761ac488a045bf45a5f3178c23a492d95f49be8ec78e435365a239714",
         "affectsGlobalScope": false
       },

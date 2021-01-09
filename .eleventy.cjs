@@ -1,12 +1,4 @@
-const htmlmin = require('html-minifier');
-
-function requireSafe(path) {
-  try {
-    return require(path);
-  } catch (err) {
-    return {};
-  }
-}
+const pluginDate = require('eleventy-plugin-date');
 
 const filtersReady = import('./src/lib/filters.js');
 const componentsReady = import('./lib/components.js');
@@ -33,11 +25,14 @@ module.exports = function (config) {
     });
   }
 
+  config.addPlugin(pluginDate)
+
   addShortcode('Schedule');
   addShortcode('StopConnections');
   addShortcode('TripSelect');
 
   addFilter('gtfsArrivalToString');
+  addFilter('parseGtfsDate');
 
   // pass some assets right through
   config.addPassthroughCopy({

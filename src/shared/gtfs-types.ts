@@ -5,8 +5,9 @@ export interface GTFSData {
 }
 
 /* Server needs to iterate through all trips, client doesn't. */
-export interface GTFSDataWithTrips extends GTFSData {
+export interface ServerGTFSData extends GTFSData {
   trips: { [trip_id: string]: Route['route_id'] };
+  info: FeedInfo;
 }
 
 export interface CsvCalendar {
@@ -39,11 +40,13 @@ export interface CsvRoute {
   route_id: string;
   route_short_name: string;
   route_long_name: string;
+  route_desc: string;
   route_type: string;
   route_color: string;
   route_text_color: string;
   agency_id: string;
   route_url: string;
+  route_sort_order: string;
 }
 
 export interface Route extends Readonly<CsvRoute> {
@@ -71,6 +74,7 @@ export interface Trip extends Readonly<CsvTrip> {
 export interface CsvStop {
   stop_id: string;
   stop_name: string;
+  stop_desc: string;
   stop_lat: string;
   stop_lon: string;
 }
@@ -100,4 +104,13 @@ export interface CsvStopTime {
 
 export interface StopTime extends Readonly<CsvStopTime> {
   readonly stop_sequence: number;
+}
+
+export interface FeedInfo {
+  feed_publisher_name: string;
+  feed_publisher_url: string;
+  feed_start_date: string;
+  feed_version: string;
+  feed_contact_email: string;
+  feed_contact_url: string;
 }

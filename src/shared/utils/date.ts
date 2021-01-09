@@ -33,9 +33,8 @@ export function stringTime(date: Date | string): string {
     throw new TypeError(`date must be Date or string, not ${typeof date}`);
   }
 
-  let m = 'am';
+  let m = 'AM';
   let displayHour = '';
-  let displayMinute = '';
   const hr = date.getHours();
   const min = date.getMinutes();
 
@@ -43,22 +42,16 @@ export function stringTime(date: Date | string): string {
     displayHour = '12';
   } else if (hr === 12) {
     displayHour = '12';
-    m = 'pm';
+    m = 'PM';
   } else if (hr > 12) {
     const mathHr = hr - 12;
     displayHour = mathHr.toString();
-    m = 'pm';
+    m = 'PM';
   } else {
     displayHour = hr.toString();
   }
 
-  if (min === 0) {
-    displayMinute = '';
-  } else if (min < 10) {
-    displayMinute = ':0' + min.toString();
-  } else {
-    displayMinute = ':' + min.toString();
-  }
+  const displayMinute = `:${min.toString().padStart(2, '0')}`;
 
   return displayHour + displayMinute + m;
 }

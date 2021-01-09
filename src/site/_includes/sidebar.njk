@@ -37,7 +37,11 @@
       Created by
       {% include 'tiger-logo.svg' %}
     </a>
-    <p class="about__item">Last updated Setember 21, 2014<meta itemprop="datePublished" content="2014-09-08" /></p>
+    {% set updated = api.info.feed_start_date | parseGtfsDate %}
+    <p class="about__item">Last updated <time datetime="{{ updated | isoDate }}">
+      <meta itemprop="datePublished" content="{{ updated | isoDate }}" />
+      {{ updated | readableDate }}
+    </time></p>
 
     <p class="about__item" itemprop="permissions">
       Finding routes near your location requires the Location permission.

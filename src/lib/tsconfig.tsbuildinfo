@@ -247,8 +247,8 @@
         "affectsGlobalScope": false
       },
       "../shared/gtfs-types.d.ts": {
-        "version": "d955e908e79fd5ea3aa98647de5449f2350394014e3a3170db39df084e85e0be",
-        "signature": "d955e908e79fd5ea3aa98647de5449f2350394014e3a3170db39df084e85e0be",
+        "version": "76e5049451e89b109960a785e58a99551640e512a2ee6a3f668339faf02c7899",
+        "signature": "76e5049451e89b109960a785e58a99551640e512a2ee6a3f668339faf02c7899",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/node/globals.d.ts": {
@@ -1487,8 +1487,8 @@
         "affectsGlobalScope": false
       },
       "./parse.ts": {
-        "version": "4cf110c3b595498642ac7ffcb1bfec6bf1fc4c9b8d178a783e9ea607374889d2",
-        "signature": "84c46df4ada5cb96f68658b365fe73fafd0b8080db61988a5ac037eb6a25e561",
+        "version": "93356367cf48caf9469a53270ec3e7f9803ab3f1f9d2c89b74f18a48f51e6fc3",
+        "signature": "1e3bf7a52407b847ae154c9ba831d32a6a24ae310e85877a4d41e92ca975ee74",
         "affectsGlobalScope": false
       },
       "./api.ts": {
@@ -1497,18 +1497,18 @@
         "affectsGlobalScope": false
       },
       "./cli.ts": {
-        "version": "d0df28b952f23d812af73850b8f62b555ba47eb50abc7c30a5d72ea5c720f74c",
+        "version": "ce803baaf6e3043a3648ea3cc476312bdd4f44d8d445f800e06f0c50b7efc898",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
       "../shared/utils/date.d.ts": {
-        "version": "d948647b6830c00e03d689b674a6b4d77eac477da629926b10a99241d4fdb36c",
-        "signature": "d948647b6830c00e03d689b674a6b4d77eac477da629926b10a99241d4fdb36c",
+        "version": "f3bdebe761ac488a045bf45a5f3178c23a492d95f49be8ec78e435365a239714",
+        "signature": "f3bdebe761ac488a045bf45a5f3178c23a492d95f49be8ec78e435365a239714",
         "affectsGlobalScope": false
       },
       "./filters.ts": {
-        "version": "ced64f5c0b85c9241c813c8098f8289cb453418aa84e955afa29606d4736628a",
-        "signature": "fdec109f752b3a435ff80fb0f439858391ef8adddbb8ac0c7dc7e93c271003d3",
+        "version": "2044bbf555472cfb0295dd16d5f7d472167712aee27745d46fe8b1bc9859571d",
+        "signature": "a2e22f67d87994e4283f37d09c34fe860a3b7e8c0afdbc2a282e0b52bad693c5",
         "affectsGlobalScope": false
       },
       "../../node_modules/ava/index.d.ts": {
@@ -1517,7 +1517,7 @@
         "affectsGlobalScope": false
       },
       "./parse.spec.ts": {
-        "version": "bc69e40f0d71f5f9f42de3b704ffab692846472b30b3c3d69e047caeb2c07b0e",
+        "version": "fdc7cc91bf9d3510715b4f933843c31a17a6860534d480627c55b01df03e8c34",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -2637,7 +2637,8 @@
       ],
       "./filters.ts": [
         "../../node_modules/tslib/tslib.d.ts",
-        "../shared/utils/date.d.ts"
+        "../shared/utils/date.d.ts",
+        "../shared/utils/num.d.ts"
       ],
       "./parse.spec.ts": [
         "../../node_modules/@types/node/fs/promises.d.ts",

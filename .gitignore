@@ -2,6 +2,7 @@ Thumbs.db
 node_modules
 big-island-buses
 heleon
+.rollup.cache
 /lib
 
 *.map
