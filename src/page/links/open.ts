@@ -47,8 +47,7 @@ export function openLinkable(linkable: Linkable | Type, value?: string) {
   let type: Type;
   if (value) {
     type = linkable as Type;
-  }
-  if (linkable instanceof HTMLElement) {
+  } else if (linkable instanceof HTMLElement) {
     type = linkable.dataset.type;
     value = linkable.dataset.value;
   } else {

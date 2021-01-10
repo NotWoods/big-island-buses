@@ -567,7 +567,7 @@
         "affectsGlobalScope": false
       },
       "./links/open.ts": {
-        "version": "8bcdb72d438b5429d570b1a6fe2443bc8ef5698ac87c0d0f1ea57e3738a59adf",
+        "version": "7246a0cb2c4295689b710939ee4c41d24173c385a81f91f9fc47cdd7a91793ad",
         "signature": "9b99dd1901c663f4298edb2b09e508d6b9724e04a1f7304dc2df08766762e193",
         "affectsGlobalScope": false
       },

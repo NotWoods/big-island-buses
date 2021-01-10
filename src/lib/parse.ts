@@ -18,7 +18,10 @@ import type {
   Trip,
   FeedInfo,
 } from '../shared/gtfs-types';
+import { stringTime } from '../shared/utils/date.js';
 import { toInt } from '../shared/utils/num.js';
+
+const STARTS_WITH_TIME = /^\d\d?:\d\d/;
 
 export async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
   const arrays = await from(zipFiles.values())
@@ -193,8 +196,17 @@ export async function createApiData(
   }
 
   for (const route of Object.values(variable.routes)) {
-    for (const trip of Object.values(route.trips)) {
+    for (const t of Object.values(route.trips)) {
+      const trip = t as Mutable<Trip>;
       trip.stop_times.sort((a, b) => a.stop_sequence - b.stop_sequence);
+      if (!STARTS_WITH_TIME.test(trip.trip_short_name)) {
+        const start = trip.stop_times[0].arrival_time;
+        trip.trip_short_name = `${stringTime(start)} ${trip.trip_short_name}`;
+      }
+      for (const st of trip.stop_times) {
+        const stopTime = st as Partial<Mutable<StopTime>>
+        delete stopTime.trip_id;
+      }
     }
   }
 

@@ -12,9 +12,14 @@
   value={stopTime.stop_id}
   class="schedule__stop">
   <div class="lines"><span class="line" /><span class="line" /></div>
-  <span class="schedule__stopname name">
-    {stops[stopTime.stop_id]?.stop_name}
-  </span>
+  <div class="schedule__stopname">
+    <span class="schedule__stop-name">
+      {stops[stopTime.stop_id]?.stop_name}
+    </span>
+    <span class="schedule__stop-desc">
+      {stops[stopTime.stop_id]?.stop_desc}
+    </span>
+  </div>
   <time class="schedule__time">
     {gtfsArrivalToString(stopTime.arrival_time)}
   </time>
