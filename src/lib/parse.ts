@@ -172,6 +172,8 @@ export async function createApiData(
   for (const csvStopTime of json.stop_times) {
     const stopTime = csvStopTime as Mutable<StopTime>;
     stopTime.stop_sequence = toInt(stopTime.stop_sequence);
+    delete (stopTime as any).continuous_drop_off;
+    delete (stopTime as any).drop_off_type;
 
     const stop = variable.stops[stopTime.stop_id];
     const route_id = variable.trips[stopTime.trip_id];
@@ -204,7 +206,7 @@ export async function createApiData(
         trip.trip_short_name = `${stringTime(start)} ${trip.trip_short_name}`;
       }
       for (const st of trip.stop_times) {
-        const stopTime = st as Partial<Mutable<StopTime>>
+        const stopTime = st as Partial<Mutable<StopTime>>;
         delete stopTime.trip_id;
       }
     }
