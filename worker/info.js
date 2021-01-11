@@ -329,7 +329,7 @@ function getRouteDetails(trips, now) {
     for (const trip of trips) {
         for (const stopTime of trip.stop_times) {
             const sequence = stopTime.stop_sequence;
-            if (toInt(trip.direction_id) === 0) {
+            if (trip.direction_id === 0) {
                 if (sequence < smallestSequence) {
                     firstStop = stopTime.stop_id;
                     smallestSequence = sequence;
