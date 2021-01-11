@@ -5,6 +5,7 @@ heleon
 .rollup.cache
 /lib
 
+*.tsbuildinfo
 *.map
 src/site/_data/*.json
 !src/site/_data/sidebar_info.json
