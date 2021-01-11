@@ -20,12 +20,12 @@ test('zipFilesToObject', async (t) => {
     'route_id',
     'route_short_name',
     'route_long_name',
+    'route_desc',
     'route_type',
+    'route_url',
     'route_color',
     'route_text_color',
-    'agency_id',
-    'route_url',
-    'route_desc',
+    'route_sort_order',
   ];
   for (const route of result.routes) {
     t.false(Array.isArray(route));

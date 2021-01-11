@@ -19,7 +19,7 @@ import type {
   FeedInfo,
 } from '../shared/gtfs-types';
 import { stringTime } from '../shared/utils/date.js';
-import { toInt } from '../shared/utils/num.js';
+import { cast } from './cast.js';
 
 const STARTS_WITH_TIME = /^\d\d?:\d\d/;
 
@@ -27,9 +27,7 @@ export async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
   const arrays = await from(zipFiles.values())
     .pipe(
       map((file) =>
-        file
-          .nodeStream('nodebuffer')
-          .pipe(parse({ cast: false, columns: true })),
+        file.nodeStream('nodebuffer').pipe(parse({ cast, columns: true })),
       ),
       map((stream) => toArray(stream)),
     )
@@ -38,14 +36,6 @@ export async function zipFilesToObject(zipFiles: Map<string, JSZipObject>) {
   return zip(zipFiles.keys(), arrays).pipe((entry) =>
     Object.fromEntries(entry),
   );
-}
-
-/**
- * Turns a number into a boolean.
- * @param i 0 returns false, 1 returns true
- */
-function toBool(i: number | string): boolean {
-  return toInt(i) !== 0;
 }
 
 function makeCalendarTextName(days: Calendar['days']) {
@@ -146,8 +136,8 @@ export async function createApiData(
   for (const csvStop of json.stops) {
     const stop = (csvStop as Partial<Stop>) as Mutable<Stop>;
     stop.position = {
-      lat: parseFloat(csvStop.stop_lat),
-      lng: parseFloat(csvStop.stop_lon),
+      lat: csvStop.stop_lat,
+      lng: csvStop.stop_lon,
     };
     stop.trips = [];
     stop.routes = [];
@@ -156,24 +146,28 @@ export async function createApiData(
     variable.stops[stop.stop_id] = stop;
   }
   for (const csvCalendar of json.calendar) {
-    const calendar = csvCalendar as Mutable<Calendar>;
-    calendar.days = [
-      toBool(calendar.sunday),
-      toBool(calendar.monday),
-      toBool(calendar.tuesday),
-      toBool(calendar.wednesday),
-      toBool(calendar.thursday),
-      toBool(calendar.friday),
-      toBool(calendar.saturday),
+    const days: Calendar['days'] = [
+      csvCalendar.sunday,
+      csvCalendar.monday,
+      csvCalendar.tuesday,
+      csvCalendar.wednesday,
+      csvCalendar.thursday,
+      csvCalendar.friday,
+      csvCalendar.saturday,
     ];
-    calendar.text_name = makeCalendarTextName(calendar.days);
+    const calendar: Calendar = {
+      service_id: csvCalendar.service_id,
+      start_date: csvCalendar.start_date,
+      end_date: csvCalendar.end_date,
+      days,
+      text_name: makeCalendarTextName(days),
+    };
     variable.calendar[calendar.service_id] = calendar;
   }
   for (const csvStopTime of json.stop_times) {
     const stopTime = csvStopTime as Mutable<StopTime>;
-    stopTime.stop_sequence = toInt(stopTime.stop_sequence);
-    delete (stopTime as any).continuous_drop_off;
-    delete (stopTime as any).drop_off_type;
+    delete (stopTime as Partial<CsvStopTime>).continuous_drop_off;
+    delete (stopTime as Partial<CsvStopTime>).drop_off_type;
 
     const stop = variable.stops[stopTime.stop_id];
     const route_id = variable.trips[stopTime.trip_id];

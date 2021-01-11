@@ -1,16 +1,12 @@
-import { readFile, writeFile } from 'fs';
+import { readFile, writeFile } from 'fs/promises';
 import Fuse from 'fuse.js';
 import { join } from 'path';
-import { promisify } from 'util';
 import type { GTFSData } from '../shared/gtfs-types';
 import { createApiData } from './parse.js';
 
-const readFileAsync = promisify(readFile);
-const writeFileAsync = promisify(writeFile);
-
 function writeJson(path: string, json: unknown) {
   const str = JSON.stringify(json);
-  return writeFileAsync(path, str, { encoding: 'utf8' });
+  return writeFile(path, str, { encoding: 'utf8' });
 }
 
 async function generateIndexes(api: GTFSData) {
@@ -34,7 +30,7 @@ export async function generateApi(
   gtfsZipPath: string,
   apiFolder: string,
 ): Promise<void> {
-  const zipData = await readFileAsync(gtfsZipPath, { encoding: null });
+  const zipData = await readFile(gtfsZipPath, { encoding: null });
   const api = await createApiData(zipData);
   const indexes = await generateIndexes(api);
 

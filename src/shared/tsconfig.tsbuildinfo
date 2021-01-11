@@ -222,8 +222,8 @@
         "affectsGlobalScope": false
       },
       "./gtfs-types.ts": {
-        "version": "ce3eccca02d854afbf04f29611b245b9748725b1c2fd2c928d1582e18e30dd68",
-        "signature": "76e5049451e89b109960a785e58a99551640e512a2ee6a3f668339faf02c7899",
+        "version": "97760cffa94d5ce22f8c938ca0942b38b34dd02833eef4f6aef24f02de8dc442",
+        "signature": "55766c447b42e9b9ffda99415c962cb68cf0769d29ecdb6eaf28fd2442035a72",
         "affectsGlobalScope": false
       },
       "./utils/num.ts": {

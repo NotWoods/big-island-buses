@@ -247,8 +247,8 @@
         "affectsGlobalScope": false
       },
       "../shared/gtfs-types.d.ts": {
-        "version": "76e5049451e89b109960a785e58a99551640e512a2ee6a3f668339faf02c7899",
-        "signature": "76e5049451e89b109960a785e58a99551640e512a2ee6a3f668339faf02c7899",
+        "version": "55766c447b42e9b9ffda99415c962cb68cf0769d29ecdb6eaf28fd2442035a72",
+        "signature": "55766c447b42e9b9ffda99415c962cb68cf0769d29ecdb6eaf28fd2442035a72",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/node/globals.d.ts": {
@@ -1491,14 +1491,29 @@
         "signature": "e39b4b0bb2884d1b922f6aac7ceb18e0455d71ee6fa38b89de93a02aa8d873be",
         "affectsGlobalScope": false
       },
+      "./cast.ts": {
+        "version": "5ba82f38dada95f7ab1aa36145575ccc86749c42346d65f92a2ff1c5ef2f7611",
+        "signature": "76ca3c23fd3283e47a5848c1e9f06ae6ae88362c83ddd84f86c23213bbc46cac",
+        "affectsGlobalScope": false
+      },
       "./parse.ts": {
-        "version": "6f8884474bbc472dd46dd96ab24c9e745be2f584c2ef26a40c27b9c52a99d5ba",
+        "version": "2036f2d7d3afd2d3962c74509d13b7c13246a79b3e5beb2239bbcd13937ffa70",
         "signature": "1e3bf7a52407b847ae154c9ba831d32a6a24ae310e85877a4d41e92ca975ee74",
         "affectsGlobalScope": false
       },
       "./api.ts": {
-        "version": "2547dd1e1eb4b4b678e56ba601605649d29dfa164864f4c0de2338700c9a1a80",
+        "version": "32bf2231a4acf95dd7b84eff9ff89d9f618b57dc4c206dd846a4a6859859a3d1",
         "signature": "4e6aa26bcce0f1900d64b54814f374756b1ebbb7076bf8b835505adcfb8c6dba",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/ava/index.d.ts": {
+        "version": "0ceec7923fb2a6e540f73682c7acffe9124c9c3517a02eac27632844b8a61251",
+        "signature": "0ceec7923fb2a6e540f73682c7acffe9124c9c3517a02eac27632844b8a61251",
+        "affectsGlobalScope": false
+      },
+      "./cast.spec.ts": {
+        "version": "a378f964675c77d47d8dcfa6005dadd17e4d1bcb7cd5344111816490c330528b",
+        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
       "./cli.ts": {
@@ -1507,17 +1522,12 @@
         "affectsGlobalScope": false
       },
       "./filters.ts": {
-        "version": "2044bbf555472cfb0295dd16d5f7d472167712aee27745d46fe8b1bc9859571d",
+        "version": "98c06c440cb02f89408319be1365cbc558eff4b63223ca8a6c3a5ee4cb019240",
         "signature": "a2e22f67d87994e4283f37d09c34fe860a3b7e8c0afdbc2a282e0b52bad693c5",
         "affectsGlobalScope": false
       },
-      "../../node_modules/ava/index.d.ts": {
-        "version": "0ceec7923fb2a6e540f73682c7acffe9124c9c3517a02eac27632844b8a61251",
-        "signature": "0ceec7923fb2a6e540f73682c7acffe9124c9c3517a02eac27632844b8a61251",
-        "affectsGlobalScope": false
-      },
       "./parse.spec.ts": {
-        "version": "fdc7cc91bf9d3510715b4f933843c31a17a6860534d480627c55b01df03e8c34",
+        "version": "3935ef71a2eb123a691bbaf8aea897e129d5b3ef9d5a899abb7a41de4c3999f8",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -2622,13 +2632,25 @@
         "../../node_modules/type-fest/ts41/delimiter-case.d.ts"
       ],
       "./api.ts": [
-        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/fs/promises.d.ts",
         "../../node_modules/@types/node/path.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
         "../../node_modules/fuse.js/dist/fuse.d.ts",
         "../../node_modules/tslib/tslib.d.ts",
         "../shared/gtfs-types.d.ts",
         "./parse.ts"
+      ],
+      "./cast.spec.ts": [
+        "../../node_modules/@types/node/fs/promises.d.ts",
+        "../../node_modules/ava/index.d.ts",
+        "../../node_modules/csv-parse/lib/index.d.ts",
+        "../../node_modules/jszip/index.d.ts",
+        "../../node_modules/tslib/tslib.d.ts",
+        "./cast.ts"
+      ],
+      "./cast.ts": [
+        "../../node_modules/csv-parse/lib/index.d.ts",
+        "../../node_modules/tslib/tslib.d.ts",
+        "../shared/utils/num.d.ts"
       ],
       "./cli.ts": [
         "../../node_modules/@types/node/path.d.ts",
@@ -2657,7 +2679,7 @@
         "../../node_modules/type-fest/ts41/index.d.ts",
         "../shared/gtfs-types.d.ts",
         "../shared/utils/date.d.ts",
-        "../shared/utils/num.d.ts"
+        "./cast.ts"
       ]
     },
     "exportedModulesMap": {
@@ -3559,6 +3581,9 @@
       "../../node_modules/type-fest/ts41/snake-case.d.ts": [
         "../../node_modules/type-fest/ts41/delimiter-case.d.ts"
       ],
+      "./cast.ts": [
+        "../../node_modules/csv-parse/lib/index.d.ts"
+      ],
       "./filters.ts": [
         "../shared/utils/date.d.ts"
       ],
@@ -3901,6 +3926,8 @@
       "../../node_modules/typescript/lib/lib.scripthost.d.ts",
       "../../node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
       "./api.ts",
+      "./cast.spec.ts",
+      "./cast.ts",
       "./cli.ts",
       "./filters.ts",
       "./parse.spec.ts",
