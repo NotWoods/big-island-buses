@@ -1,6 +1,5 @@
 import type { Stop, Trip } from '../../shared/gtfs-types';
 import { gtfsArrivalToDate, plainTime } from '../../shared/utils/date';
-import { toInt } from '../../shared/utils/num';
 
 export interface RouteDetails {
   readonly firstStop: Stop['stop_id'];
@@ -43,7 +42,7 @@ export function getRouteDetails(
   for (const trip of trips) {
     for (const stopTime of trip.stop_times) {
       const sequence = stopTime.stop_sequence;
-      if (toInt(trip.direction_id) === 0) {
+      if (trip.direction_id === 0) {
         if (sequence < smallestSequence) {
           firstStop = stopTime.stop_id;
           smallestSequence = sequence;
