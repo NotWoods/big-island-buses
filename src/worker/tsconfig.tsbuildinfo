@@ -257,8 +257,8 @@
         "affectsGlobalScope": false
       },
       "../shared/utils/num.d.ts": {
-        "version": "e39b4b0bb2884d1b922f6aac7ceb18e0455d71ee6fa38b89de93a02aa8d873be",
-        "signature": "e39b4b0bb2884d1b922f6aac7ceb18e0455d71ee6fa38b89de93a02aa8d873be",
+        "version": "e8a3c8f2ad2dc3bc869e8ecb87282161662c67acaab0cc8a380874db32ae1bbc",
+        "signature": "e8a3c8f2ad2dc3bc869e8ecb87282161662c67acaab0cc8a380874db32ae1bbc",
         "affectsGlobalScope": false
       },
       "./info/route-details-worker.ts": {
@@ -277,8 +277,8 @@
         "affectsGlobalScope": false
       },
       "../shared/utils/search.d.ts": {
-        "version": "2f18d27074b86f99b69503aa2874f91a86f64f2aca63ac4ccaeedf3a4310bccb",
-        "signature": "2f18d27074b86f99b69503aa2874f91a86f64f2aca63ac4ccaeedf3a4310bccb",
+        "version": "65f85e49dc34107adbdb94e7607310ba88175053ddcb1bb3808b21842f3f0b24",
+        "signature": "65f85e49dc34107adbdb94e7607310ba88175053ddcb1bb3808b21842f3f0b24",
         "affectsGlobalScope": false
       },
       "./search/helpers.ts": {
