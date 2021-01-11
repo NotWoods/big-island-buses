@@ -13,7 +13,7 @@ self.addEventListener('fetch', (evt) => {
         }
         else {
             // Network then fallback
-            evt.respondWith(fromCache(evt.request));
+            evt.respondWith(fetch(evt.request));
             evt.waitUntil(update(evt.request));
         }
     }

@@ -490,6 +490,10 @@ main {
   vertical-align: middle;
   max-width: calc(100% - 130px);
 }
+.schedule__stop-desc {
+  opacity: 0.8;
+  font-size: 0.85em;
+}
 .schedule__time {
   line-height: 40px;
   white-space: nowrap;

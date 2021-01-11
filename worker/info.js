@@ -42,7 +42,7 @@ function registerPromiseWorker(callback) {
             self.postMessage([messageId, null, result]);
         }
     }
-    self.addEventListener('message', function onIncomingMessage(e) {
+    self.onmessage = function onIncomingMessage(e) {
         const payload = e.data;
         if (!Array.isArray(payload) || payload.length !== 2) {
             // message doens't match communication format; ignore
@@ -50,7 +50,7 @@ function registerPromiseWorker(callback) {
         }
         const [messageId, message] = payload;
         Promise.resolve(callback(message)).then((result) => postOutgoingMessage(messageId, null, result), (error) => postOutgoingMessage(messageId, error));
-    });
+    };
 }
 
 /** @type {number} Earth's radius (at the Equator) of 6378137 meters. */
