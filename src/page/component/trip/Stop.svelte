@@ -17,7 +17,7 @@
       {stops[stopTime.stop_id]?.stop_name}
     </span>
     <span class="schedule__stop-desc">
-      {stops[stopTime.stop_id]?.stop_desc}
+      {stops[stopTime.stop_id]?.stop_desc || ''}
     </span>
   </div>
   <time class="schedule__time">

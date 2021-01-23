@@ -81,7 +81,7 @@ export interface Trip extends Readonly<CsvTrip> {
 export interface CsvStop {
   stop_id: string;
   stop_name: string;
-  stop_desc: string;
+  stop_desc?: string;
   stop_lat: number;
   stop_lon: number;
 }
