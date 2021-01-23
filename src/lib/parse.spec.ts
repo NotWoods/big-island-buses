@@ -16,19 +16,8 @@ test('zipFilesToObject', async (t) => {
   t.deepEqual(Object.keys(result), ['routes']);
   t.not(result.routes.length, 0);
 
-  const expectedKeys = [
-    'route_id',
-    'route_short_name',
-    'route_long_name',
-    'route_desc',
-    'route_type',
-    'route_url',
-    'route_color',
-    'route_text_color',
-    'route_sort_order',
-  ];
   for (const route of result.routes) {
     t.false(Array.isArray(route));
-    t.deepEqual(Object.keys(route), expectedKeys);
+    t.true(Object.keys(route).includes('route_id'));
   }
 });
