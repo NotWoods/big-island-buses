@@ -1,6 +1,7 @@
-import { findClosestStop } from '../info-worker';
-import { memoize, State } from './store';
-import type { GTFSData, Stop } from '../../shared/gtfs-types';
+import type { GTFSData, Stop } from '../../shared/gtfs-types.js';
+import { memoize } from '../../shared/utils/memoize.js';
+import { findClosestStop } from '../info-worker.js';
+import type { State } from './store.js';
 
 const getClosestToUser = memoize(findClosestStop);
 const getClosestToSearch = memoize(findClosestStop);

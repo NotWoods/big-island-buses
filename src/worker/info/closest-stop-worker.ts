@@ -20,3 +20,32 @@ export function findClosestStop(stops: readonly Stop[], location: LatLngLike) {
 
   return closestStop;
 }
+
+export interface ClosestStopsOptions {
+  readonly maxAmount?: number;
+  readonly maxDistance?: number;
+}
+
+/**
+ * Find the closest stops to a given point.
+ * @param stops List of stops from API.
+ * @param location Location of point.
+ * @param options.maxAmount Maximum number of stops to return.
+ * @param options.maxDistance Maximum distance away to return.
+ */
+export function findClosestStops(
+  stops: readonly Stop[],
+  location: LatLngLike,
+  options: ClosestStopsOptions = {},
+) {
+  const { maxDistance = Infinity, maxAmount } = options;
+
+  return stops
+    .map((stop) => {
+      const distance = computeDistanceBetween(location, stop.position);
+      return { stop, distance };
+    })
+    .filter(({ distance }) => distance < maxDistance)
+    .slice(0, maxAmount)
+    .map(({ stop }) => stop);
+}

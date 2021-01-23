@@ -46,20 +46,6 @@ export const store = writable<State>({
   focus: 'stop',
 });
 
-export function memoize<Func extends (...args: any[]) => any>(fn: Func): Func {
-  let lastArgs: Parameters<Func> | undefined;
-  let lastResult: ReturnType<Func> | undefined;
-  return function (...args: Parameters<Func>) {
-    if (lastArgs?.every((arg, i) => arg === args[i])) {
-      return lastResult;
-    }
-
-    lastArgs = args;
-    lastResult = fn(...args);
-    return lastResult;
-  } as Func;
-}
-
 export function strictEqual<T>(a: T, b: T) {
   return a === b;
 }

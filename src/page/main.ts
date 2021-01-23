@@ -22,12 +22,12 @@ import {
   connect,
   deepEqual,
   LatLngLiteral,
-  memoize,
   stopViewStore,
   View,
   store,
 } from './state/store.js';
 import { stringTime } from '../shared/utils/date.js';
+import { memoize } from '../shared/utils/memoize.js';
 import { parseLink } from './links/state.js';
 import { getRouteDetails } from './info-worker.js';
 import type { GTFSData, Route, Stop, Trip } from '../shared/gtfs-types.js';
