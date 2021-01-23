@@ -892,18 +892,6 @@
         locatePermission: LocationPermission.NOT_ASKED,
         focus: 'stop',
     });
-    function memoize(fn) {
-        let lastArgs;
-        let lastResult;
-        return function (...args) {
-            if (lastArgs === null || lastArgs === void 0 ? void 0 : lastArgs.every((arg, i) => arg === args[i])) {
-                return lastResult;
-            }
-            lastArgs = args;
-            lastResult = fn(...args);
-            return lastResult;
-        };
-    }
     function strictEqual(a, b) {
         return a === b;
     }
@@ -1145,6 +1133,27 @@
         }, function onerror(error) {
             store.update((oldState) => (Object.assign(Object.assign({}, oldState), { locatePermission: error.code })));
         });
+    }
+
+    /**
+     * Creates a copy of `fn` that caches the last result.
+     * If called again with the same parameters, the cached result is returned.
+     */
+    function memoize(fn, cacheSize = 1) {
+        const cache = [];
+        return function (...args) {
+            for (const { args: lastArgs, result: lastResult } of cache) {
+                if (lastArgs.every((arg, i) => arg === args[i])) {
+                    return lastResult;
+                }
+            }
+            const entry = { args, result: fn(...args) };
+            cache.push(entry);
+            while (cache.length > cacheSize) {
+                cache.unshift();
+            }
+            return entry.result;
+        };
     }
 
     var url = "worker/info.js";
@@ -2217,7 +2226,7 @@
     	let t1;
     	let t2;
     	let span3;
-    	let t3_value = /*stops*/ ctx[0][/*stopTime*/ ctx[1].stop_id]?.stop_desc + "";
+    	let t3_value = (/*stops*/ ctx[0][/*stopTime*/ ctx[1].stop_id]?.stop_desc || "") + "";
     	let t3;
     	let t4;
     	let time;
@@ -2283,7 +2292,7 @@
     			attr_dev(div1, "class", "schedule__stopname");
     			add_location(div1, file$3, 12, 2, 349);
     			attr_dev(time, "class", "schedule__time");
-    			add_location(time, file$3, 20, 2, 581);
+    			add_location(time, file$3, 20, 2, 587);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
@@ -2302,7 +2311,7 @@
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*stops, stopTime*/ 3 && t1_value !== (t1_value = /*stops*/ ctx[0][/*stopTime*/ ctx[1].stop_id]?.stop_name + "")) set_data_dev(t1, t1_value);
-    			if (dirty & /*stops, stopTime*/ 3 && t3_value !== (t3_value = /*stops*/ ctx[0][/*stopTime*/ ctx[1].stop_id]?.stop_desc + "")) set_data_dev(t3, t3_value);
+    			if (dirty & /*stops, stopTime*/ 3 && t3_value !== (t3_value = (/*stops*/ ctx[0][/*stopTime*/ ctx[1].stop_id]?.stop_desc || "") + "")) set_data_dev(t3, t3_value);
     			if (dirty & /*stopTime*/ 2 && t5_value !== (t5_value = gtfsArrivalToString(/*stopTime*/ ctx[1].arrival_time) + "")) set_data_dev(t5, t5_value);
     		},
     		d: function destroy(detaching) {
