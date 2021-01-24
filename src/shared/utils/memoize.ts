@@ -23,7 +23,7 @@ export function memoize<Func extends (...args: any[]) => any>(
     const entry: MemoizeCacheEntry<Func> = { args, result: fn(...args) };
     cache.push(entry);
     while (cache.length > cacheSize) {
-      cache.unshift();
+      cache.shift();
     }
 
     return entry.result;
