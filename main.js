@@ -1150,7 +1150,7 @@
             const entry = { args, result: fn(...args) };
             cache.push(entry);
             while (cache.length > cacheSize) {
-                cache.unshift();
+                cache.shift();
             }
             return entry.result;
         };
