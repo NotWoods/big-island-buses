@@ -14,7 +14,7 @@
   <ul class="sidebar__list routes__list" id="other">
     {% for id, route in api.routes %}
       <li class="sidebar__item routes__item" style="border-color: #{{ route.route_color }}" data-route="{{ id }}">
-        <a href="/routes/{{ id }}/" class="sidebar__link routes__link" data-type="route" data-value="{{ id }}">
+        <a href="{{ "/routes/ID/" | replace("ID", id) | url }}" class="sidebar__link routes__link" data-type="route" data-value="{{ id }}">
           {{ route.route_long_name }}
         </a>
       </li>
