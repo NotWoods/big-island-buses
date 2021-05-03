@@ -9,6 +9,17 @@
 <link rel="icon" sizes="512x512" href="/big-island-buses/icon/transparent.png" />
 <link rel="apple-touch-icon" sizes="512x512" href="/big-island-buses/icon/maskable.png" />
 <link rel="icon" href="/big-island-buses/icon/favicon.ico" sizes="16x16 32x32 48x48 256x256" />
+<script>
+  if (window.location.search.includes('no_replace')) {
+    localStorage.setItem('no-replace-time', new Date().toISOString());
+  } else {
+    const noReplaceTime = new Date(localStorage.getItem('no-replace-time') || '2021-01-01');
+    const today = new Date();
+    if ((today - noReplaceTime) > 259200000) {
+      window.location.replace("https://hawaiibusplus.com/big-island-buses/");
+    }
+  }
+</script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb-LGdBsQnw3p_4s-DGf_o2lhLEF03nXI&libraries=places"></script>
 <script async src="/big-island-buses/main.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
