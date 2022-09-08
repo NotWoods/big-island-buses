@@ -8,7 +8,7 @@
     "csv-parse": "^4.14.2",
     "fuse.js": "^6.4.6",
     "ix": "^4.0.0",
-    "jszip": "^3.5.0",
+    "jszip": "^3.7.0",
     "spherical-geometry-js": "^2.0.0"
   },
   "devDependencies": {
